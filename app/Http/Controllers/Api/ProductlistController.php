@@ -11,8 +11,44 @@ use DB;
 class ProductlistController extends Controller
 {
     public function getAllProducts() {
-      $product = Product::join('product_media', 'product_media.product_id', '=', 'product.id')->get();
-      return response($product, 200);
+      $product = Product::join('product_media as pm', 'pm.product_id', '=', 'product.id')->
+      select('pm.image as image')
+      ->addSelect('product.id as id','pm.product_id','product.title as title','product.descripation as descripation')
+      ->get();
+     
+      $data=array();
+      $i=0;
+      $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
+
+      foreach($product as $val)
+      {
+        $price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
+        where('product.id',$val->id)->whereNotNull('product_variants.price')->get();
+
+      
+        $price_array=array();
+        foreach($price_data as $key=> $value)
+        {
+          $price_array[$key]=$value->price;
+        }
+       
+        if(!empty($price_array)){
+          $min = min($price_array);
+          $max = max($price_array);
+        }
+        else{
+          $min='';
+          $max='';
+        }
+        $data[$i]['id']=$val->id;
+        $data[$i]['title']=$val->title;
+        $data[$i]['description']=$val->descripation;
+        $data[$i]['image']=$image_path.$val->image;
+        $data[$i]['price_range']='$'.$min.'-'.'$'.$max;
+        $i++;
+
+      }
+      return response($data, 200);
     }
 
     public function getIndividualProduct($id) {
