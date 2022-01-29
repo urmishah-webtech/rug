@@ -30,9 +30,6 @@ use App\Http\Livewire;
 
 Route::middleware(['checkRole'])->group(function () {
 
-    
-
-    Route::get('/', Livewire\Dashboard::class)->name('home');
 
     // Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
 
@@ -43,9 +40,8 @@ Route::middleware(['checkRole'])->group(function () {
     // })->name('admin.login');
 
 
-
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-
+        Route::get('/', Livewire\Admin\Dashboard::class)->name('home');
         Route::get('/dashboard', Livewire\Dashboard::class)->name('dashboard');
 
 
