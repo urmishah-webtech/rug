@@ -23,12 +23,12 @@
 
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>
-        <ul class="tabs">
+       <!--  <ul class="tabs">
             <li class="active tab all" data-toggle="tab"><a href="javascript:;">All</a></li>
-           <!--  <li class="tab titled" data-toggle="tab"><a href="#">Active</a></li>
+            <li class="tab titled" data-toggle="tab"><a href="#">Active</a></li>
             <li class="tab titled" data-toggle="tab"><a href="#">Draft</a></li>
-            <li class="tab titled" data-toggle="tab"><a href="#">Archived</a></li> -->
-        </ul>
+            <li class="tab titled" data-toggle="tab"><a href="#">Archived</a></li>
+        </ul> -->
         
         <div class="card-section tab_content  active" id="all_customers" wire:ignore.self>
             <div class="order-form">
