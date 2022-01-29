@@ -313,6 +313,83 @@ class Detail extends Component
 
     }
 
+    public function storeProductvarient(Request $request)
+    {
+        $varition_arrray_crunch = $request['varition_arrray'];
+        $price_arr = $request['att_price'];
+        $price_selling_arr = $request['att_price_selling'];
+        $cost_arr = $request['att_cost'];
+        $sku_arr = $request['att_sku'];
+        $barcode_arr = $request['att_barcode'];
+        $hscode_arr = $request['att_hscode'];
+        $country_arr = $request['att_country'];
+        $margin_arr = $request['margin_arry'];
+        $profit_arr = $request['profit_arry'];
+        $variations_arr = [];
+        $arr = [];
+        $productCollection_arrray = [];
+        $product_new_arrray = [];
+
+            if($varition_arrray_crunch){
+             foreach ($varition_arrray_crunch as  $key => $value) {
+                $explode_array = explode("/",$value);
+                $variations = [];
+                $variations['product_id'] = $request['product_id'];
+                $variations['price'] = $price_arr[$key];
+                $variations['selling_price'] = $price_selling_arr[$key];
+                $variations['cost'] = $cost_arr[$key];
+                $variations['sku'] = $sku_arr[$key];
+                $variations['barcode'] = $barcode_arr[$key];
+                $variations['hscode'] = $hscode_arr[$key];
+                $variations['country'] = $country_arr[$key];
+                $variations['margin'] = $margin_arr[$key];
+                $variations['profit'] = $profit_arr[$key];
+                // dd($explode_array);
+               if(!empty($explode_array[0])) {
+                 
+                 $variations['varient1'] = (int) $explode_array[0];
+                 $variations['attribute1'] = $explode_array[1];
+                 
+               }
+               if(!empty($explode_array[2])) {
+                 $variations['varient2'] = (int) $explode_array[2];
+                 $variations['attribute2'] = $explode_array[3];
+               }
+               if(!empty($explode_array[4])) {
+                 $variations['varient3'] = (int) $explode_array[4];
+                 $variations['attribute3'] = $explode_array[5];
+               }
+
+
+               $variations['updated_at'] = now();
+
+                //  $variations_arr[] = $variations;
+              
+                $product_variant = ProductVariant::create($variations);
+
+                $insert_stock =[];
+                // dd($request->att_stock);
+                if($request->att_stock){
+                    foreach($request->att_stock as $key1 =>$stock) {          
+                        if(!empty($stock[$key])) {
+                            $stock_arr = [
+                            'product_id' =>$this->product['id'],
+                            'variant_main_id' => $product_variant->id,
+                            'location_id' => $key1,
+                            'stock' => $stock[$key]
+                            ];
+                            $insert_stock[] = $stock_arr;
+                        }
+                       
+                    }
+                    VariantStock::insert($insert_stock);
+                }
+                // dd($insert_stock);     
+            }
+        }
+        return redirect()->back();
+    }
+
 
     public function updateDetail()
     {  
