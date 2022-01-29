@@ -11,7 +11,7 @@ use DB;
 class ProductlistController extends Controller
 {
     public function getAllProducts() {
-      $product = Product::get()->toJson(JSON_PRETTY_PRINT);
+      $product = Product::join('product_media', 'product_media.product_id', '=', 'product.id')->get();
       return response($product, 200);
     }
 
