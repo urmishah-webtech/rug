@@ -11,10 +11,7 @@ use DB;
 class ProductlistController extends Controller
 {
     public function getAllProducts() {
-      $product = Product::join('product_media as pm', 'pm.product_id', '=', 'product.id')->
-      select('pm.image as image')
-      ->addSelect('product.id as id','pm.product_id','product.title as title','product.descripation as descripation')
-      ->get();
+      $product = DB::table('product')->get();
      
       $data=array();
       $i=0;
@@ -25,7 +22,10 @@ class ProductlistController extends Controller
         $price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
         where('product.id',$val->id)->whereNotNull('product_variants.price')->get();
 
-      
+        $product_image = DB::table('product')->leftJoin('product_media as pm', 'product.id','=','pm.product_id')
+        ->select('product.id as id','pm.image as image','product.title as title','product.descripation as descripation')
+        ->where('product.id',$val->id)->first();
+
         $price_array=array();
         foreach($price_data as $key=> $value)
         {
@@ -43,7 +43,7 @@ class ProductlistController extends Controller
         $data[$i]['id']=$val->id;
         $data[$i]['title']=$val->title;
         $data[$i]['description']=$val->descripation;
-        $data[$i]['image']=$image_path.$val->image;
+        $data[$i]['image']=$image_path. $product_image->image;
         $data[$i]['price_range']='$'.$min.'-'.'$'.$max;
         $i++;
 
