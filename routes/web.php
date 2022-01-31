@@ -95,6 +95,8 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/admin/products/new', Livewire\Product\ProductCreate::class)->name('products.create');
 
             Route::post('/admin/products/store', [Livewire\Product\ProductCreate::class, 'storeProduct'])->name('products-store');
+            
+            Route::post('/admin/products/update', [Livewire\Product\Detail::class, 'storeProductvarient'])->name('products-varient-store');
 
            
 

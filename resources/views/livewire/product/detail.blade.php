@@ -69,8 +69,7 @@
 
    
 
-<form enctype="multipart/form-data">
-    @csrf
+
 
     <section wire:ignore class="full-width flex-wrap admin-body-width customers-details-sec product-details-sec">
 
@@ -526,7 +525,7 @@
 
             @else
 
-                <div class="card card-pd-0 pd-variants-card main-variant-attribute" wire:ignore>
+            <div class="card card-pd-0 pd-variants-card main-variant-attribute" wire:ignore>
 
                     <div class="card-header">
 
@@ -619,10 +618,206 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing" wire:ignore>
-                                            <tbody class="variants-option" wire:ignore>
-                                            </tbody>
-                                        </table>
+
+                                         <form action="{{ route('products-varient-store') }}" method="POST" enctype="multipart/form-data" autocomplete="" lete="off">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                         <!-- Price Modal -->
+                                            <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal">
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit prices</h2>
+                                                            <span onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row side-elements align-item-bt">
+                                                                <div class="form-field-list">
+                                                                    <label>Apply a price to all variants</label>
+                                                                    <span class="dollar-input">
+                                                                        <input type="text" id="apply-price" class="apply-price" value="" placeholder="0,00">
+                                                                    </span>
+                                                                </div>
+                                                                <a class="button fw-6" id="apply-price-submit" class="apply-price-submit">Apply to all</a>
+                                                            </div>
+                                                            
+                                                            <div class="attribute-prices">
+                                                                
+                                                            </div>
+                                                 
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
+                                                            <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-prices-modal').style.display='none'"  data-recordid="">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Edit SKUs modal-->
+                                            <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal">
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit SKUs</h2>
+                                                            <span onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body  attribute-sku-value">
+                                                         
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button secondary">Cancel</a>
+                                                            <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button green-btn">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            
+                                            <!--Edit barcodes modal-->
+                                            <div id="variants-edit-barcodes-modal" class="customer-modal-main skus-barcodes-modal">
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit barcodes</h2>
+                                                            <span onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body attribute-barcode-value">
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button secondary">Cancel</a>
+                                                            <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button green-btn">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            
+                                            
+                                            <!--Edit HS codes modal-->
+                                            <div id="edit-hs-codes-modal" class="customer-modal-main variants-edit-option-modal">
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit HS codes</h2>
+                                                            <span onclick="document.getElementById('edit-hs-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row side-elements align-item-bt">
+                                                                <div class="form-field-list">
+                                                                    <label>HS (Harmonized System) code</label>
+                                                                    <input type="search" id="apply-hscode" value="" placeholder="Search or enter a HS code">
+                                                                </div>
+                                                                <a class="button fw-6" id="apply-hscode-submit">Apply to all</a>
+                                                            </div>
+                                                            <p class="ta-left mb-0">Manually enter codes that are longer than 6 numbers.</p>
+                                                            <div class="attribute-hscode-value">
+                                                                
+                                                            </div> 
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a class="button secondary">Cancel</a>
+                                                            <a class="button green-btn">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            
+                                            <!--Edit country codes of origin modal-->
+                                            <div id="edit-country-codes-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit country codes of origin</h2>
+                                                            <span onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row side-elements align-item-bt">
+                                                                <div class="form-field-list">
+                                                                    <label>Country/Region of origin</label>
+                                                                    <select id="apply-country">
+                                                                        <option value="">Select country/region</option>
+                                                                        <option value="1">Afghanistan</option>
+                                                                        <option value="2">india</option>
+                                                                        <option value="3">Greenland</option>
+                                                                    </select>
+                                                                </div>
+                                                                <a class="button fw-6" id="apply-country-submit">Apply to all</a>
+                                                            </div>
+                                                            <p class="ta-left mb-0">In most cases, where the product is manufactured.</p>
+                                                            <div class="attribute-country-value">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button secondary">Cancel</a>
+                                                            <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button green-btn">Done</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+
+
+                                          <!--Edit quantities modal-->
+                                            <div id="edit-quantities-modal" class="customer-modal-main">
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Edit quantities</h2>
+                                                            <span onclick="document.getElementById('edit-quantities-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="first-modal">
+                                                                <p class="mb-0">Choose a location where you want to edit quantities.</p>
+                                                                <div>
+
+                                                                    @foreach($location as $local_row)
+                                                                    <a class="link location_name" id="{{$local_row->id}}" data-toggle="modal" data-target="#edit-quantities-details-modal-{{$local_row->id}}" data-dismiss="modal">{{$local_row->name}} <span><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></span></a>
+
+
+                                                                     <!--Edit quantities modal-->
+                                                                        <div id="edit-quantities-details-modal-{{$local_row->id}}" class="customer-modal-main ">
+                                                                            <div class="customer-modal-inner">
+                                                                                <div class="customer-modal">
+                                                                                    <div class="modal-header">
+                                                                                        <h2>Edit quantities</h2>
+                                                                                        <span  data-dismiss="modal" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+
+                                                                                            <p class="mb-0">Editing quantities at <span class="fw-6">{{$local_row->name}}</span></p>
+                                                                                            <input type="hidden" name="variantsid[]" value="{{$local_row->id}}"> 
+                                                                                            <div class="attribute-stock-value" id="location_{{$local_row->id}}">
+                                                                                            </div>
+
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button class="button secondary"  data-dismiss="modal">Cancel</button>
+                                                                                        <button class="button secondary green-btn"  data-dismiss="modal">Done</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> 
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <div class="second-modal">
+                                                                <p>Inventory can’t be edited because no variants are stocked at <span class="fw-6">Armada.</span></p>
+                                                                <p>Inventory can’t be edited at <span class="fw-6">H-28, Sector 63 </span>because no variants have quantity tracking turned on.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="button secondary" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
+                                                <input type="submit" class="button" name="submit" id="master-save" value="save">
+                                                <tbody class="variants-option">
+                                                </tbody>
+                                            </table>
+                                            </form>
+                                           
+                            
                                         <hr>
                                         <div class="product-table-footer">
                                             <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory at all locations</a>
@@ -634,8 +829,7 @@
                         </div>
                     </div>
                 </div>
-                    
-                </div>
+            </div>
                 
 
             @endif
@@ -1627,7 +1821,6 @@
 
     <!--Edit prices modal-->
 @if(count($Productvariant) != 0)
-
     <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
 
         <div class="customer-modal-inner">
@@ -1713,7 +1906,6 @@
         </div>
 
     </div> 
-
 
     <!-- Edit Selling Price -->
 
@@ -2295,194 +2487,9 @@
     </div> 
 
 @else
-
- <!-- Price Modal -->
-    <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit prices</h2>
-                    <span onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body">
-                    <div class="row side-elements align-item-bt">
-                        <div class="form-field-list">
-                            <label>Apply a price to all variants</label>
-                            <span class="dollar-input">
-                                <input type="text" id="apply-price" class="apply-price" value="" placeholder="0,00">
-                            </span>
-                        </div>
-                        <a class="button fw-6" id="apply-price-submit" class="apply-price-submit">Apply to all</a>
-                    </div>
-                    <div class="attribute-prices" wire:ignore>
-                        
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-prices-modal').style.display='none'"  data-recordid="">Done</a>
-                </div>
-            </div>
-        </div>
-    </div> 
-    
-    <!--Edit SKUs modal-->
-    <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal">
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit SKUs</h2>
-                    <span onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body  attribute-sku-value">
-                 
-                </div>
-                <div class="modal-footer">
-                    <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button green-btn">Done</a>
-                </div>
-            </div>
-        </div>
-    </div> 
-    
-    <!--Edit barcodes modal-->
-    <div id="variants-edit-barcodes-modal" class="customer-modal-main skus-barcodes-modal">
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit barcodes</h2>
-                    <span onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body attribute-barcode-value">
-                    
-                </div>
-                <div class="modal-footer">
-                    <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button green-btn">Done</a>
-                </div>
-            </div>
-        </div>
-    </div> 
+   
     
     
-    <!--Edit HS codes modal-->
-    <div id="edit-hs-codes-modal" class="customer-modal-main variants-edit-option-modal">
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit HS codes</h2>
-                    <span onclick="document.getElementById('edit-hs-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body">
-                    <div class="row side-elements align-item-bt">
-                        <div class="form-field-list">
-                            <label>HS (Harmonized System) code</label>
-                            <input type="search" id="apply-hscode" value="" placeholder="Search or enter a HS code">
-                        </div>
-                        <a class="button fw-6" id="apply-hscode-submit">Apply to all</a>
-                    </div>
-                    <p class="ta-left mb-0">Manually enter codes that are longer than 6 numbers.</p>
-                    <div class="attribute-hscode-value">
-                        
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <a class="button secondary">Cancel</a>
-                    <a class="button green-btn">Done</a>
-                </div>
-            </div>
-        </div>
-    </div> 
-    
-    <!--Edit country codes of origin modal-->
-    <div id="edit-country-codes-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit country codes of origin</h2>
-                    <span onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body">
-                    <div class="row side-elements align-item-bt">
-                        <div class="form-field-list">
-                            <label>Country/Region of origin</label>
-                            <select id="apply-country">
-                                <option value="">Select country/region</option>
-                                <option value="1">Afghanistan</option>
-                                <option value="2">india</option>
-                                <option value="3">Greenland</option>
-                            </select>
-                        </div>
-                        <a class="button fw-6" id="apply-country-submit">Apply to all</a>
-                    </div>
-                    <p class="ta-left mb-0">In most cases, where the product is manufactured.</p>
-                    <div class="attribute-country-value">
-                        
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button green-btn">Done</a>
-                </div>
-            </div>
-        </div>
-    </div> 
-
-
-  <!--Edit quantities modal-->
-    <div id="edit-quantities-modal" class="customer-modal-main">
-        <div class="customer-modal-inner">
-            <div class="customer-modal">
-                <div class="modal-header">
-                    <h2>Edit quantities</h2>
-                    <span onclick="document.getElementById('edit-quantities-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                </div>
-                <div class="modal-body">
-                    <div class="first-modal">
-                        <p class="mb-0">Choose a location where you want to edit quantities.</p>
-                        <div>
-
-                            @foreach($location as $local_row)
-                            <a class="link location_name" id="{{$local_row->id}}" data-toggle="modal" data-target="#edit-quantities-details-modal-{{$local_row->id}}" data-dismiss="modal">{{$local_row->name}} <span><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></span></a>
-
-
-                             <!--Edit quantities modal-->
-                                <div id="edit-quantities-details-modal-{{$local_row->id}}" class="customer-modal-main ">
-                                    <div class="customer-modal-inner">
-                                        <div class="customer-modal">
-                                            <div class="modal-header">
-                                                <h2>Edit quantities</h2>
-                                                <span  data-dismiss="modal" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                    <p class="mb-0">Editing quantities at <span class="fw-6">{{$local_row->name}}</span></p>
-                                                    <input type="hidden" name="variantsid[]" value="{{$local_row->id}}"> 
-                                                    <div class="attribute-stock-value" id="location_{{$local_row->id}}">
-                                                    </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="button secondary"  data-dismiss="modal">Cancel</button>
-                                                <button class="button secondary green-btn"  data-dismiss="modal">Done</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="second-modal">
-                        <p>Inventory can’t be edited because no variants are stocked at <span class="fw-6">Armada.</span></p>
-                        <p>Inventory can’t be edited at <span class="fw-6">H-28, Sector 63 </span>because no variants have quantity tracking turned on.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="button secondary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div> 
 
 @endif
 
@@ -2686,7 +2693,7 @@ $(document).ready(function () {
                                 var arr_name3 = el;
                                 get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
-                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" wire:model="att_price" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
@@ -2705,7 +2712,7 @@ $(document).ready(function () {
                         {
                              get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>'; 
 
-                             get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" wire:model="att_price" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+                             get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
                              get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
@@ -2721,9 +2728,9 @@ $(document).ready(function () {
                 }
                 else
                 {
-                     get_html += '<input type="hidden" wire:model="varition_arrray" name="varition_arrray" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>$</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
+                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>$</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
 
-                     get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" wire:model="att_price" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+                     get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
                      get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
