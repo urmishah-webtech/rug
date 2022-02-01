@@ -188,8 +188,14 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/blogs/detail', Livewire\OnlineStore\BlogPostDetail::class)->name('blogs-detail');
 
+            Route::post('/admin/blogs/blogs-create', [Livewire\OnlineStore\BlogPostCreate::class, 'store_BlogPost'])->name('create_blog_post');
+             
+            Route::get('/admin/blogs/{id?}', [Livewire\OnlineStore\BlogPostDetail::class,'get_BlogPost_detail'])->name('blog-detail');
 
+            Route::post('/admin/blogs/update-blog', [Livewire\OnlineStore\BlogPostDetail::class, 'update_BlogPost_detail'])->name('update_blogpost_detail');
 
+            Route::get('/admin/blogs/delete-post/{id}',[Livewire\OnlineStore\BlogPostDetail::class, 'delete_blog_post'])->name('delete_blogpost');
+             
             //Order
 
             Route::get('/admin/order', Livewire\Order\Order::class)->name('order-list');
