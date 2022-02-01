@@ -27,7 +27,7 @@
                     <div class="columns eight">
                         <div class="card">
                             <div class="row">
-                                <label>Store name</label>
+                                <label>Site name</label>
                                 <input type="text" wire:model="getgeneral.store_name" value="delivery-boy-demo">
                             </div>
                             <article class="full-width">
@@ -56,10 +56,17 @@
                                             <button class="secondary">Add logo</button>
                                             <label for="logoUpload">or drop files to upload</label>
                                         </div>
+                                        @if(!empty($getgeneral->backend_logo))
+                                        <div class="avatar-preview">  
+                                            <div id="logoPreview" style="background-image: url('{{ url('storage/'.$getgeneral->backend_logo) }}'); display: block;">
+                                            </div>
+                                        </div>
+                                        @else
                                         <div class="avatar-preview">
                                             <div id="logoPreview" style="background-image: url();">
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="columns six row field_style1 mb-2">
@@ -72,7 +79,7 @@
                                             <label for="favUpload">or drop files to upload</label>
                                         </div>
                                         <div class="avatar-preview">
-                                            <div id="favPreview" style="background-image: url();">
+                                            <div id="favPreview" style="background-image: url('{{ url('storage/'.$getgeneral->favicon_logo) }}'); display: block;">
                                             </div>
                                         </div>
                                     </div>

@@ -150,13 +150,13 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/menu?menu={id}', Livewire\Menu\Menus::class)->name('menu-item');
 
-            Route::post('addCustomMenu','App\Http\Livewire\Menu\Menus@addCustomMenu')->name('addCustomMenu');
+            Route::post('/admin/addCustomMenu','App\Http\Livewire\Menu\Menus@addCustomMenu')->name('addCustomMenu');
 
-            Route::get('add-main-menu', [Livewire\Menu\Menus::class, 'addMainmenu'])->name('add-main-menu');
+            Route::get('/admin/add-main-menu', [Livewire\Menu\Menus::class, 'addMainmenu'])->name('add-main-menu');
 
-            Route::get('add-product-menu', [Livewire\Menu\Menus::class, 'addProductmenu'])->name('add-product-menu');
+            Route::get('/admin/add-product-menu', [Livewire\Menu\Menus::class, 'addProductmenu'])->name('add-product-menu');
 
-            Route::get('add-collection-menu', [Livewire\Menu\Menus::class, 'addCollectionmenu'])->name('add-collection-menu');
+            Route::get('/admin/add-collection-menu', [Livewire\Menu\Menus::class, 'addCollectionmenu'])->name('add-collection-menu');
 
 
 
@@ -220,8 +220,12 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/discounts/{id?}', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
 
-            //Marketing 
-            Route::get('/admin/marketing', Livewire\Marketing\Marketing::class)->name('marketing');
+            //Slider 
+            Route::get('/admin/slider/new', Livewire\Slider\SliderCreate::class)->name('slider-creates');
+
+            Route::get('/admin/slider', Livewire\Slider\SliderList::class)->name('slider-list');
+
+            Route::get('/admin/slider/{id?}', Livewire\Slider\SliderDetail::class)->name('slider-detail');
 
             //AdminUsers 
 
