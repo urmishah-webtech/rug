@@ -78,10 +78,17 @@
                                             <button class="secondary">Add favicon</button>
                                             <label for="favUpload">or drop files to upload</label>
                                         </div>
+                                        @if(!empty($getgeneral->favicon_logo))
                                         <div class="avatar-preview">
                                             <div id="favPreview" style="background-image: url('{{ url('storage/'.$getgeneral->favicon_logo) }}'); display: block;">
                                             </div>
                                         </div>
+                                        @else
+                                        <div class="avatar-preview">
+                                            <div id="logoPreview" style="background-image: url();">
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
