@@ -197,7 +197,7 @@
                                     <img src="{{ url('storage/'.@$val->image) }}">
                                 </td>
                                 <td class="product-table-item">
-                                    <a href="{{ route('blog-detail', @$val->id) }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->title}}</a>
+                                    <a href="{{ route('blog-detail', @$val->slug) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->title}}</a>
                                     <p class="mb-0 text-grey">Last edited: {{date('d M Y H:i:s', strtotime(@$val->updated_at))}}</p>
                                 </td>
                                 <td class="subscribed-label status-table-item">

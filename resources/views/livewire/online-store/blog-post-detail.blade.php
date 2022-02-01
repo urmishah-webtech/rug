@@ -27,6 +27,15 @@
             <div class="columns two-thirds">
                 <div class="card">
                     <h3 class="fs-16 fw-6">Blog details</h3>
+                    @if ($errors->any())
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                        @if($errors->any())
+                        {!! implode('', $errors->all('<div>:message</div>')) !!}
+                        @endif
+                    
+                    </div>
+                    @endif
                     <div class="row row-mb-0 ">
                         <label class="lbl-mb-4">Title</label>
                         <input type="text" name="title" value="{{ @$edit_post->title }}">
@@ -39,7 +48,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="product-des-customize">
+                        <label class="lbl-mb-4">Slug</label>
+                        <input type="text" name="slug" value="{{ @$edit_post->slug }}">
+                        </div>
                     </div>
                 </div>
                 <div class="card search-engine-listing-card">
@@ -66,8 +78,6 @@
                         <div class="row">
                             <label>URL and handle</label>
                             <div class="url-input">
-                                <span>{{ url('/blogs') }}/</span>
-                                 
                                 <input type="text" name="seo_url" value="{{ @$edit_post->seo_url}}">
                             </div>
                         </div>
@@ -92,26 +102,14 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="card">
-                    <div class="p-3">
-                        <h3 class="fs-16 fw-6 lh-normal">Online store</h3>
-                        <div class="row">
-                            <label class="lbl-mb-4">Theme template</label>
-                            <select>
-                                <option value="">Default blog</option>
-                            </select>
-                        </div>
-                        <p class="mb-0">Assign a template from your current theme to define how the blog is displayed.</p>
-                    </div>
-                </div>
+                 
             </div>
         </article>
     </section>
     <section class="full-width flex-wrap admin-body-width">
         <div class="page-bottom-btn">
             <a class="warning delete_blogpost" data-id="{{$edit_post->id}}" data-toggle="modal" data-target="#delete-blog-post">Delete blog</a>
-            <button >Save</button>
+            <button class="save_button">Update</button>
         </div>
     </section>
     </form>
@@ -160,6 +158,7 @@
                </div>
             </div>
          </div>
+ 
 <script type="text/javascript">
     $( ".edit-website-seo-btn" ).click(function() {     
         $('.search-engine-listing-card .card-middle').toggle();
@@ -168,48 +167,11 @@
     $('.tinymce-editor').each(function () {
                 CKEDITOR.replace($(this).prop('id'));
     });
-     $(function(){  
-            $('#images').change(function(e) {
-                var files = e.target.files;
-                    for (var i = 0; i <= files.length; i++) {  
-                    if(i==files.length){ 
-                    setTimeout(function(){ reorderImages(); }, 100);
-                    break;
-                    }        
-                var file = files[i];
-                var reader = new FileReader(); 
-                reader.onload = (function(file) {
-                    return function(event){
-                        $('li#old_edit_blogimg').hide();
-                        $('#sortable').prepend('<li id="update_bgimage" class="ui-state-default remove-image" data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" class="image-checkbox" id="image-check-'+file.lastModified+'" name="media-images"></div><img src="' + event.target.result + '" style="width:100%;" /> <div class="order-number">0</div></li>');
-                        $('#sortable').find('li').eq(0).insertAfter('#sortable>li:last');
-                    };
-                })(file); 
-                reader.readAsDataURL(file); 
-                } 
-            });
-        });
-        function reorderImages() {		 
-            var images = $('#sortable li');
-            var i = 0,
-                nrOrder = 0;
-            for(i; i < images.length; i++) {
-                var image = $(images[i]);
-                if(image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder')) {
-                    image.attr('data-order', nrOrder);
-                    var orderNumberBox = image.find('.order-number');
-                    orderNumberBox.html(nrOrder + 1);
-                    nrOrder++;
-                } 
-            } 
-	    }
-
-         
+      
 </script>
 <style type="text/css">
-li#update_bgimage{
-    height: 278px;
-}
+li#update_bgimage{ height: 278px;}
+button.save_button{color:#fff!important;}
 </style>
 <!-- Edit Blog page end -->
 </x-admin-layout>

@@ -20,7 +20,7 @@ class BlogPostCreate extends Component
 		 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'seo_url' => 'required|unique:blogs' 
+            'slug' => 'required|alpha|unique:blogs' 
         ]); 
         
         if($validator->fails()){
@@ -33,6 +33,7 @@ class BlogPostCreate extends Component
         $blog=new Blog();
         $blog->title=$request->title;
         $blog->description=$request->description;
+		$blog->slug=$request->slug;
         $blog->image=$path_url;
         $blog->seo_title=$request->seo_title;
         $blog->seo_description=$request->seo_description;

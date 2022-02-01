@@ -16,14 +16,22 @@ class BlogPostDetail extends Component
         return view('livewire.online-store.blog-post-detail');
     }
 	
-	public function get_BlogPost_detail($id)
+	public function get_BlogPost_detail($slug)
 	{
-		$edit_post=Blog::where('id',$id)->first();   
+		$edit_post=Blog::where('slug',$slug)->first();    
 		return view('livewire.online-store.blog-post-detail',compact('edit_post'));
 	}
 	
 	public function update_BlogPost_detail(Request $request)
     {	
+		$validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'slug' => 'required|alpha|unique:blogs,slug,'.$request->id 
+        ]); 
+        
+        if($validator->fails()){
+            return Redirect::back()->withErrors($validator);
+        }
 		
 		if($request['image']){
 		$path_url = $request['image']->storePublicly('media','public');
@@ -32,6 +40,7 @@ class BlogPostDetail extends Component
         $blog=Blog::where('id',$request->id)->first();
         $blog->title=$request->title;
         $blog->description=$request->description;
+		$blog->slug=$request->slug;
         $blog->image=$path_url;
         $blog->seo_title=$request->seo_title;
         $blog->seo_description=$request->seo_description;

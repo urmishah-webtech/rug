@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
 Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
+
+Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
+Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
