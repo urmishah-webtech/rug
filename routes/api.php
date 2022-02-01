@@ -23,3 +23,8 @@ Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getI
 
 Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
 Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
+
+Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
+Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+
+Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
