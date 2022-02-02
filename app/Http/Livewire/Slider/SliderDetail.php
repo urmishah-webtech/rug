@@ -53,7 +53,7 @@ class SliderDetail extends Component
 
                     'description' 	  => $this->slider['description'],
 
-                    'slider_image'    => $path_url,    
+                    'slider_image'    => $path_url	,    
 
                 ]
 

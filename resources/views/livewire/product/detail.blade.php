@@ -116,7 +116,7 @@
 
                         <label class="all-select-media"><input type="checkbox" name="option2a" id="select-all"><span class="count-image"></span> Media </label>
 
-                        <a href="javascript:;" class="link warning delete-media">Delete media</a>
+                        <a wire:ignore wire:click.prevent="deleteimage()" class="link warning delete-media">Delete media</a>
 
                     </div>
 
@@ -139,7 +139,7 @@
 
                                         @foreach($Productmedia as $row)
 
-                                        <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" name="image[]" class="image-checkbox"></div><img src="{{ url('storage/'.$row->image) }}" style="width:100%;" /> <div class="order-number">0</div></li>
+                                        <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" name="removeimage" wire:model="removeimage" value="{{$row->id}}" class="image-checkbox"></div><img src="{{ url('storage/'.$row->image) }}" style="width:100%;" /> <div class="order-number">0</div></li>
 
                                          @endforeach
 
