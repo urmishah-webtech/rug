@@ -111,6 +111,12 @@ class Variant extends Component
 
     public function Addvariant(Request $request)
     {
+
+        $request->validate([
+            'price' => 'required',
+            'photo' => 'required',
+            'attribute1' => 'required',
+        ]);
              
 
         $variant_stock_arr = [];

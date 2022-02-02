@@ -28,3 +28,12 @@ Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigati
 Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
+
+Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
+Route::post('signup', 'App\Http\Controllers\Api\LoginController@signup');
+Route::post('resetpassword', 'App\Http\Controllers\Api\LoginController@storeNewPassword');
+Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
+Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
+
+
+

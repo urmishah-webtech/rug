@@ -139,6 +139,7 @@
                                
                                 <label> {{$row->name}} </label> 
                                 <input type="text" name="attribute1"/> 
+                                @error('attribute1') <span class="text-danger">{{ $message }}</span>@enderror
 
                                 @endif
 
@@ -218,6 +219,7 @@
                             <input type="file" name="photo" id="et_pb_contact_brand_file_request_0" >
                         </div>
                     </div>
+                    @error('photo') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="card variant-pricing-card">
                     <div class="row-items">
@@ -229,6 +231,8 @@
                                 <label>Price</label>
                                 <input type="text" name="price" id="price-change-input" value="" class="change-value-main-price" >
                                 <label for="input">US$</label>
+                                @error('price') <span class="text-danger">{{ $message }}</span>@enderror
+                                
                             </div>
                             <div class="form-field-list">
                                 <label>Compare at price</label>
