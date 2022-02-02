@@ -194,7 +194,11 @@
                                     <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>
                                 </td>
                                 <td class="product-img">
+                                    @if(@$val->image)
                                     <img src="{{ url('storage/'.@$val->image) }}">
+                                    @else
+                                    <video autoplay muted loop ><source src="{{ url('storage/'.@$val->video)}}" type="video/mp4"></source></video>
+                                    @endif
                                 </td>
                                 <td class="product-table-item">
                                     <a href="{{ route('blog-detail', @$val->slug) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->title}}</a>

@@ -36,12 +36,16 @@ class BlogPostDetail extends Component
 		if($request['image']){
 		$path_url = $request['image']->storePublicly('media','public');
 		}else {$path_url = '';}
+		if($request['video']){
+		$video_url = $request['video']->storePublicly('media','public');}
+		else{$video_url = '';}
 		
         $blog=Blog::where('id',$request->id)->first();
         $blog->title=$request->title;
         $blog->description=$request->description;
 		$blog->slug=$request->slug;
         $blog->image=$path_url;
+		$blog->video=$video_url;
         $blog->seo_title=$request->seo_title;
         $blog->seo_description=$request->seo_description;
         $blog->seo_url=$request->seo_url;
@@ -53,7 +57,7 @@ class BlogPostDetail extends Component
 	public function delete_blog_post($id)
 	{
 		$data = Blog::where('id',$id)->delete();
-		return redirect('/admin/articles'); 
+		return redirect()->route('articles');
     }
 	  
 }

@@ -16,6 +16,24 @@ $(document).ready(function(){
 	    readURL(this);
 	});
 });
+
+//// blog video
+$(document).ready(function(){
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+				$('#logoPreview_video').html('<video autoplay muted loop ><source src="'+e.target.result +'" type="video/mp4"></source></video>' );
+	            $('#logoPreview_video').hide();
+	            $('#logoPreview_video').fadeIn(650);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$("#logoUpload_video").change(function() {
+	    readURL(this);
+	});
+});
 /*fav upload js*/
 $(document).ready(function(){
 	function readURL(input) {
