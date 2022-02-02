@@ -22,6 +22,7 @@ class BlogPostController extends Controller
         $data[$i]['description']=$posts->description;
 		$data[$i]['slug']=$posts->slug;
         $data[$i]['image']=$image_path. '/'. $posts->image;
+		$data[$i]['video']=$image_path. '/'. $posts->video;
         $data[$i]['seo_title']=$posts->seo_title;
         $data[$i]['seo_description']=$posts->seo_description;
         $data[$i]['seo_url']=$posts->seo_url;
@@ -44,6 +45,7 @@ class BlogPostController extends Controller
 				$data['description']=$post->description;
 				$data['slug']=$post->slug;
 				$data['image']=$image_path. '/'. $post->image;
+				$data['video']=$image_path. '/'. $post->video;
 				$data['seo_title']=$post->seo_title;
 				$data['seo_description']=$post->seo_description;
 				$data['seo_url']=$post->seo_url;

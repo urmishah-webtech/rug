@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
 			$table->text('description')->nullable();
 			$table->text('slug')->nullable();
 			$table->string('image')->nullable();
+			$table->string('video')->nullable();
 			$table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->string('seo_url')->nullable();

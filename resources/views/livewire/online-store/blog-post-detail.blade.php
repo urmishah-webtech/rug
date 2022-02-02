@@ -87,19 +87,36 @@
             <div class="columns one-third right-details">
             <div class="card">
                     <div class="p-3">
-                        <h3 class="fs-16 fw-6 lh-normal">Featured image</h3>
-                        <div class="avatar-upload">
+                        <h3 class="fs-16 fw-6 lh-normal">Featured @if($edit_post->image)Image  @else Video @endif</h3>
+                         
+
+                        <div id="blog_image_up" class="avatar-upload" @if($edit_post->image)style="display:block" @else style="display:none" @endif>
                             <div class="avatar-edit">
                                 <input type='file' name="image" id="logoUpload" accept=".png, .jpg, .jpeg" />
                                 <img src="{{ url('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Files</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
-                            <div class="avatar-preview">                                
-                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$edit_post->image) }}'); display: block;" >
+                            <div class="avatar-preview">
+                            @if($edit_post->image)                              
+                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$edit_post->image) }}'); @if($edit_post->image) display:block @endif" ></div>
+                                 @endif
                                 </div>
                             </div>
-                        </div>
+                        
+                        <div id="blog_video_up" class="avatar-upload" @if($edit_post->video)style="display:block" @else style="display:none" @endif>
+                            <div class="avatar-edit">
+                                <input type="file" id="logoUpload_video" name="video" accept=".mp4">
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Video</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            <div class="avatar-preview">
+                                 @if($edit_post->video)   
+                                <div  id="logoPreview_video" @if($edit_post->video)style="display:block" @endif><video autoplay muted loop ><source src="{{ url('storage/'.@$edit_post->video)}}" type="video/mp4"></source></video></div>
+                                 @endif
+                                </div>
+                         </div>
                     </div>
                 </div>
                  
@@ -168,6 +185,17 @@
                 CKEDITOR.replace($(this).prop('id'));
     });
       
+     
+        $(document).on("change","#userType",function(e){
+            var usertype=$(this).val();
+            if(usertype==2){
+                $('#blog_video_up').show();
+                $("#blog_image_up").hide();           
+            } if(usertype==0){
+                $('#blog_video_up').hide();
+                $("#blog_image_up").show();
+            }
+        });
 </script>
 <style type="text/css">
 li#update_bgimage{ height: 278px;}

@@ -13,6 +13,7 @@ class BlogPostCreate extends Component
 {
     public function render()
     {
+		//$blog_video = Blog::where('id',1)->first();
         return view('livewire.online-store.blog-post-create');
     }
 	
@@ -30,11 +31,16 @@ class BlogPostCreate extends Component
 		if($request['image']){
 		$path_url = $request['image']->storePublicly('media','public');}
 		else{$path_url = '';}
+		if($request['video']){
+		$video_url = $request['video']->storePublicly('media','public');}
+		else{$video_url = '';}
+		
         $blog=new Blog();
         $blog->title=$request->title;
         $blog->description=$request->description;
 		$blog->slug=$request->slug;
         $blog->image=$path_url;
+		$blog->video=$video_url;
         $blog->seo_title=$request->seo_title;
         $blog->seo_description=$request->seo_description;
         $blog->seo_url=$request->seo_url;

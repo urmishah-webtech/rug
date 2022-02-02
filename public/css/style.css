@@ -8303,6 +8303,15 @@ section.create-page-header .page_header {
     width: 40px;
     height: 40px;
 }
+.blog-posts-sec table td.product-img video {
+    padding: 19px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+	object-fit: contain;
+    border: 1px solid #e1e3e5;
+    border-radius: 4px;
+}
 .blog-posts-sec .pdpage-checkbox .one-bg.border-every-row p {
     display: block;
 }

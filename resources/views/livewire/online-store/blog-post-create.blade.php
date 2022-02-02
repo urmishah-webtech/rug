@@ -94,8 +94,14 @@
                 </div>-->
                 <div class="card">
                     <div class="p-3">
-                        <h3 class="fs-16 fw-6 lh-normal">Featured image</h3>
-                        <div class="avatar-upload">
+                        <h3 class="fs-16 fw-6 lh-normal">Featured Image or Video</h3>
+                        <select name="usertype" class="form-control" required id="userType">
+							  <option value="">{{ __('select Image/Video') }}</option>
+							   <option value="0" >{{ __('Image') }} </option>
+							   <option value="2" >{{ __('Video') }} </option>
+							</select>
+                    
+                        <div id="blog_image_up" class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' name="image" id="logoUpload" accept=".png, .jpg, .jpeg" />
                                 <img src="{{ url('assets/images/upload-icon.svg') }}">
@@ -107,6 +113,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="blog_video_up" class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type="file" id="logoUpload_video" name="video" accept=".mp4">
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Video</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            <div class="avatar-preview">                             
+                                <div  id="logoPreview_video" ></div>
+                            </div>
+                        </div>
+                         
                     </div>
                 </div>
                 <!--<div class="card">
@@ -141,6 +159,21 @@
        
         $('.tinymce-editor').each(function () {
                 CKEDITOR.replace($(this).prop('id'));
+        });
+
+        $( document ).ready(function() {
+        $('#blog_image_up').hide();
+        $("#blog_video_up").hide();        
+        });
+        $(document).on("change","#userType",function(e){
+            var usertype=$(this).val();
+            if(usertype==2){
+                $('#blog_video_up').show();
+                $("#blog_image_up").hide();           
+            } if(usertype==0){
+                $('#blog_video_up').hide();
+                $("#blog_image_up").show();
+            }
         });
     </script>
 <!-- New Blog page end -->
