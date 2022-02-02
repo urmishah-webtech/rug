@@ -57,7 +57,7 @@ class BlogPostDetail extends Component
 	public function delete_blog_post($id)
 	{
 		$data = Blog::where('id',$id)->delete();
-		return redirect('/admin/articles'); 
+		return redirect()->route('articles');
     }
 	  
 }
