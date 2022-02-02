@@ -95,7 +95,7 @@
                 <div class="card">
                     <div class="p-3">
                         <h3 class="fs-16 fw-6 lh-normal">Featured Image or Video</h3>
-                        <select name="usertype" class="form-control" required id="userType">
+                        <select name="usertype" class="form-control" id="userType">
 							  <option value="">{{ __('select Image/Video') }}</option>
 							   <option value="0" >{{ __('Image') }} </option>
 							   <option value="2" >{{ __('Video') }} </option>
