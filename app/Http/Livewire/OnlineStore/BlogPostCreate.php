@@ -21,7 +21,7 @@ class BlogPostCreate extends Component
 		 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'slug' => 'required|alpha|unique:blogs' 
+            'slug' => 'required|regex:/^[\s\w-]*$/|unique:blogs' 
         ]); 
         
         if($validator->fails()){

@@ -194,7 +194,7 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::post('/admin/blogs/update-blog', [Livewire\OnlineStore\BlogPostDetail::class, 'update_BlogPost_detail'])->name('update_blogpost_detail');
 
-            Route::get('/admin/blogs/delete-post',[Livewire\OnlineStore\BlogPostDetail::class, 'delete_blog_post'])->name('delete_blogpost');
+            Route::get('/admin/blogs/delete-post/{id?}',[Livewire\OnlineStore\BlogPostDetail::class, 'delete_blog_post'])->name('delete_blogpost');
              
             //Order
 

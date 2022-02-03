@@ -168,8 +168,9 @@
 
                   <div class="modal-footer">
                      <div class="button-col">
+                         <?php $deleteurl = $edit_post->id?>
                         <button class="button secondary" data-dismiss="modal" data-dismiss="modal">Cancel</button>
-                        <button class="button"><a  href="/admin/blogs/delete-post/{{$edit_post->id}}" style="color:#fff">Yes, Delete</a></button>
+                        <button class="button"><a  href="{{URL::to('/admin/blogs/delete-post/'.$deleteurl)}}" style="color:#fff">Yes, Delete</a></button>
                      </div>
                   </div>
                </div>
