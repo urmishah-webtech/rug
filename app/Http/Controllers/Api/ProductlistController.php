@@ -85,25 +85,10 @@ class ProductlistController extends Controller
            $product_arra['image']=$image_path.$val['productmediaget'][$key]['image'];
            $product_arra['price_range']='$'.$min.'-'.'$'.$max;
            
-           $insert_stock =[];
-          foreach($val['variants'] as $key => $result){
-            $insert_stock['variant_id']=$result['id'];
-            $insert_stock['variant1']=$result['varient1'];
-           $insert_stock['attribute1']=$result['attribute1'];
-           $insert_stock['varient2']=$result['varient2'];
-           $insert_stock['attribute2']=$result['attribute2'];
-           $insert_stock['varient3']=$result['varient3'];
-           $insert_stock['attribute3']=$result['attribute3'];
-           $insert_stock['image']=$image_path.$result['photo'];
-           $insert_stock['price']=$result['price'];
-           $insert_stock['selling_price']=$result['selling_price'];
-           $insert_stock['sku']=$result['sku'];
-           $insert_stock['outofstock']=$result['outofstock'];
-           $insert_stock['barcode']=$result['barcode'];
-          $data_result[$key] = $insert_stock;          
+                    
           }          
          // $data_result = json_encode($data_result);
-         return response([$product_arra, $data_result], 200);
+         return response($product_arra, 200);
         }
          
       }
