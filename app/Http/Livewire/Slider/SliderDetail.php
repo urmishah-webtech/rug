@@ -58,5 +58,7 @@ class SliderDetail extends Component
                 ]
 
             );
+
+        session()->flash('message', 'Record Updated Successfully.');
     }
 }

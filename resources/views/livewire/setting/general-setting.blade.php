@@ -1,5 +1,18 @@
 <div>
 <x-admin-layout>
+    <div wire:key="alert">
+
+     @if (session()->has('message'))
+
+     <div class="alert alert-success">
+
+        {{ session('message') }}
+
+     </div>
+
+     @endif
+
+    </div>
     <section class="full-width flex-wrap admin-body-width without-border-head">
         <article class="full-width">
             <div class="columns seven">
@@ -30,22 +43,10 @@
                                 <label>Site name</label>
                                 <input type="text" wire:model="getgeneral.store_name" value="delivery-boy-demo">
                             </div>
-                            <article class="full-width">
-                                <div class="columns six row field_style1 mb-2">
-                                    <label>Store contact email</label>
-                                    <input type="text" wire:model="getgeneral.contact_email" value="shopifydev@webkul.com">
-                                    <p class="text-grey mb-0">We'll use this address if we need to contact you about your store.</p>
-                                </div>
-                                <div class="columns six row field_style1 mb-2">
-                                    <label>Sender email</label>
-                                    <input type="text" wire:model="getgeneral.sender_email" value="shopifydev@webkul.com">
-                                    <p class="text-grey mb-0">Your customers will see this address if you email them.</p>
-                                    <div class="general-alrt-msg">
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zM9 9a1 1 0 0 0 2 0V7a1 1 0 1 0-2 0v2zm0 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path></svg>
-                                        <p class="mb-0">Your email may not appear this way in customers' inboxes. <a class="blue-color td-underline" href="{{ route('sender-email') }}">Manage</a></p>
-                                    </div>
-                                </div>
-                            </article>
+                            <div class="row">
+                                <label>support email field</label>
+                                <input type="email" wire:model="getgeneral.contact_email" value="shopifydev@webkul.com">
+                            </div>
                             <div class="row mb-0">
                                 <div class="columns six row field_style1 mb-2">
                                     <label>Add logo for admin panel</label>

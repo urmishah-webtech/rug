@@ -44,8 +44,8 @@ class SliderCreate extends Component
              	'slider_image' => $path_url,
 
              ]);
-
-             session()->flash('message', 'Slider Created Successfully.');
+             
+             return redirect(route('slider-list'));
 
         }
 

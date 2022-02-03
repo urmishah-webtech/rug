@@ -33,7 +33,14 @@ class Collectionscreate extends Component
     public function collectionCreate(Request $request)
     {      
 
+
         $photo = $request['image'];
+
+        if ($photo) {
+        $path_url = $photo->storePublicly('collection','public');
+        }else{
+            $path_url = '';
+        }
         
         $customer_detail_arr = [
 
@@ -42,6 +49,8 @@ class Collectionscreate extends Component
             'description' => $request['description'],
 
             //'customer_email' => $request['customer_email'],
+
+            'image' => $path_url,
 
             'collection_type' => $request['collection_type'],
 
@@ -76,17 +85,6 @@ class Collectionscreate extends Component
                 $customer_detail_arr['point_of_sale'] = 'false';
 
             }
-
-            if ($photo) {
-            $path_url = $photo->storePublicly('collection','public');
-
-            $customer_detail_arr = [
-            'image' => $path_url
-            ];
-            
-            }
-
-
 
             Collection::create($customer_detail_arr);
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use App\Models\CustomerDetail;
 use App\Models\CustomerComment;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,33 @@ class LoginController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
+
     public function signup(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/',
+        ]);
+        if ($validator->fails()) {
+          return response()->json([
+            'success' => false,
+            'message' => $validator->errors(),
+          ], 401);
+        }
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
+        $user['token'] = $user->createToken('appToken')->accessToken;
+        return response()->json([
+          'success' => true,
+          //'token' => $success,
+          'user' => $user
+      ]);
+    }
+    /*public function signup(Request $request)
     {
 
     	date_default_timezone_set("Europe/Amsterdam");
@@ -74,7 +101,7 @@ class LoginController extends Controller
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
-    }
+    }*/
   
     /**
      * Login user and create token
@@ -100,17 +127,18 @@ class LoginController extends Controller
                 'message' => 'Unauthorized'
             ], 401);
         $user = $request->user();
-        /*$tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->remember_me;
-        if ($request->remember_me)
+        $tokenResult = $user->createToken('Personal Access Token');
+      //  $token = $tokenResult->remember_me;
+        /*if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();*/
         return response()->json([
-            //'access_token' => $tokenResult->accessToken,
+            'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
-           /* 'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()*/
+            'success' => true,
+            'expires_at' => Carbon::parse(
+             //   $tokenResult->token->expires_at
+            )->toDateTimeString()
         ]);
     }
 

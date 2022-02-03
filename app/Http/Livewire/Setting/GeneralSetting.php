@@ -82,7 +82,7 @@ class GeneralSetting extends Component
         $user->pincode     = $this->getgeneral['pincode'];
         $user->save();
 
-        session()->flash('message', 'Address Updated Successfully.');
+        session()->flash('message', 'Record Updated Successfully.');
         //return redirect(route('setting.general-setting'));
     }
 }

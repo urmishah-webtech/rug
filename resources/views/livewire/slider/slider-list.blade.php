@@ -14,11 +14,11 @@
     </section> 
     <section class="full-width flex-wrap admin-full-width list-customers bd_none">
         <div class="columns product_listing_columns has-sections card ml-0">
-            <div class="inventory-tab">
+           <!--  <div class="inventory-tab">
                 <ul class="tabs">
                     <li class="active tab all" data-toggle="tab"><a href="#">All</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="card-section tab_content  active" id="all_customers">
                 <div class="order-form">
                     <article class="full-width">

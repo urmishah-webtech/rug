@@ -35,5 +35,8 @@ Route::post('resetpassword', 'App\Http\Controllers\Api\LoginController@storeNewP
 Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
 Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
 
+Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
+Route::get('pages/{id?}', 'App\Http\Controllers\Api\PagesController@getPages');
+
 
 

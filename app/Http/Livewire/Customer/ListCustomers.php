@@ -378,7 +378,7 @@ class ListCustomers extends Component
 
             
 
-        })->role('customer')->orderBy('updated_at', 'desc')->get();
+        })/*->role('customer')*/->orderBy('updated_at', 'desc')->get();
 
 
 
@@ -561,7 +561,7 @@ class ListCustomers extends Component
 
                 case 4:
 
-                    if (isset($tab['data'][4])) $this->amount_spent = $tab['data'][4]; $this->more_than_amount = $tab['data'][6];
+                    if (isset($tab['data'][4])) $this->amount_spent = $tab['data'][4]; $this->more_than_amount = $tab['data'][4];
 
                 case 5:
 
