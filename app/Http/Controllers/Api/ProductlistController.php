@@ -91,7 +91,7 @@ class ProductlistController extends Controller
          return response($product_arra, 200);
         }
          
-      }
+       
       else
       {
         return response()->json([
