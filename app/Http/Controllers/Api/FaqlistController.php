@@ -19,25 +19,26 @@ class FaqlistController extends Controller
 	{
 		if (FaqCategory::where('id', $id)->exists())
 		{
-			$posts = Faq::where('category_id', $id)->get();   
+			$posts = Faq::where('category_id', $id)->get();     
 			$data=array();
-			 
-			foreach($posts as $post)
+ 
+			foreach($posts as $key => $post)
 			{
-				$data['id']=$post->id;
-				$data['title']=$post->title;
-				$data['description']=$post->description;
-				$data['category_id']=$post->category_id;
-				 
-				$data['seo_title']=$post->seo_title;
-				$data['seo_description']=$post->seo_description;
-				$data['seo_url']=$post->seo_url;
-				return response($data, 200);
+				$data['id']=$post['id'];
+				$data['title']=$post['title'];
+				$data['description']=$post['description'];
+				$data['category_id']=$post['category_id'];
+				$data['seo_title']=$post['seo_title'];
+				$data['seo_description']=$post['seo_description'];
+				$data['seo_url']=$post['seo_url'];
+				$data_result[$key] = $data;   
+				
 			}
+			return response($data_result, 200);
 		}
 		else
 		{
-			return response()->json(["message" => "Blog not found"], 404);
+			return response()->json(["message" => "FAQ not found"], 404);
 		}
     }
 }
