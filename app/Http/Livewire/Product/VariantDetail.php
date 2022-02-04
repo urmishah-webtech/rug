@@ -18,6 +18,8 @@ use App\Models\Location;
 
 use App\Models\Country;
 
+use App\Models\ProductDetail;
+
 use Livewire\WithFileUploads;
 
 class VariantDetail extends Component
@@ -31,6 +33,7 @@ class VariantDetail extends Component
 
     protected $listeners = ['changevariant'];
 
+    public $productDetail, $existDetailCount = 0;
 
 
     protected $rules = [
@@ -93,6 +96,7 @@ class VariantDetail extends Component
             $this->Productvariant_first['trackqtn'] = false;
 
         }
+        $this->getProductDetail();
 
 
     }
@@ -137,7 +141,26 @@ class VariantDetail extends Component
 
     public function changevariant($flag, $params = null)
     {
-        
+
+            if(!empty($this->productDetail)) {
+
+                foreach ($this->productDetail as $key => $detail) {
+
+                    $data = [
+                        'title'=> $detail['title'],
+                        'description' =>$detail['description'],
+                    ];
+                    
+                    if(isset($detail['id']) && !isset($detail['product_id'])) {
+                        ProductDetail::where('id', $detail['id'])->update($data);
+                    } else {
+                        $data['product_id'] = $this->product->id;
+                        $data['variant_id'] = $this->Productvariant_first->id;
+                        ProductDetail::create($data);
+
+                    }
+                }
+            }
 
 
             if ($this->Productvariant_first['outofstock'] == '0') {
@@ -241,5 +264,38 @@ class VariantDetail extends Component
    
 
     }
-  
+  public function getProductDetail()
+    {
+        $detailData = ProductDetail::where('product_id', $this->product->id)->where('variant_id', $this->Productvariant_first->id)->select('title', 'description','id')->get()->toArray();
+        
+        if(empty($detailData)) {
+            $detailData = ProductDetail::where('product_id', $this->product->id)->select('title', 'description','id', 'product_id')->get()->toArray();
+        }
+
+
+        if(!empty($detailData)) {
+            $this->existDetailCount = count($detailData);
+            $this->productDetail = $detailData;
+
+        } else {
+
+            $this->productDetail  = [
+                ['title' => '', 'description' => '']
+            ]; 
+        }
+    }
+    public function addProductDetailSection(){
+
+        $this->productDetail[] =  ['title' => '', 'description' => ''];
+
+    }   
+    public function removeProductDetailSection($index){
+
+        if(isset($this->productDetail[$index]['id']) && !isset($this->productDetail[$index]['product_id'])) {
+            ProductDetail::where('id', $this->productDetail[$index]['id'])->delete();
+        }
+        unset($this->productDetail[$index]);
+        $this->productDetail = array_values($this->productDetail);
+
+    }
 }

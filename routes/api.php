@@ -27,8 +27,12 @@ Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogP
 
 Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
 Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
+
+Route::get('faq-category', 'App\Http\Controllers\Api\FaqlistController@getAllFaqCategory');
+Route::get('faq/{id}', 'App\Http\Controllers\Api\FaqlistController@getFaq_Category_Post');
 
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
 Route::post('signup', 'App\Http\Controllers\Api\LoginController@signup');
