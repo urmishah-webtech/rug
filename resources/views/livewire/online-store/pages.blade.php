@@ -15,10 +15,10 @@
     </section>
     <section class="full-width flex-wrap bd_none admin-full-width pages-list-sec">
         <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0">
-            <ul class="tabs">
+           <!--  <ul class="tabs">
                 <li class="active tab all" data-toggle="tab"><a href="#">All</a>
                 </li>
-            </ul>
+            </ul> -->
             <div class="card-section tab_content  active" id="all_customers">
                 <div class="order-form">
                     <article class="full-width" disabled="disabled">
@@ -26,10 +26,10 @@
                             <div class="input-group" disabled="disabled">
                                 <!-- Search Field -->
                                 <div class="search-product-field" disabled="disabled">
-                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_product" placeholder="Filter Product">
+                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_product" placeholder="Filter Page">
                                 </div>
-                                <div class="form-field" disabled="disabled">
-                                    <!-- Fullfillment Status -->
+                                <!-- <div class="form-field" disabled="disabled">
+                                    
                                     <div class="fs-14 fw-6 fullfillment-dropdown dropdown-field" disabled="disabled">
                                         <label id="main_customer_account_status" class="dropdown-label" disabled="disabled">
                                             Visibility
@@ -49,8 +49,8 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="saved-btn" disabled="disabled">
+                                </div> -->
+                                <!-- <div class="saved-btn" disabled="disabled">
                                     <button class="secondary fw-6 disabled" id="save">
                                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true" disabled="disabled">
                                             <path d="M5.2 18a.8.8 0 0 1-.792-.914l.743-5.203-2.917-2.917a.8.8 0 0 1 .434-1.355l4.398-.733 2.218-4.435a.8.8 0 0 1 1.435.008l2.123 4.361 4.498.801a.8.8 0 0 1 .425 1.353l-2.917 2.917.744 5.203a.8.8 0 0 1-1.154.828l-4.382-2.22-4.502 2.223A.792.792 0 0 1 5.2 18z" disabled="disabled"></path>
@@ -84,7 +84,7 @@
                                             <label for="subscribed-pending" disabled="disabled">Title Z–A</label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </article>

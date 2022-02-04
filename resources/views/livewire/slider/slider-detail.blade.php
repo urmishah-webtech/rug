@@ -1,5 +1,18 @@
 <div>
 <x-admin-layout>
+    <div wire:key="alert">
+
+     @if (session()->has('message'))
+
+     <div class="alert alert-success">
+
+        {{ session('message') }}
+
+     </div>
+
+     @endif
+
+    </div>
     <section class="full-width admin-body-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
             <div class="columns customers-details-heading">

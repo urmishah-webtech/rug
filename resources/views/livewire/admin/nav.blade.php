@@ -40,11 +40,17 @@
             <li class="{{ request()->route()->getName() === 'role-permission' ?  'active' : '' }}">
                 <a href="{{ route('role-permission') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14.363 5.22a4.22 4.22 0 1 1-8.439 0 4.22 4.22 0 0 1 8.439 0zM2.67 14.469c1.385-1.09 4.141-2.853 7.474-2.853 3.332 0 6.089 1.764 7.474 2.853.618.486.81 1.308.567 2.056l-.333 1.02A2.11 2.11 0 0 1 15.846 19H4.441a2.11 2.11 0 0 1-2.005-1.455l-.333-1.02c-.245-.748-.052-1.57.567-2.056z"></path></svg> Role Permission</a>
             </li> -->
-            <li class="<?php if(request()->route()->getName() === 'articles' || request()->route()->getName() === 'pages-list' || request()->route()->getName() === 'menus' || request()->route()->getName() === 'preferences') echo "active"; ?>">
+            <li class="<?php if(request()->route()->getName() === 'articles' || request()->route()->getName() === 'faq' || request()->route()->getName() === 'faq-category' || request()->route()->getName() === 'pages-list' || request()->route()->getName() === 'menus' || request()->route()->getName() === 'preferences') echo "active"; ?>">
                 <a class="nav-dropdown"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M1.791 2.253l-.597 3.583A1 1 0 002.18 7h.893a1.5 1.5 0 001.342-.83L5 5l.585 1.17A1.5 1.5 0 006.927 7h1.146a1.5 1.5 0 001.342-.83L10 5l.585 1.17a1.5 1.5 0 001.342.83h1.146a1.5 1.5 0 001.342-.83L15 5l.585 1.17a1.5 1.5 0 001.342.83h.893a1 1 0 00.986-1.164l-.597-3.583A1.5 1.5 0 0016.729 1H3.271a1.5 1.5 0 00-1.48 1.253z" fill="#5C5F62"/><path d="M18 9H2v8.5A1.5 1.5 0 003.5 19H7v-7h6v7h3.5a1.5 1.5 0 001.5-1.5V9z" fill="#5C5F62"/></svg>Online Store</a>
                 <ul class="sub_items">
                     <li class="{{ request()->route()->getName() === 'articles' ?  'active' : '' }}">
                         <a href="{{ route('articles') }}">Blog posts</a>
+                    </li>
+					<li class="{{ request()->route()->getName() === 'faq' ?  'active' : '' }}">
+                        <a href="{{ route('faq') }}">FAQ</a>
+                    </li>
+                    <li class="{{ request()->route()->getName() === 'faq-category' ?  'active' : '' }}">
+                        <a href="{{ route('faq-category') }}">FAQ Category</a>
                     </li>
                     <li class="{{ request()->route()->getName() === 'pages-list' ?  'active' : '' }}">
                         <a href="{{ route('pages-list') }}">Pages</a>
