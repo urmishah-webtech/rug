@@ -30,6 +30,9 @@ Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getN
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 
+Route::get('faq-category', 'App\Http\Controllers\Api\FaqlistController@getAllFaqCategory');
+Route::get('faq/{id}', 'App\Http\Controllers\Api\FaqlistController@getFaq_Category_Post');
+
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
 Route::post('signup', 'App\Http\Controllers\Api\LoginController@signup');
 Route::post('resetpassword', 'App\Http\Controllers\Api\LoginController@storeNewPassword');
