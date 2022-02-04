@@ -1,5 +1,6 @@
 <div>
    <x-admin-layout>
+
     <section class="full-width flex-wrap admin-body-width add-variant-header">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -32,7 +33,7 @@
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap admin-body-width add-variant-sec" wire:ignore>
+    <section class="full-width flex-wrap admin-body-width add-variant-sec" wire:ignore.self>
     <form enctype="multipart/form-data">
         <article class="full-width">
             <div class="columns one-third">
@@ -299,9 +300,52 @@
                                 <input type="search" placeholder="Search or enter a HS code" wire:model="Productvariant_first.hscode">
                                 <p class="mb-0">Manually enter codes that are longer than 6 numbers.</p>
                             </div>
-                        </div>
                     </div>
                 </div>
+
+                  <!-- detail -->
+                <div class="card " >
+                    <div class="row-items">
+                        <div class="header-title">
+                            <h3 class="fs-16 fw-6 mb-0">Detail</h3>
+                        </div>
+                    </div>
+                    <div class="row-items">
+                      @php $x=0; @endphp
+                             @foreach ($productDetail as $index => $product_detail)
+
+                            <div class="row accordian">
+                                <div class="form-group">
+                                  <a  data-toggle="collapse" href="#productDetail{{$index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                                    <input type="text" class="form-label" readonly="readonly"  style="background-color: #fafbfb;" @if(isset($productDetail[$index]['title'])) value="{{$productDetail[$index]['title']}}"  @endif /> 
+
+                                    
+                              
+                                    
+                                  </a>
+                                </div>
+                                <div  class=" row card card-body collapse"  id="productDetail{{$index}}" style="padding: 0px;" aria-expanded="false">
+
+
+                                    <label><input type="text" wire:key="{{ $index }}" name="productDetail[{{$index}}]['title']" wire:model="productDetail.{{$index}}.title" class="form-control"  placeholder="write the heading here..." ></label>
+
+                                    <textarea placeholder="description..." wire:key="desc_{{ $index }}"  class="form-control" name="productDetail[{{$index}}]['description']" wire:model="productDetail.{{$index}}.description">
+                                    </textarea>
+                                    <a href="#" wire:click.prevent="removeProductDetailSection({{$index}})">delete</a> 
+                                </div>
+
+                            </div>
+                            @php $x++; @endphp
+                            @endforeach
+                    </div>
+                    <div class="row">
+                        <button id="add_new" wire:click.prevent="addProductDetailSection">Add New</button>
+                    </div>
+                    
+                </div>
+                <!-- end detail -->
+            </div>
         </article>
     </section>
     <section class="full-width flex-wrap admin-body-width" wire:ignore>
@@ -446,6 +490,8 @@
         }
 
     });
+
+      
 
 </script>
 </x-admin-layout>

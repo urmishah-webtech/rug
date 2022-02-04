@@ -26,6 +26,8 @@ use App\Models\VariantTag;
 
 use App\Models\tagsale;
 
+use App\Models\ProductDetail;
+
 use Illuminate\Http\Request;
 
 use Livewire\WithFileUploads;
@@ -51,11 +53,14 @@ class Detail extends Component
 
     protected $listeners = ['UpdateVarient'];
 
+    public $productDetail, $existDetailCount = 0;
+
  
 
 
     public function render()
     {
+
         if($this->filesvariant)
         {
             foreach ($this->filesvariant as $photo) {
@@ -84,7 +89,9 @@ class Detail extends Component
     }
  
      public function mount($id) {
-        
+
+    
+
         $this->uuid = $id;
         $this->editQuantitiesDetailsModal = false;
         $this->product = Product::where('uuid',$this->uuid)->first();
@@ -125,6 +132,9 @@ class Detail extends Component
         if(!empty($this->product['product_new'])) {
            $this->product['product_new'] =  json_decode($this->product['product_new']);
         }
+
+        $this->getProductDetail();
+
        
     }
 
@@ -394,6 +404,9 @@ class Detail extends Component
     public function updateDetail()
     {  
 
+
+
+
         if ($this->product['trackqtn'] == 'false') {
 
             $trackqtn = 'true';
@@ -526,6 +539,23 @@ class Detail extends Component
             } 
          }
 
+         if(!empty($this->productDetail)) {
+           
+            foreach ($this->productDetail as $detail) {
+                $data = [
+                    'title'=> $detail['title'],
+                    'description' =>$detail['description'],
+                ];
+                if(isset($detail['id'])) {
+                    ProductDetail::where('id', $detail['id'])->update($data);
+                } else {
+                    $data['product_id'] = $this->product['id'];
+                    ProductDetail::create($data);
+                }
+            }
+         }
+         $this->getProductDetail();
+
         $this->product = Product::where('uuid',$this->uuid)->first();
 
          session()->flash('message', 'Product Updated Successfully.');
@@ -577,5 +607,36 @@ class Detail extends Component
     public function closeModel($model_name)
     {
         if($model_name == 'edit-quantities-details-modal') $this->editQuantitiesDetailsModal = false;
+    }
+
+
+    public function getProductDetail()
+    {
+        $detailData = ProductDetail::where('product_id', $this->product['id'])->where('variant_id', '')->select('title', 'description','id')->get()->toArray();
+
+        if(!empty($detailData)) {
+            $this->existDetailCount = count($detailData);
+            $this->productDetail = $detailData;
+
+        } else {
+
+            $this->productDetail  = [
+                ['title' => '', 'description' => '']
+            ]; 
+        }
+    }
+    public function addProductDetailSection(){
+
+        $this->productDetail[] =  ['title' => '', 'description' => ''];
+
+    }   
+    public function removeProductDetailSection($index){
+
+        if(isset($this->productDetail[$index]['id'])) {
+            ProductDetail::where('id', $this->productDetail[$index]['id'])->delete();
+        }
+        unset($this->productDetail[$index]);
+        $this->productDetail = array_values($this->productDetail);
+
     }
 }
