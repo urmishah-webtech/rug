@@ -135,7 +135,7 @@
                                     <div class="row"><label><input type="checkbox" name="option6a"></label></div>
                                 </th>
                                 <th class="fw-6">
-                                    <div class="select-customers">
+                                   <!--  <div class="select-customers">
                                         <span class="button-group">
                                             <button class="secondary all-customer-select">
                                                 <input type="checkbox" name="option2a" checked="checked">
@@ -148,7 +148,7 @@
                                                 More actions
                                                 <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
                                             </button>
-                                        </span>
+                                        </span> -->
                                     </div>
                                 </th>
                                 <th>Title</th>

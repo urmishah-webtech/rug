@@ -48,6 +48,8 @@ class Detail extends Component
     public $imgvariant;
 
     public $filesvariant = [];
+   
+    public $removeimage = [];
     
     public $photo_variant, $file;
 
@@ -104,8 +106,7 @@ class Detail extends Component
         $this->location = Location::All();
         $this->Country = Country::All();
         $this->fullStock = VariantStock::All();
-        $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get();
-        
+        $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get(); 
         $this->locationarray = (array) json_decode($this->product['location']);
 
         if($this->product['trackqtn'] == 'true') {
@@ -219,6 +220,31 @@ class Detail extends Component
 
     }
 
+    public function deleteimage()
+    {
+       
+
+        foreach ($this->removeimage as $key => $result) {
+
+            $unlinkimg = ProductMedia::where('id',$result)->first();
+
+            $deleteimg = "";
+            if(storage_path("app/public/{$unlinkimg->image}")) {
+            $image_path = storage_path("app/public/{$unlinkimg->image}");
+            $deleteimg = unlink($image_path);
+            }
+
+            if($unlinkimg){
+                $unlinkimg = ProductMedia::where('id',$result)->delete();
+            }
+
+        }
+
+        $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
+        session()->flash('message', 'Deleted Record Successfully.');
+        
+    }
+
     public function EditAddress($locid)
 
     {
@@ -315,7 +341,7 @@ class Detail extends Component
 
             if($variantimgsave){
             $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
-
+            $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
             session()->flash('message', 'Image Updated Successfully.');
             }
         }

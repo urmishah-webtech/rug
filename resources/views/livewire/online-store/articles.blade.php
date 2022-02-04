@@ -3,7 +3,7 @@
         <article class="full-width">
             <div class="columns customers-details-heading">
                 <div class="page_header d-flex  align-item-center mb-3">
-                    <a href="http://185.160.67.108/estore/public/admin/products">
+                    <a href="">
                         <button class="secondary icon-arrow-left mr-2">
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
                                 <path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path>
@@ -13,11 +13,11 @@
                     <h4 class="mb-0 fw-5">Blog posts</h4>
                 </div>
                 <div class="product-header-btn">
-                    <button class="button link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M16 2a2 2 0 0 1 4 0v1h-4V2zM8.379 1a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 14 6.622V17.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1h5.879zM4 5h4v2H4V5zm7 4v2H4V9h7zm-7 6v-2h5v2H4zM16 5h4v11l-2 4-2-4V5z"></path></svg> Manage blogs</button>
+                    <a class="button link" href="{{ url('/admin/blogs') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M16 2a2 2 0 0 1 4 0v1h-4V2zM8.379 1a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 14 6.622V17.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1h5.879zM4 5h4v2H4V5zm7 4v2H4V9h7zm-7 6v-2h5v2H4zM16 5h4v11l-2 4-2-4V5z"></path></svg> Manage blogs</a>
 
-                    <button class="button link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M13 10a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm5-8c-4.411 0-8 3.589-8 8 0 1.504.425 2.908 1.15 4.111l-1.069 2.495a1 1 0 0 0 1.314 1.313l2.494-1.069A7.939 7.939 0 0 0 10 18c4.411 0 8-3.589 8-8s-3.589-8-8-8z"></path></svg> Manage comments</button>
-
-                    <button class="button green-btn">Add blog post</button>
+                    <a class="button link" href=""><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M13 10a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm5-8c-4.411 0-8 3.589-8 8 0 1.504.425 2.908 1.15 4.111l-1.069 2.495a1 1 0 0 0 1.314 1.313l2.494-1.069A7.939 7.939 0 0 0 10 18c4.411 0 8-3.589 8-8s-3.589-8-8-8z"></path></svg> Manage comments</a>
+                    <a class="button green-btn" href="{{ url('/admin/blogs/new') }}">Add blog post</a>
+                     
                 </div>
             </div>
         </article>
@@ -151,7 +151,7 @@
                                 </th>
                                 <th class="fw-6" colspan="2">
                                     <span class="all-customer-list">
-                                    Showing 1 Blog post
+                                    Showing {{@$post_count}} Blog post
                                     </span>
                                     <div class="select-customers" style="display:none">
                                         <span class="button-group product-more-action">
@@ -187,20 +187,27 @@
                                     </div>
                                 </th>
                             </tr>
+                            @isset($articles)
+                            @foreach($articles as $val)
                             <tr>
                                 <td>
                                     <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>
                                 </td>
                                 <td class="product-img">
-                                    <img src="http://185.160.67.108/estore/public/image/defult-image.png">
+                                    @if(@$val->image)
+                                    <img src="{{ url('storage/'.@$val->image) }}">
+                                    @else
+                                    <video autoplay muted loop ><source src="{{ url('storage/'.@$val->video)}}" type="video/mp4"></source></video>
+                                    @endif
                                 </td>
                                 <td class="product-table-item">
-                                    <a href="#" class="fs-14 fw-6 mb-0 black-color">First Post</a>
-                                    <p class="text-grey">Shopify —<a href="#" class="arrow-with-link">News <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14 13v1a1 1 0 0 1-1 1H6c-.575 0-1-.484-1-1V7a1 1 0 0 1 1-1h1c1.037 0 1.04 1.5 0 1.5-.178.005-.353 0-.5 0v6h6V13c0-1 1.5-1 1.5 0zm-3.75-7.25A.75.75 0 0 1 11 5h4v4a.75.75 0 0 1-1.5 0V7.56l-3.22 3.22a.75.75 0 1 1-1.06-1.06l3.22-3.22H11a.75.75 0 0 1-.75-.75z"></path></svg></a></p>
-                                    <p class="mb-0 text-grey">Last edited: Aug 20, 2015</p>
+                                    <a href="{{ route('blog-detail', @$val->slug) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->title}}</a>
+                                    <p class="mb-0 text-grey">Last edited: {{date('d M Y H:i:s', strtotime(@$val->updated_at))}}</p>
                                 </td>
                                 <td class="subscribed-label status-table-item">
                             </tr>
+                            @endforeach
+                            @endisset
                         </tbody>
                     </table>
                 </div>

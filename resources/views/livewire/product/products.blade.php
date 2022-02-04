@@ -23,12 +23,12 @@
 
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>
-        <ul class="tabs">
+       <!--  <ul class="tabs">
             <li class="active tab all" data-toggle="tab"><a href="javascript:;">All</a></li>
-           <!--  <li class="tab titled" data-toggle="tab"><a href="#">Active</a></li>
+            <li class="tab titled" data-toggle="tab"><a href="#">Active</a></li>
             <li class="tab titled" data-toggle="tab"><a href="#">Draft</a></li>
-            <li class="tab titled" data-toggle="tab"><a href="#">Archived</a></li> -->
-        </ul>
+            <li class="tab titled" data-toggle="tab"><a href="#">Archived</a></li>
+        </ul> -->
         
         <div class="card-section tab_content  active" id="all_customers" wire:ignore.self>
             <div class="order-form">
@@ -95,9 +95,8 @@
                             <th>Image</th>
                             <th>Product</th>
                             <th>Status</th>
-                            <th>Inventory</th>
-                            <th>Type</th>
-                            <th>Type</th>
+                            <th>Total Variants</th>
+                            <th>Price</th>
                         </tr>
 
                         <span>@foreach($product as $row)
@@ -148,17 +147,33 @@
                                 @if($row_Variant->product_id == $row->id)
                                  <?php $number++ ?>
                                 @endif
-
                                 @endforeach
-
-                                
-
-                                <p> <?php echo $sum; ?>  in stock for <?php echo $number; ?> variants</p>
+                                <p><?php echo $number; ?> variants</p>
                             </td>
-                            <td class="type-table-item"></td>
-                            <td class="vendor-table-item">
-                                <p><?php echo $row->vender; ?></p>
+                            <td class="type-table-item">
+                                <?php
+                                    $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
+                                    where('product.id',$row->id)->whereNotNull('product_variants.price')->get();
+                                   
+                                    $price_array=array();
+                                    foreach($price_data as $key=> $value)
+                                    {
+                                      $price_array[$key]=$value->price;
+                                    }
+                                   
+                                    if(!empty($price_array)){
+                                      $min = min($price_array);
+                                      $max = max($price_array);
+                                    }
+                                    else{
+                                      $min='';
+                                      $max='';
+                                    }
+                                ?>
+                                <span>$</span><span><?php echo $min; ?></span>
+                                <span> - $</span><span><?php echo $max; ?></span>
                             </td>
+                            
                         </tr>
                         @endforeach</span>
                     </tbody>

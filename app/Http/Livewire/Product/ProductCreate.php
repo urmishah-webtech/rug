@@ -69,29 +69,6 @@ class ProductCreate extends Component
         'seo_descripation' => ['required'],
 
         'seo_url' => ['required'],
-/*
-        'tax' => [],
-
-        'sku' => [],
-
-        'barcode' => [],
-
-        'location' => [],
-
-        'online_store' => [],
-
-        'point_of_sale' => [],
-
-        'product_type' => [],
-
-        'vender' => [],
-
-        'collection' => [],
-
-        'tags' => [],
-
-        'variant' => [],*/
-
     ];
 
 
