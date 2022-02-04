@@ -196,6 +196,30 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/blogs/delete-post/{id?}',[Livewire\OnlineStore\BlogPostDetail::class, 'delete_blog_post'])->name('delete_blogpost');
              
+            Route::get('/admin/faq', Livewire\OnlineStore\Faqpost::class)->name('faq');
+
+            Route::get('/admin/faq/new', Livewire\OnlineStore\FaqCreate::class)->name('faq-new');
+
+            Route::post('/admin/faq/create', [Livewire\OnlineStore\FaqCreate::class, 'store_FaqPost'])->name('store_Faq_create');
+
+            Route::get('/admin/faq/{id?}', [Livewire\OnlineStore\FaqDetail::class,'get_FAQ_detail'])->name('Faq_Detail');
+
+            Route::post('/admin/faq/update-faq', [Livewire\OnlineStore\FaqDetail::class, 'update_FAQ_detail'])->name('update_Faq_detail');
+
+            Route::get('/admin/faq/delete-faq/{id?}',[Livewire\OnlineStore\FaqDetail::class, 'delete_FAQ_post'])->name('delete_Faq');
+
+            Route::get('/admin/faq-category', Livewire\OnlineStore\FaqCategoryPost::class)->name('faq-category');
+
+            Route::get('/admin/faq-category/new', Livewire\OnlineStore\FaqCategoryCreate::class)->name('category-new');
+
+            Route::post('/admin/faq-category/create', [Livewire\OnlineStore\FaqCategoryCreate::class, 'store_FaqCategory'])->name('faq_category_create');
+
+            Route::get('/admin/faq-category/{id?}', [Livewire\OnlineStore\FaqCategoryDetail::class,'get_FaqCategory_Detail'])->name('FaqCategory_Detail');
+
+            Route::post('/admin/faq-category/update-category', [Livewire\OnlineStore\FaqCategoryDetail::class, 'update_FaqCategory_Detail'])->name('update_FaqCategory_detail');
+
+            Route::get('/admin/faq-category/delete-category/{id?}',[Livewire\OnlineStore\FaqCategoryDetail::class, 'delete_FaqCategory'])->name('delete_FaqCategory');
+
             //Order
 
             Route::get('/admin/order', Livewire\Order\Order::class)->name('order-list');
