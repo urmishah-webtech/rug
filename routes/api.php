@@ -37,7 +37,9 @@ Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
 Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
 
 Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
-Route::get('pages/{id?}', 'App\Http\Controllers\Api\PagesController@getPages');
+Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
+
+Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 
 
 
