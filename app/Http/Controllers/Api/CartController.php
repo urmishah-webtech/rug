@@ -298,14 +298,88 @@ class CartController extends Controller
                       //  session()->put('cart', $cart);
                    //    $this->emitTo('header','getCart');
                     }
-
-                    
-
-                }
-
-                
-            
+                } 
             }  
-    	
+        }
+
+    public function DeleteCartProduct($id)
+    {
+
+        if (!empty($id)) {
+            Cart::find($id)->delete();
+             return response()->json([
+                'message' => 'Deleted Record',
+                'success' => true, 
+            ]);
+        } else {
+
+            return response()->json([
+                'message' => 'Not Deleted Record',
+                'success' => false, 
+            ]);
+          /*  $cart = session()->get('cart');
+
+            if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
+                unset($cart[$variantid]);
+            }
+
+            if(isset($cart[$id]) && $cart[$id]['type'] == 'product') {
+                unset($cart[$id]);
+            }
+             session()->put('cart', $cart);*/
+        }
+        //$this->getCart();
+        //$this->emit('getCart');
+
+    }
+
+    public function getCart(Request $result)
+    {   
+
+        $CartItem =  Cart::with(['media_product', 'product_detail','product_variant'])->where('user_id',$result->user_id)->get();
+        $CartsessionItem =  Cart::with(['media_product', 'product_detail','product_variant'])->where('session_id',$result->session_id)->get();
+
+        if (count($CartItem) != 0) {
+            $finalamount = 0;
+            foreach ($CartItem as $key => $result) {
+                $Totalamount = ($result->stock * $result->price);
+
+                $finalamount += $Totalamount;
+            }
+
+             $cartCount = $CartItem->sum('stock');
+
+          return response()->json([
+                'message' => 'success',
+                'cartitem' => $CartItem, 
+                'Totalstock' => $cartCount, 
+                'Totalamount' => $finalamount, 
+                'success' => true, 
+            ]);
+
+        } 
+        if(count($CartsessionItem) != 0) {
+            $stock = 0;
+            $finalamount = 0;
+            foreach ($CartsessionItem as $item) {
+                $stock += $item['stock'];
+                $Totalamount = ($result->stock * $result->price);
+
+                $finalamount += $Totalamount;
+            }
+
+
+
+            $cartCount = $stock;
+            return response()->json([
+                'message' => 'success',
+                'cartitem' => $CartsessionItem, 
+                'Totalstock' => $cartCount, 
+                'Totalamount' => $finalamount,
+                'success' => true, 
+            ]);
+        }
+
+       // $this->dispatchBrowserEvent('onCartChanged');
     }
 }

@@ -27,6 +27,12 @@ class Cart extends Model
         
     }
 
+    public function product_variant()
+    {
+        return $this->hasMany(ProductVariant::class, 'id', 'varientid');
+        
+    }
+
     public function media_product()
     {
         return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
