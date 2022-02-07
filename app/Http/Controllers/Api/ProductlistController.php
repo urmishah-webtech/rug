@@ -101,15 +101,19 @@ class ProductlistController extends Controller
 	public function getIndividualProduct_variant($id) {
       if (Product::where('id', $id)->exists())
       {
-        $product = Product::with('productmediaget')->with('favoriteget')->with('variants')->where('id',$id)->get(); 
+        $product = Product::with('productmediaget')->with('favoriteget')->with('productDetail')->with(['variants' => function($q) {
+          return $q->with('detail');
+        }])->where('id',$id)->get(); 
+
        
         $product_arra= array();
         $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
 
         foreach($product as $key => $val)
         {
-          $price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
-          where('product.id',$val->id)->whereNotNull('product_variants.price')->get();
+          $price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')
+          ->select('product_variants.price as price')
+          ->where('product.id',$val->id)->whereNotNull('product_variants.price')->get();
           $price_array=array();
 
           foreach($price_data as $key=> $value)
@@ -145,7 +149,14 @@ class ProductlistController extends Controller
            $insert_stock['sku']=$result['sku'];
            $insert_stock['outofstock']=$result['outofstock'];
            $insert_stock['barcode']=$result['barcode'];
-          $data_result[$key] = $insert_stock;   
+           $data_result[$key] = $insert_stock;
+
+            if($result['detail']->isEmpty()) {
+              $data_result[$key]['detail'] = $val['productDetail'];
+            } else {
+                $data_result[$key]['detail'] = $result['detail'];
+            }   
+
           }          
          // $data_result = json_encode($data_result);
          return response($data_result, 200);
