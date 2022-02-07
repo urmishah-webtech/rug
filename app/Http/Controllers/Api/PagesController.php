@@ -26,11 +26,12 @@ class PagesController extends Controller
       return response($data, 200);
     }
 	
-	public function getPages($id)
+	public function getPages($slug)
 	{
-		if (page::where('id', $id)->exists())
+
+		if (page::where('seo_url', $slug)->exists())
 		{
-			$pages = page::where('id', $id)->get(); 
+			$pages = page::where('seo_url', $slug)->get(); 
 			$data=array();
 			foreach($pages as $result)
 			{

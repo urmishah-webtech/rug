@@ -365,7 +365,7 @@ class ProductCreate extends Component
                 $variations['country'] = $country_arr[$key];
                 $variations['margin'] = $margin_arr[$key];
                 $variations['profit'] = $profit_arr[$key];
-                // dd($explode_array);
+             //  dd($explode_array);
                if(!empty($explode_array[0])) {
                  
                  $variations['varient1'] = (int) $explode_array[0];
@@ -379,6 +379,31 @@ class ProductCreate extends Component
                if(!empty($explode_array[4])) {
                  $variations['varient3'] = (int) $explode_array[4];
                  $variations['attribute3'] = $explode_array[5];
+               }
+
+               if(!empty($explode_array[6])) {
+                 $variations['varient4'] = (int) $explode_array[7];
+                 $variations['attribute4'] = $explode_array[6];
+               }
+
+               if(!empty($explode_array[8])) {
+                 $variations['varient5'] = (int) $explode_array[9];
+                 $variations['attribute5'] = $explode_array[8];
+               }
+
+               if(!empty($explode_array[10])) {
+                 $variations['varient6'] = (int) $explode_array[11];
+                 $variations['attribute6'] = $explode_array[10];
+               }
+
+               if(!empty($explode_array[12])) {
+                 $variations['varient7'] = (int) $explode_array[13];
+                 $variations['attribute7'] = $explode_array[12];
+               }
+
+               if(!empty($explode_array[14])) {
+                 $variations['varient8'] = (int) $explode_array[15];
+                 $variations['attribute8'] = $explode_array[14];
                }
 
 

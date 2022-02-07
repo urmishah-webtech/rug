@@ -16,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); 
 
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
 Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
 Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
+
+Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
+Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
+Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
+
+Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
 
 Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
 Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
@@ -41,7 +47,11 @@ Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
 Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
 
 Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
-Route::get('pages/{id?}', 'App\Http\Controllers\Api\PagesController@getPages');
+Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
+
+Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
+Route::post('getcart', 'App\Http\Controllers\Api\CartController@getCart');
+Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
 
 
 
