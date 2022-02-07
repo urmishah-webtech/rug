@@ -2549,7 +2549,7 @@ $(document).ready(function () {
            
         
             console.log(x)
-            if(flag < 3 ) {
+            if(flag < 4) {
                 if(attrinbute == "" && variants_tag == "")
                 {
                       
@@ -2605,7 +2605,7 @@ $(document).ready(function () {
 
                     flag++;
 
-                     if(flag == 3) {
+                     if(flag == 4) {
 
                         $('.addBtn').css('display', 'none');
 
@@ -2615,31 +2615,17 @@ $(document).ready(function () {
 
         });         
     
-       // $(document).on("change", '.varition-type-value', function() {
-       //      var selecetval = $(this).val();
-       //      arr_list_items.push(selecetval);
+       $(document).on("change", '.varition-type-value', function() {
+            var selecetval = $(this).val();
+            arr_list_items.push(selecetval);
        
-       //      console.log(arr_list_items);
-       //  });
+            console.log(arr_list_items);
+        });
         
 
     });
         
-       /* $('#add_people_form').validate({ // initialize the plugin  
-                rules: {  
-                    size: {  
-                    required: true  
-                    },  
-                    option: {  
-                    required: true  
-                    }  
-                },  
-                submitHandler: function (form) { // for demo  
-             
-                return false; // for demo  
-                }  
-            });*/
-      
+
        $(document).on("change", '.varition_tags', function() {
 
         var mainid = $(this).attr('id');
@@ -2647,10 +2633,24 @@ $(document).ready(function () {
         var id_type1 = $('#varition_type_1').val();
         var id_type2 = $('#varition_type_2').val();
         var id_type3 = $('#varition_type_3').val();
+        var id_type4 = $('#varition_type_4').val();
+        var id_type5 = $('#varition_type_5').val();
+        var id_type6 = $('#varition_type_6').val();
+        var id_type7 = $('#varition_type_7').val();
+        var id_type8 = $('#varition_type_8').val();
+        var id_type9 = $('#varition_type_9').val();
+        var id_type10 = $('#varition_type_10').val();
 
         var id1 = $('#varition_tags_1').val();
         var id2 = $('#varition_tags_2').val();
         var id3 = $('#varition_tags_3').val();
+        var id4 = $('#varition_tags_4').val();
+        var id5 = $('#varition_tags_5').val();
+        var id6 = $('#varition_tags_6').val();
+        var id7 = $('#varition_tags_7').val();
+        var id8 = $('#varition_tags_8').val();
+        var id9 = $('#varition_tags_9').val();
+        var id10 = $('#varition_tags_10').val();
 
 
    
@@ -2672,9 +2672,53 @@ $(document).ready(function () {
             var arr3 = arr33;
         }
 
+        if(id4 != null && id4.length > 0) {
+            var arr44 = id4.split(',');
+            var arrlegth4 =  id4.length;
+            var arr4 = arr44;
+        }
+
+        if(id5 != null && id5.length > 0) {
+            var arr55 = id5.split(',');
+            var arrlegth5 =  id5.length;
+            var arr5 = arr55;
+        }
+
+        if(id6 != null && id6.length > 0) {
+            var arr66 = id6.split(',');
+            var arrlegth6 =  id6.length;
+            var arr6 = arr66;
+        }
+
+        if(id7 != null && id7.length > 0) {
+            var arr77 = id7.split(',');
+            var arrlegth7 =  id7.length;
+            var arr7 = arr77;
+        }
+
+        if(id8 != null && id8.length > 0) {
+            var arr88 = id8.split(',');
+            var arrlegth8 =  id8.length;
+            var arr8 = arr88;
+        }
+
+        if(id9 != null && id9.length > 0) {
+            var arr99 = id9.split(',');
+            var arrlegth9 =  id9.length;
+            var arr9 = arr99;
+        }
+
+
+        if(id10 != null && id10.length > 0) {
+            var arr1010 = id10.split(',');
+            var arrlegth10 =  id10.length;
+            var arr10 = arr1010;
+        }
+
        
         var get_html = '';
         var get_price_html = '';
+        var get_selling_price_html = '';
         var get_sku_html = '';
         var get_barcode_html = '';
         var get_hscode_html = '';
@@ -2698,9 +2742,202 @@ $(document).ready(function () {
                             arr3.forEach(function(el) {
                                 var uniq_id = Math.random().toString(36).substr(2, 9);
                                 var arr_name3 = el;
+
+                            if(id4 != null && id4.length > 0) {
+
+                            arr4.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name4 = el;
+
+                            if(id5 != null && id5.length > 0) {
+
+                            arr5.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name5 = el;
+
+                            if(id6 != null && id6.length > 0) {
+
+                            arr6.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name6 = el;
+
+                            if(id7 != null && id7.length > 0) {
+
+                            arr7.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name7 = el;
+
+                            if(id8 != null && id8.length > 0) {
+
+                            arr8.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name8 = el;
+
+                            if (id9 != null && id9.length > 0) {
+
+                            arr9.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name9 = el;
+
+                            if (id10 != null && id10.length > 0) {
+
+                            arr10.forEach(function(el) {
+                                var uniq_id = Math.random().toString(36).substr(2, 9);
+                                var arr_name10 = el;
+
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'/' + arr_name10 + '/' + id_type10 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+
+                                get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+
+                            });
+                        } 
+                        else {
+
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+
+                                get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                            }
+
+                           });
+                        } 
+                        else {
+
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + ' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
+
+                                get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+
+                                get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                            }
+
+                            });
+                        }
+                        else
+                        {
+                            
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'/'+arr_name7+'/'+id_type7+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                
+                                get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                                }
+                                
+                            });
+                        }
+                        else
+                        {
+
+                                 get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                
+                                get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                                }
+                                
+                            });
+                        }
+                        else
+                        {
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                
+                                get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                                }
+                                
+                            });
+                        }
+                        else
+                        {
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+
+                                get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
+
+                                get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
+
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                
+                                get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
+
+                                get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                                }
+                                
+                            });
+                        }
+                        else
+                        {
                                 get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
@@ -2711,6 +2948,7 @@ $(document).ready(function () {
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
                                 get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
+                            }
                         
 
                             });
@@ -2720,6 +2958,8 @@ $(document).ready(function () {
                              get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>'; 
 
                              get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
+                             get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
                              get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
@@ -2735,9 +2975,11 @@ $(document).ready(function () {
                 }
                 else
                 {
-                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>$</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
+                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>{{$symbol["currency"]}}</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
 
                      get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
+                      get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
                      get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 

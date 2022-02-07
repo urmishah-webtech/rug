@@ -406,6 +406,16 @@ class ProductCreate extends Component
                  $variations['attribute8'] = $explode_array[14];
                }
 
+               if(!empty($explode_array[16])) {
+                 $variations['varient8'] = (int) $explode_array[17];
+                 $variations['attribute8'] = $explode_array[16];
+               }
+
+               if(!empty($explode_array[18])) {
+                 $variations['varient8'] = (int) $explode_array[19];
+                 $variations['attribute8'] = $explode_array[18];
+               }
+
 
                $variations['updated_at'] = now();
 
