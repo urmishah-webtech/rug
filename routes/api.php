@@ -33,6 +33,7 @@ Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogP
 
 Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
 Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 
@@ -46,7 +47,11 @@ Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
 Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
 
 Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
-Route::get('pages/{id?}', 'App\Http\Controllers\Api\PagesController@getPages');
+Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
+
+Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
+Route::post('getcart', 'App\Http\Controllers\Api\CartController@getCart');
+Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
 
 
 

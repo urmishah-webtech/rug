@@ -440,16 +440,9 @@ class ProductFrontDetail extends Component
 
                 
             
-            }
-
-
+            }  
         
-
-
-      
-
-        
-    }
+        }
 
 
 
