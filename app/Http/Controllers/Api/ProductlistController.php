@@ -51,23 +51,23 @@ class ProductlistController extends Controller
       return response($data, 200);
     }
 
-    public function getIndividualProduct($id) {
+    public function getIndividualProduct($id) { 
       if (Product::where('id', $id)->exists())
-      {
+      { 
         $product = Product::with('productmediaget')->with('favoriteget')->with('variants')->where('id',$id)->get(); 
        
         $product_arra= array();
         $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
 
         foreach($product as $key => $val)
-        {
+        { 
           $price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
           where('product.id',$val->id)->whereNotNull('product_variants.price')->get();
           $price_array=array();
 
-          foreach($price_data as $key=> $value)
+          foreach($price_data as $keynm=> $value)
           {
-            $price_array[$key]=$value->price;
+            $price_array[$keynm]=$value->price;
           }
         
           if(!empty($price_array)){
@@ -78,7 +78,7 @@ class ProductlistController extends Controller
             $min='';
             $max='';
           } 
-
+			//dump($key);
            $product_arra['id']=$val['id'];
            $product_arra['title']=$val['title'];
            $product_arra['description']=$val['descripation'];
