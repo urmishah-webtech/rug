@@ -26,7 +26,8 @@ class BlogPostDetail extends Component
     {	
 		$validator = Validator::make($request->all(), [
             'title' => 'required',
-            'slug' => 'required|alpha|unique:blogs,slug,'.$request->id 
+            'slug' => 'required|alpha|unique:blogs,slug,'.$request->id,
+			'description' => 'required'
         ]); 
         
         if($validator->fails()){

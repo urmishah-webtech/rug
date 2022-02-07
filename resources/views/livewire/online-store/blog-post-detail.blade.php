@@ -50,7 +50,7 @@
                         </div>
                         <div class="product-des-customize">
                         <label class="lbl-mb-4">Slug</label>
-                        <input type="text" name="slug" value="{{ @$edit_post->slug }}">
+                        <input type="text" name="slug" value="{{ @$edit_post->slug }}" readonly>
                         </div>
                     </div>
                 </div>
