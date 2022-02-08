@@ -673,7 +673,7 @@ class Detail extends Component
 
     public function getProductDetail()
     {
-        $detailData = ProductDetail::where('product_id', $this->product['id'])->where('variant_id', '')->select('title', 'description','id')->get()->toArray();
+        $detailData = ProductDetail::where('product_id', $this->product['id'])->whereNULL('variant_id')->select('title', 'description','id')->get()->toArray();
 
         if(!empty($detailData)) {
             $this->existDetailCount = count($detailData);

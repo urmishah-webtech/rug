@@ -16,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); 
 
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
 Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
 Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
+
+Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
+Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
+Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
+
+Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
 
 Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
 Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');

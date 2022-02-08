@@ -168,6 +168,54 @@
 
                 </div>
 
+                                  <!-- detail -->
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div class="header-title">
+                            <h4 class="fs-16 mb-0 fw-6">Detail</h4>
+                        </div>
+
+                    </div>
+                    <div class="card-middle">
+
+                            @php $x=0; @endphp
+                             @foreach ($productDetail as $index => $product_detail)
+
+                            <div>
+                                <div class="form-group">
+                                  <a  data-toggle="collapse" href="#productDetail{{$index}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                                    <input type="text" class="form-label" readonly="readonly"  style="background-color: #fafbfb;" @if(isset($productDetail[$index]['title'])) value="{{$productDetail[$index]['title']}}"  @endif /> 
+
+                                    
+                              
+                                    
+                                  </a>
+                              </div>
+                                <div  class=" row card card-body collapse form-group"  id="productDetail{{$index}}" style="padding: 0px;">
+
+
+                                    <label><input type="text" wire:key="{{ $index }}" name="productDetail[{{$index}}]['title']" wire:model="productDetail.{{$index}}.title" class="form-control"  placeholder="write the heading here..." ></label>
+
+                                    <textarea placeholder="description..." wire:key="desc_{{ $index }}"  class="form-control" name="productDetail[{{$index}}]['description']" wire:model="productDetail.{{$index}}.description">
+                                    </textarea>
+                                    <a href="#" wire:click.prevent="removeProductDetailSection({{$index}})">delete</a> 
+                                </div>
+
+                            </div>
+                            @php $x++; @endphp
+                            @endforeach
+
+                    </div>
+                    <div class="card-footer">
+                        <button wire:click.prevent="addProductDetailSection">Add New</button>
+                    </div>
+
+                </div>
+                <!-- end detail -->
+
       
 
                 @if(count($Productvariant) != 0)
