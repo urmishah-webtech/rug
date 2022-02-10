@@ -52,7 +52,7 @@ class LoginController extends Controller
     /*public function signup(Request $request)
     {
 
-    	date_default_timezone_set("Europe/Amsterdam");
+      date_default_timezone_set("Europe/Amsterdam");
 
         $request->validate([
             'first_name' => 'required|string',
@@ -143,8 +143,8 @@ class LoginController extends Controller
     }
 
 
-  	
-  	public function storeNewPassword(Request $request)
+    
+    public function storeNewPassword(Request $request)
 
     {
 
@@ -166,9 +166,9 @@ class LoginController extends Controller
 
         if(empty($user)) {
 
-        	return response()->json([
-	            'message' => 'Email not exist!'
-	        ], 401);
+          return response()->json([
+              'message' => 'Email not exist!'
+          ], 401);
 
         }
 
@@ -209,8 +209,8 @@ class LoginController extends Controller
         CustomerComment::create($Comment_arr);
 
         return response()->json([
-	            'message' => 'Your password has been reset!'
-	        ], 201);
+              'message' => 'Your password has been reset!'
+          ], 201);
        
 
         

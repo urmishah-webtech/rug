@@ -396,6 +396,41 @@ class Detail extends Component
                  $variations['attribute3'] = $explode_array[5];
                }
 
+               if(!empty($explode_array[6])) {
+                 $variations['varient4'] = (int) $explode_array[7];
+                 $variations['attribute4'] = $explode_array[6];
+               }
+
+               if(!empty($explode_array[8])) {
+                 $variations['varient5'] = (int) $explode_array[9];
+                 $variations['attribute5'] = $explode_array[8];
+               }
+
+               if(!empty($explode_array[10])) {
+                 $variations['varient6'] = (int) $explode_array[11];
+                 $variations['attribute6'] = $explode_array[10];
+               }
+
+               if(!empty($explode_array[12])) {
+                 $variations['varient7'] = (int) $explode_array[13];
+                 $variations['attribute7'] = $explode_array[12];
+               }
+
+               if(!empty($explode_array[14])) {
+                 $variations['varient8'] = (int) $explode_array[15];
+                 $variations['attribute8'] = $explode_array[14];
+               }
+
+               if(!empty($explode_array[16])) {
+                 $variations['varient8'] = (int) $explode_array[17];
+                 $variations['attribute8'] = $explode_array[16];
+               }
+
+               if(!empty($explode_array[18])) {
+                 $variations['varient8'] = (int) $explode_array[19];
+                 $variations['attribute8'] = $explode_array[18];
+               }
+
 
                $variations['updated_at'] = now();
 
@@ -638,7 +673,7 @@ class Detail extends Component
 
     public function getProductDetail()
     {
-        $detailData = ProductDetail::where('product_id', $this->product['id'])->where('variant_id', '')->select('title', 'description','id')->get()->toArray();
+        $detailData = ProductDetail::where('product_id', $this->product['id'])->whereNULL('variant_id')->select('title', 'description','id')->get()->toArray();
 
         if(!empty($detailData)) {
             $this->existDetailCount = count($detailData);
