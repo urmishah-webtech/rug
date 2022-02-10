@@ -42,7 +42,7 @@ class SendMail extends Mailable
 
         CustomerComment::create($Comment_arr);*/
         
-        return $this->from('zappos@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
+        return $this->from('rug@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
 
         
         //return $this->view('view.name');
