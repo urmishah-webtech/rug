@@ -18,7 +18,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-lg-3 col-md-3">
-                        <h4 class="h4">Explore Zappos</h4>
+                        <h4 class="h4">Explore Rugs</h4>
                         <ul class="list-unstyled">
                             <li><a href="#">Brands</a></li>
                             <li><a href="#">Clothing</a></li>
@@ -62,12 +62,12 @@
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <div class="col-12 p-0 footer-inner-col">
-                            <h4 class="h4">About Zappos</h4>
+                            <h4 class="h4">About Rugs</h4>
                             <ul class="list-unstyled">
                                 <li><a href="#">About</a></li>
                                 <li><a href="#">Beyond box</a></li>
-                                <li><a href="#">Zappos for good</a></li>
-                                <li><a href="#">Zappos insights</a></li>
+                                <li><a href="#">Rugs for good</a></li>
+                                <li><a href="#">Rugs insights</a></li>
                                 <li><a href="#">Tours</a></li>
                                 <li><a href="#">Get mobile app</a></li>
                                 <li><a href="#">Cupons</a></li>

@@ -180,7 +180,7 @@
                                 <div class="product-table-title">
                                     <h3>Variants</h3>
                                 </div>
-                                <div class="product-all-location">
+                              <!--   <div class="product-all-location">
                                     <label>Available inventory</label>
                                     <button class="link">
                                         <svg class="location-icon" viewBox="0 0 20 20" focusable="false" aria-hidden="true">
@@ -196,7 +196,7 @@
                                         <li>Armada</li>
                                         <li>H-28, Sector 63</li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <div class="card-section tab_content  active" id="all_customers">
                                     <div class="table-loader">
                                         <div class="loading-overlay" wire:loading.flex="">
@@ -213,11 +213,11 @@
                                                     <ul class="edite-variants-dropdown">
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-                                                        <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
+                                                        <!-- <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
                                                         <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
-                                                        <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li>
+                                                        <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -262,7 +262,7 @@
 
                             </div>
 
-                            <div class="form-field-list">
+                            <!-- <div class="form-field-list">
 
                                 <label>Compare at price</label>
 
@@ -272,7 +272,7 @@
 
                                  @error('compare_price') <span class="text-danger">{{ $message }}</span>@enderror
 
-                            </div>
+                            </div> -->
 
                             <div class="form-field-list">
 
@@ -290,7 +290,7 @@
 
                     </div>
 
-                    <div class="row-items bd_none">
+                    <!-- <div class="row-items bd_none">
 
                         <div class="row variant-price-option">
 
@@ -330,11 +330,11 @@
 
                     <label class="variant-pricing-checkbox"><input type="checkbox" name="tax" checked="checked">Charge tax on this product</label>
 
-                    </div>
+                    </div> -->
 
                 </div>
 
-                <div class="card variant-inventory-card">
+                <!-- <div class="card variant-inventory-card">
 
                     <div class="row-items">
 
@@ -408,9 +408,9 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
-                <div class="card variant-shipping-card">
+                <!-- <div class="card variant-shipping-card">
 
                     <div class="row-items">
 
@@ -486,7 +486,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
                 
                 <div class="card search-engine-listing-card">
 
@@ -562,7 +562,7 @@
 
                                 <option value="active">Active</option>
 
-                                <option value="invited">Draft</option>
+                                <option value="inactive">InActive</option>
 
                             </select>                     
 
@@ -598,7 +598,7 @@
 
                     </div>
 
-                    <div class="card-middle">
+                    <!-- <div class="card-middle">
 
                         <div class="header-title">
 
@@ -622,13 +622,13 @@
 
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
 
                 <div class="card tag-card card-grey-bg organization-card">
 
-                    <div class="card-header">
+                    <!-- <div class="card-header">
 
                         <div class="header-title">
 
@@ -664,7 +664,7 @@
 
                         </div>
 
-                    </div>
+                    </div> -->
 
                     <div class="card-middle">
 
@@ -680,7 +680,7 @@
 
                     </div>
 
-                    <div class="card-footer">
+                    <!-- <div class="card-footer">
 
                         <label name="tags" class="fs-12  fw-6 mb-0">TAGS</label>
 
@@ -703,9 +703,9 @@
                         </div>
 
 
-                    </div>
+                    </div> -->
 
-                    <p class="fs-13 mt-1 mb-1">Add existing tags:</p>
+                    <!-- <p class="fs-13 mt-1 mb-1">Add existing tags:</p>
 
                     @if(!empty($tags))
 
@@ -715,7 +715,7 @@
 
                         @endforeach
 
-                    @endif
+                    @endif -->
 
                 </div>
 

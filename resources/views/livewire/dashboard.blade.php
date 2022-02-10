@@ -157,8 +157,8 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-12">
                         <div class="mini-banner-content">
-                            <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
-                            <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
+                            <h2 class="h2">Earn a Total of 5% Back at Rug</h2>
+                            <p>Automatically earn a total of 5% Back on all Rug purchases when using your Amazon Rewards Visa card.*</p>
                             <a href="#" class="site-btn blue-border-btn">Learn more</a>
                         </div>
                     </div>

@@ -3,14 +3,19 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
 class Dashboard extends Component
 {
+    public $product, $User;
 
     public function mount()
     {
+        $this->product = Product::count();
+        $this->User = User::count();
         // if(!Auth::check()) {
         //     return view('livewire.admin.login');
         // } 

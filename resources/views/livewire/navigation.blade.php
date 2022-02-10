@@ -278,7 +278,7 @@
 
                                 <div class="platform zappos pt-1 ml-auto">
 
-                                    <img class="img-fluid" src="{{ URL::asset('/assets/zappos-iicon.svg')}}" alt="">
+                                    <img class="img-fluid" src="{{ URL::asset('/assets/adminlogo.svg')}}" alt="">
 
                                 </div>
 
@@ -344,7 +344,7 @@
 
                                 <div class="platform zappos pt-1 ml-auto d-none">
 
-                                    <img class="img-fluid" src="{{ URL::asset('/assets/zappos-iicon.svg')}}" alt="">
+                                    <img class="img-fluid" src="{{ URL::asset('/assets/adminlogo.svg')}}" alt="">
 
                                 </div>
 
@@ -358,7 +358,7 @@
 
                         <div class="col-8 terms mr-auto ml-auto mt-md-5 mt-4 text-center">
 
-                            <p class="f-12 m-0">By signing in, you agree to Zappos</p>
+                            <p class="f-12 m-0">By signing in, you agree to Rugs</p>
 
                             <p class="f-12"><a href="#" class="f-12 underline hover-blue">Terms and Conditions</a> and
 
@@ -376,7 +376,7 @@
 
                             By logging in with Amazon, you may be eligible for additional Prime benefits like FREE
 
-                            Upgraded Shipping. Then, join Zappos VIP for additional Prime-linked VIP perks:
+                            Upgraded Shipping. Then, join Rugs VIP for additional Prime-linked VIP perks:
 
                         </h5>
 

@@ -765,7 +765,7 @@
                                             </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>If you want to change the name associated with your Zappos customer account, you may do so below. Be sure to click the Save Changes button when you are done.</p>
+                                                <p>If you want to change the name associated with your Rugs customer account, you may do so below. Be sure to click the Save Changes button when you are done.</p>
                                                 <form autocomplete="off">
                                                     <div class="form-group">
                                                         <label for="NameOnCard">First Name</label>
@@ -875,7 +875,7 @@
                                                     </div>
 
                                                 @endif
-                                                <p>To change the password for your Zappos account, use this form.</p>
+                                                <p>To change the password for your Rugs account, use this form.</p>
                                                 <p style="color: red">Note : Password must contains at least 1 Uppercase, 1 Lowercase, 1 Digit, 1 Special character</p>
 
                                                 <form autocomplete="off">

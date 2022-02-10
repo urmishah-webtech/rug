@@ -1,8 +1,9 @@
+<div>
 <x-admin-layout>
 <section class="full-width home-page">
     <article>
         <div class="columns home-left-sec">
-            <p class="align-left mb-3">Here’s what’s happening with your store today.</p>
+            <!-- <p class="align-left mb-3">Here’s what’s happening with your store today.</p>
             <article>
                 <div class="column six">
                     <div class="card">
@@ -18,18 +19,18 @@
                         <p class="flex-row text-grey">No visitors right now</p>
                     </div>
                 </div>
-            </article>
+            </article> -->
             <div class="card order-method-card">
                 <a href="#">
-                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-orders-c00f8aec8fe360bcc3de597323648bf2c6a9951c2e13a1dbfcdeb7808a6cf6b6.svg" alt=""><span class="fw-6">18 orders</span> to fulfill</p>
+                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-orders-c00f8aec8fe360bcc3de597323648bf2c6a9951c2e13a1dbfcdeb7808a6cf6b6.svg" alt=""><span class="fw-6">{{$product}} Product</span> </p>
                     <p class="mb-0"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></p>
                 </a>
                 <a href="#">
-                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-payments-ce1f89f01d3539ce3bf4032042f97bec81c369e4ed99f8743f02e94e5662eb3e.svg" alt=""><span class="fw-6">4 payments</span> to capture</p>
+                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-payments-ce1f89f01d3539ce3bf4032042f97bec81c369e4ed99f8743f02e94e5662eb3e.svg" alt=""><span class="fw-6">{{$User}} Customer</span> </p>
                     <p class="mb-0"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></p>
                 </a>
             </div>
-            <div class="card suggested-reading-card">
+           <!--  <div class="card suggested-reading-card">
                 <article>
                     <div class="column">
                         <div class="suggested-reading-card-left ta-center">
@@ -48,67 +49,14 @@
                         </div>
                     </div>
                 </article>
-            </div>
+            </div> -->
 
 
 
         </div>
-        <div class="columns home-right-sec">
-            <!-- Select Field Area -->
-            <div class="card has-sections">
-                <div class="card-section">
-                    <article>
-                        <div class="columns six">
-                            <button class="secondary">All channels <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-                        </div>
-                        <div class="columns six">
-                        <button class="secondary">Today <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <div class="card-section">
-                <div class="header-title mb-8">
-                    <h3 class="fs-12 fw-6 mb-0 tt-u lh-normal">Total sales</h3>
-                    <span class="text-grey">Today</span>
-                </div>
-                <p class="text-grey mb-0">There were no sales during this time.</p>
-            </div>
-            <div class="card-section">
-                <div class="header-title mb-8">
-                    <h3 class="fs-12 fw-6 mb-0 tt-u lh-normal">TOTAL SALES BREAKDOWN</h3>
-                    <span class="text-grey">Today</span>
-                </div>
-                <p class="text-grey mb-0">There were no sales during this time.</p>
-            </div>
-            <div class="card-section">
-                <div class="header-title mb-8">
-                    <h3 class="fs-12 fw-6 mb-0 tt-u lh-normal">TOTAL SALES BY CHANNEL</h3>
-                    <span class="text-grey">Today</span>
-                </div>
-                <p class="text-grey mb-0">There were no sales during this time.</p>
-            </div>
-            <div class="card-section">
-                <div class="header-title mb-8">
-                    <h3 class="fs-12 fw-6 mb-0 tt-u lh-normal">TOP PRODUCTS</h3>
-                    <span class="text-grey">Today</span>
-                </div>
-                <p class="text-grey mb-0">There were no products sold during this time.</p>
-            </div>
-            <div class="card-section activity-sec">
-                <div class="header-title mb-8">
-                    <h3 class="fs-12 fw-6 mb-0 tt-u lh-normal">ACTIVITY</h3>
-                </div>
-                <p class="mb-0">You created a new product: <a href="#">dfsd.</a></p>
-                <p class="text-grey">5 August 2021, 02:54 GMT-4</p>
-                <p class="mb-0">You published a collection on Point of Sale: <a href="#">abc.</a></p>
-                <p class="text-grey">28 July 2021, 02:41 GMT-4</p>
-                <p class="mb-0">You published a collection on Online Store: <a href="#">abc.</a></p>
-                <p class="text-grey mb-0">28 July 2021, 02:41 GMT-4</p>
-                <a class="mt-8" href="#">View all recent activity</a>
-            </div>
-        </div>
+       
 </div>
 </article>
 </section>
 </x-admin-layout>
+</div>

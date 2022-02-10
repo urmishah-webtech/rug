@@ -780,7 +780,7 @@
                     <div class="col-12">
                         <div class="free-shipping-return">
                             <h3 class="h3">Free Shipping and Free Return</h3>
-                            <p>If, for any reason, you are unsatisfied with your purchase from Zappos.com LLC you may return it in its original condition within 365 days for a refund. We'll even pay for return shipping!</p>
+                            <p>If, for any reason, you are unsatisfied with your purchase from Rugs.com LLC you may return it in its original condition within 365 days for a refund. We'll even pay for return shipping!</p>
                             <a href="#">Learn more about our free shipping and free returns policy</a>
                         </div>
                     </div>

@@ -98,7 +98,7 @@
 
 
 
-                                <a href="{{url('/')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
+                                <a href="{{url('/')}}"><img src="{{URL::asset('Storage/mailimg/adminlogo.png')}}"></a>
 
 
 

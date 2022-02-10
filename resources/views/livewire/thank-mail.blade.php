@@ -38,7 +38,7 @@
 				</tr>
 				<tr>
 					<td style="text-align: center; padding: 3em 15px 0; ">
-						<img src="{{ URL::asset('mail-img/zappos-logo.svg') }}" style="width: 8em; margin-bottom: 0.4em;">
+						<img src="{{ URL::asset('mailimg/adminlogo.png') }}" style="width: 8em; margin-bottom: 0.4em;">
 						<span style=" width: 100%; display: block;"> © 2020-2021 - Company Name</span>
 					</td>
 				</tr>
