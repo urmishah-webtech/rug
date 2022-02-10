@@ -41,7 +41,7 @@
 
                                 </a>
 
-                                <a href="{{ route('notifications') }}" class="settings-option row field_style1 mb-2">
+                               <!--  <a href="{{ route('notifications') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -57,8 +57,8 @@
 
                                     </div>
 
-                                </a>
-
+                                </a> -->
+<!-- 
                                 <a href="{{ route('languages') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
@@ -309,7 +309,7 @@
 
                                     </div>
 
-                                </a>
+                                </a> -->
 
                             </div>
 

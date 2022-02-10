@@ -3,7 +3,7 @@
         <div class="hidden_desktop">
             <div class="open_side_menu mr-2 fs-20"><i class="fas fa-bars"></i></div>
         </div>
-        <a href="{{ route('admin-dashboard') }}" class="site_title">Demo Estore</a>
+        <a href="{{ route('admin-dashboard') }}" class="site_title">Rug</a>
     </div>
     <div class="header_site_search hidden_mobile">
         <form name="panel_search" id="panel_search" method="post">
@@ -11,12 +11,12 @@
             <input type="text" name="search_from_panel" id="search_from_panel" placeholder="Search">
         </form>
     </div>
-    <div class="header_user_name">
+    <div class="header_user_name"> 
 
 
         <a class="header_user_profile" onclick="myFunction()">
-            <img src="{{ URL::asset('/assets/images/avatar.png')}}">
-            <h4>Demo EStore</h4>
+            <img src="{{ URL::asset('/assets/logo-blue-small._CB485919770_.svg')}}" width="30%">
+            <h4>Rug</h4>
         </a>
         <div style="display: none" id="myDIV">
             <ul style="list-style-type:none;">

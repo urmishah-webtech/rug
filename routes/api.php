@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 }); 
-
+Route::middleware('auth:api')->group(function(){
+	Route::post('shippingInfo', 'App\Http\Controllers\Api\ShippingController@shippingInfo');
+});
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
 Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
 Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
