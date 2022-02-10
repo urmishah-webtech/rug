@@ -11,7 +11,7 @@
             <input type="text" name="search_from_panel" id="search_from_panel" placeholder="Search">
         </form>
     </div>
-    <div class="header_user_name">
+    <div class="header_user_name"> 
 
 
         <a class="header_user_profile" onclick="myFunction()">
