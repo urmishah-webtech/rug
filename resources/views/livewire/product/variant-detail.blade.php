@@ -176,21 +176,31 @@
                                 <label for="input">US$</label>
                             </div>
                             <div class="form-field-list">
-                                <label>Compare at price</label>
-                                <input type="text" name="compare_price" wire:model="product.compare_price">
+                                <label>Selling at price</label>
+                                <input type="text" name="compare_price" wire:model="Productvariant_first.selling_price">
                                 <label for="input">US$</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-field-list">
+                                <label>Stock</label>
+                                <input type="number" name="stock" id="stock-change-input" wire:model="Productvariant_first.stock" class="change-value-main-stock" >
+                                @error('stock') <span class="text-danger">{{ $message }}</span>@enderror
+                                
+                            </div>
+                            <div class="form-field-list">
                             </div>
                         </div>
                     </div>
                     <div class="row-items bd_none">
                         <div class="row variant-price-option">
-                            <div class="form-field-list">
+                            <!-- <div class="form-field-list">
                                 <label>Cost per item</label>
                                 <input type="text" name="cost" class="change-value-main-cost" wire:model="Productvariant_first.cost">
                                 <label for="input">US$</label>
                                 <p>Customers won’t see this</p>
-                            </div>
-                            <div class="form-field-list">
+                            </div> -->
+                            <!-- <div class="form-field-list">
                                 <span>Margin</span> 
                                 <input type="hidden" name="margin" id="margin-input-mian-value" wire:model="Productvariant_first.margin">
                                 
@@ -200,12 +210,12 @@
                                 <span>Profit</span>
                                 <input type="hidden" name="profit" id="profit-input-mian-value" wire:model="Productvariant_first.profit">
                                 <span class="profit-value-main">${{$Productvariant_first->profit}}</span>
-                            </div>
+                            </div> -->
                         </div>
-                    <label class="variant-pricing-checkbox"><input type="checkbox" name="option2a" checked="checked">Charge tax on this variant</label>
+                   <!--  <label class="variant-pricing-checkbox"><input type="checkbox" name="option2a" checked="checked">Charge tax on this variant</label> -->
                     </div>
                 </div>
-                <div class="card variant-inventory-card">
+                <!-- <div class="card variant-inventory-card">
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Inventory</h3>
@@ -255,9 +265,9 @@
                         </table>
 
                     </div>
-                </div>
+                </div> -->
                 
-                <div class="card variant-shipping-card" wire:ignore>
+                <!-- <div class="card variant-shipping-card" wire:ignore>
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Shipping</h3>
@@ -301,7 +311,7 @@
                                 <p class="mb-0">Manually enter codes that are longer than 6 numbers.</p>
                             </div>
                     </div>
-                </div>
+                </div> -->
 
                   <!-- detail -->
                 <div class="card " >

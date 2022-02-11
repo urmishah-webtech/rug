@@ -13,11 +13,11 @@
     </section> 
     <section class="full-width flex-wrap admin-full-width list-customers bd_none">
         <div class="columns product_listing_columns has-sections card ml-0">
-            <div class="inventory-tab">
+            <!-- <div class="inventory-tab">
                 <ul class="tabs">
                     <li class="active tab all" data-toggle="tab"><a href="#">All</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="card-section tab_content  active" id="all_customers">
                 <div class="order-form">
                     <article class="full-width">
@@ -25,11 +25,11 @@
                             <div class="input-group">
                                 <!-- Search Field -->
                                 <div class="search-product-field">
-                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Customers">
+                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_collection" id="search_products" placeholder="Filter Collection">
                                 </div>
                                 <div class="form-field">
                                     <!-- Status -->
-                                    <div class="fs-14 fw-6 status-dropdown dropdown-field">
+                                    <!-- <div class="fs-14 fw-6 status-dropdown dropdown-field">
                                         <label id="main_email_subscription_status" class="dropdown-label">
                                             Availability
                                             <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -54,9 +54,9 @@
                                             <li><a class="clear-btn" type="button" wire:click="removeFilter(0)">Clear</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                     <!-- Fullfillment Status -->
-                                    <div class="fs-14 fw-6 fullfillment-dropdown dropdown-field">
+                                    <!-- <div class="fs-14 fw-6 fullfillment-dropdown dropdown-field">
                                         <label id="main_customer_account_status" class="dropdown-label">
                                             Type
                                             <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -117,7 +117,7 @@
                                             <label for="subscribed">Updated (newest first)</label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </article>
@@ -154,6 +154,7 @@
                                 <th>Title</th>
                                 <th>Product conditions</th>
                             </tr>
+                            @if($collection)
                             @foreach($collection as $row)
                             <tr>
                                 <td>
@@ -176,6 +177,7 @@
                                 <td class="type-table-item"></td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

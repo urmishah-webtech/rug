@@ -7,9 +7,9 @@
 
         <div class="header-btn-group">
 
-            <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+            <!-- <a class="link" data-toggle="modal" data-target="#export" >Export</a>
 
-            <a class="link" data-toggle="modal" data-target="#import">Import</a>
+            <a class="link" data-toggle="modal" data-target="#import">Import</a> -->
 
              @if(user_permission('allproduct','create'))
 
@@ -77,14 +77,14 @@
                                                 <button class="link" wire:click.prevent="store('active')" wire:ignore.self>Set as active</button>
                                             </li>
                                             <li>
-                                                <button class="link" wire:click.prevent="store('draft')" wire:ignore.self>Set as draft</button>
+                                                <button class="link" wire:click.prevent="store('draft')" wire:ignore.self>Set as Disactive</button>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <button class="link" wire:click.prevent="store('archive')" wire:ignore.self>Archive products</button>
                                             </li>
                                             <li>
                                                 <button class="link" wire:click.prevent="store('delete')" wire:ignore.self>Delete products</button>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </span>
                                 </div>

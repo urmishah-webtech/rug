@@ -197,6 +197,7 @@
                                         <li>H-28, Sector 63</li>
                                     </ul>
                                 </div> -->
+
                                 <div class="card-section tab_content  active" id="all_customers">
                                     <div class="table-loader">
                                         <div class="loading-overlay" wire:loading.flex="">
@@ -213,9 +214,10 @@
                                                     <ul class="edite-variants-dropdown">
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
+                                                         <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
                                                         <!-- <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
-                                                        <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
+                                                        <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
                                                         <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
                                                         <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
                                                     </ul>
@@ -227,8 +229,8 @@
                                             </table>
                                             <hr>
                                             <div class="product-table-footer">
-                                                <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory at all locations</a>
-                                                <p>15 available</p>
+                                                <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory</a>
+                                                <p>0 available</p>
                                             </div>
                                         </div>
                                     </div>
@@ -283,6 +285,20 @@
                                 <label for="input">US{{$symbol['currency']}}</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-field-list">
+
+                                <label>Stock</label>
+
+                                <input type="number" name="stock" id="price-change-input" class="price-change-input" value="">
+
+                                @error('stock') <span class="text-danger">{{ $message }}</span>@enderror
 
                             </div>
 
@@ -780,7 +796,6 @@
             </div>
         </div>
     </div> 
-
     <!-- Price Modal -->
     <div id="variants-edit-selling-prices-modal" class="customer-modal-main variants-edit-option-modal">
         <div class="customer-modal-inner">
@@ -810,6 +825,36 @@
             </div>
         </div>
     </div> 
+
+    <!-- Stock Modal -->
+    <div id="variants-edit-stock-modal" class="customer-modal-main variants-edit-option-modal">
+        <div class="customer-modal-inner">
+            <div class="customer-modal">
+                <div class="modal-header">
+                    <h2>Edit Stock</h2>
+                    <span onclick="document.getElementById('variants-edit-stock-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row side-elements align-item-bt">
+                        <div class="form-field-list">
+                            <label>Apply a Stock to all variants</label>
+                            <span class="dollar-input">
+                                <input type="text" id="apply-stock" class="apply-stock" value="" placeholder="0,00">
+                            </span>
+                        </div>
+                        <a class="button fw-6" id="apply-stock-submit" class="apply-stock-submit">Apply to all</a>
+                    </div>
+                    <div class="attribute-selling-prices">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a onclick="document.getElementById('variants-edit-stock-modal').style.display='none'" class="button secondary">Cancel</a>
+                    <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-stock-modal').style.display='none'" data-recordid="">Done</a>
+                </div>
+            </div>
+        </div>
+    </div> 
     
     <!--Edit SKUs modal-->
     <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal">
@@ -831,19 +876,19 @@
     </div> 
     
     <!--Edit barcodes modal-->
-    <div id="variants-edit-barcodes-modal" class="customer-modal-main skus-barcodes-modal">
+    <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal">
         <div class="customer-modal-inner">
             <div class="customer-modal">
                 <div class="modal-header">
-                    <h2>Edit barcodes</h2>
-                    <span onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                    <h2>Edit Stock</h2>
+                    <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                 </div>
-                <div class="modal-body attribute-barcode-value">
+                <div class="modal-body attribute-stock-qtn-value">
                     
                 </div>
                 <div class="modal-footer">
-                    <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button green-btn">Done</a>
+                    <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button secondary">Cancel</a>
+                    <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button green-btn">Done</a>
                 </div>
             </div>
         </div>
@@ -1341,6 +1386,7 @@ $(document).ready(function () {
         var get_html = '';
         var get_price_html = '';
         var get_selling_price_html = '';
+        var get_single_stock_html = '';
         var get_sku_html = '';
         var get_barcode_html = '';
         var get_hscode_html = '';
@@ -1413,11 +1459,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1433,11 +1481,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1454,11 +1504,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1476,11 +1528,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1498,11 +1552,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1519,11 +1575,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1540,11 +1598,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1561,11 +1621,13 @@ $(document).ready(function () {
 
                                 get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1583,11 +1645,13 @@ $(document).ready(function () {
 
                              get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
+                             get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                              get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                              get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                             get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>'; 
+                             get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>'; 
 
                              get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1601,11 +1665,13 @@ $(document).ready(function () {
 
                      get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
-                      get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+                    get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
+                    get_single_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_single_stock" name="att_single_stock[]" id="child-popup-single-stock'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
                      get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
-                     get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                     get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                      get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -1634,7 +1700,7 @@ $(document).ready(function () {
                 
             `);
 
-            $('.attribute-barcode-value').html(`        
+            $('.attribute-stock-qtn-value').html(`        
                        `+get_barcode_html+`
                 
             `);
@@ -1667,7 +1733,7 @@ $(document).ready(function () {
 
         });   
         
-        $(document).on("change", '.att_barcode_class', function() {
+        $(document).on("change", '.att_stock_qtn_class', function() {
 
              var id_value = $(this).attr('id');
              
@@ -1699,6 +1765,12 @@ $(document).ready(function () {
             var val = $('.apply-selling-price').val();
 
             $('.att_price_selling_class').attr("value", val);
+        });
+
+         $(document).on("click", '#apply-stock-submit', function() {
+            var val = $('.apply-stock').val();
+
+            $('.att_single_stock').attr("value", val);
         });
 
 
@@ -1772,7 +1844,7 @@ $(document).ready(function () {
            $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
 
            $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
-           $("#child-popup-barcode-"+thisid).attr("value", $('#barcode-input').val());
+           $("#child-popup-stock-qtn-"+thisid).attr("value", $('#barcode-input').val());
            $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
            $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
            $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());

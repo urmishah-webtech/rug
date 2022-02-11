@@ -14,8 +14,8 @@
 
         <h4 class="mb-0 fw-5">Customers</h4>
         <div class="header-btn-group">
-            <a class="link" data-toggle="modal" data-target="#export" >Export</a>
-            <a class="link" data-toggle="modal" data-target="#import">Import customers</a>
+         <!--    <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+            <a class="link" data-toggle="modal" data-target="#import">Import customers</a> -->
             @if(user_permission('customers','create'))
             <a class="button green-btn" href="{{ route('customer.create') }}">Add customer</a>
             @endif
@@ -32,13 +32,13 @@
 
             </li>
 
-            @foreach($filter_tabs as $tab)
+           <!--  @foreach($filter_tabs as $tab)
 
                 <li class="tab titled" wire:click="activeTab({{$tab}})" data-toggle="tab" wire:ignore.self><a
 
                             href="#">{{$tab->name}}</a></li>
 
-            @endforeach
+            @endforeach -->
 
             <li id="untitled" class="tab" data-toggle="tab" wire:ignore.self><a href="#">Untitled</a></li>
 

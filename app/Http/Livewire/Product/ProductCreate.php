@@ -160,10 +160,12 @@ class ProductCreate extends Component
             $cost_arr = $request['att_cost'];
             $sku_arr = $request['att_sku'];
             $barcode_arr = $request['att_barcode'];
-            $hscode_arr = $request['att_hscode'];
+            $stock_single_arr = $request['att_stock_qtn'];
             $country_arr = $request['att_country'];
             $margin_arr = $request['margin_arry'];
             $profit_arr = $request['profit_arry'];
+           // $stock_single_arr = $request['att_single_stock'];
+
             $variations_arr = [];
             $arr = [];
             $productCollection_arrray = [];
@@ -177,7 +179,7 @@ class ProductCreate extends Component
             $product_new_arrray = $request['product_new'];
             }
             
-            foreach ($request->request as $key => $value) {
+            /*foreach ($request->request as $key => $value) {
 
                $id = explode("_",$key);
                $stockname = $id[0];
@@ -188,7 +190,7 @@ class ProductCreate extends Component
                      $arr[$id[1]] = $value[0];               
                 }           
                    
-            }     
+            }     */
             
             $locationid = json_encode($arr);     
 
@@ -209,6 +211,8 @@ class ProductCreate extends Component
                 'selling_price' => $request['selling_price'],
                 
                 'compare_selling_price' => $request['compare_selling_price'],
+                
+                'stock' => $request['stock'],
                 
                 'weight' => $request['weight'],
                 
@@ -358,13 +362,14 @@ class ProductCreate extends Component
                 $variations['product_id'] = $this->product['id'];
                 $variations['price'] = $price_arr[$key];
                 $variations['selling_price'] = $price_selling_arr[$key];
-                $variations['cost'] = $cost_arr[$key];
-                $variations['sku'] = $sku_arr[$key];
-                $variations['barcode'] = $barcode_arr[$key];
-                $variations['hscode'] = $hscode_arr[$key];
-                $variations['country'] = $country_arr[$key];
-                $variations['margin'] = $margin_arr[$key];
-                $variations['profit'] = $profit_arr[$key];
+               // $variations['cost'] = $cost_arr[$key];
+               // $variations['sku'] = $sku_arr[$key];
+              //  $variations['barcode'] = $barcode_arr[$key];
+              //  $variations['hscode'] = $hscode_arr[$key];
+              //  $variations['country'] = $country_arr[$key];
+              //  $variations['margin'] = $margin_arr[$key];
+              //  $variations['profit'] = $profit_arr[$key];
+                $variations['stock'] = $stock_single_arr[$key];
              //  dd($explode_array);
                if(!empty($explode_array[0])) {
                  

@@ -143,8 +143,10 @@ class Variant extends Component
                     'price'            => $request['price'],
 
                     'cost'             => $request['cost'],
+                   
+                    'stock'             => $request['stock'],
                     
-                    //'compare_price'    => $request['compare_price'],
+                    'compare_price'    => $request['compare_price'],
 
                     'margin'           => $request['margin'],
 
@@ -169,7 +171,7 @@ class Variant extends Component
 
             $this->lastid = ProductVariant::orderBy('id', 'DESC')->first();
 
-
+/*
             $insert_stock =[];
                     foreach($request->request as $key1 =>$stock) {  
                      $id = explode("_",$key1);
@@ -185,7 +187,7 @@ class Variant extends Component
                         }
                        
                     }
-                    VariantStock::insert($insert_stock);
+                    VariantStock::insert($insert_stock);*/
 
 
                  return redirect(route('variant-detail', $this->lastid));

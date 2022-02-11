@@ -11,7 +11,7 @@
                     <li class="{{ request()->route()->getName() === 'checkout-list' ?  'active' : '' }}"><a href="{{ route('checkout-list') }}">Abandoned checkouts</a></li>
                 </ul>
             </li>-->
-            <li class="have_sub_item <?php if(request()->route()->getName() === 'products' || request()->route()->getName() === 'inventory' || request()->route()->getName() === 'transfers' || request()->route()->getName() === 'collections' || request()->route()->getName() === 'gift-cards') echo "active"; ?>">
+          <?php /*   <li class="have_sub_item <?php if(request()->route()->getName() === 'products' || request()->route()->getName() === 'inventory' || request()->route()->getName() === 'transfers' || request()->route()->getName() === 'collections' || request()->route()->getName() === 'gift-cards') echo "active"; ?>">
                 <a class="nav-dropdown"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10.293 1.293A1 1 0 0 1 11 1h7a1 1 0 0 1 1 1v7a1 1 0 0 1-.293.707l-9 9a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414l9-9zM15.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg> Products</a>
                 <ul class="sub_items">
                     <li class="{{ request()->route()->getName() === 'products' ?  'active' : '' }}"><a href="{{ route('products') }}">All Products</a></li>
@@ -20,7 +20,16 @@
                     <li class="{{ request()->route()->getName() === 'collections' ?  'active' : '' }}"><a href="{{ route('collections') }}">Collections</a></li>
                     <li class="{{ request()->route()->getName() === 'gift-cards' ?  'active' : '' }}"><a href="{{ route('gift-cards') }}">Gift Cards</a></li>
                 </ul>
+            </li> 
+            */?>
+            <li class="{{ request()->route()->getName() === 'products' ?  'active' : '' }}">
+                <a href="{{ route('products') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14.363 5.22a4.22 4.22 0 1 1-8.439 0 4.22 4.22 0 0 1 8.439 0zM2.67 14.469c1.385-1.09 4.141-2.853 7.474-2.853 3.332 0 6.089 1.764 7.474 2.853.618.486.81 1.308.567 2.056l-.333 1.02A2.11 2.11 0 0 1 15.846 19H4.441a2.11 2.11 0 0 1-2.005-1.455l-.333-1.02c-.245-.748-.052-1.57.567-2.056z"></path></svg> Products</a>
             </li>
+
+            <li class="{{ request()->route()->getName() === 'collections' ?  'active' : '' }}">
+                <a href="{{ route('collections') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14.363 5.22a4.22 4.22 0 1 1-8.439 0 4.22 4.22 0 0 1 8.439 0zM2.67 14.469c1.385-1.09 4.141-2.853 7.474-2.853 3.332 0 6.089 1.764 7.474 2.853.618.486.81 1.308.567 2.056l-.333 1.02A2.11 2.11 0 0 1 15.846 19H4.441a2.11 2.11 0 0 1-2.005-1.455l-.333-1.02c-.245-.748-.052-1.57.567-2.056z"></path></svg> Collections </a>
+            </li>
+
             <li class="{{ request()->route()->getName() === 'customers' ?  'active' : '' }}">
                 <a href="{{ route('customers') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14.363 5.22a4.22 4.22 0 1 1-8.439 0 4.22 4.22 0 0 1 8.439 0zM2.67 14.469c1.385-1.09 4.141-2.853 7.474-2.853 3.332 0 6.089 1.764 7.474 2.853.618.486.81 1.308.567 2.056l-.333 1.02A2.11 2.11 0 0 1 15.846 19H4.441a2.11 2.11 0 0 1-2.005-1.455l-.333-1.02c-.245-.748-.052-1.57.567-2.056z"></path></svg> Customers</a>
             </li>

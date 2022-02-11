@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-0">
+                            <!-- <div class="row mb-0">
                                 <label>Store industry</label>
                                 <select wire:model="getgeneral.industry">
                                     <option value="beauty">Beauty</option>
@@ -114,7 +114,7 @@
                                     <option value="other">Other</option>
                                     <option value="do_not_know">I haven’t decided yet</option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </article>
@@ -178,7 +178,7 @@
                                         <option>(GMT-12:00) International Date Line West</option>
                                     </select>
                                 </div>
-                                <div class="full-width">
+                                <!-- <div class="full-width">
                                     <div class="columns six row field_style1">
                                         <label>Unit system</label>
                                         <select>
@@ -193,9 +193,9 @@
                                             <option value="GRAMS">Gram (g)</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="card-middle">
+                            <!-- <div class="card-middle">
                                 <h3 class="fs-12 fw-6 mb-8">EDIT ORDER ID FORMAT (OPTIONAL)</h3>
                                 <p class="text-grey">Order numbers start at #1001 by default. While you can’t change the order number itself, you can add a prefix or suffix to create IDs like "EN1001" or "1001-A."</p>
                                 <div class="full-width">
@@ -209,11 +209,11 @@
                                     </div>
                                 </div>
                                 <p class="text-grey mt-8 mb-0">Your order ID will appear as #1001, #1002, #1003 ...</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </article>
-                <article class="full-width add-customer-part">
+              <!--   <article class="full-width add-customer-part">
                     <div class="columns four pt-3 pr-3">
                         <h4 class="fs-15 fw-5 mb-16">Store currency</h4>
                         <p>This is the currency your products are sold in. After your first sale, currency is locked in and can’t be changed. To change your payout currency, go to <a class="blue-color td-underline" href="#">payments settings.</a></p>
@@ -249,7 +249,7 @@
                             </div>
                         </div>
                     </div>
-                </article>
+                </article> -->
             </div>
         </article>
     </section>

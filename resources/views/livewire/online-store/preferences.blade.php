@@ -41,7 +41,7 @@
                 </div>
             </div>
         </article>
-        <article class="full-width sec-border">
+        <!-- <article class="full-width sec-border">
             <div class="columns one-third">
                 <div class="card card-transparent-bg pl-0">
                     <div class="card-title">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
             </div>
-        </article>
+        </article> -->
         <article class="full-width sec-border">
             <div class="columns one-third">
                 <div class="card card-transparent-bg pl-0">
@@ -103,7 +103,7 @@
                 </div>
             </div>
         </article>
-        <article class="full-width sec-border">
+   <!--      <article class="full-width sec-border">
             <div class="columns one-third">
                 <div class="card card-transparent-bg pl-0">
                     <div class="card-title">
@@ -155,7 +155,7 @@
                     </div> 
                 </div>
             </div>
-        </article>
+        </article> -->
     </section>
     <section class="full-width flex-wrap admin-body-width add-transfer-footer">
         <div class="page-bottom-btn">
