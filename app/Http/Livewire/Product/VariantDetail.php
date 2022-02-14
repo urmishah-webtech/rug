@@ -38,7 +38,7 @@ class VariantDetail extends Component
 
     protected $rules = [
 
-        'Productvariant_first.price' => [],
+        'Productvariant_first.price' => ['required'],
         'Productvariant_first.cost' => [],
         'product.compare_price' => [],
         'Productvariant_first.margin' => [],
@@ -49,9 +49,17 @@ class VariantDetail extends Component
         'Productvariant_first.outofstock' => [],
         'Productvariant_first.trackqtn' => [],
         'Productvariant_first.image' => 'nullable|sometimes|max:5000',
-        'Productvariant_first.attribute1' => [],
+        'Productvariant_first.attribute1' => ['required'],
         'Productvariant_first.attribute2' => [],
         'Productvariant_first.attribute3' => [],
+        'Productvariant_first.attribute4' => [],
+        'Productvariant_first.attribute5' => [],
+        'Productvariant_first.attribute6' => [],
+        'Productvariant_first.attribute7' => [],
+        'Productvariant_first.attribute8' => [],
+        'Productvariant_first.attribute9' => [],
+        'Productvariant_first.attribute10' => [],
+        'Productvariant_first.selling_price' => [],
         'Productvariant_first.weight' => '',
         'Productvariant_first.weight_lable' => '',
         'Productvariant_first.country' => '',
@@ -247,6 +255,8 @@ class VariantDetail extends Component
                     'price'            => $this->Productvariant_first['price'],
 
                     'cost'             => $this->Productvariant_first['cost'],
+                    
+                    'selling_price'    => $this->Productvariant_first['selling_price'],
 
                     'margin'           => $this->Productvariant_first['margin'],
 

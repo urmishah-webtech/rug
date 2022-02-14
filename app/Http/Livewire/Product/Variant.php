@@ -29,7 +29,7 @@ class Variant extends Component
 
     use WithFileUploads;
 
-    public $product,$Country, $Productvariant, $Productvariant_first,$Varianttype,$sku,$price,$cost,$compare_price,$margin,$profit,$barcode,$hscode,$attribute_one,$attribute_two,$attribute_three,$lastid,$location,$variant_main_id,$location_id,$stock,$varition_name;
+    public $product,$Country, $Productvariant, $Productvariant_first,$Varianttype,$sku,$price,$cost,$selling_price,$margin,$profit,$barcode,$hscode,$attribute_one,$attribute_two,$attribute_three,$lastid,$location,$variant_main_id,$location_id,$stock,$varition_name;
 
     public $photo;
 
@@ -53,7 +53,7 @@ class Variant extends Component
 
         'price' => [],
         'cost' => [],
-        'compare_price' => [],
+        'selling_price' => [],
         'margin' => [],
         'profit' => [],
         'sku' => [],
@@ -116,6 +116,11 @@ class Variant extends Component
             'price' => 'required',
             'photo' => 'required',
             'attribute1' => 'required',
+        ],
+        [
+            "price.required"        =>  "Price required!",
+            "photo.required"        =>  "Image required!",
+            "attribute1.required"   =>  "Attribute required!",
         ]);
              
 
@@ -146,7 +151,7 @@ class Variant extends Component
                    
                     'stock'             => $request['stock'],
                     
-                    'compare_price'    => $request['compare_price'],
+                    'selling_price'    => $request['selling_price'],
 
                     'margin'           => $request['margin'],
 

@@ -149,11 +149,35 @@ class ProductCreate extends Component
 
     public function storeProduct(Request $request)
     {    
+        if(!empty($request['varition_arrray'])){
 
+            if(!empty($request->att_price)){
+                $request->validate([
+                    'seo_url'   =>  'required',
+                    'title'     =>  'required',
+                    'att_price.*'     =>  'required',
+                ],
+                [
+                    "seo_url.required"        =>  "Enter your SEO URL!",
+                    "title.required"          =>  "Enter your Title!",
+                    "att_price.*.required"      =>  "Enter your Variant Price!",
+                ]);
+            }
 
-        if($request['seo_url'] == ""){ 
-            $this->validate();
-        }    
+            session()->flash('messagevarient', 'Enter your Variant Price!');
+        }else{
+            $request->validate([
+                'seo_url'   =>  'required',
+                'title'     =>  'required',
+                'price_main'     =>  'required',
+            ],
+            [
+                "seo_url.required"        =>  "Enter your SEO URL!",
+                "title.required"          =>  "Enter your Title!",
+                "price_main.required"     =>  "Enter your Price!",
+            ]);
+        }
+   
             $varition_arrray_crunch = $request['varition_arrray'];
             $price_arr = $request['att_price'];
             $price_selling_arr = $request['att_price_selling'];
