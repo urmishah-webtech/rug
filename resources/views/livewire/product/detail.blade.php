@@ -3705,7 +3705,7 @@ $(document).on("click", '.image-checkbox', function() {
 
 
 
-<script >
+<script>
 
 function openOption(id) {
 

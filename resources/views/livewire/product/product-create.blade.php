@@ -78,6 +78,8 @@
 
                     <input wire:ignore.self type="text" name="title" placeholder="Short sleeve t-shirt">
                      @error('title') <span class="text-danger">{{ $message }}</span>@enderror
+                     @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
+                    <!--  @if (session()->has('messagevarient')) <span class="text-danger">{{ session('messagevarient') }}</span>@enderror -->
                     <div class="product-des-customize">
 
                         <label>Description</label>
@@ -140,6 +142,7 @@
                         </div>
                         <label><input type="checkbox" name="option2a" class="edit-website-Attribute">This product has multiple options, like different sizes or colors</label>
                     </div>
+
                     <div class="card-middle-arrtibute" style="display: none;" wire:ignore.self>
                         <div class="card-middle pd-add-attri-card"> 
                             <div class="add-attri-list">
@@ -260,7 +263,7 @@
 
                                 <label for="input">US{{$symbol['currency']}}</label>
 
-                                @error('price') <span class="text-danger">{{ $message }}</span>@enderror
+                                @error('price_main') <span class="text-danger">{{ $message }}</span>@enderror
 
                             </div>
 
@@ -684,13 +687,19 @@
 
                     <div class="card-middle">
 
-                        <div class="row">
+                        <div class="row sidebar-collection-checkbox">
 
                             <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
 
-                            <input type="search" name="collection" placeholder="Search for collections">
+                            <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')">
 
-                            <p class="mb-0">Add this product to a collection so it’s easy to find in your store.</p>
+                            <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
+                            @foreach($Collection as $row)
+                            
+                                <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{$row->title}}</label>
+                               
+                            @endforeach    
+                            </div>
 
                         </div>
 
@@ -761,7 +770,7 @@
 
         <div class="page-bottom-btn">
 
-            <input type="submit" class="button"id="master-save" value="save">
+            <input type="submit" class="button" id="master-save" value="save" disabled="disabled">
 
         </div>
 
@@ -1453,7 +1462,7 @@ $(document).ready(function () {
                                 var uniq_id = Math.random().toString(36).substr(2, 9);
                                 var arr_name10 = el;
 
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'/' + arr_name10 + '/' + id_type10 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'/' + arr_name10 + '/' + id_type10 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
@@ -1475,7 +1484,7 @@ $(document).ready(function () {
                         } 
                         else {
 
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
@@ -1498,7 +1507,7 @@ $(document).ready(function () {
                         } 
                         else {
 
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + ' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type1 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + ' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
 
@@ -1522,7 +1531,7 @@ $(document).ready(function () {
                         else
                         {
                             
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'/'+arr_name7+'/'+id_type7+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'/'+arr_name7+'/'+id_type7+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1546,7 +1555,7 @@ $(document).ready(function () {
                         else
                         {
 
-                                 get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                 get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1569,7 +1578,7 @@ $(document).ready(function () {
                         }
                         else
                         {
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1592,7 +1601,7 @@ $(document).ready(function () {
                         }
                         else
                         {
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1615,7 +1624,7 @@ $(document).ready(function () {
                         }
                         else
                         {
-                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
+                                get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type1+'/'+arr_name3+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>';
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1639,7 +1648,7 @@ $(document).ready(function () {
                         }
                         else
                         {
-                             get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>'; 
+                             get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p><p>6 available at 2 locations</p></td></tr><br>'; 
 
                              get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
@@ -1661,7 +1670,7 @@ $(document).ready(function () {
                 }
                 else
                 {
-                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>{{$symbol["currency"]}}</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
+                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 stock-data-input" id="child-popup-single-stock'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>{{$symbol["currency"]}}</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
 
                      get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
@@ -1723,11 +1732,13 @@ $(document).ready(function () {
            $(".product-table-item").attr("data-input", $('.price-change-input').val());
            $(".price-main-popup-input").attr("data-input", $('.price-change-input').val());
            $(".cost-data-input-new").attr("data-input", $('.change-value-main-cost').val());
+           $(".att_price_selling_class").attr("data-input", $('.change-value-main-stock').val());
            $(".profit-data-input").attr("data-input", $('#profit-input-mian-value').val());
            $(".margin-data-input").attr("data-input", $('#margin-input-mian-value').val());
            $(".price-view-class").html($('.price-change-input').val());
            $(".att_price_class").attr("value", $('.price-change-input').val());
            $(".cost-data-input-new").attr("value", $('.change-value-main-cost').val());
+           $(".att_price_selling_class").attr("value", $('.change-value-main-stock').val());
            $(".margin-data-input").attr("value", $('#margin-input-mian-value').val());
            $(".profit-data-input").attr("value", $('#profit-input-mian-value').val());
 
@@ -1866,6 +1877,8 @@ $(document).ready(function () {
             var inputvalue = $(this).attr('data-input');
 
             var costinput = $('#cost-data-input-'+id_value).attr('data-input');
+            
+            var stockinput = $('#child-popup-single-stock'+id_value).attr('data-input');
 
             var skuinput = $('#sku-data-input-'+id_value).attr('data-input'); 
            
@@ -1887,11 +1900,11 @@ $(document).ready(function () {
                     <span  data-dismiss="modal" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                 </div>
                 <div class="modal-body ta-left">
-                    <div class="variants-preview-list p-3 bd_none">
+                   <?php /* <div class="variants-preview-list p-3 bd_none">
                         <label>
                             <input type="checkbox" name="option2a" checked="checked">Charge tax on this variant
                         </label>
-                    </div>
+                    </div> */ ?>
                     <div class="variants-preview-list p-3">
                         <div class="variant-pricing-card">
                             <div class="row">
@@ -1903,12 +1916,19 @@ $(document).ready(function () {
                             </div>
                             <div class="row variant-price-option">
                                 <div class="form-field-list cost-input">
-                                    <label>Cost per item</label>
-                                    <input type="text" name="cost" value="`+costinput+`" id="main-popup-cost-`+id_value+`" class="change-value-main-cost" placeholder="0,00">
+                                    <label>Selling price</label>
+                                    <input type="text" name="selling" value="`+costinput+`" id="main-popup-cost-`+id_value+`" class="change-value-main-cost" placeholder="0,00">
                                     <label for="input">{{$symbol['currency']}}</label>
-                                    <p>Customers won’t see this</p>
+                                  
                                 </div>
-                                <div class="form-field-list">
+                                <div class="form-field-list cost-input">
+                                    <label>Stock</label>
+                                    <input type="text" name="cost" value="`+stockinput+`" id="main-popup-stock-`+id_value+`" class="change-value-main-stock">
+           
+                                </div>
+
+                                
+                                <?php /* <div class="form-field-list">
                                     <span>Margin</span>
                                     <span class="margin-value`+id_value+`">`+margininput+`</span>
                                     <input type="hidden" name="margin[]" value="`+margininput+`" class="margin-get-value" id="margin-value-input`+id_value+`">
@@ -1917,11 +1937,11 @@ $(document).ready(function () {
                                     <span>Profit</span>
                                     <span class="Profit-value`+id_value+`">`+profitinput+`</span>
                                     <input type="hidden" name="Profit[]" value="`+profitinput+`" class="Profit-get-value" id="Profit-value-input`+id_value+`">
-                                </div>
+                                </div> */ ?>
                             </div>
                         </div>
                     </div>
-                    <div class="variants-preview-list p-3">
+                  <?php /*  <div class="variants-preview-list p-3">
                         <h3 class="fw-6 fs-12 mb-2">INVENTORY</h3>
                         <div class="row">
                             <div class="form-field-list">
@@ -1980,6 +2000,7 @@ $(document).ready(function () {
                         </div>
                     </div> 
                 </div>
+               */ ?>
                  <div class="modal-footer">
                     <a class="button secondary"  data-dismiss="modal">Cancel</a>
                     <a class="button green-btn"  data-recordid=`+id_value+`>Done</a>
@@ -2252,6 +2273,28 @@ $(document).on("click", '.image-checkbox', function() {
 </script>
 
 <script type="text/javascript">
+    function openOption(id) {
+
+
+
+        $(".filter_" + id).toggle();
+
+
+
+        if (id != 'save' && id != 'more_filters') {
+
+            $('#' + id + ' .close').toggle();
+
+            $('#' + id + ' .open').toggle();
+
+        }
+
+        if (id == 'more_filters') {
+
+            $('.filter_more_filters .tag').removeClass('open');
+
+        }
+    }
 
     $(document).ready(function () {
 
@@ -2346,6 +2389,21 @@ $(document).on("click", '.image-checkbox', function() {
 
     }
 
+</script>
+
+<script type="text/javascript">
+    $('input').change(function() {
+      
+        var empty = true;
+
+
+        if (empty) {
+               $('#master-save').removeAttr('disabled'); 
+             // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        } else {
+           $('#master-save').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        }
+    });
 </script>
 
 </x-admin-layout>

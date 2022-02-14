@@ -39,13 +39,13 @@
             <div class="columns one-third">
                 <div class="card variant-details-card card-grey-bg">
                     <div class="variant-img">
-                        <img src="{{ url('image/defult-image.png') }}">
+                        <img src="@if($Productvariant_first->photo != '') {{ url('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ url('image/defult-image.png') }} @endif">
                     </div>
                     <div class="variant-details">
                         <h2>{{$product->title}}</h2>
                         <span class="tag green">Active</span>
                         <span>{{count($Productvariant)}} variants</span>
-                        <button class="link">Back to product</button>
+                        <a href="{{ route('product-detail', $product->uuid) }}" class="link">Back to product</a>
                     </div>
                 </div>
                 <div class="card variants-color-card card-grey-bg">
