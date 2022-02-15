@@ -283,7 +283,7 @@
 
                                 <label>Selling price</label>
 
-                                <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
+                                <input type="text" name="compare_selling_price" placeholder="0,00">
 
                                 <label for="input">US{{$symbol['currency']}}</label>
 

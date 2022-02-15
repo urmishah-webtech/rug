@@ -72,13 +72,13 @@
 
                             </div>
 
-                            <div class="form-field">
+                           <?php /* <div class="form-field">
 
 
 
                                 <!-- Status -->
 
-                                <div class="fs-14 fw-6 status-dropdown dropdown-field">
+                                <!-- <div class="fs-14 fw-6 status-dropdown dropdown-field">
 
                                     <label id="main_email_subscription_status" class="dropdown-label"
 
@@ -124,11 +124,11 @@
 
                                     </ul>
 
-                                </div>
+                                </div> -->
 
                                 <!-- Payment Status -->
 
-                                <div class="payment-dropdown dropdown-field">
+                                <!-- <div class="payment-dropdown dropdown-field">
 
                                     <label id="main_tagged_with" class="dropdown-label"
 
@@ -156,7 +156,7 @@
 
                                     </ul>
 
-                                </div>
+                                </div> -->
 
                                 <!-- Fullfillment Status -->
 
@@ -260,7 +260,7 @@
 
                                 </button>
 
-                            </div>
+                            </div>  */ ?>
 
                         </div>
 
@@ -331,7 +331,7 @@
 
                     <th class="order-filed"></th>
 
-                    <th class="sort-by-field">
+                    <!-- <th class="sort-by-field">
 
                         <label>Sort by</label>
 
@@ -359,7 +359,7 @@
 
                         </select>
 
-                    </th>
+                    </th> -->
 
                 </tr>
                 <tr>
