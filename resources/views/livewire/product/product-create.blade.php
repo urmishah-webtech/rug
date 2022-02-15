@@ -76,7 +76,7 @@
 
                      <label>Title</label>
 
-                    <input wire:ignore.self type="text" name="title" placeholder="Short sleeve t-shirt">
+                    <input wire:ignore.self type="text" name="title" placeholder="Please Enter Title">
                      @error('title') <span class="text-danger">{{ $message }}</span>@enderror
                      @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
                     <!--  @if (session()->has('messagevarient')) <span class="text-danger">{{ session('messagevarient') }}</span>@enderror -->
@@ -800,7 +800,7 @@
                 </div>
                 <div class="modal-footer">
                     <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
-                    <a class="button green-btn child-price-submit" data-recordid="">Done</a>
+                    <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button green-btn child-price-submit" data-recordid="">Done</a>
                 </div>
             </div>
         </div>
@@ -1795,6 +1795,8 @@ $(document).ready(function () {
             $("#"+id_value).attr("value", id1);
 
             $("#price-view-"+dataid).html(id1);
+            
+            $("#main-popup-price"+dataid).attr("value", id1);
         });
 
         $(document).on("change", '.att_price_selling_class', function() {
@@ -1807,6 +1809,8 @@ $(document).ready(function () {
             $("#"+id_value).attr("value", id1);
 
             $("#price-view-"+dataid).html(id1);
+
+            $("#main-popup-price"+dataid).attr("value", id1);
         });
 
         $(document).on("change", '.att_sku_class', function() {
@@ -1848,6 +1852,7 @@ $(document).ready(function () {
            $("#profit-data-input-"+thisid).attr("data-input", $('.Profit-get-value').val());
            $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
            $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+           $("#main-popup-price"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
 
            $("#child-popup-price-selling-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
@@ -2079,8 +2084,10 @@ $(document).ready(function () {
            $(".profit-data-input").attr("data-input", profit.toFixed(2));
            $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
            $(".price-view-class").html(price);
+           $(".pchange-value-main-price").html(price);
            $(".att_price_class").attr("value", price);
            $(".att_price_selling_class").attr("value", price);
+           $(".change-value-main-price").attr("value", price);
            $(".cost-data-input-new").attr("value", cost);
            $(".margin-data-input").attr("value", grossMargin.toFixed(2));
            $(".profit-data-input").attr("value", profit.toFixed(2)); 
@@ -2113,7 +2120,9 @@ $(document).ready(function () {
            $(".profit-data-input").attr("data-input", profit.toFixed(2));
            $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
            $(".price-view-class").html(price);
+           $(".change-value-main-price").html(price);
            $(".att_price_class").attr("value", price);
+           $(".change-value-main-price").attr("value", price);
            $(".cost-data-input-new").attr("value", cost);
            $(".margin-data-input").attr("value", grossMargin.toFixed(2));
            $(".profit-data-input").attr("value", profit.toFixed(2));  
