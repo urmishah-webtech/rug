@@ -49,7 +49,7 @@
                             </div>
                             <div class="row mb-0">
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>Add logo for admin panel</label>
+                                    <label>Add logo for front panel</label>
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="logoUpload" wire:model="admin_logo" accept=".png, .jpg, .jpeg" />
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>add favicon for admin panel</label>
+                                    <label>add favicon for front panel</label>
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="favUpload" wire:model="admin_favicon" accept=".png, .jpg, .jpeg" />
