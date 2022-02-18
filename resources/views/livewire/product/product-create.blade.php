@@ -76,9 +76,8 @@
 
                      <label>Title</label>
 
-                    <input wire:ignore.self type="text" name="title" placeholder="Please Enter Title">
+                    <input wire:ignore.self type="text" name="title" value="{{ old('title') }}" placeholder="Please Enter Title">
                      @error('title') <span class="text-danger">{{ $message }}</span>@enderror
-                     @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
                     <!--  @if (session()->has('messagevarient')) <span class="text-danger">{{ session('messagevarient') }}</span>@enderror -->
                     <div class="product-des-customize">
 
@@ -88,7 +87,7 @@
 
                             <div class="product-dec-textbox">
 
-                                 <textarea class="form-control tinymce-editor {{ $errors->has('descripation') ? 'parsley-error' : '' }}" rows="5" placeholder="Please Enter descripation" name="descripation" id="descripation" wire:ignore.self></textarea>
+                                 <textarea class="form-control tinymce-editor {{ $errors->has('descripation') ? 'parsley-error' : '' }}" rows="5" placeholder="Please Enter descripation" name="descripation" id="descripation" wire:ignore.self>{{ old('descripation') }}</textarea>
 
                                  @error('descripation') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -138,6 +137,7 @@
                 <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
                     <div class="card-header">
                         <div class="header-title">
+                             @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
                             <h4 class="fs-16 mb-0 fw-6">Variants</h4>
                         </div>
                         <label><input type="checkbox" name="option2a" class="edit-website-Attribute">This product has multiple options, like different sizes or colors</label>
@@ -171,7 +171,7 @@
                                         <option value="{{$row->id}}">{{$row->name}}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" value=""  name="option" class="varition_tags variant-tags-error" id="varition_tags_1" data-role="tagsinput"  placeholder="Separate options with a comma">
+                                    <input type="text" value="{{ old('option') }}"  name="option" class="varition_tags variant-tags-error" id="varition_tags_1" data-role="tagsinput"  placeholder="Separate options with a comma">
                                 </div>
                             </div>
                             <div class="row pd-variants-card-btn">
@@ -259,7 +259,7 @@
 
                                 <label>Price</label>
 
-                                <input type="text" name="price_main" placeholder="0.00" id="price-change-input" class="price-change-input" value="">
+                                <input type="text" name="price_main" value="{{ old('price_main') }}" placeholder="0.00" id="price-change-input" class="price-change-input">
 
                                 <label for="input">US{{$symbol['currency']}}</label>
 
@@ -283,7 +283,7 @@
 
                                 <label>Selling price</label>
 
-                                <input type="text" name="compare_selling_price" placeholder="0,00">
+                                <input type="text" name="compare_selling_price" value="{{ old('compare_selling_price') }}" placeholder="0,00">
 
                                 <label for="input">US{{$symbol['currency']}}</label>
 
@@ -299,7 +299,7 @@
 
                                 <label>Stock</label>
 
-                                <input type="number" name="stock" id="price-change-input" class="price-change-input" value="">
+                                <input type="number" name="stock" value="{{ old('stock') }}" id="price-change-input" class="price-change-input">
 
                                 @error('stock') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -527,7 +527,7 @@
 
                             <label>Page title</label>
 
-                            <input name="seo_title" type="text">
+                            <input name="seo_title" type="text" value="{{ old('seo_title') }}">
 
                             <p>0 of 70 characters used</p>
                             @error('seo_title') <span class="text-danger">{{ $message }}</span>@enderror
@@ -537,7 +537,7 @@
 
                             <label>Description</label>
 
-                            <textarea name="seo_descripation"></textarea>
+                            <textarea name="seo_descripation">value="{{ old('seo_descripation') }}"</textarea>
 
                             <p>0 of 320 characters used</p>
                             @error('seo_descripation') <span class="text-danger">{{ $message }}</span>@enderror
@@ -551,7 +551,7 @@
 
                                 <span>{{ url('/product') }}/</span>
 
-                                <input name="seo_url" type="text">
+                                <input name="seo_url" type="text" value="{{ old('seo_url') }}">
                             </div>
                             @error('seo_url') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -578,7 +578,13 @@
                         <p class="mb-0">
 
                             <select name="status">
+                              <?php /*   @if (Input::old('status') == active)
+                                    <option value="active" selected>Active</option>
+                                @else
+                                    <option value="inactive">InActive</option>
+                                @endif -->
 
+                                */ ?>
                                 <option value="active">Active</option>
 
                                 <option value="inactive">InActive</option>
@@ -696,7 +702,7 @@
                             <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
                             @foreach($Collection as $row)
                             
-                                <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{$row->title}}</label>
+                                <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{old($row->title)}}</label>
                                
                             @endforeach    
                             </div>
@@ -1751,6 +1757,7 @@ $(document).ready(function () {
             var id1 = $('#'+id_value).val();
              
             $("#"+id_value).attr("value", id1);
+           
 
             
         });
@@ -1778,7 +1785,7 @@ $(document).ready(function () {
             $('.att_price_selling_class').attr("value", val);
         });
 
-         $(document).on("click", '#apply-stock-submit', function() {
+         $(document).on("change", '#apply-stock-submit', function() {
             var val = $('.apply-stock').val();
 
             $('.att_single_stock').attr("value", val);
@@ -1791,12 +1798,29 @@ $(document).ready(function () {
              var dataid = $(this).data('id');
              
             var id1 = $('#'+id_value).val();
-             
+             console.log($('#main-popup-price-'+dataid));
             $("#"+id_value).attr("value", id1);
 
             $("#price-view-"+dataid).html(id1);
-            
-            $("#main-popup-price"+dataid).attr("value", id1);
+           
+            $("#main-popup-price-"+dataid).attr("value", id1);
+        
+        });
+
+         $(document).on("change", '.att_single_stock', function() {
+
+             var id_value = $(this).attr('id');
+             var dataid = $(this).data('id');
+             
+            var id1 = $('#'+id_value).val();
+             
+
+              $("#main-popup-stock-"+id_value).attr("value", id1);
+            //$("#"+id_value).attr("value", id1);
+
+          //  $("#price-view-"+dataid).html(id1);
+           
+        
         });
 
         $(document).on("change", '.att_price_selling_class', function() {
@@ -1807,10 +1831,10 @@ $(document).ready(function () {
             var id1 = $('#'+id_value).val();
              
             $("#"+id_value).attr("value", id1);
-
+            $("#main-popup-cost-"+dataid).attr("value", id1);
             $("#price-view-"+dataid).html(id1);
 
-            $("#main-popup-price"+dataid).attr("value", id1);
+            
         });
 
         $(document).on("change", '.att_sku_class', function() {
@@ -1844,7 +1868,7 @@ $(document).ready(function () {
        $(document).on("click", '.modal-footer .button.green-btn', function() {
             var thisid = $(this).data("recordid");
            //$(".varition_popup_main."+thisid).data("input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-           $(".product-table-item ."+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+           $(".product-table-item"+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
            $("#cost-data-input-"+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
            $("#sku-data-input-"+thisid).attr("data-input", $('#sku-input').val());
            $("#barcode-data-input-"+thisid).attr("data-input", $('#barcode-input').val());
@@ -1852,7 +1876,7 @@ $(document).ready(function () {
            $("#profit-data-input-"+thisid).attr("data-input", $('.Profit-get-value').val());
            $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
            $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-           $("#main-popup-price"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+           $("#main-popup-price-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
 
            $("#child-popup-price-selling-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
@@ -1915,7 +1939,7 @@ $(document).ready(function () {
                             <div class="row">
                                 <div class="form-field-list">
                                     <label>Price</label>
-                                    <input type="text" value="`+inputvalue+`" id="main-popup-price`+id_value+`" class="change-value-main-price" placeholder="0.00">
+                                    <input type="text" value="`+inputvalue+`" id="main-popup-price-`+id_value+`" class="change-value-main-price" placeholder="0.00">
                                     <label for="input">{{$symbol['currency']}}</label>
                                 </div>
                             </div>
@@ -2038,7 +2062,7 @@ $(document).ready(function () {
 
       $(document).on("keyup", ".change-value-main-cost", function () {
 
-        var price = $('#main-popup-price'+id_value).val();
+        var price = $('#main-popup-price-'+id_value).val();
         var cost = $(this).val();
 
         if (price > 0 && cost > 0) {

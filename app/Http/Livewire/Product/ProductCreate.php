@@ -153,12 +153,10 @@ class ProductCreate extends Component
 
             if(!empty($request->att_price)){
                 $request->validate([
-                    'seo_url'   =>  'required',
                     'title'     =>  'required',
                     'att_price.*'     =>  'required',
                 ],
                 [
-                    "seo_url.required"        =>  "Enter your SEO URL!",
                     "title.required"          =>  "Enter your Title!",
                     "att_price.*.required"      =>  "Enter your Variant Price!",
                 ]);
@@ -167,12 +165,10 @@ class ProductCreate extends Component
             session()->flash('messagevarient', 'Enter your Variant Price!');
         }else{
             $request->validate([
-                'seo_url'   =>  'required',
                 'title'     =>  'required',
                 'price_main'     =>  'required',
             ],
             [
-                "seo_url.required"        =>  "Enter your SEO URL!",
                 "title.required"          =>  "Enter your Title!",
                 "price_main.required"     =>  "Enter your Price!",
             ]);
@@ -202,7 +198,10 @@ class ProductCreate extends Component
             if(!empty($request['product_new'])){
             $product_new_arrray = $request['product_new'];
             }
+
+            $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
+    
             /*foreach ($request->request as $key => $value) {
 
                $id = explode("_",$key);
@@ -268,7 +267,7 @@ class ProductCreate extends Component
 
                 'seo_descripation' => $request['seo_descripation'],
 
-                'seo_utl' => $request['seo_url'],
+                'seo_utl' => $urllink,
 
                 'status' => $request['status']
 

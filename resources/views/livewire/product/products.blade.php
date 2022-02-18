@@ -170,8 +170,12 @@
                                       $max='';
                                     }
                                 ?>
+                                @if(!empty($price_array))
                                 <span>$</span><span><?php echo $min; ?></span>
                                 <span> - $</span><span><?php echo $max; ?></span>
+                                @else
+                                <span>$</span><span><?php echo $row->price; ?></span>
+                                @endif
                             </td>
                             
                         </tr>
