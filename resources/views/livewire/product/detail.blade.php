@@ -504,7 +504,8 @@
 
                                         <td class="vendor-table-item">
 
-                                            <p>US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}</p>
+                                            <p>@if($row->price)US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
+                                            @endif</p>
                                             <?php $location_count = count($location); ?>
                                             <?php $sum = 0; ?>
                                             @foreach($fullStock as $res)

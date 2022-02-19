@@ -69,12 +69,13 @@
     <section class="full-width flex-wrap admin-body-width customers-details-sec product-details-sec">
 
          <article class="full-width">
-
+            
             <div class="columns two-thirds">
-
+                 @error('title') <span class="text-danger">{{ $message }}</span>@enderror OR 
+                 @error('price_main') <span class="text-danger">{{ $message }}</span>@enderror
                 <div class="card">
 
-                     <label>Title</label>
+                     <label>Title <span class="text-danger">*</span></label>
 
                     <input wire:ignore.self type="text" name="title" value="{{ old('title') }}" placeholder="Please Enter Title">
                      @error('title') <span class="text-danger">{{ $message }}</span>@enderror
@@ -257,7 +258,7 @@
 
                             <div class="form-field-list">
 
-                                <label>Price</label>
+                                <label>Price <span class="text-danger">*</span></label>
 
                                 <input type="text" name="price_main" value="{{ old('price_main') }}" placeholder="0.00" id="price-change-input" class="price-change-input">
 

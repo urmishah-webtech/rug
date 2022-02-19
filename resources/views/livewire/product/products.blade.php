@@ -152,7 +152,7 @@
                             </td>
                             <td class="type-table-item">
                                 <?php
-                                    $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
+                                    $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.*')->
                                     where('product.id',$row->id)->whereNotNull('product_variants.price')->get();
                                    
                                     $price_array=array();
@@ -171,8 +171,12 @@
                                     }
                                 ?>
                                 @if(!empty($price_array))
-                                <span>$</span><span><?php echo $min; ?></span>
-                                <span> - $</span><span><?php echo $max; ?></span>
+                                    @if(count($price_data) != '1')
+                                    <span>$</span><span><?php echo $min; ?></span>
+                                    <span> - $</span><span><?php echo $max; ?></span>
+                                    @else
+                                    <span>$</span><span><?php echo $min; ?></span>
+                                    @endif
                                 @else
                                 <span>$</span><span><?php echo $row->price; ?></span>
                                 @endif

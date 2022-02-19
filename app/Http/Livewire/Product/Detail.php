@@ -145,12 +145,12 @@ class Detail extends Component
         'urlpath' => '',
         'product.title' => 'required',
         'product.descripation' => 'required',
-        'product.seo_title' => 'required',
-        'product.seo_descripation' => 'required',
-        'product.seo_utl' => 'required',
+        'product.seo_title' => '',
+        'product.seo_descripation' => '',
+        'product.seo_utl' => '',
         'product.product_type' => 'required',
-        'product.vender' => 'required',
-        'product.status' => 'required',
+        'product.vender' => '',
+        'product.status' => '',
         'product.price' => 'required',
         'product.compare_price' => '',
         'product.cost' => '',
@@ -159,7 +159,7 @@ class Detail extends Component
         'product.profit' => '',
         'product.selling_price' => '',
         'product.compare_selling_price' => '',
-        'LocationId.name' => 'required',
+        'LocationId.name' => '',
         'product.weight' => '',
         'product.weight_lable' => '',
         'product.country' => '',
@@ -171,13 +171,13 @@ class Detail extends Component
         'product.product_new' => '',
         'product.trackqtn' => '',
         'product.outofstock' => '',
-        'Productvariant.*.price' => 'required|string',
-        'Productvariant.*.selling_price' => 'required|string',
-        'Productvariant.*.sku' => 'required|string',
-        'Productvariant.*.barcode' => 'required|string',
-        'Productvariant.*.hscode' => 'required|string',
-        'Productvariant.*.stock' => 'required|string',
-        'variantStock.*.stock' => 'required',
+        'Productvariant.*.price' => 'required',
+        'Productvariant.*.selling_price' => '',
+        'Productvariant.*.sku' => '',
+        'Productvariant.*.barcode' => '',
+        'Productvariant.*.hscode' => '',
+        'Productvariant.*.stock' => '',
+        'variantStock.*.stock' => '',
         'Productvariant.*.photo' => [],
         'att_price' => [],
 
@@ -470,7 +470,7 @@ class Detail extends Component
     {  
 
 
-
+    	date_default_timezone_set('Asia/Kolkata');
 
         if ($this->product['trackqtn'] == 'false') {
 
@@ -479,23 +479,17 @@ class Detail extends Component
         } 
 
         else {
-
             $trackqtn = 'false';
-
         }
-
-
         if ($this->product['outofstock'] == 'false') {
-
             $outofstock = 'true';
-
         } 
-
         else {
-
             $outofstock = 'false';
-
         }
+
+        $product_price = (!empty($this->product['price'])) ? $this->product['price'] : '' ;
+        $product_selling = (!empty($this->product['compare_price'])) ? $this->product['compare_price'] : '' ;
 
         Product::where('id', $this->product['id'])->update(
 
@@ -535,9 +529,9 @@ class Detail extends Component
                     
                     'hscode'           => $this->product['hscode'],
                     
-                    'price'            => $this->product['price'],
+                    'price'            => $product_price,
                     
-                    'compare_price'    => $this->product['compare_price'],
+                    'compare_price'    => $product_selling,
                     
                     'stock'            => $this->product['stock'],
                     
@@ -552,6 +546,8 @@ class Detail extends Component
                     'selling_price'         => $this->product['selling_price'],
                     
                     'compare_selling_price' => $this->product['compare_selling_price'],       
+                    
+                    'updated_at' => date('d-m-y h:i:s'),
 
                 ]
 
@@ -595,8 +591,9 @@ class Detail extends Component
         $variationValue = ProductVariant::query()->findOrFail($id);
 
             if ($id) {
+            	$product_variant_price = (!empty($this->Productvariant[$key]['price'])) ? $this->Productvariant[$key]['price'] : 'NULL' ;
                $variationValue->update([
-                   'price' => $this->Productvariant[$key]['price'],
+                   'price' => $product_variant_price,
                    'selling_price' => $this->Productvariant[$key]['selling_price'],
                    'sku' => $this->Productvariant[$key]['sku'],
                    'barcode' => $this->Productvariant[$key]['barcode'],
