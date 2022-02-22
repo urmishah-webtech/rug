@@ -14,8 +14,8 @@
 
         <h4 class="mb-0 fw-5">Customers</h4>
         <div class="header-btn-group">
-            <a class="link" data-toggle="modal" data-target="#export" >Export</a>
-            <a class="link" data-toggle="modal" data-target="#import">Import customers</a>
+         <!--    <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+            <a class="link" data-toggle="modal" data-target="#import">Import customers</a> -->
             @if(user_permission('customers','create'))
             <a class="button green-btn" href="{{ route('customer.create') }}">Add customer</a>
             @endif
@@ -32,13 +32,13 @@
 
             </li>
 
-            @foreach($filter_tabs as $tab)
+           <!--  @foreach($filter_tabs as $tab)
 
                 <li class="tab titled" wire:click="activeTab({{$tab}})" data-toggle="tab" wire:ignore.self><a
 
                             href="#">{{$tab->name}}</a></li>
 
-            @endforeach
+            @endforeach -->
 
             <li id="untitled" class="tab" data-toggle="tab" wire:ignore.self><a href="#">Untitled</a></li>
 
@@ -72,13 +72,13 @@
 
                             </div>
 
-                            <div class="form-field">
+                           <?php /* <div class="form-field">
 
 
 
                                 <!-- Status -->
 
-                                <div class="fs-14 fw-6 status-dropdown dropdown-field">
+                                <!-- <div class="fs-14 fw-6 status-dropdown dropdown-field">
 
                                     <label id="main_email_subscription_status" class="dropdown-label"
 
@@ -124,11 +124,11 @@
 
                                     </ul>
 
-                                </div>
+                                </div> -->
 
                                 <!-- Payment Status -->
 
-                                <div class="payment-dropdown dropdown-field">
+                                <!-- <div class="payment-dropdown dropdown-field">
 
                                     <label id="main_tagged_with" class="dropdown-label"
 
@@ -156,7 +156,7 @@
 
                                     </ul>
 
-                                </div>
+                                </div> -->
 
                                 <!-- Fullfillment Status -->
 
@@ -260,7 +260,7 @@
 
                                 </button>
 
-                            </div>
+                            </div>  */ ?>
 
                         </div>
 
@@ -331,7 +331,7 @@
 
                     <th class="order-filed"></th>
 
-                    <th class="sort-by-field">
+                    <!-- <th class="sort-by-field">
 
                         <label>Sort by</label>
 
@@ -359,7 +359,7 @@
 
                         </select>
 
-                    </th>
+                    </th> -->
 
                 </tr>
                 <tr>

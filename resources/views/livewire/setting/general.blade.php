@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-0">
+                            <!-- <div class="row mb-0">
                                 <label>Store industry</label>
                                 <select>
                                     <option value="beauty">Beauty</option>
@@ -99,7 +99,7 @@
                                     <option value="other">Other</option>
                                     <option value="do_not_know">I haven’t decided yet</option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </article>

@@ -41,9 +41,7 @@
                     <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing collections-sec">
                         <tbody>
                             <tr>
-                                <th>
-                                    <div class="row all-select-checkbox"><label><input type="checkbox" class="checked_all" name="customer_all"></label></div>
-                                </th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Button Text</th>
                                 <th class="ta-right">

@@ -7,9 +7,9 @@
 
         <div class="header-btn-group">
 
-            <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+            <!-- <a class="link" data-toggle="modal" data-target="#export" >Export</a>
 
-            <a class="link" data-toggle="modal" data-target="#import">Import</a>
+            <a class="link" data-toggle="modal" data-target="#import">Import</a> -->
 
              @if(user_permission('allproduct','create'))
 
@@ -77,14 +77,14 @@
                                                 <button class="link" wire:click.prevent="store('active')" wire:ignore.self>Set as active</button>
                                             </li>
                                             <li>
-                                                <button class="link" wire:click.prevent="store('draft')" wire:ignore.self>Set as draft</button>
+                                                <button class="link" wire:click.prevent="store('draft')" wire:ignore.self>Set as Disactive</button>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <button class="link" wire:click.prevent="store('archive')" wire:ignore.self>Archive products</button>
                                             </li>
                                             <li>
                                                 <button class="link" wire:click.prevent="store('delete')" wire:ignore.self>Delete products</button>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </span>
                                 </div>
@@ -152,7 +152,7 @@
                             </td>
                             <td class="type-table-item">
                                 <?php
-                                    $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->
+                                    $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.*')->
                                     where('product.id',$row->id)->whereNotNull('product_variants.price')->get();
                                    
                                     $price_array=array();
@@ -170,8 +170,16 @@
                                       $max='';
                                     }
                                 ?>
-                                <span>$</span><span><?php echo $min; ?></span>
-                                <span> - $</span><span><?php echo $max; ?></span>
+                                @if(!empty($price_array))
+                                    @if(count($price_data) != '1')
+                                    <span>$</span><span><?php echo $min; ?></span>
+                                    <span> - $</span><span><?php echo $max; ?></span>
+                                    @else
+                                    <span>$</span><span><?php echo $min; ?></span>
+                                    @endif
+                                @else
+                                <span>$</span><span><?php echo $row->price; ?></span>
+                                @endif
                             </td>
                             
                         </tr>

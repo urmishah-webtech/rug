@@ -134,7 +134,8 @@
                     <div class="row">
                         <div class="variant-option-input" wire:ignore.self>
                             @foreach($Varianttype as $row)
-                              <?php if($Productvariant_first){ ?>
+                              <?php  if($Productvariant_first){ ?>
+
                                 @if($Productvariant_first->varient1 != "" && $row->id == $Productvariant_first->varient1) 
                                
                                 <label> {{$row->name}} </label> 
@@ -235,13 +236,28 @@
                                 
                             </div>
                             <div class="form-field-list">
+                                <label>Selling prices</label>
+                                <input type="text" name="selling_price" value="" >
+                                <label for="input">US$</label>
+                            </div>
+                  <!--           <div class="form-field-list">
                                 <label>Compare at price</label>
                                 <input type="text" name="compare_price" value="" >
                                 <label for="input">US$</label>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="form-field-list">
+                                <label>Stock</label>
+                                <input type="number" name="stock" id="stock-change-input" value="" class="change-value-main-stock" >
+                                @error('stock') <span class="text-danger">{{ $message }}</span>@enderror
+                                
+                            </div>
+                            <div class="form-field-list">
                             </div>
                         </div>
                     </div>
-                    <div class="row-items bd_none">
+                  <!--   <div class="row-items bd_none">
                         <div class="row variant-price-option">
                             <div class="form-field-list">
                                 <label>Cost per item</label>
@@ -262,9 +278,9 @@
                             </div>
                         </div>
                     <label class="variant-pricing-checkbox"><input type="checkbox" name="option2a" checked="checked">Charge tax on this variant</label>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="card variant-inventory-card">
+               <!--  <div class="card variant-inventory-card">
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Inventory</h3>
@@ -302,9 +318,9 @@
                         </table>
 
                     </div>
-                </div>
+                </div> -->
                 
-                <div class="card variant-shipping-card">
+                <!-- <div class="card variant-shipping-card">
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Shipping</h3>
@@ -343,7 +359,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
         </article>
     </section>
     <section class="full-width flex-wrap admin-body-width">

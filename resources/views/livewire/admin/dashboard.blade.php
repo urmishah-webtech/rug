@@ -3,33 +3,24 @@
 <section class="full-width home-page">
     <article>
         <div class="columns home-left-sec">
-            <!-- <p class="align-left mb-3">Here’s what’s happening with your store today.</p>
+            
             <article>
                 <div class="column six">
                     <div class="card">
-                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">Total sales</h3>
-                        <p class="text-grey">No sales yet</p>
-                        <p class="flex-row"><span class="text-grey">No orders yet</span><a href="#">View report</a></p>
+                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL CUSTOMER</h3>
+                        <p class="fw-6 fs-26">@if(!empty($User)) {{$User}} @else No sales yet @endif<svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg"><g fill="none"><polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon><path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path><circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle></g></svg></p>
+                       
                     </div>
                 </div>
                 <div class="column six">
                     <div class="card">
-                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL SESSIONS</h3>
-                        <p class="fw-6 fs-26">1 <svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg"><g fill="none"><polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon><path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path><circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle></g></svg></p>
-                        <p class="flex-row text-grey">No visitors right now</p>
+                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL PRODUCT</h3>
+                        <p class="fw-6 fs-26">@if($product) {{$product}} @else No sales yet @endif<svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg"><g fill="none"><polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon><path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path><circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle></g></svg></p>
+                        
                     </div>
                 </div>
-            </article> -->
-            <div class="card order-method-card">
-                <a href="#">
-                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-orders-c00f8aec8fe360bcc3de597323648bf2c6a9951c2e13a1dbfcdeb7808a6cf6b6.svg" alt=""><span class="fw-6">{{$product}} Product</span> </p>
-                    <p class="mb-0"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></p>
-                </a>
-                <a href="#">
-                    <p class="mb-0"><img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/tasks/next-payments-ce1f89f01d3539ce3bf4032042f97bec81c369e4ed99f8743f02e94e5662eb3e.svg" alt=""><span class="fw-6">{{$User}} Customer</span> </p>
-                    <p class="mb-0"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></p>
-                </a>
-            </div>
+            </article>
+       
            <!--  <div class="card suggested-reading-card">
                 <article>
                     <div class="column">

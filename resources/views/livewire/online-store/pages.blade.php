@@ -101,7 +101,7 @@
                                 </th>
                                 <th class="fw-6">
                                     <span class="all-customer-list">
-                                    Showing 13 Pages
+                                    Showing {{count($pages)}} Pages
                                     </span>
                                     <div class="select-customers" style="display: none;">
                                         <span class="button-group product-more-action">
@@ -134,10 +134,11 @@
                                 </th>
                                 <th></th>
                             </tr>
+                            @if($pages)
                             @foreach($pages as $result)
                             <tr>
                                 <td>
-                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>
+                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117"></label></div>
                                 </td>
                                 <td>
                                     @if(user_permission('pages','update'))
@@ -145,13 +146,14 @@
                                     @else
                                     <p><b>{{$result->title}}</b></p>
                                     @endif
-                                    <p class="text-grey mb-0">{!!$result->content!!}</p>
+                                   
                                 </td>
                                 <td class="ta-right">
                                     <span class="text-grey pr-3">{{$result->created_at}}</span>
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
