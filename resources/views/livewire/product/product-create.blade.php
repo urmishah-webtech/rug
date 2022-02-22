@@ -71,7 +71,7 @@
          <article class="full-width">
             
             <div class="columns two-thirds">
-                 @error('title') <span class="text-danger">{{ $message }}</span>@enderror OR 
+                 @error('title') <span class="text-danger">{{ $message }}</span>@enderror  
                  @error('price_main') <span class="text-danger">{{ $message }}</span>@enderror
                 <div class="card">
 

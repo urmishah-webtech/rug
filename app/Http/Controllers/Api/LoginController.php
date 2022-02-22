@@ -134,6 +134,8 @@ class LoginController extends Controller
         $token->save();*/
         return response()->json([
             'access_token' => $tokenResult->accessToken,
+            'user' => $user,
+            'token_type' => 'Bearer',
             'token_type' => 'Bearer',
             'success' => true,
             'expires_at' => Carbon::parse(
