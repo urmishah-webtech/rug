@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductMedia;
+use App\Models\Collection;
 use DB;
 class ProductlistController extends Controller
 {
@@ -161,6 +162,55 @@ class ProductlistController extends Controller
          // $data_result = json_encode($data_result);
          return response($data_result, 200);
         }
+	   }
+		else
+		{
+			return response()->json([
+			  "message" => "Product not found"
+			], 404);
+		}
+    }
+	
+	public function get_related_Products($id) {
+      if (Collection::where('id', $id)->exists()) 
+      {	 
+		$product = Product::with('productmediaget')->with('favoriteget')->with('variants')->get();
+		 
+		$data = array();
+		$image_path='https://projects.webtech-evolution.com/rug/public/storage/';
+		foreach($product as  $key => $value){
+		$decodeA = json_decode($value->collection); 
+			 
+		if(in_array($id, $decodeA)){
+		
+			$price_data=Product::join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')->where('product.id',$value->id)->whereNotNull('product_variants.price')->get();
+			$price_array=array();
+
+			  foreach($price_data as $key2=> $value)
+			  {
+				$price_array[$key2]=$value->price;
+			  }
+			
+			  if(!empty($price_array)){
+				$min = min($price_array);
+				$max = max($price_array);
+			  }
+			  else{
+				$min='';
+				$max='';
+			  }
+				//dump($value); 			 
+				$data['id']=$value['id'];
+			   $data['title']=$value['title'];
+			   $data['description']=$value['descripation'];
+			   $data['image']= (!empty($value['productmediaget'][$key]['image']))? $image_path.$value['productmediaget'][$key]['image'] : '' ;
+			   $data['price_range']='$'.$min.'-'.'$'.$max;
+				$data_result[$key] = $data;			   
+				 	   
+			}
+			
+		}
+		return response($data_result, 200);
 	   }
 		else
 		{
