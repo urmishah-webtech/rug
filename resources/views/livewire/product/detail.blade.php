@@ -372,7 +372,7 @@
                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
 
                                 <tbody>
-
+                                    <?php $stocksum = 0;  ?>
                                     @foreach($Productvariant as $key => $row)
 
                                     <tr>
@@ -507,13 +507,9 @@
                                             <p>@if($row->price)US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
                                             @endif</p>
                                             <?php $location_count = count($location); ?>
-                                            <?php $sum = 0; ?>
-                                            @foreach($fullStock as $res)
-                                              @if($res->variant_main_id == $row->id)
-                                                <?php $sum += $res->stock;?> 
-                                              @endif
-                                            @endforeach
-                                            <p>available at 2 Stock</p>
+                                            <?php 
+                                             $stocksum += $row->stock; ?>
+                                            <p>available at {{$row->stock}} Stock</p>
 
                                         </td>
 
@@ -527,15 +523,12 @@
 
                             <hr>
 
-                             <?php $sum = 0; ?>
-                            @foreach($variantStock as $row_stock)
-                             <?php $sum += $row_stock->stock;?> 
-                             @endforeach 
+                         
                            <div class="product-table-footer">
 
                                <p>Total inventory at all stock</p>
 
-                               <p> 12 available</p>
+                               <p> {{$stocksum}} available</p>
 
                            </div>
 

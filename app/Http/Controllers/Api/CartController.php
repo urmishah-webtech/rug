@@ -349,12 +349,11 @@ class CartController extends Controller
         
     }
 
-    public function getCart(Request $result)
+    public function getCart($id = '', $sessionid = '')
     {
-
-        $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $result->user_id)
+        $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)
             ->get();
-        $CartsessionItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $result->session_id)
+        $CartsessionItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $sessionid)
             ->get();
 
         if (count($CartItem) != 0)

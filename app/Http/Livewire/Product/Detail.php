@@ -547,7 +547,7 @@ class Detail extends Component
                     
                     'compare_selling_price' => $this->product['compare_selling_price'],       
                     
-                    'updated_at' => date('d-m-y h:i:s'),
+                    'updated_at' => now(),
 
                 ]
 
