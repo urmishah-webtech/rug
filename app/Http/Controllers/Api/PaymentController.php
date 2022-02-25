@@ -21,7 +21,8 @@ class PaymentController extends Controller
     public function payment(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'user_id'=>'required'
+            'user_id'=>'required',
+            'amount'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -42,6 +43,11 @@ class PaymentController extends Controller
             "redirectUrl" => "https://projects.webtech-evolution.com/rug_frontend/",
             "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
         ]);
+        $pay = new Payment();
+        $pay->payment_id= $payment->id;
+        $pay->amount=$request->amount;
+        $pay->payment_link=$payment->_links->checkout->href;
+        $pay->save();
         return $this->sendJson([
             'status' => 0,
             'message' => $payment
@@ -49,10 +55,11 @@ class PaymentController extends Controller
       
     }
     public function webhook(Request $request){
-        $pay = new Payment();
+       
         $mollie = new \Mollie\Api\MollieApiClient();
         $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
         $payment = $mollie->payments->get($request->id);
+        $pay = Payment::where('payment_id',$request->id)->first();
         //$orderId = $payment->metadata->order_id;
        // Log::info('payment '.$payment);
 
