@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Payment;
+use Log;
 class PaymentController extends Controller
 {
     public function sendJson($data, $withDie = false)
