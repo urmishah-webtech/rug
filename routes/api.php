@@ -55,6 +55,5 @@ Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
 Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 Route::get('getcart/{id}/{sessionid}', 'App\Http\Controllers\Api\CartController@getCart');
 Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
-
-
-
+Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
+Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');
