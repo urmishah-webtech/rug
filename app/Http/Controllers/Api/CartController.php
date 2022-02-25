@@ -16,6 +16,8 @@ class CartController extends Controller
         $variantID = $request->variation;
         $variant = ProductVariant::select(['product_id', 'price'])->find($variantID);
 
+        $session_id = Session::getId();
+        dd($session_id);
         if (!empty($variant))
         {
 
@@ -349,27 +351,30 @@ class CartController extends Controller
         
     }
 
-    public function getCart($id = '', $sessionid = '')
+    public function getCart($id = '0', $sessionid = '0')
     {
         $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)
             ->get();
         $CartsessionItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $sessionid)
             ->get();
-
+        $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
         if (count($CartItem) != 0)
         {
+        	
             $finalamount = 0;
+            $i=0;
+            
             foreach ($CartItem as $key => $result)
             {
+            	$CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                 $Totalamount = ($result->stock * $result->price);
-
                 $finalamount += $Totalamount;
             }
 
             $cartCount = $CartItem->sum('stock');
 
             return response()
-                ->json(['message' => 'success', 'cartitem' => $CartItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'success' => true, ]);
+                ->json(['message' => 'success', 'cartitem' => $CartItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'image' => $CartItem, 'success' => true, ]);
 
         }
         if (count($CartsessionItem) != 0)
