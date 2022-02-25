@@ -49,7 +49,7 @@ class PaymentController extends Controller
       
     }
     public function webhook(Request $request){
-        $payment = new Payment();
+        $pay = new Payment();
         $mollie = new \Mollie\Api\MollieApiClient();
         $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
         $payment = $mollie->payments->get($request->id);
@@ -57,50 +57,50 @@ class PaymentController extends Controller
        // Log::info('payment '.$payment);
 
     if ($payment->isPaid() && ! $payment->hasRefunds() && ! $payment->hasChargebacks()) {
-        $payment->status=1;
+        $pay->status=1;
         /*
          * The payment is paid and isn't refunded or charged back.
          * At this point you'd probably want to start the process of delivering the product to the customer.
          */
     } elseif ($payment->isOpen()) {
-        $payment->status=2;
+        $pay->status=2;
         /*
          * The payment is open.
          */
     } elseif ($payment->isPending()) {
-        $payment->status=3;
+        $pay->status=3;
         /*
          * The payment is pending.
          */
     } elseif ($payment->isFailed()) {
-        $payment->status=4;
+        $pay->status=4;
         /*
          * The payment has failed.
          */
     } elseif ($payment->isExpired()) {
-        $payment->status=5;
+        $pay->status=5;
         /*
          * The payment is expired.
          */
     } elseif ($payment->isCanceled()) {
-        $payment->status=6;
+        $pay->status=6;
         /*
          * The payment has been canceled.
          */
     } elseif ($payment->hasRefunds()) {
-        $payment->status=7;
+        $pay->status=7;
         /*
          * The payment has been (partially) refunded.
          * The status of the payment is still "paid"
          */
     } elseif ($payment->hasChargebacks()) {
-        $payment->status=8;
+        $pay->status=8;
         /*
          * The payment has been (partially) charged back.
          * The status of the payment is still "paid"
          */
     }
-    $payment->save();
+    $pay->save();
 
     }
 }
