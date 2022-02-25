@@ -54,7 +54,7 @@ class PaymentController extends Controller
         $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
         $payment = $mollie->payments->get($request->id);
         //$orderId = $payment->metadata->order_id;
-        Log::info('payment '.$payment);
+       // Log::info('payment '.$payment);
 
     if ($payment->isPaid() && ! $payment->hasRefunds() && ! $payment->hasChargebacks()) {
         $payment->status=1;
