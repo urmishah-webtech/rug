@@ -35,8 +35,8 @@ class PaymentController extends Controller
         $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
         $payment = $mollie->payments->create([
             "amount" => [
-                "currency" => "EUR",
-                "value" => "10.00"
+                "currency" => "USD",
+                "value" => $request->amount
             ],
             "method"=>"creditcard",
             "description" => "My first API payment",
