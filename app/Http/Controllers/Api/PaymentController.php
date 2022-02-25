@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use App\Payment;
+use App\Models\Payment;
 class PaymentController extends Controller
 {
     public function sendJson($data, $withDie = false)
