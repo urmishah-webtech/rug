@@ -55,10 +55,11 @@ class CheckoutController extends Controller
 			]);
     	}
     	
-
+        $data = CustomerAddress::where('user_id',$request->user_id)->first();
     	return response()->json([
 		    'success' => true, 
-		    'data' => $addshipping,
+		    'data'    => $addshipping,
+            'dataget' => $data,
             ]);
     }
 }
