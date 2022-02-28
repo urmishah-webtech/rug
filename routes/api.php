@@ -56,7 +56,11 @@ Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 Route::get('getcart/{id}/{sessionid}', 'App\Http\Controllers\Api\CartController@getCart');
 Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
 
+
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
 
+Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
+Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
 
+   
