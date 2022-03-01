@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Validator;
 use App\Models\CustomerDetail;
 use App\Models\CustomerComment;
@@ -30,6 +31,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
+            'session_id' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/',
         ]);
@@ -39,10 +41,13 @@ class LoginController extends Controller
             'message' => $validator->errors(),
           ], 401);
         }
+
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $user['token'] = $user->createToken('appToken')->accessToken;
+        $payment = Cart::where('session_id', $request->session_id)->update(['user_id' => $user->id,'session_id' => '']);
+
         return response()->json([
           'success' => true,
           //'token' => $success,
