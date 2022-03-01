@@ -135,13 +135,15 @@ class ProductlistController extends Controller
            $product_arra['description']=$val['descripation'];
            $product_arra['image']=$image_path.$val['productmediaget'][$key]['image'];
            $product_arra['price_range']='$'.$min.'-'.'$'.$max;
+		   $data_color = [];
+		   $data_size = [];
            $insert_stock =[];
           foreach($val['variants'] as $key => $result){
             $insert_stock['variant_id']=$result['id'];
-            $insert_stock['variant1']=$result['varient1'];
-           $insert_stock['attribute1']=$result['attribute1'];
-           $insert_stock['varient2']=$result['varient2'];
-           $insert_stock['attribute2']=$result['attribute2'];
+            $data_size['variant1']=$result['varient1'];
+           $data_size['attribute1']=$result['attribute1'];
+           $data_color['varient2']=$result['varient2'];
+           $data_color['attribute2']=$result['attribute2'];
            $insert_stock['varient3']=$result['varient3'];
            $insert_stock['attribute3']=$result['attribute3'];
            $insert_stock['image']=$image_path.$result['photo'];
@@ -150,17 +152,23 @@ class ProductlistController extends Controller
            $insert_stock['sku']=$result['sku'];
            $insert_stock['outofstock']=$result['outofstock'];
            $insert_stock['barcode']=$result['barcode'];
+           $color_result[$key] = $data_color;
+           $size_result[$key] = $data_size;
            $data_result[$key] = $insert_stock;
 
             if($result['detail']->isEmpty()) {
               $data_result[$key]['detail'] = $val['productDetail'];
+              $size_result[$key]['color'] = $val['productDetail'];
+              $color_result[$key]['size'] = $val['productDetail'];
             } else {
                 $data_result[$key]['detail'] = $result['detail'];
+				$color_result[$key]['color'] = $result['detail'];
+				//$size_result[$key]['size'] = $val['productDetail'];
             }   
-
+			 
           }          
          // $data_result = json_encode($data_result);
-         return response($data_result, 200);
+         return response([$data_result,$color_result,$size_result], 200);
         }
 	   }
 		else
@@ -204,7 +212,7 @@ class ProductlistController extends Controller
 			   $data['title']=$value['title'];
 			   $data['description']=$value['descripation'];
 			   $data['image']= (!empty($value['productmediaget'][$key]['image']))? $image_path.$value['productmediaget'][$key]['image'] : '' ;
-			   $data['price_range']='$'.$min.'-'.'$'.$max;
+			  // $data['price_range']='$'.$min.'-'.'$'.$max;
 				$data_result[$key] = $data;			   
 				 	   
 			}
