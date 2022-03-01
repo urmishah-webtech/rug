@@ -63,4 +63,5 @@ Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutControll
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
 Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
 
+Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
    
