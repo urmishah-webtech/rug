@@ -16,8 +16,6 @@ class CartController extends Controller
         $variantID = $request->variation;
         $variant = ProductVariant::select(['product_id', 'price'])->find($variantID);
 
-        /*$session_id = Session::getId();
-        dd($session_id);*/
         if (!empty($variant))
         {
 

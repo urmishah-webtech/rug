@@ -53,6 +53,25 @@ class PaymentController extends Controller
 
     }
 
+    public function get_thankyou($userid){
+        $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
+        $order_item = order_item::with('media_product')->with('order_product')->where('order_id',$order->id)->orderBy('id', 'DESC')->get();
+
+        $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
+
+        $finalamount = 0;
+            $i=0;
+        foreach ($order_item as $key => $result)
+        {
+            $order_item[$key]['image'] = $result['order_product'][0]['title'];
+            $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
+            $Totalamount = ($result->stock * $result->price);
+            $finalamount += $Totalamount;
+        }
+
+        return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item]);
+    }
+
     public function orderplace(Request $request){
 
         $user_detail = User::where('id', $request['user_id'])->first();
