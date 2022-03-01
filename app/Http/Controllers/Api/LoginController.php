@@ -31,7 +31,6 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'session_id' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/',
         ]);
@@ -133,6 +132,8 @@ class LoginController extends Controller
             ], 401);
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
+
+        $payment = Cart::where('session_id', $request->session_id)->update(['user_id' => $user->id,'session_id' => '']);
       //  $token = $tokenResult->remember_me;
         /*if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
