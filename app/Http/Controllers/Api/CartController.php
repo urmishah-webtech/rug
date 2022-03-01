@@ -349,12 +349,17 @@ class CartController extends Controller
         
     }
 
-    public function getCart($id = '0', $sessionid = '0')
+    public function getCart($id)
     {
-        $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)
-            ->get();
-        $CartsessionItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $sessionid)
-            ->get();
+
+    
+        if (preg_match("/^\d+$/", $id)) {
+          $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)->get();
+          
+        } else {
+           $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
+        }
+          
         $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
         if (count($CartItem) != 0)
         {
@@ -375,7 +380,7 @@ class CartController extends Controller
                 ->json(['message' => 'success', 'cartitem' => $CartItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'image' => $CartItem, 'success' => true, ]);
 
         }
-        if (count($CartsessionItem) != 0)
+        /*if (count($CartsessionItem) != 0)
         {
             $stock = 0;
             $finalamount = 0;
@@ -389,7 +394,7 @@ class CartController extends Controller
 
             $cartCount = $stock;
             return response()->json(['message' => 'success', 'cartitem' => $CartsessionItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'success' => true, ]);
-        }
+        }*/
 
         // $this->dispatchBrowserEvent('onCartChanged');
         
