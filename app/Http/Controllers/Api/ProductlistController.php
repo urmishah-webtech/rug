@@ -158,12 +158,12 @@ class ProductlistController extends Controller
 
             if($result['detail']->isEmpty()) {
               $data_result[$key]['detail'] = $val['productDetail'];
-              $size_result[$key]['color'] = $val['productDetail'];
-              $color_result[$key]['size'] = $val['productDetail'];
+              $size_result[$key]['size'] = $val['productDetail'];
+              $color_result[$key]['color'] = $val['productDetail'];
             } else {
                 $data_result[$key]['detail'] = $result['detail'];
 				$color_result[$key]['color'] = $result['detail'];
-				//$size_result[$key]['size'] = $val['productDetail'];
+				$size_result[$key]['size'] = $result['detail'];
             }   
 			 
           }          
