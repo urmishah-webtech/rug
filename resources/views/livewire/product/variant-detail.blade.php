@@ -39,13 +39,13 @@
             <div class="columns one-third">
                 <div class="card variant-details-card card-grey-bg">
                     <div class="variant-img">
-                        <img src="{{ url('image/defult-image.png') }}">
+                        <img src="@if($Productvariant_first->photo != '') {{ url('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ url('image/defult-image.png') }} @endif">
                     </div>
                     <div class="variant-details">
                         <h2>{{$product->title}}</h2>
                         <span class="tag green">Active</span>
                         <span>{{count($Productvariant)}} variants</span>
-                        <button class="link">Back to product</button>
+                        <a href="{{ route('product-detail', $product->uuid) }}" class="link">Back to product</a>
                     </div>
                 </div>
                 <div class="card variants-color-card card-grey-bg">
@@ -152,15 +152,23 @@
                                  @endif
                             @endforeach
                         </div>
-                        <div class="import-file">
-                            <!--<input type="file" name="file" class="form-control" id="import_customers" onchange="importCustomers()">-->
-                            <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>
-                                <p class="secondary">Add images</p>
-                                <span>or drop images to upload</span>
-                                <button class="link">Choose existing</button>
-                            </label>
-                            <input type="file" name="photo" wire:model="photo" id="et_pb_contact_brand_file_request_0"  wire:ignore>
+                         <div class="card card-pd-0 tag-card collection-upload-image">
+                  
+                            <div class="single-upload-img">
+                                <input type='file' id="readUrl">
+                                <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>
+                                    <p class="secondary">Add images</p>
+                                    <span class="fs-12">or drop an image to upload</span>
+                                </label>
+
+                             
+                      
+                                <img id="uploadedImage" src="" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;">
+                       
+                                
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -176,21 +184,31 @@
                                 <label for="input">US$</label>
                             </div>
                             <div class="form-field-list">
-                                <label>Compare at price</label>
-                                <input type="text" name="compare_price" wire:model="product.compare_price">
+                                <label>Selling at price</label>
+                                <input type="text" name="compare_price" wire:model="Productvariant_first.selling_price">
                                 <label for="input">US$</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-field-list">
+                                <label>Stock</label>
+                                <input type="number" name="stock" id="stock-change-input" wire:model="Productvariant_first.stock" class="change-value-main-stock" >
+                                @error('stock') <span class="text-danger">{{ $message }}</span>@enderror
+                                
+                            </div>
+                            <div class="form-field-list">
                             </div>
                         </div>
                     </div>
                     <div class="row-items bd_none">
                         <div class="row variant-price-option">
-                            <div class="form-field-list">
+                            <!-- <div class="form-field-list">
                                 <label>Cost per item</label>
                                 <input type="text" name="cost" class="change-value-main-cost" wire:model="Productvariant_first.cost">
                                 <label for="input">US$</label>
                                 <p>Customers won’t see this</p>
-                            </div>
-                            <div class="form-field-list">
+                            </div> -->
+                            <!-- <div class="form-field-list">
                                 <span>Margin</span> 
                                 <input type="hidden" name="margin" id="margin-input-mian-value" wire:model="Productvariant_first.margin">
                                 
@@ -200,12 +218,12 @@
                                 <span>Profit</span>
                                 <input type="hidden" name="profit" id="profit-input-mian-value" wire:model="Productvariant_first.profit">
                                 <span class="profit-value-main">${{$Productvariant_first->profit}}</span>
-                            </div>
+                            </div> -->
                         </div>
-                    <label class="variant-pricing-checkbox"><input type="checkbox" name="option2a" checked="checked">Charge tax on this variant</label>
+                   <!--  <label class="variant-pricing-checkbox"><input type="checkbox" name="option2a" checked="checked">Charge tax on this variant</label> -->
                     </div>
                 </div>
-                <div class="card variant-inventory-card">
+                <!-- <div class="card variant-inventory-card">
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Inventory</h3>
@@ -255,9 +273,9 @@
                         </table>
 
                     </div>
-                </div>
+                </div> -->
                 
-                <div class="card variant-shipping-card" wire:ignore>
+                <!-- <div class="card variant-shipping-card" wire:ignore>
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Shipping</h3>
@@ -301,7 +319,7 @@
                                 <p class="mb-0">Manually enter codes that are longer than 6 numbers.</p>
                             </div>
                     </div>
-                </div>
+                </div> -->
 
                   <!-- detail -->
                 <div class="card " >
@@ -493,6 +511,18 @@
 
       
 
+</script>
+<script type="text/javascript">
+    document.getElementById('readUrl').addEventListener('change', function(){
+      if (this.files[0] ) {
+        var picture = new FileReader();
+        picture.readAsDataURL(this.files[0]);
+        picture.addEventListener('load', function(event) {
+          document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+          document.getElementById('uploadedImage').style.display = 'block';
+        });
+      }
+    });
 </script>
 </x-admin-layout>
 </div>

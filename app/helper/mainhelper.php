@@ -11,7 +11,7 @@ use App\Models\rolepermission;
 
   function CurrencySymbol(){
 
-    return [ 'currency' => '€' ];
+    return [ 'currency' => '$' ];
 
  }
 

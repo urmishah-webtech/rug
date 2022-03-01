@@ -349,13 +349,15 @@
 
                                         <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
 
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
+
                                         <!-- <li><a class="link"  onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li> -->
 
                                         <!-- <li><a class="link" onclick="document.getElementById('edit-option-values-modal').style.display='block'">Edit option values</a></li> -->
 
                                         <!-- <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
 
-                                        <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
 
                                         <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
 
@@ -370,7 +372,7 @@
                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
 
                                 <tbody>
-
+                                    <?php $stocksum = 0;  ?>
                                     @foreach($Productvariant as $key => $row)
 
                                     <tr>
@@ -502,15 +504,12 @@
 
                                         <td class="vendor-table-item">
 
-                                            <p>US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}</p>
+                                            <p>@if($row->price)US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
+                                            @endif</p>
                                             <?php $location_count = count($location); ?>
-                                            <?php $sum = 0; ?>
-                                            @foreach($fullStock as $res)
-                                              @if($res->variant_main_id == $row->id)
-                                                <?php $sum += $res->stock;?> 
-                                              @endif
-                                            @endforeach
-                                            <p>available at 2 Stock</p>
+                                            <?php 
+                                             $stocksum += $row->stock; ?>
+                                            <p>available at {{$row->stock}} Stock</p>
 
                                         </td>
 
@@ -524,15 +523,12 @@
 
                             <hr>
 
-                             <?php $sum = 0; ?>
-                            @foreach($variantStock as $row_stock)
-                             <?php $sum += $row_stock->stock;?> 
-                             @endforeach 
+                         
                            <div class="product-table-footer">
 
                                <p>Total inventory at all stock</p>
 
-                               <p> 12 available</p>
+                               <p> {{$stocksum}} available</p>
 
                            </div>
 
@@ -629,9 +625,10 @@
                                                 <ul class="edite-variants-dropdown">
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
+                                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit stock</a></li>
                                                     <!-- <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
-                                                    <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
+                                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
                                                     <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
                                                     <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
                                                 </ul>
@@ -692,19 +689,19 @@
                                             </div> 
                                             
                                             <!--Edit barcodes modal-->
-                                            <div id="variants-edit-barcodes-modal" class="customer-modal-main skus-barcodes-modal">
+                                            <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal">
                                                 <div class="customer-modal-inner">
                                                     <div class="customer-modal">
                                                         <div class="modal-header">
-                                                            <h2>Edit barcodes</h2>
-                                                            <span onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                            <h2>Edit Stock</h2>
+                                                            <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                                                         </div>
                                                         <div class="modal-body attribute-barcode-value">
                                                             
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button secondary">Cancel</a>
-                                                            <a onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="button green-btn">Done</a>
+                                                            <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button secondary">Cancel</a>
+                                                            <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button green-btn">Done</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -898,6 +895,21 @@
                                 <label for="input">{{$symbol['currency']}}</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-field-list">
+
+                                <label>Stock</label>
+
+                                <input type="text" name="compare_selling_price" wire:model="product.stock" wire:ignore>
+
+
+                                 @error('Stock') <span class="text-danger">{{ $message }}</span>@enderror
 
                             </div>
 
@@ -2298,7 +2310,7 @@
 
     <!--Edit barcodes modal-->
 
-    <div id="variants-edit-barcodes-modal" class="customer-modal-main skus-barcodes-modal" wire:ignore>
+    <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal" wire:ignore>
 
         <div class="customer-modal-inner">
 
@@ -2306,9 +2318,9 @@
 
                 <div class="modal-header">
 
-                    <h2>Edit barcodes</h2>
+                    <h2>Edit Stock</h2>
 
-                    <span onclick="document.getElementById('variants-edit-barcodes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                    <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
 
                 </div>
 
@@ -2338,7 +2350,7 @@
 
                                 @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif </label>
 
-                        <input type="text"  wire:model.debounce.lazy="Productvariant.{{ $key }}.barcode">         
+                        <input type="text"  wire:model.debounce.lazy="Productvariant.{{ $key }}.stock">         
 
                     </div>
 
@@ -2350,7 +2362,7 @@
 
                     <button class="button secondary" data-dismiss="modal">Cancel</button>
 
-                    <button class="button green-btn" onclick="document.getElementById('variants-edit-skus-modal').style.display='none'">Done</button>
+                    <button class="button green-btn" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'">Done</button>
 
                 </div>
 
@@ -2810,7 +2822,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2830,7 +2842,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2851,7 +2863,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-barcode-' + uniq_id + '" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2873,7 +2885,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2895,7 +2907,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2916,7 +2928,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2937,7 +2949,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2958,7 +2970,7 @@ $(document).ready(function () {
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                                get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
                                 
                                 get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2980,7 +2992,7 @@ $(document).ready(function () {
 
                              get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
 
-                             get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>'; 
+                             get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>'; 
 
                              get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -2998,7 +3010,7 @@ $(document).ready(function () {
 
                      get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
-                     get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-barcode-'+uniq_id+'" class="att_barcode_class" name="att_barcode[]"></div><br>';
+                     get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
 
                      get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
 
@@ -3057,7 +3069,7 @@ $(document).ready(function () {
 
         });   
         
-        $(document).on("change", '.att_barcode_class', function() {
+        $(document).on("change", '.att_stock_qtn_class', function() {
 
              var id_value = $(this).attr('id');
              
@@ -3140,7 +3152,7 @@ $(document).ready(function () {
            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
            $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
            $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
-           $("#child-popup-barcode-"+thisid).attr("value", $('#barcode-input').val());
+           $("#child-popup-stock-qtn-"+thisid).attr("value", $('#barcode-input').val());
            $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
            $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
            $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());
@@ -3687,7 +3699,7 @@ $(document).on("click", '.image-checkbox', function() {
 
 
 
-<script >
+<script>
 
 function openOption(id) {
 

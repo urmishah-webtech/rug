@@ -3285,7 +3285,7 @@ code {
      position: relative;
 }
  .search-collections-checkbox {
-     position: absolute;
+     /* position: absolute; */
      background: #fff;
      z-index: 9;
      width: 100%;
@@ -4089,7 +4089,7 @@ code {
  .page-bottom-btn button, .page-bottom-btn input.button {
      background-color: #f1f1f1 !important;
      border: none !important;
-     color: #8c9196 !important;
+     color: #ffffff !important;
      font-weight: 600;
 }
  .page-bottom-btn button.secondary-brd-btn {
