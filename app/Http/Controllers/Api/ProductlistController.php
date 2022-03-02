@@ -82,6 +82,7 @@ class ProductlistController extends Controller
 			//dump($key);
            $product_arra['id']=$val['id'];
            $product_arra['title']=$val['title'];
+           $product_arra['collection']=$val['collection'];
            $product_arra['description']=$val['descripation'];
            $product_arra['image']=$image_path.$val['productmediaget'][$key]['image'];
            $product_arra['price_range']='$'.$min.'-'.'$'.$max;
