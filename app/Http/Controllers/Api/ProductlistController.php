@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\VariantTag;
 use App\Models\ProductMedia;
 use App\Models\Collection;
 use DB;
@@ -113,6 +114,7 @@ class ProductlistController extends Controller
     {
         if (Product::where('id', $id)->exists())
         {
+            $varianttag = VariantTag::all()->groupBy('id')->toArray();
             $product = Product::with('productmediaget')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
@@ -193,7 +195,7 @@ class ProductlistController extends Controller
 
                 }
                 // $data_result = json_encode($data_result);
-                 return response(['data' => $data_result,'colormain' => $color_main_result, 'color' => $color_result, 'size' => $size_result], 200);
+                 return response(['data' => $data_result,'colormain' => $color_main_result, 'color' => $color_result, 'size' => $size_result,'varianttag' => $varianttag], 200);
             }
         }
         else
