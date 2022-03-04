@@ -119,7 +119,7 @@ class ProductlistController extends Controller
                 return $q->with('detail');
             }
             ])
-                ->where('id', $id)->get();
+            ->where('id', $id)->get();
 
             $product_arra = array();
             $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
@@ -131,6 +131,7 @@ class ProductlistController extends Controller
                     ->where('product.id', $val->id)
                     ->whereNotNull('product_variants.price')
                     ->get();
+
                 $price_array = array();
 
                 foreach ($price_data as $key => $value)
@@ -169,47 +170,7 @@ class ProductlistController extends Controller
                     $insert_stock['sku'] = $result['sku'];
                     $insert_stock['outofstock'] = $result['outofstock'];
                     $insert_stock['barcode'] = $result['barcode'];
-
-
-
-                    if($result['varient1'] == 37){
-
-                      $data_color_main['variant1'] = $result['varient1'];
-                      $data_color_main['attribute1'] = $result['attribute1'];
-
-                    }elseif ($result['varient1'] == 37) {
-                       $data_color['variant1'] = $result['varient1'];
-                       $data_color['attribute1'] = $result['attribute1'];
-                    }elseif ($result['varient1'] == 37) {
-                       $data_size['varient1'] = $result['varient1'];
-                       $data_size['attribute1'] = $result['attribute1'];
-                    }
-
-                    if($result['varient2'] == 36){
-
-                      $data_color_main['variant2'] = $result['varient2'];
-                      $data_color_main['attribute2'] = $result['attribute2'];
-
-                    }elseif ($result['varient2'] == 36) {
-                      $data_color['variant2'] = $result['varient2'];
-                      $data_color['attribute2'] = $result['attribute2'];
-                    }elseif ($result['varient2'] == 36) {
-                      $data_size['variant2'] = $result['varient2'];
-                      $data_size['attribute2'] = $result['attribute2'];
-                    }
-
-                    if($result['varient3'] == 38){
-                      $data_color_main['variant3'] = $result['varient3'];
-                      $data_color_main['attribute3'] = $result['attribute3'];
-                    }elseif ($result['varient3'] == 38) {
-                      $data_color['variant3'] = $result['varient3'];
-                      $data_color['attribute3'] = $result['attribute3'];
-                    }elseif ($result['varient3'] == 38) {
-                      $data_size['variant3'] = $result['varient3'];
-                      $data_size['attribute3'] = $result['attribute3'];
-                    }
-
-                    $insert_stock['variant1'] = $result['varient1'];
+                    $insert_stock['varient1'] = $result['varient1'];
                     $insert_stock['attribute1'] = $result['attribute1'];
                     $insert_stock['varient2'] = $result['varient2'];
                     $insert_stock['attribute2'] = $result['attribute2'];
@@ -343,6 +304,7 @@ class ProductlistController extends Controller
                 }
 
             }
+            dd($data);
             return response($data, 200);
         }
         else
