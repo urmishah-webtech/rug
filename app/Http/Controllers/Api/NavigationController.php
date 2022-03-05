@@ -9,6 +9,9 @@ use App\Models\MenuItem;
 
 class NavigationController extends Controller
 {
+
+	public $menu_arr = [];
+
     public function getAllNavigation() 
 	{
 		$menu = Menu::get();
@@ -22,7 +25,62 @@ class NavigationController extends Controller
 		  }
 		return response($data, 200);
 	}
-	public function getNavigationList($id)
+
+	public function getnavigation(){
+		$menus = Menu::where('name','Main Menu')->with('items')->first();
+
+        if(!empty($menus) && count($menus->items) > 0) {
+
+            $menuitems = $menus->items->sortBy('sort');
+
+            $i = -1;
+
+        
+
+            foreach ($menuitems as $menu) {
+
+                if ($menu->depth == 0) {
+
+                    $i++;
+
+
+
+                    $menu_arr[$i]['id'] = $menu->id;
+
+                    $menu_arr[$i]['name'] = $menu->label;
+
+                    $menu_arr[$i]['items'] = [];
+
+                    $menu_arr[$i]['images'] = [];
+
+                }elseif (!empty($menu->image)) {
+
+                    $menu_arr[$i]['images'][$menu->id] = $menu->toArray();
+
+
+
+                } elseif ($menu->depth == 1) {
+
+                    $menu_arr[$i]['items'][$menu->id] = $menu->toArray();
+
+                    $menu_arr[$i]['items'][$menu->id]['items'] = [];
+
+
+
+                } elseif ($menu->depth == 2) {
+
+                    $menu_arr[$i]['items'][$menu->parent]['items'][] = $menu->toArray();
+
+                }
+
+            }
+
+           return response($menu_arr, 200);
+        }else{
+           return response()->json(["message" => "Menu not found"], 404);
+        }
+	}
+	/*public function getNavigationList($id)
 	{	 
 		if (Menu::where('id', $id)->exists())
 		{
@@ -114,5 +172,5 @@ class NavigationController extends Controller
 		{
 			return response()->json(["message" => "Sub Menu not found"], 404);
 		}
-    }
+    }*/
 }

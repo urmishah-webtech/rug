@@ -36,8 +36,9 @@ Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost'
 Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
 
 Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
-Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
-Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
+Route::get('getmenu', 'App\Http\Controllers\Api\NavigationController@getnavigation');
+//Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+//Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 
