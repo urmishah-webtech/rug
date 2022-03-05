@@ -312,5 +312,51 @@ class ProductlistController extends Controller
             return response()->json(["message" => "Product not found"], 404);
         }
     }
+    public function fetchPrice(Request $request){
+
+        $productvariants = ProductVariant::Where('product_id',$request->product_id)->get();
+        $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+        if(!empty($productvariants) && count($productvariants) > 0) {
+           
+        
+
+            foreach ($productvariants as $variant) {
+                if(($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3)) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+            if(empty($productvariant)) {
+
+
+            foreach ($productvariants as $variant) {
+                if($variant->attribute1 == $request->text1 && $variant->attribute2 == $request->text2) {
+                    $productvariant = $variant;
+                    break;     
+                }else if($variant->attribute1 == $request->text1 && $variant->attribute3 == $request->text3) {
+                    $productvariant = $variant;
+                    break;     
+                }else if($variant->attribute2 == $request->text2 && $variant->attribute3 == $request->text3) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+        }
+         if(empty($productvariant)) {
+            foreach ($productvariants as $variant) {
+                if(($variant->attribute1 == $request->text1) || ($variant->attribute2 == $request->text2) || ($variant->attribute3 == $request->text3)) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+        }
+        if(empty($productvariant)) { $productvariant = $productvariants[0];}
+                    $Productvariant = $productvariant;
+
+        }
+
+        $price = number_format($Productvariant->price,2,'.',',');
+         return response()->json(array('variant' => $Productvariant, 'price' => $price,'image' => $image_path.$Productvariant->photo));
+    }
 }
 

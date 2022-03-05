@@ -24,6 +24,7 @@ Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllPro
 Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
 Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
 Route::get('related-product/{id}', 'App\Http\Controllers\Api\ProductlistController@get_related_Products');
+Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetchPrice');
 
 Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
@@ -65,4 +66,3 @@ Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');
 
 Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
 Route::get('thankyou/{id}', 'App\Http\Controllers\Api\PaymentController@get_thankyou'); 
-   
