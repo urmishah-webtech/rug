@@ -315,6 +315,7 @@ class ProductlistController extends Controller
     public function fetchPrice(Request $request){
 
         $productvariants = ProductVariant::Where('product_id',$request->product_id)->get();
+        $productimage = ProductMedia::Where('product_id',$request->product_id)->first();
         $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
         if(!empty($productvariants) && count($productvariants) > 0) {
            
@@ -355,8 +356,14 @@ class ProductlistController extends Controller
 
         }
 
+        if(!empty($Productvariant->photo)){
+            $image = $Productvariant->photo;
+        }else{
+            $image = $productimage->image;
+        }
+
         $price = number_format($Productvariant->price,2,'.',',');
-         return response()->json(array('variant' => $Productvariant, 'price' => $price,'image' => $image_path.$Productvariant->photo));
+         return response()->json(array('variant' => $Productvariant, 'price' => $price,'image' => $image_path.$image));
     }
 }
 
