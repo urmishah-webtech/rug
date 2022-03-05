@@ -209,13 +209,12 @@ class ProductlistController extends Controller
         if (Product::where('id', $id)->exists())
         {
             $productget = Product::where('id', $id)->first();
-            $product = Product::with('productmediaget')->with('variants')
-                ->get();
+            $product = Product::with('productmediaget')->with('variants')->get();
 
             $data = array();
             $price_array = array();
             $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
-            foreach ($product as $key => $value)
+            foreach ($product->unique('id')  as $key => $value)
             {
 
                 $decodeA = json_decode($value->collection);
@@ -306,7 +305,6 @@ class ProductlistController extends Controller
                 }
 
             }
-            dd($data);
             return response($data, 200);
         }
         else

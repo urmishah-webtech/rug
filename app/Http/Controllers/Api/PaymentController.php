@@ -67,7 +67,7 @@ class PaymentController extends Controller
                 $i=0;
             foreach ($order_item as $key => $result)
             {
-                $order_item[$key]['image'] = $result['order_product'][0]['title'];
+                $order_item[$key]['title'] = $result['order_product'][0]['title'];
                 $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
                 $Totalamount = ($result->stock * $result->price);
                 $finalamount += $Totalamount;
