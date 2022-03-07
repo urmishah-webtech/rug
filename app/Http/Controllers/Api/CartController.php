@@ -349,6 +349,24 @@ class CartController extends Controller
         
     }
 
+    public function UpdateCartProduct(Request $request)
+    {
+
+        if (!empty($request->cartid))
+        {
+            Cart::where('id', $request->cartid)->update(['stock' => $request->stock]);
+            return response()
+                ->json(['message' => 'Updated Record', 'success' => true, ]);
+        }
+        else
+        {
+
+            return response()
+                ->json(['message' => 'Not Updated Record', 'success' => false, ]);
+        }
+        
+    }
+
     public function getCart($id)
     {
 

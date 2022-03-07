@@ -57,6 +57,7 @@ Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
 Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 Route::get('getcart/{id}', 'App\Http\Controllers\Api\CartController@getCart');
 Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
+Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartProduct');
 
 
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
