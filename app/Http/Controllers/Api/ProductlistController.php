@@ -209,16 +209,15 @@ class ProductlistController extends Controller
         if (Product::where('id', $id)->exists())
         {
             $productget = Product::where('id', $id)->first();
-            $product = Product::with('productmediaget')->with('variants')->get();
+            $product = Product::with('productmediaget')->with('variants')->get()->toArray();
 
             $data = array();
             $price_array = array();
             $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
-            foreach ($product->unique('id')  as $key => $value)
+            foreach ($product as $key => $value)
             {
-
-                $decodeA = json_decode($value->collection);
-                $decodeB = json_decode($productget->collection);
+                $decodeA = json_decode($value['collection']);
+                $decodeB = json_decode($productget['collection']);
                 if (!empty($decodeA))
                 {
                     foreach ($decodeA as $decoderes)

@@ -19,6 +19,10 @@ class order_item extends Model
     {
         return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
     }
+    public function variant_product()
+    {
+        return $this->hasMany(ProductVariant::class, 'id', 'varition_id');
+    }
     public function order()
     {
         return $this->hasOne(Orders::class, 'id', 'order_id');

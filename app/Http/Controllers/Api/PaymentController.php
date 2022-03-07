@@ -59,7 +59,7 @@ class PaymentController extends Controller
         if($ordercheck != 0){
             $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
             
-            $order_item = order_item::with('media_product')->with('order_product')->where('order_id',$order->id)->orderBy('id', 'DESC')->get();
+            $order_item = order_item::with('media_product')->with('variant_product')->with('order_product')->where('order_id',$order->id)->orderBy('id', 'DESC')->get();
 
             $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
 

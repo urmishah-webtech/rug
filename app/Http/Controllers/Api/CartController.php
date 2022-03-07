@@ -353,7 +353,7 @@ class CartController extends Controller
     {
 
         if (!empty($request->cartid))
-        {
+        {   
             Cart::where('id', $request->cartid)->update(['stock' => $request->stock]);
             return response()
                 ->json(['message' => 'Updated Record', 'success' => true, ]);
