@@ -392,10 +392,10 @@ class CartController extends Controller
                 $finalamount += $Totalamount;
             }
 
-            $cartCount = $CartItem->sum('stock');
-
+            $cartStock = $CartItem->sum('stock');
+            $cartCount = count($CartItem);
             return response()
-                ->json(['message' => 'success', 'cartitem' => $CartItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'image' => $CartItem, 'success' => true, ]);
+                ->json(['message' => 'success','cartcount' => $cartCount, 'cartitem' => $CartItem, 'Totalstock' => $cartStock, 'Totalamount' => $finalamount, 'image' => $CartItem, 'success' => true, ]);
 
         }
         /*if (count($CartsessionItem) != 0)

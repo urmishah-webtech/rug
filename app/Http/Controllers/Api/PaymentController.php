@@ -49,6 +49,108 @@ class PaymentController extends Controller
             ->_links
             ->checkout->href;
         $pay->save();
+
+        $user_detail = User::where('id', $request['user_id'])->first();
+
+            $Cart = Cart::where('user_id',$user_detail['id'])->get();
+
+            $pay = 1;
+
+            if ($pay == 1)
+            {
+             $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+                $Order_insert = orders::insert($order_arr = [
+
+                'user_id' => $user_detail['id'],
+
+                'transactionid' => 'vcevevnerv',
+
+                'email' => $user_detail['email'],
+
+                'netamout' => "230",
+
+                'paymentstatus' => 'pending',
+
+                'first_name' => $shipping['first_name'],
+
+                'last_name' => $shipping['last_name'],
+
+                'address' => $shipping['address'],
+
+                'state' => $shipping['state'], 
+
+                'city' => $shipping['city'], 
+
+                'country' => $shipping['country'], 
+
+                'pincode' => $shipping['postal_code'], 
+
+                'mobile' => $shipping['mobile_no'],
+
+                ]);
+            }
+
+            if($Order_insert){
+                // Insert Record Order Item
+                $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
+
+                $insert_order_item =[];
+                foreach($Cart as $res) {         
+                    if($res) {
+                        $totalamout = ($res->price * $res->stock);
+                        $order_item_arr = [
+
+                            'order_id' => $lastorderid['id'],
+                            
+                            'user_id' => $res->user_id,
+
+                            'product_id' => $res->product_id,
+
+                            'varition_id' => $res->varientid,
+                            
+                            'price' => $res->price,
+                            
+                            'stock' => $res->stock,
+                            
+                            'total' => '230',
+
+                        ];
+                        $insert_order_item[] = $order_item_arr;
+                    }               
+                }
+            }
+
+            $Orderitemvalue =  order_item::insert($insert_order_item);
+
+            foreach($Cart as $res) { 
+
+                if($res->varientid != ""){
+
+                    $varient_stock = ProductVariant::where('id',$res->varientid)->first();
+
+                    $finalstock = ($varient_stock->stock - $res->stock);
+
+                    $paymentdetail = ProductVariant::where('id', $res->varientid)->update(['stock' => $finalstock]);
+
+                }
+                else
+                {
+                    if($res->product_id != ""){
+                        $product_stock = Product::where('id',$res->product_id)->first();
+
+                        $finalstock = ($product_stock->stock - $res->stock);
+
+                        $paymentdetail = Product::where('id', $res->product_id)->update(['stock' => $finalstock]);
+                    }     
+                }
+            }
+
+            if($paymentdetail){
+
+                Cart::where('user_id',$user_detail['id'])->delete();
+            }else{
+                
+            }
         return $this->sendJson(['status' => 0, 'message' => $payment]);
 
     }
@@ -72,6 +174,8 @@ class PaymentController extends Controller
                 $Totalamount = ($result->stock * $result->price);
                 $finalamount += $Totalamount;
             }
+
+
 
             return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item]);
         }else

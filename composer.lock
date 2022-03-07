@@ -3105,6 +3105,10 @@
                 "sofortbanking",
                 "subscriptions"
             ],
+            "support": {
+                "issues": "https://github.com/mollie/mollie-api-php/issues",
+                "source": "https://github.com/mollie/mollie-api-php/tree/v2.40.2"
+            },
             "time": "2022-02-08T08:53:18+00:00"
         },
         {
@@ -9984,5 +9988,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }

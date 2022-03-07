@@ -163,7 +163,9 @@ class ProductlistController extends Controller
                 $data_size = [];
                 $data_color_main = [];
                 $insert_stock = [];
-                foreach ($val['variants'] as $key => $result)
+                $arrayvarit = [];
+                 $product_vari_array = array_unique($val['variants']->toArray());
+                foreach ($product_vari_array as $key => $result)
                 {
                     $insert_stock['variant_id'] = $result['id'];
                     $insert_stock['image'] = $image_path . $result['photo'];
@@ -210,6 +212,12 @@ class ProductlistController extends Controller
         {
             $productget = Product::where('id', $id)->first();
             $product = Product::with('productmediaget')->with('variants')->get()->toArray();
+
+
+//             $product=Product::leftJoin('product_media as pm','pm.product_id','=','product.id')->
+// leftJoin('product_variants as pv','pv.product_id','=','product.id')->groupBy('product.id')
+// ->get();
+// dd()
 
             $data = array();
             $price_array = array();
