@@ -109,7 +109,43 @@ class ProductlistController extends Controller
             return response()->json(["message" => "Product not found"], 404);
         }
     }
- 
+function unique_key($array,$keyname){
+
+ $new_array = array();
+ foreach($array as $key=>$value){
+   
+   if(!isset($new_array[$value[$keyname]])){
+     $new_array[$value[$keyname]] = $value;
+   }
+   
+ }
+ $new_array = array_values($new_array);
+    foreach($new_array as $key => $value)
+    {
+       if($keyname=='attribute1'){
+        $new_array[$key]['varient2']=null;
+        $new_array[$key]['varient3']=null;
+        $new_array[$key]['attribute2']=null;
+        $new_array[$key]['attribute3']=null;
+       }
+
+       if($keyname=='attribute2'){
+         $new_array[$key]['varient1']=null;
+        $new_array[$key]['varient3']=null;
+        $new_array[$key]['attribute1']=null;
+        $new_array[$key]['attribute3']=null;
+       }
+
+       if($keyname=='attribute3'){
+         $new_array[$key]['varient1']=null;
+        $new_array[$key]['varient2']=null;
+        $new_array[$key]['attribute1']=null;
+        $new_array[$key]['attribute2']=null;
+       }
+    }
+ return $new_array;
+}
+
     public function getIndividualProduct_variant($id)
     { 
         if (Product::where('id', $id)->exists())
@@ -164,6 +200,12 @@ class ProductlistController extends Controller
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
+                $arr=$val['variant_groupby']->toArray();
+                $arr1=$this->unique_key($arr,'attribute1');
+                $arr2=$this->unique_key($arr,'attribute2');
+                $arr3=$this->unique_key($arr,'attribute3');
+               
+                 $val['variant_groupby']=array_merge($arr1,$arr2,$arr3);
                 foreach ($val['variant_groupby'] as $key => $result)
                 {
                     $insert_stock['variant_id'] = $result['id'];
@@ -185,7 +227,7 @@ class ProductlistController extends Controller
                     $color_main_result[$key] = $data_color_main;
                     $data_result[$key] = $insert_stock;
 
-                    if ($result['detail']->isEmpty())
+                    if (count($result['detail'])>0)
                     {
                         $data_result[$key]['detail'] = $val['productDetail'];
                     }
