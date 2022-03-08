@@ -111,7 +111,7 @@ class ProductlistController extends Controller
     }
 
     public function getIndividualProduct_variant($id)
-    {
+    { 
         if (Product::where('id', $id)->exists())
         {
             $varianttag = VariantTag::all()->groupBy('id')->toArray();
