@@ -55,8 +55,11 @@ class CartController extends Controller
 
                     ]);
 
+
+                    $cartcount = Cart::where('user_id', $user_id)->count();
+
                     return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cart' => $cart,
+                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount ,'cart' => $cart,
 
                     ]);
 
@@ -111,8 +114,10 @@ class CartController extends Controller
                     //'media_product' => $media_product
                     ]);
 
+                    $cartcount = Cart::where('session_id', $request->session_id)->count();
+
                     return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cart' => $cart,
+                        ->json(['message' => 'Added Record', 'success' => true , 'cartcount' => $cartcount, 'cart' => $cart,
 
                     ]);
 
@@ -155,7 +160,10 @@ class CartController extends Controller
 
                     'media_product' => $media_product]);
 
-                    return response()->json(['message' => 'insert Record', 'success' => true, 'cart' => $cart,
+
+                     $cartcount = Cart::where('session_id', $request->session_id)->count();
+
+                    return response()->json(['message' => 'insert Record','success' => true,'cartcount' => $cartcount, 'cart' => $cart,
 
                     ]);
                     // session()->put('cart', $cart);
@@ -206,8 +214,10 @@ class CartController extends Controller
 
                     ]);
 
+                    $cartcount = Cart::where('user_id', $request->user_id)->count();
+
                     return response()
-                        ->json(['message' => 'insert Record', 'success' => true, 'cart' => $cart,
+                        ->json(['message' => 'insert Record', 'success' => true, 'cartcount' => $cartcount, 'cart' => $cart,
 
                     ]);
                     // $this->emitTo('header','getCart');
@@ -264,8 +274,10 @@ class CartController extends Controller
                     //    'product_detail' => $product_detail,
                     //   'media_product' => $media_product
                     ]);
+
+                    $cartcount = Cart::where('session_id', $request->session_id)->count();
                     return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cart' => $cart,
+                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount,'cart' => $cart,
 
                     ]);
 
@@ -307,7 +319,9 @@ class CartController extends Controller
 
                     'media_product' => $media_product]);
 
-                    return response()->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
+                    $cartcount = Cart::where('session_id', $request->session_id)->count();
+
+                    return response()->json(['message' => 'Updated Record', 'success' => true,'cartcount' => $cartcount ,'cart' => $cart,
 
                     ]);
 
