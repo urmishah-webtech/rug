@@ -116,7 +116,7 @@ class ProductlistController extends Controller
         {
             $varianttag = VariantTag::all()->groupBy('id')->toArray();
             $product = Product::with('productmediaget')->with('favoriteget')
-                ->with('productDetail')->with(['variants' => function ($q)
+                ->with('productDetail')->with(['variant_groupby' => function ($q)
             {
                 return $q->with('detail');
             }
@@ -164,8 +164,7 @@ class ProductlistController extends Controller
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
-                 $product_vari_array = array_unique($val['variants']->toArray());
-                foreach ($product_vari_array as $key => $result)
+                foreach ($val['variant_groupby'] as $key => $result)
                 {
                     $insert_stock['variant_id'] = $result['id'];
                     $insert_stock['image'] = $image_path . $result['photo'];

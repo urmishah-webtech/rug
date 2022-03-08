@@ -33,6 +33,11 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
+    public function variant_groupby()
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id')->groupBy(['attribute1','attribute2','attribute3']);;
+    }
+
     public function favoriteget()
     {
         return $this->hasMany(favorite::class, 'product_id', 'id');
