@@ -109,7 +109,7 @@ class ProductlistController extends Controller
             return response()->json(["message" => "Product not found"], 404);
         }
     }
-
+ 
     public function getIndividualProduct_variant($id)
     { 
         if (Product::where('id', $id)->exists())
