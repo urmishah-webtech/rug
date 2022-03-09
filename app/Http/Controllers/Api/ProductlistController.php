@@ -232,7 +232,7 @@ class ProductlistController extends Controller
                         if (is_array($decodeB) && !empty($decodeB))
                         {
 
-                            if (in_array($decoderes, $decodeB))
+                            if (in_array($decoderes, $decodeB) && $productget{'id'} != $value['id'])
                             {
 
                                 if (!empty($value['variants'][$key]['price']))

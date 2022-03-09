@@ -49,8 +49,8 @@ class PaymentController extends Controller
             ->_links
             ->checkout->href;
         $pay->save();
-
-        $user_detail = User::where('id', $request['user_id'])->first();
+        if($pay){
+            $user_detail = User::where('id', $request['user_id'])->first();
 
             $Cart = Cart::where('user_id',$user_detail['id'])->get();
 
@@ -148,9 +148,8 @@ class PaymentController extends Controller
             if($paymentdetail){
 
                 Cart::where('user_id',$user_detail['id'])->delete();
-            }else{
-                
             }
+        }
         return $this->sendJson(['status' => 0, 'message' => $payment]);
 
     }
