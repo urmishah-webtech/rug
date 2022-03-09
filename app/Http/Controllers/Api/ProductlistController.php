@@ -200,48 +200,60 @@ class ProductlistController extends Controller
                foreach($val->variants->unique('attribute1') as $sizekey1 => $row1){
                    
                     if($row1->attribute1 != ""){
-                        $color['variantnumber'] = $val->variants[0]['varient1'];
+                        $colorvarient['variantnumber'] = $val->variants[0]['varient1'];
                         $color[$sizekey1] = $row1->attribute1; 
-                        $color_arry[] = $color;  
+                         
                                            
                     }else{
-                         $color_arry[] = "";
+                         $colorvarient[] = "";
+                         $color[] = "";
                     }
                     
                 }
+                $color_arry[] = $color; 
+                $color_arry[] = $colorvarient; 
 
 
                 foreach($val->variants->unique('attribute2') as $sizekey2 => $row2){
                    
                     if($row2->attribute2 != ""){
-                        $othercolor['variantnumber'] = $val->variants[0]['varient2'];
-                        $othercolor[$sizekey2] = $row2->attribute2;
-                        $other_color_arry[] = $othercolor;                        
+                        $othercolorvarient['variantnumber'] = $val->variants[0]['varient2'];
+                        $othercolor[$sizekey2] = $row2->attribute2;                     
                     }else{
-                        $other_color_arry[] = '';
+                        $othercolorvarient[] = '';
+                        $othercolor[] = '';
                     }
                 }
+
+                $other_color_arry[] = $othercolor; 
+                $other_color_arry[] = $othercolorvarient; 
+
                 foreach($val->variants->unique('attribute3') as $sizekey => $row3){
                    
                     if($row3->attribute3 != ""){
-                        $size['variantnumber'] = $val->variants[0]['varient3'];
-                        $size[$sizekey] = $row3->attribute3;  
-                        $size_arry[] = $size;                       
+                        $sizevarient['variantnumber'] = $val->variants[0]['varient3'];
+                        $size[$sizekey] = $row3->attribute3;                      
                     }else{
-                         $size_arry[] = '';
+                         $sizevarient[] = '';
+                         $size[] = '';
                     }
                 }
+
+                $size_arry[] = $size; 
+                $size_arry[] = $sizevarient; 
 
                 foreach($val->variants->unique('attribute4') as $sizekey4 => $row4){
                    
                     if($row4->attribute4 != ""){
-                        $tassels['variantnumber'] = $val->variants[0]['varient2'];
-                        $tassels[$sizekey4] = $row4->attribute4;       
-                        $tassels_arry[] = $tassels;                 
+                        $tasselsverient['variantnumber'] = $val->variants[0]['varient2'];
+                        $tassels[$sizekey4] = $row4->attribute4;                    
                     }else{
-                        $tassels_arry[] = '';
+                        $tassels[] = '';
+                        $tasselsverient[] = '';
                     }
                 }
+                $tassels_arry[] = $tassels; 
+                $tassels_arry[] = $tasselsverient; 
                 // $data_result = json_encode($data_result);
                  return response(['data' => $data_result, 'attribute1' => $color_arry,'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry, 'varianttag' => $varianttag], 200);
             }
