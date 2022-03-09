@@ -116,7 +116,7 @@ class ProductlistController extends Controller
         {
             $varianttag = VariantTag::all()->groupBy('id')->toArray();
             $product = Product::with('productmediaget')->with('favoriteget')
-                ->with('productDetail')->with(['variant_groupby' => function ($q)
+                ->with('productDetail')->with(['variants' => function ($q)
             {
                 return $q->with('detail');
             }
@@ -164,7 +164,8 @@ class ProductlistController extends Controller
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
-                foreach ($val['variant_groupby'] as $key => $result)
+                                                
+                foreach ($val['variants'] as $key => $result)
                 {
                     $insert_stock['variant_id'] = $result['id'];
                     $insert_stock['image'] = $image_path . $result['photo'];
@@ -173,12 +174,12 @@ class ProductlistController extends Controller
                     $insert_stock['sku'] = $result['sku'];
                     $insert_stock['outofstock'] = $result['outofstock'];
                     $insert_stock['barcode'] = $result['barcode'];
-                    $insert_stock['varient1'] = $result['varient1'];
+                /*    $insert_stock['varient1'] = $result['varient1'];
                     $insert_stock['attribute1'] = $result['attribute1'];
                     $insert_stock['varient2'] = $result['varient2'];
                     $insert_stock['attribute2'] = $result['attribute2'];
                     $insert_stock['varient3'] = $result['varient3'];
-                    $insert_stock['attribute3'] = $result['attribute3'];
+                    $insert_stock['attribute3'] = $result['attribute3'];*/
 
                     $color_result[$key] = $data_color;
                     $size_result[$key] = $data_size;
@@ -195,8 +196,37 @@ class ProductlistController extends Controller
                     }
 
                 }
+
+               
+                foreach($val->variants->unique('attribute3') as $sizekey => $row3){
+                   
+                    if($row3->attribute3 != ""){
+                        $size['variantnumber'] = $val->variants[0]['varient3'];
+                        $size[$sizekey] = $row3->attribute3;                        
+                    }else{
+                         $size[] = '';
+                    }
+                }
+
+                foreach($val->variants->unique('attribute1') as $sizekey1 => $row1){
+                   
+                    if($row1->attribute1 != ""){
+                        $color['variantnumber'] = $val->variants[0]['varient1'];
+                        $color[$sizekey1] = $row1->attribute1;                        
+                    }
+                }
+
+                foreach($val->variants->unique('attribute2') as $sizekey2 => $row2){
+                   
+                    if($row2->attribute2 != ""){
+                        $othercolor['variantnumber'] = $val->variants[0]['varient2'];
+                        $othercolor[$sizekey2] = $row2->attribute2;                        
+                    }else{
+                        $othercolor[] = '';
+                    }
+                }
                 // $data_result = json_encode($data_result);
-                 return response(['data' => $data_result,'colormain' => $color_main_result, 'color' => $color_result, 'size' => $size_result,'varianttag' => $varianttag], 200);
+                 return response(['data' => $data_result, 'attribute1' => $color,'attribute2' => $othercolor, 'attribute3' => $size,'varianttag' => $varianttag], 200);
             }
         }
         else
