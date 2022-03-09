@@ -198,17 +198,7 @@ class ProductlistController extends Controller
                 }
 
                
-                foreach($val->variants->unique('attribute3') as $sizekey => $row3){
-                   
-                    if($row3->attribute3 != ""){
-                        $size['variantnumber'] = $val->variants[0]['varient3'];
-                        $size[$sizekey] = $row3->attribute3;                        
-                    }else{
-                         $size[] = '';
-                    }
-                }
-
-                foreach($val->variants->unique('attribute1') as $sizekey1 => $row1){
+               foreach($val->variants->unique('attribute1') as $sizekey1 => $row1){
                    
                     if($row1->attribute1 != ""){
                         $color['variantnumber'] = $val->variants[0]['varient1'];
@@ -225,8 +215,27 @@ class ProductlistController extends Controller
                         $othercolor[] = '';
                     }
                 }
+                foreach($val->variants->unique('attribute3') as $sizekey => $row3){
+                   
+                    if($row3->attribute3 != ""){
+                        $size['variantnumber'] = $val->variants[0]['varient3'];
+                        $size[$sizekey] = $row3->attribute3;                        
+                    }else{
+                         $size[] = '';
+                    }
+                }
+
+                foreach($val->variants->unique('attribute4') as $sizekey4 => $row4){
+                   
+                    if($row4->attribute4 != ""){
+                        $tassels['variantnumber'] = $val->variants[0]['varient2'];
+                        $tassels[$sizekey4] = $row4->attribute4;                        
+                    }else{
+                        $tassels[] = '';
+                    }
+                }
                 // $data_result = json_encode($data_result);
-                 return response(['data' => $data_result, 'attribute1' => $color,'attribute2' => $othercolor, 'attribute3' => $size,'varianttag' => $varianttag], 200);
+                 return response(['data' => $data_result, 'attribute1' => $color,'attribute2' => $othercolor, 'attribute3' => $size,, 'attribute4' => $tassels, 'varianttag' => $varianttag], 200);
             }
         }
         else
