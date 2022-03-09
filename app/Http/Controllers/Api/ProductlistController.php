@@ -235,7 +235,7 @@ class ProductlistController extends Controller
                     }
                 }
                 // $data_result = json_encode($data_result);
-                 return response(['data' => $data_result, 'attribute1' => $color,'attribute2' => $othercolor, 'attribute3' => $size,, 'attribute4' => $tassels, 'varianttag' => $varianttag], 200);
+                 return response(['data' => $data_result, 'attribute1' => $color,'attribute2' => $othercolor, 'attribute3' => $size, 'attribute4' => $tassels, 'varianttag' => $varianttag], 200);
             }
         }
         else
