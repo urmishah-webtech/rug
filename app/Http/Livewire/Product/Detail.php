@@ -50,6 +50,10 @@ class Detail extends Component
     public $filesvariant = [];
    
     public $removeimage = [];
+   
+    public $question = [];
+   
+    public $answer = [];
     
     public $photo_variant, $file;
 
@@ -585,6 +589,35 @@ class Detail extends Component
             }
         }
 
+         $position    = $request->question;
+        $code_tool   = $request->answer;
+
+        for($count = 0; $count < count($this->question); $count++)
+        {
+            $insert = array(                        
+                'question' => $this->question[$count],
+                'answer'     => $this->answer[$count]
+            );
+            $insert_data[] = $insert; 
+
+        }
+        if ($this->image) {
+            foreach ($this->image as $photo) {
+                
+                // $file_extension = $photo->extension();
+                $path_url = $photo->storePublicly('media','public');
+    
+               $mediaimg = ProductMedia::create([
+                    'product_id' => $this->product['id'],
+                    'image' => $path_url,
+                ]);
+            }
+
+            if($mediaimg){
+
+                $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
+            }
+        }
 
         foreach ($this->Productvariant as $key => $value) {
         $id = $this->Productvariant[$key]['id'];
