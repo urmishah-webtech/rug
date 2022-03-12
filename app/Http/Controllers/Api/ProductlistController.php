@@ -387,7 +387,7 @@ class ProductlistController extends Controller
         
 
             foreach ($productvariants as $variant) {
-                if(($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3)) {
+                if(($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3 && ($variant->attribute4 == $request->text4)) {
                     $productvariant = $variant;
                     break;     
                 }
@@ -401,8 +401,20 @@ class ProductlistController extends Controller
                     break;     
                 }else if($variant->attribute1 == $request->text1 && $variant->attribute3 == $request->text3) {
                     $productvariant = $variant;
+                    break; 
+
+                }else if($variant->attribute1 == $request->text1 && $variant->attribute4== $request->text4) {
+                    $productvariant = $variant;
                     break;     
                 }else if($variant->attribute2 == $request->text2 && $variant->attribute3 == $request->text3) {
+                    $productvariant = $variant;
+                    break;     
+                }
+                else if($variant->attribute2 == $request->text2 && $variant->attribute4 == $request->text4) {
+                    $productvariant = $variant;
+                    break;     
+                }
+                else if($variant->attribute3 == $request->text3 && $variant->attribute4 == $request->text4) {
                     $productvariant = $variant;
                     break;     
                 }
@@ -410,7 +422,7 @@ class ProductlistController extends Controller
         }
          if(empty($productvariant)) {
             foreach ($productvariants as $variant) {
-                if(($variant->attribute1 == $request->text1) || ($variant->attribute2 == $request->text2) || ($variant->attribute3 == $request->text3)) {
+                if(($variant->attribute1 == $request->text1) || ($variant->attribute2 == $request->text2) || ($variant->attribute3 == $request->text3) || ($variant->attribute4 == $request->text4) {
                     $productvariant = $variant;
                     break;     
                 }

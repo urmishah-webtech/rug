@@ -173,7 +173,38 @@ class ProductCreate extends Component
                 "price_main.required"     =>  "Enter your Price!",
             ]);
         }
-   
+
+        foreach ($request as $key => $find_contant) {
+
+            foreach ($find_contant as $key_value => $result_content) {
+
+                if($key_value == 'product_array')
+                {
+                    foreach ($result_content as $content_key => $content_value) {
+
+
+                        foreach($content_value as $final_key =>$final_value){
+                            if($final_key == 'question')
+                            {
+                                $arry[$content_key]['question'] = $final_value;
+                            }
+                            if($final_key == 'answer')
+                            {
+                                $arry[$content_key]['answer'] = $final_value;
+                            }
+                            if(!empty($arry))
+                            {
+                                $insertquestion = json_encode($arry);
+                                
+                            }else{
+                                 $insertquestion = '';
+                            }
+                    }
+                }
+            }
+        }
+    }
+
             $varition_arrray_crunch = $request['varition_arrray'];
             $price_arr = $request['att_price'];
             $price_selling_arr = $request['att_price_selling'];
@@ -250,6 +281,8 @@ class ProductCreate extends Component
                 'barcode' => $request['barcode'],
 
                 'location' => $locationid,
+                
+                'faq' => $insertquestion,
 
                 'product_new'  => json_encode($product_new_arrray),
 

@@ -100,6 +100,28 @@
 
                 </div>
 
+                <div class="card">
+                    <div class="col-md-2">
+                        <div class="form-group change">
+                            <label for="">&nbsp;</label><br/>
+                            <a class="btn btn-success add-more">+ Add More</a>
+                        </div>
+                    </div>
+                    <div id="tab_logic" class="after-add-more">
+                        <div class="row">
+                            <label>Question</label>
+                            <input type="text" name="product_array[1][question]">
+                        </div>
+                        <div wire:ignore class="form-group row">
+                            <label>Answer</label>
+                            <div class="col-md-9">
+                                <textarea name="product_array[1][answer]" class="form-control"  id="descripation"></textarea>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more-feilds"></div>
+                </div>
               
 
                 <div class="card product-media-card">
@@ -1089,6 +1111,30 @@
 
 
 <!--script start-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $(".add-more").click(function(){ 
+        x = Math.random().toString(36).substr(2, 9);
+        var html = $("#tab_logic").html();
+        $(".more-feilds").append(`<div class="row">
+        <label>Question</label>
+        <input type="text" name="product_array[${x}][question]" value="">
+    </div>
+    <div wire:ignore class="form-group row">
+        <label>Answer</label>
+        <div class="col-md-9">
+            <textarea name="product_array[${x}][answer]" class="form-control required" id="descripation"></textarea>
+          
+        </div>
+    </div>`);        
+    });
+
+    $("body").on("click",".remove",function(){ 
+        $(this).parents("#tab_logic").remove();
+    });
+});
+</script>
 <script>
     $('.sales-channel-btn').on('click', function() {
         $('.sales-channels-apps').toggleClass('channels-dropdown-open');

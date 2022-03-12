@@ -91,6 +91,33 @@
                     </div>
 
                 </div>
+                <div class="card">
+                    <div class="col-md-2">
+                        <div class="form-group change">
+                            <label for="">&nbsp;</label><br/>
+                            <a class="btn btn-success add-more">+ Add More</a>
+                        </div>
+                    </div>
+                    
+                    @foreach($product_array as $key => $row)
+                   
+                    <div id="tab_logic" class="after-add-more">
+                        <div class="row">
+                            <label>Question</label>
+                            <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
+                        </div>
+                        <div wire:ignore class="form-group row">
+                            <label>Answer</label>
+                            <div class="col-md-9">
+                                <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"></textarea>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="more-feilds"></div>
+                </div>
+            
 
                
 
@@ -2530,6 +2557,31 @@
 </section>
 
 
+<!-- Add More FAQ"S -->
+<script type="text/javascript">
+    $(document).ready(function() {
+    $(".add-more").click(function(){ 
+        x = Math.random().toString(36).substr(2, 9);
+        var html = $("#tab_logic").html();
+        $(".more-feilds").append(`<div class="row">
+        <label>Question</label>
+        <input type="text" name="product_array[${x}][question]" value="">
+    </div>
+    <div wire:ignore class="form-group row">
+        <label>Answer</label>
+        <div class="col-md-9">
+            <textarea  name="product_array[${x}][answer] class="form-control required" id="descripation"></textarea>
+          
+        </div>
+    </div>`);        
+    });
+
+    $("body").on("click",".remove",function(){ 
+        $(this).parents("#tab_logic").remove();
+    });
+});
+</script>
+<!-- END -->
 <script>
     $(document).ready(function() {
          // $('.save-button').prop('disabled', true);
@@ -3696,6 +3748,8 @@ $(document).on("click", '.image-checkbox', function() {
 });
 
 </script>
+
+
 
 
 
