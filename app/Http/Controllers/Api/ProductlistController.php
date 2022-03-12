@@ -114,7 +114,8 @@ class ProductlistController extends Controller
     { 
         if (Product::where('id', $id)->exists())
         {
-            $varianttag = VariantTag::all()->groupBy('id')->toArray();
+           // $varianttag = VariantTag::all()->groupBy('id')->toArray();
+           
             $product = Product::with('productmediaget')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
@@ -167,6 +168,7 @@ class ProductlistController extends Controller
                                                 
                 foreach ($val['variants'] as $key => $result)
                 {
+                    
                     $insert_stock['variant_id'] = $result['id'];
                     $insert_stock['image'] = $image_path . $result['photo'];
                     $insert_stock['price'] = $result['price'];
@@ -198,9 +200,15 @@ class ProductlistController extends Controller
                 }
 
                foreach($val->variants->unique('attribute1') as $sizekey1 => $row1){
-                   
+                    $variant_tag=VariantTag::where('id',$val->variants[0]['varient1'])->first();
+                    if($variant_tag){
+                        $tag_name=$variant_tag->name;
+                    }else{
+                        $tag_name='';
+                    }
                     if($row1->attribute1 != ""){
                         $colorvarient['variantnumber'] = $val->variants[0]['varient1'];
+                        $colorvarient['variant_tag'] = $tag_name;
                         $color[] = $row1->attribute1; 
                          
                                            
@@ -215,10 +223,16 @@ class ProductlistController extends Controller
 
 
                 foreach($val->variants->unique('attribute2') as $sizekey2 => $row2){
-                   
+                    $variant_tag=VariantTag::where('id',$val->variants[0]['varient2'])->first();
+                    if($variant_tag){
+                        $tag_name=$variant_tag->name;
+                    }else{
+                        $tag_name='';
+                    }
                     if($row2->attribute2 != ""){
                         $othercolorvarient['variantnumber'] = $val->variants[0]['varient2'];
-                        $othercolor[$sizekey2] = $row2->attribute2;                     
+                        $othercolorvarient['variant_tag'] = $tag_name;
+                        $othercolor[] = $row2->attribute2;                     
                     }else{
                         $othercolorvarient[] = '';
                         $othercolor[] = '';
@@ -229,10 +243,16 @@ class ProductlistController extends Controller
                 $other_color_arry[] = $othercolorvarient; 
 
                 foreach($val->variants->unique('attribute3') as $sizekey => $row3){
-                   
+                    $variant_tag=VariantTag::where('id',$val->variants[0]['varient3'])->first();
+                    if($variant_tag){
+                        $tag_name=$variant_tag->name;
+                    }else{
+                        $tag_name='';
+                    }
                     if($row3->attribute3 != ""){
                         $sizevarient['variantnumber'] = $val->variants[0]['varient3'];
-                        $size[$sizekey] = $row3->attribute3;                      
+                        $sizevarient['variant_tag'] = $tag_name;
+                        $size[] = $row3->attribute3;                      
                     }else{
                          $sizevarient[] = '';
                          $size[] = '';
@@ -243,10 +263,16 @@ class ProductlistController extends Controller
                 $size_arry[] = $sizevarient; 
 
                 foreach($val->variants->unique('attribute4') as $sizekey4 => $row4){
-                   
+                    $variant_tag=VariantTag::where('id',$val->variants[0]['varient2'])->first();
+                    if($variant_tag){
+                        $tag_name=$variant_tag->name;
+                    }else{
+                        $tag_name='';
+                    }
                     if($row4->attribute4 != ""){
                         $tasselsverient['variantnumber'] = $val->variants[0]['varient2'];
-                        $tassels[$sizekey4] = $row4->attribute4;                    
+                        $tasselsverient['variant_tag'] = $tag_name;
+                        $tassels[] = $row4->attribute4;                    
                     }else{
                         $tassels[] = '';
                         $tasselsverient[] = '';
@@ -254,9 +280,9 @@ class ProductlistController extends Controller
                 }
                 $tassels_arry[] = $tassels; 
                 $tassels_arry[] = $tasselsverient; 
-
+               
                 // $data_result = json_encode($data_result);
-                 return response(['data' => $data_result, 'attribute1' => $color_arry,'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry, 'varianttag' => $varianttag], 200);
+                 return response(['data' => $data_result, 'attribute1' => $color_arry,'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry], 200);
             }
         }
         else
@@ -378,15 +404,14 @@ class ProductlistController extends Controller
             return response()->json(["message" => "Product not found"], 404);
         }
     }
+    
     public function fetchPrice(Request $request){
-
+    
         $productvariants = ProductVariant::Where('product_id',$request->product_id)->get();
         $productimage = ProductMedia::Where('product_id',$request->product_id)->first();
         $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+      
         if(!empty($productvariants) && count($productvariants) > 0) {
-           
-        
-
             foreach ($productvariants as $variant) {
                 if(($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3)) {
                     $productvariant = $variant;
