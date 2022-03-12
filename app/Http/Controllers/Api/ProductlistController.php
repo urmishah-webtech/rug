@@ -201,7 +201,7 @@ class ProductlistController extends Controller
                    
                     if($row1->attribute1 != ""){
                         $colorvarient['variantnumber'] = $val->variants[0]['varient1'];
-                        $color[$sizekey1] = $row1->attribute1; 
+                        $color[] = $row1->attribute1; 
                          
                                            
                     }else{
@@ -254,6 +254,7 @@ class ProductlistController extends Controller
                 }
                 $tassels_arry[] = $tassels; 
                 $tassels_arry[] = $tasselsverient; 
+
                 // $data_result = json_encode($data_result);
                  return response(['data' => $data_result, 'attribute1' => $color_arry,'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry, 'varianttag' => $varianttag], 200);
             }
