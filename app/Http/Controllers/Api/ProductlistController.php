@@ -472,7 +472,7 @@ class ProductlistController extends Controller
             $image = $Productvariant->photo;
         }else{
             if(!isset($productimage->image)){
-                $image = url('/').'/image/defult-image.png';
+                $image = '/image/defult-image.png';
                 }
                 else{
                     $image =$productimage->image;
