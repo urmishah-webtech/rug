@@ -471,7 +471,13 @@ class ProductlistController extends Controller
         if(!empty($Productvariant->photo)){
             $image = $Productvariant->photo;
         }else{
-            $image = $productimage->image;
+            if(isset($productimage->image)){
+                $image = url('/').'/image/defult-image.png';
+                }
+                else{
+                    $image =$productimage->image;
+                }
+         
         }
 
         $price = number_format($Productvariant->price,2,'.',',');
