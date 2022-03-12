@@ -97,10 +97,16 @@ class ProductlistController extends Controller
                 $product_arra['title'] = $val['title'];
                 $product_arra['collection'] = json_decode($val['collection']);
                 $product_arra['description'] = $val['descripation'];
+                if(isset($val['productmediaget'][$key])){
                 $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
+                }
+                else{
+                    $product_arra['image']=url('/').'/image/defult-image.png';
+                }
                 $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
 
             }
+           
             // $data_result = json_encode($data_result);
             return response($product_arra, 200);
         }
