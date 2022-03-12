@@ -39,7 +39,7 @@ class Detail extends Component
     use WithFileUploads;
 
 
-    public $product,$variantag,$tagsale,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath, $productCollection = [];
+    public $product,$variantag,$tagsale,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath,$product_array, $productCollection = [];
 
     public $image = [], $selectedlocation = [], $stock = [], $locationarray;
 
@@ -101,6 +101,7 @@ class Detail extends Component
         $this->uuid = $id;
         $this->editQuantitiesDetailsModal = false;
         $this->product = Product::where('uuid',$this->uuid)->first();
+        $this->product_array = (array) json_decode($this->product['faq']);
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
         $this->tagsale = tagsale::get();
@@ -183,6 +184,8 @@ class Detail extends Component
         'Productvariant.*.stock' => '',
         'variantStock.*.stock' => '',
         'Productvariant.*.photo' => [],
+        'product_array.*.question' => '',
+        'product_array.*.answer' => '',
         'att_price' => [],
 
     ];
@@ -476,6 +479,20 @@ class Detail extends Component
 
     	date_default_timezone_set('Asia/Kolkata');
 
+
+/*
+        $this->product_array = json_decode($this->product['faq']);
+        
+        foreach ($this->product_array as $key => $value) {
+            $insert = array(                        
+                'question' => $this->product_array[$key]['question'],
+                'answer'   => $this->product_array[$key]['answer']
+            );
+         }
+
+           $insert_data[] = $insert; */
+
+
         if ($this->product['trackqtn'] == 'false') {
 
             $trackqtn = 'true';
@@ -512,6 +529,8 @@ class Detail extends Component
                     'product_type'     => $this->product['product_type'],
 
                     'vender'           => $this->product['vender'],
+                    
+                    'faq'              => json_encode($insert_data),
                     
                     'status'           => $this->product['status'],
                     
@@ -571,36 +590,6 @@ class Detail extends Component
            
         } 
 
-        if ($this->image) {
-            foreach ($this->image as $photo) {
-                
-                // $file_extension = $photo->extension();
-                $path_url = $photo->storePublicly('media','public');
-    
-               $mediaimg = ProductMedia::create([
-                    'product_id' => $this->product['id'],
-                    'image' => $path_url,
-                ]);
-            }
-
-            if($mediaimg){
-
-                $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
-            }
-        }
-
-         $position    = $request->question;
-        $code_tool   = $request->answer;
-
-        for($count = 0; $count < count($this->question); $count++)
-        {
-            $insert = array(                        
-                'question' => $this->question[$count],
-                'answer'     => $this->answer[$count]
-            );
-            $insert_data[] = $insert; 
-
-        }
         if ($this->image) {
             foreach ($this->image as $photo) {
                 

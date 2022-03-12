@@ -145,10 +145,9 @@ class PaymentController extends Controller
                 }
             }
 
-            if($paymentdetail){
 
-                Cart::where('user_id',$user_detail['id'])->delete();
-            }
+                Cart::where('user_id',$user_detail['id'])->delete(); 
+            
         }
         return $this->sendJson(['status' => 0, 'message' => $payment]);
 
