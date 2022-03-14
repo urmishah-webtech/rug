@@ -386,14 +386,15 @@ class CartController extends Controller
 
     
         if (preg_match("/^\d+$/", $id)) {
+
           $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)->get();
           
         } else {
            $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
         }
-          
+       
         $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
-        if (count($CartItem) != 0)
+        if ($CartItem)
         {
         	
             $finalamount = 0;
