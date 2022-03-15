@@ -43,7 +43,8 @@ class PaymentController extends Controller
             ->payments
             ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rug_frontend/thankyou"
         ]);
-    $pay->payment_id = $payment->id;
+        $pay = new Payment();
+        $pay->payment_id = $payment->id;
         $pay->amount = $request->amount;
         $pay->payment_link = $payment
             ->_links
