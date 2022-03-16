@@ -282,6 +282,7 @@ class VariantDetail extends Component
 
             );
 
+            
                  return redirect(route('variant-detail', $flag));
 
         
