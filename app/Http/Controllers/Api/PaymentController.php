@@ -32,30 +32,11 @@ class PaymentController extends Controller
     public function payment(Request $request)
     {
         $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
-
-        if ($validator->fails())
-        {
-            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
-        }
-        $mollie = new \Mollie\Api\MollieApiClient();
-        $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
-        $payment = $mollie
-            ->payments
-            ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rug_frontend/thankyou"
-        ]);
-        $pay = new Payment();
-        $pay->payment_id = $payment->id;
-        $pay->amount = $request->amount;
-        $pay->payment_link = $payment
-            ->_links
-            ->checkout->href;
-        $pay->save();
+        $pay = 1;
         if($pay){
             $user_detail = User::where('id', $request['user_id'])->first();
 
             $Cart = Cart::where('user_id',$user_detail['id'])->get();
-
-            $pay = 1;
 
             if ($pay == 1)
             {
@@ -123,7 +104,7 @@ class PaymentController extends Controller
 
             $Orderitemvalue =  order_item::insert($insert_order_item);
 
-            foreach($Cart as $res) { 
+            /*foreach($Cart as $res) { 
 
                 if($res->varientid != ""){
 
@@ -147,9 +128,29 @@ class PaymentController extends Controller
             }
 
 
-                Cart::where('user_id',$user_detail['id'])->delete(); 
+                Cart::where('user_id',$user_detail['id'])->delete(); */
             
         }
+
+        if ($validator->fails())
+        {
+            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
+        }
+        $mollie = new \Mollie\Api\MollieApiClient();
+        $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
+        $payment = $mollie
+            ->payments
+            ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rug_frontend/thankyou"
+        ]);
+        $pay = new Payment();
+        $pay->payment_id = $payment->id;
+        $pay->order_id = $lastorderid['id'];
+        $pay->amount = $request->amount;
+        $pay->payment_link = $payment
+            ->_links
+            ->checkout->href;
+        $pay->save();
+        
         return $this->sendJson(['status' => 0, 'message' => $payment]);
 
     }
@@ -303,72 +304,14 @@ class PaymentController extends Controller
         if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks())
         {
             $pay->status = 1;
-
-            if ($pay->status == 1)
-            {
-                $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
-                $Order_insert = orders::insert($order_arr = [
-
-                'user_id' => $user_detail['id'],
-
-                'transactionid' => $pay['payment_id'],
-
-                'email' => $user_detail['email'],
-
-                'netamout' => $pay->amount,
-
-                'paymentstatus' => 'pending',
-
-                'first_name' => $shipping['first_name'],
-
-                'last_name' => $shipping['last_name'],
-
-                'address' => $shipping['address'],
-
-                'state' => $shipping['state'], 
-
-                'city' => $shipping['city'], 
-
-                'country' => $shipping['country'], 
-
-                'pincode' => $shipping['postal_code'], 
-
-                'mobile' => $shipping['mobile_no'],
-
-                ]);
-            }
-
-            if($Order_insert){
-                // Insert Record Order Item
-                $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
-
-                $insert_order_item =[];
-                foreach($Cart as $res) {         
-                    if($res) {
-                        $totalamout = ($res->price * $res->stock);
-                        $order_item_arr = [
-
-                            'order_id' => $lastorderid['id'],
-                            
-                            'user_id' => $res->user_id,
-
-                            'product_id' => $res->product_id,
-
-                            'varition_id' => $res->varientid,
-                            
-                            'price' => $res->price,
-                            
-                            'stock' => $res->stock,
-                            
-                            'total' => $pay->amount,
-
-                        ];
-                        $insert_order_item[] = $order_item_arr;
-                    }               
-                }
-            }
-
-            $Orderitemvalue =  order_item::insert($insert_order_item);
+            /*
+             * The payment is paid and isn't refunded or charged back.
+             * At this point you'd probably want to start the process of delivering the product to the customer.
+            */
+        }
+        elseif ($payment->isOpen())
+        {
+            $pay->status = 2;
 
             foreach($Cart as $res) { 
 
@@ -397,14 +340,6 @@ class PaymentController extends Controller
 
                 Cart::where('user_id',$user_detail['id'])->delete();
             }
-            /*
-             * The payment is paid and isn't refunded or charged back.
-             * At this point you'd probably want to start the process of delivering the product to the customer.
-            */
-        }
-        elseif ($payment->isOpen())
-        {
-            $pay->status = 2;
             /*
              * The payment is open.
             */
