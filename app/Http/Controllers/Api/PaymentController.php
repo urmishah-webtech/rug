@@ -169,10 +169,9 @@ class PaymentController extends Controller
                 }
             }
 
-            if($paymentdetail){
 
                 Cart::where('user_id',$user_detail['id'])->delete();
-            }
+            
 
             return $this->sendJson(['status' => 0, 'message' => 'cash on delivery place successed']);
         }   
@@ -261,10 +260,9 @@ class PaymentController extends Controller
                 }
             }
 
-            if($paymentdetail){
 
                 Cart::where('user_id',$user_detail['id'])->delete();
-            }
+            
             /*
              * The payment is open.
             */

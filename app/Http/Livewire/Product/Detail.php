@@ -530,7 +530,7 @@ class Detail extends Component
 
                     'vender'           => $this->product['vender'],
                     
-                    'faq'              => json_encode($insert_data),
+               //     'faq'              => json_encode($insert_data),
                     
                     'status'           => $this->product['status'],
                     

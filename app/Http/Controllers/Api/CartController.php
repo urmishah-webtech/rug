@@ -179,7 +179,7 @@ class CartController extends Controller
 
             $product = Product::with('variants')->where('id', $request->product_id)
                 ->first();
-
+            
             if ($product->compare_selling_price)
             {
                 $price = $product['compare_selling_price'];
