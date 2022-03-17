@@ -225,6 +225,8 @@ class PaymentController extends Controller
         // Log::info('payment '.$payment);
         if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks())
         {
+
+            dd('11');
             $pay->status = 1;
             /*
              * The payment is paid and isn't refunded or charged back.
@@ -233,7 +235,9 @@ class PaymentController extends Controller
         }
         elseif ($payment->isOpen())
         {
+             dd('22');
             $pay->status = 2;
+
 
             foreach($Cart as $res) { 
 
@@ -271,6 +275,8 @@ class PaymentController extends Controller
         }
         elseif ($payment->isPending())
         {
+
+             dd('33');
             $pay->status = 3;
             /*
              * The payment is pending.
@@ -278,6 +284,7 @@ class PaymentController extends Controller
         }
         elseif ($payment->isFailed())
         {
+             dd('44');
             $pay->status = 4;
             /*
              * The payment has failed.
@@ -285,13 +292,15 @@ class PaymentController extends Controller
         }
         elseif ($payment->isExpired())
         {
+             dd('55');
             $pay->status = 5;
             /*
              * The payment is expired.
             */
         }
-        elseif ($payment->isCanceled())
+        elseif ($payment->isCanceled()) 
         {
+             dd('66');
             $pay->status = 6;
             /*
              * The payment has been canceled.
@@ -299,6 +308,8 @@ class PaymentController extends Controller
         }
         elseif ($payment->hasRefunds())
         {
+
+             dd('77');
             $pay->status = 7;
             /*
              * The payment has been (partially) refunded.
