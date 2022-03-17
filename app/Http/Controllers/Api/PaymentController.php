@@ -297,7 +297,7 @@ class PaymentController extends Controller
             /*
              * The payment is expired.
             */
-        }
+        } 
         elseif ($payment->isCanceled()) 
         {
              dd('66');
