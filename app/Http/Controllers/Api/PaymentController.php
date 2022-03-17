@@ -49,7 +49,7 @@ class PaymentController extends Controller
 
             'user_id' => $user_detail['id'],
 
-            'transactionid' => 'vcevevnerv',
+            'transactionid' => '',
 
             'email' => $user_detail['email'],
 
@@ -124,7 +124,8 @@ class PaymentController extends Controller
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
-            $pay->payment_link = $payment
+            $pay->payment_link = $payment;
+            $pay->status = $payment->status;
                 ->_links
                 ->checkout->href;
             $pay->save();
@@ -142,6 +143,7 @@ class PaymentController extends Controller
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
+            $pay->status = $payment->status;
             $pay->payment_link = '';
             $pay->save();
 
