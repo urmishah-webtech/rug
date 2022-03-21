@@ -236,7 +236,7 @@ class Detail extends Component
         foreach ($this->removeimage as $key => $result) {
 
             $unlinkimg = ProductMedia::where('id',$result)->first();
-
+            
             $deleteimg = "";
             if(storage_path("app/public/{$unlinkimg->image}")) {
             $image_path = storage_path("app/public/{$unlinkimg->image}");

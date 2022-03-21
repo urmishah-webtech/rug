@@ -150,7 +150,7 @@
 
                     <div class="card-middle">
 
-                        <div class="uplod-main-demo">
+                        <div class="uplod-main-demo" wire:ignore>
 
                             <input type="file" id="images" wire:model.debounce.lazy="image" multiple name="image" multiple="multiple"/>
 
