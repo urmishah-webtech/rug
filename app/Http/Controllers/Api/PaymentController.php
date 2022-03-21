@@ -116,7 +116,8 @@ class PaymentController extends Controller
             $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
             $payment = $mollie
                 ->payments
-                ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rug_frontend/thankyou"
+                ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rugs/thank-you/",
+                    "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
             ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
@@ -215,26 +216,19 @@ class PaymentController extends Controller
         $payment = $mollie
             ->payments
             ->get($request->id);
+
         $pay = Payment::where('payment_id', $request->id)
             ->first();
 
-        $user_detail = User::where('id', $pay['user_id'])->first();
+        $user_detail = User::where('id', $pay->user_id)->first();
 
-        $Cart = Cart::where('user_id',$user_detail['id'])->get();
+        $Cart = Cart::where('user_id',$user_detail->id)->get();
         //$orderId = $payment->metadata->order_id;
-        // Log::info('payment '.$payment);
+        
         if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks())
         {
             $pay->status = 1;
-            /*
-             * The payment is paid and isn't refunded or charged back.
-             * At this point you'd probably want to start the process of delivering the product to the customer.
-            */
-        }
-        elseif ($payment->isOpen())
-        {
-            $pay->status = 2;
-
+             if(!empty($Cart)){
             foreach($Cart as $res) { 
 
                 if($res->varientid != ""){
@@ -263,10 +257,22 @@ class PaymentController extends Controller
             }
 
 
-                Cart::where('user_id',$user_detail['id'])->delete();
-            
+               $data= Cart::where('user_id',$user_detail->id)->delete();
+             
+
+            }
             /*
-             * The payment is open.
+            /*
+             * The payment is paid and isn't refunded or charged back.
+             * At this point you'd probably want to start the process of delivering the product to the customer.
+            */
+        }
+        elseif ($payment->isOpen())
+        {
+            $pay->status = 2;
+
+           
+             /* The payment is open.
             */
         }
         elseif ($payment->isPending())
