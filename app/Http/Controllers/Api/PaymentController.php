@@ -116,7 +116,7 @@ class PaymentController extends Controller
             $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
             $payment = $mollie
                 ->payments
-                ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rugs/thank-you/",
+                ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://rug.webtech-evolution.com/thankyou/",
                     "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
             ]);
             $pay = new Payment();

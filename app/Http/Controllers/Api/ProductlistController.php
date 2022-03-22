@@ -63,7 +63,7 @@ class ProductlistController extends Controller
         if (Product::where('id', $id)->exists())
         {
             $product = Product::with('productmediaget')->with('favoriteget')
-                ->with('variants')
+                ->with('variants')->with('productDetail')
                 ->where('id', $id)->get();
 
             $product_arra = array();
@@ -106,8 +106,11 @@ class ProductlistController extends Controller
                     $product_arra['image'] = url('/') . '/image/defult-image.png';
                 }
                 $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
+                $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
+
 
             }
+
 
             // $data_result = json_encode($data_result);
             return response($product_arra, 200);
@@ -363,7 +366,7 @@ class ProductlistController extends Controller
                         if (is_array($decodeB) && !empty($decodeB))
                         {
 
-                            if (in_array($decoderes, $decodeB) && $productget{'id'} != $value['id'])
+                            if (in_array($decoderes, $decodeB) && $productget['id'] != $value['id'])
                             {
 
                                 if (!empty($value['variants'][$key]['price']))
