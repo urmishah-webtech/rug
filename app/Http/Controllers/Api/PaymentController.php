@@ -196,11 +196,12 @@ class PaymentController extends Controller
                 $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
                 $Totalamount = ($result->stock * $result->price);
                 $finalamount += $Totalamount;
+                
             }
 
 
 
-            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item]);
+            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
         }else
         {
              return $this->sendJson(['error' => 'Not avalible Order']);
