@@ -129,6 +129,7 @@ class Collectionsdetail extends Component
         'collection.condition_match' => [],
         'collection.online_store' => [],
         'collection.point_of_sale' => [],
+        'collection.featured' => [],
         //'productpaginator.*' => '',
 
     ];
@@ -243,7 +244,9 @@ class Collectionsdetail extends Component
 
                     'seo_url'          => $this->collection['seo_url'],
 
-                    'status'           => $this->collection['status']
+                    'status'           => $this->collection['status'],
+
+                    'featured'            => $this->collection['featured'],
 
                 ]
 
