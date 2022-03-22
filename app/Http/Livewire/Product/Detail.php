@@ -234,10 +234,10 @@ class Detail extends Component
        
 
         foreach ($this->removeimage as $key => $result) {
-
+        //   dd($this->removeimage);
             $unlinkimg = ProductMedia::where('id',$result)->first();
-            
             $deleteimg = "";
+
             if(storage_path("app/public/{$unlinkimg->image}")) {
             $image_path = storage_path("app/public/{$unlinkimg->image}");
             $deleteimg = unlink($image_path);
@@ -246,10 +246,10 @@ class Detail extends Component
             if($unlinkimg){
                 $unlinkimg = ProductMedia::where('id',$result)->delete();
             }
-
         }
-
+         return redirect()->back();
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
+        
         session()->flash('message', 'Deleted Record Successfully.');
         
     }
@@ -347,14 +347,11 @@ class Detail extends Component
                         'photo' => $getimg->image
                     ]);
             }
-
-            if($variantimgsave){
-            $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
-            $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
-            session()->flash('message', 'Image Updated Successfully.');
-            }
         }
-
+        
+        $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
+        $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
+         session()->flash('message', 'Image Updated Successfully.');
 
     }
 

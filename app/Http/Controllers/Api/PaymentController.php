@@ -14,6 +14,8 @@ use App\Models\ProductVariant;
 use App\Models\Orders;
 use App\Models\User;
 use App\Models\Cart;
+use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -116,7 +118,7 @@ class PaymentController extends Controller
             $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
             $payment = $mollie
                 ->payments
-                ->create(["amount" => ["currency" => "USD", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rugs/thank-you/",
+                ->create(["amount" => ["currency" => "EUR", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rugs/thank-you/",
                     "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
             ]);
             $pay = new Payment();
@@ -126,7 +128,7 @@ class PaymentController extends Controller
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
             $pay->payment_link = $payment;
-            $pay->status = $payment->status;
+            $pay->status = $payment->status
                 ->_links
                 ->checkout->href;
             $pay->save();
@@ -183,6 +185,7 @@ class PaymentController extends Controller
     public function get_thankyou($userid){
 
         $ordercheck = Orders::where('user_id',$userid)->count();
+        $user_detail = User::where('id', $userid)->first();
         if($ordercheck != 0){
             $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
             
@@ -201,7 +204,12 @@ class PaymentController extends Controller
             }
 
 
-
+                $data = ['name'=>'vishal', 'data'=>'hello vishal'];
+                $user['to'] = 'prajapativishal999991@gmail.com';
+             Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
+                    $message->to($user['to']);
+                    $message->subject('New email!!!');
+                });
             return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item]);
         }else
         {
@@ -257,8 +265,7 @@ class PaymentController extends Controller
             }
 
 
-               $data= Cart::where('user_id',$user_detail->id)->delete();
-             
+               $data= Cart::where('user_id',$user_detail->id)->delete();             
 
             }
             /*

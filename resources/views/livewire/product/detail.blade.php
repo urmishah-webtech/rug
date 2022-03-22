@@ -122,7 +122,7 @@
                
 
 
-                <div class="card product-media-card">
+                <div class="card product-media-card"  wire:ignore>
 
                     <div class="card-header upload-media-header">
 
@@ -144,13 +144,13 @@
 
                         <label class="all-select-media"><input type="checkbox" name="option2a" id="select-all"><span class="count-image"></span> Media </label>
 
-                        <a wire:ignore wire:click.prevent="deleteimage()" class="link warning delete-media">Delete media</a>
+                        <a wire:click.prevent="deleteimage()" class="link warning delete-media">Delete media</a>
 
                     </div>
 
                     <div class="card-middle">
 
-                        <div class="uplod-main-demo" wire:ignore>
+                        <div class="uplod-main-demo">
 
                             <input type="file" id="images" wire:model.debounce.lazy="image" multiple name="image" multiple="multiple"/>
 
@@ -344,7 +344,7 @@
 
                         <div class="table-loader">
 
-                            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel">
+                            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant">
 
                                 <div class="page-loading"></div>
 

@@ -18,22 +18,25 @@
 			<tbody>
 				<tr>
 					<td>
-						<img src="{{ URL::asset('mail-img/thumbs-up.png') }}" style="width: 7em; height: 7em; ">
+						<img src="{{ URL::asset('/assets/logo-blue-small._CB485919770_.svg')}}" style="width: 7em; height: 7em; ">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<h1 style=" margin: 0.1em 0 0.2em; font-size: 2.34em; font-weight: 900; line-height: 46px; color: #035d59;">Welcome to Zappos!</h1>
+						<h1 style=" margin: 0.1em 0 0.2em; font-size: 2.34em; font-weight: 900; line-height: 46px; color: #035d59;">Welcome to Rug!</h1>
 					</td>
 				</tr>
 				<tr>
+					@foreach($order_item as $row)
 					<td>
-						<p>{{$MailMessage->discripation}}</p>
+						<img src="{{ $row['image'] }}" width="50px" width="50px" />
+						<p>Product name : {{$row['title']}}</p>
+						<p>price : {{$row['price']}}</p>
+						<p>stock : {{$row['stock']}}</p>
 					</td>
-				</tr>
-				<tr>
+					@endforeach
 					<td>
-						<a href="{{ route('home') }}"><button style=" background-color: #035d59; border: none; color: #fff; padding: 15px 25px; display: inline-block; font-size: 1.02em; font-weight: 500; border-radius: 8px; margin-top: 1em; line-height: 22px;cursor: pointer; letter-spacing: 0.02em; text-transform: uppercase;">Login</button></a>
+						<p>Net Amount : {{$orders->netamout}}</p>
 					</td>
 				</tr>
 				<tr>
