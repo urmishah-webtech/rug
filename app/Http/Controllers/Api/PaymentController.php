@@ -128,10 +128,9 @@ class PaymentController extends Controller
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
-            $pay->payment_link = $payment;
-            $pay->status = $payment->status
-                ->_links
-                ->checkout->href;
+            $pay->payment_link = $payment->_links->checkout->href;
+            $pay->status = $payment->status;
+               
             $pay->save();
 
             return $this->sendJson(['status' => 0, 'message' => $payment]);
