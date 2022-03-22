@@ -118,7 +118,8 @@ class PaymentController extends Controller
             $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
             $payment = $mollie
                 ->payments
-                ->create(["amount" => ["currency" => "EUR", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://projects.webtech-evolution.com/rugs/thank-you/",
+
+                ->create(["amount" => ["currency" => "EUR", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://rug.webtech-evolution.com/thankyou/",
                     "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
             ]);
             $pay = new Payment();
@@ -201,7 +202,9 @@ class PaymentController extends Controller
                 $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
                 $Totalamount = ($result->stock * $result->price);
                 $finalamount += $Totalamount;
+                
             }
+
 
 
                 $data = ['name'=>'vishal', 'data'=>'hello vishal'];
@@ -210,7 +213,9 @@ class PaymentController extends Controller
                     $message->to($user['to']);
                     $message->subject('New email!!!');
                 });
-            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item]);
+         
+            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
+
         }else
         {
              return $this->sendJson(['error' => 'Not avalible Order']);

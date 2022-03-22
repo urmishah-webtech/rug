@@ -176,6 +176,7 @@ class Detail extends Component
         'product.product_new' => '',
         'product.trackqtn' => '',
         'product.outofstock' => '',
+        'product.featured' => '',
         'Productvariant.*.price' => 'required',
         'Productvariant.*.selling_price' => '',
         'Productvariant.*.sku' => '',
@@ -568,6 +569,8 @@ class Detail extends Component
                     'compare_selling_price' => $this->product['compare_selling_price'],       
                     
                     'updated_at' => now(),
+
+                    'featured'            => $this->product['featured'],
 
                 ]
 

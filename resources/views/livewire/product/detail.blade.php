@@ -1148,6 +1148,21 @@
 
                 </div> -->
 
+                <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
+
+                    <div class="card-header">
+
+                        <div class="header-title">
+
+                            <h4 class="fs-16 mb-0 fw-6">Featured</h4>
+
+                        </div>
+
+                        <label><input type="checkbox" name="featured" wire:model="collection.featured" wire:ignore class="click-varients-type">Assign this product as Featured</label>
+
+                    </div>
+                </div>
+
                 <div class="card search-engine-listing-card">
 
                     <div class="card-header">
