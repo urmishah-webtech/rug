@@ -107,49 +107,49 @@ class PagesDetail extends Component
         if ($this->image3) {
             $path_url3 = $this->image3->storePublicly('media','public');
         }else{
-            $path_url3 = $this->page['image'];
+            $path_url3 = $this->page['image3'];
         }
 
         if ($this->product_image1) {
             $product_image_url1 = $this->product_image1->storePublicly('media','public');
         }else{
-            $product_image_url1 = $this->page['image'];
+            $product_image_url1 = $this->page['product_image1'];
         }
 
         if ($this->product_image2) {
             $product_image_url2 = $this->product_image2->storePublicly('media','public');
         }else{
-            $product_image_url2 = $this->page['image'];
+            $product_image_url2 = $this->page['product_image2'];
         }
 
         if ($this->product_image3) {
             $product_image_url3 = $this->product_image3->storePublicly('media','public');
         }else{
-            $product_image_url3 = $this->page['image'];
+            $product_image_url3 = $this->page['product_image3'];
         }
 
         if ($this->product_image4) {
             $product_image_url4 = $this->product_image4->storePublicly('media','public');
         }else{
-            $product_image_url4 = $this->page['image'];
+            $product_image_url4 = $this->page['product_image4'];
         }
 
         if ($this->product_image5) {
             $product_image_url5 = $this->product_image5->storePublicly('media','public');
         }else{
-            $product_image_url5 = $this->page['image'];
+            $product_image_url5 = $this->page['product_image5'];
         }
 
          if ($this->flat_image1) {
             $flat_image_url1 = $this->flat_image1->storePublicly('media','public');
         }else{
-            $flat_image_url1 = $this->page['image'];
+            $flat_image_url1 = $this->page['flat_image1'];
         }
 
          if ($this->flat_image2) {
             $flat_image_url2 = $this->flat_image2->storePublicly('media','public');
         }else{
-            $flat_image_url2 = $this->page['image'];
+            $flat_image_url2 = $this->page['flat_image2'];
         }
 
         page::where('id', $this->page['id'])->update(

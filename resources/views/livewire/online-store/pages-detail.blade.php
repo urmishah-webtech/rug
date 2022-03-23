@@ -192,7 +192,7 @@
                     </div>
                     <!-- product 2  -->
                     <div class="row">
-                        <label>Product Title 1</label>
+                        <label>Product Title 2</label>
                         <input type="text" name="product_title1" wire:model="page.product_title2">
                     </div>
                     <div class="columns six row field_style1 mb-2">

@@ -32,7 +32,7 @@ class SliderController extends Controller
     public function getHomepage(){
         $homeget =  page::where('id',10)->first();
         $data=array();
-        $image_path= public_path().'/image/slider/';
+        $image_path= storage_path().'/storage/';
          
             $data['homepagetitle'] = $homeget->title;
            
