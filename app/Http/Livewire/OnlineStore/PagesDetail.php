@@ -103,6 +103,12 @@ class PagesDetail extends Component
             $path_url = $this->page['image'];
         }
 
+        if ($this->image3) {
+            $path_url = $this->image3->storePublicly('media','public');
+        }else{
+            $path_url = $this->page['image'];
+        }
+
         page::where('id', $this->page['id'])->update(
 
                 [

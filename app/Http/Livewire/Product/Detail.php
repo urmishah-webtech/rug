@@ -37,9 +37,10 @@ use Illuminate\Support\Facades\Storage;
 class Detail extends Component
 {
     use WithFileUploads;
+    
+    public $answer, $question;
 
-
-    public $product,$variantag,$tagsale,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath,$product_array, $productCollection = [];
+    public $product,$variantag,$tagsale,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath, $productCollection = [];
 
     public $image = [], $selectedlocation = [], $stock = [], $locationarray;
 
@@ -51,15 +52,17 @@ class Detail extends Component
    
     public $removeimage = [];
    
-    public $question = [];
-   
-    public $answer = [];
+
     
     public $photo_variant, $file;
 
     protected $listeners = ['UpdateVarient'];
 
     public $productDetail, $existDetailCount = 0;
+    public $product_array = [];
+
+    
+    public $i = 1;
 
  
 
@@ -139,6 +142,10 @@ class Detail extends Component
            $this->product['product_new'] =  json_decode($this->product['product_new']);
         }
 
+        if(!empty($this->product_array['faq'])) {
+           $this->product_array['faq'] =  json_decode($this->product_array['faq']);
+        }
+
         $this->getProductDetail();
 
        
@@ -192,6 +199,17 @@ class Detail extends Component
     ];
 
 
+    public function add($i)
+    {
+        $i = $i + 1;
+        $this->i = $i;
+        array_push($this->product_array ,$i);
+    }
+
+    public function remove($i)
+    {
+        unset($this->product_array[$i]);
+    }
 
 
     public function UpdateVarient($flag)
@@ -473,22 +491,16 @@ class Detail extends Component
 
     public function updateDetail()
     {  
-
-
     	date_default_timezone_set('Asia/Kolkata');
 
+       // $this->product_array = json_decode($this->product['faq']);
+              
+        /*foreach ($this->product_array as $key => $value) {
+              $arry['answer'] = $this->product_array[$key]['answer'];                       
+              $arry['question'] =  $this->product_array[$key]['question'];          
+         }*/
 
-/*
-        $this->product_array = json_decode($this->product['faq']);
-        
-        foreach ($this->product_array as $key => $value) {
-            $insert = array(                        
-                'question' => $this->product_array[$key]['question'],
-                'answer'   => $this->product_array[$key]['answer']
-            );
-         }
-
-           $insert_data[] = $insert; */
+     //  $insert_data[] = json_decode($insert); 
 
 
         if ($this->product['trackqtn'] == 'false') {
@@ -528,7 +540,7 @@ class Detail extends Component
 
                     'vender'           => $this->product['vender'],
                     
-               //     'faq'              => json_encode($insert_data),
+                   'faq'              => json_encode($this->product_array),
                     
                     'status'           => $this->product['status'],
                     
