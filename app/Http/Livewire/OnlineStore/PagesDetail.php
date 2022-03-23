@@ -10,7 +10,7 @@ class PagesDetail extends Component
 {
 
     use WithFileUploads;
-    public $page,$content,$image,$image3,$product_image1,$product_image2,$product_image3,$product_image4,$product_image5;
+    public $page,$content,$image,$image3,$product_image1,$product_image2,$product_image3,$product_image4,$product_image5,$flat_image1,$flat_image2;
     public function mount($id) {
         
         $this->uuid = $id;
@@ -37,6 +37,7 @@ class PagesDetail extends Component
      protected $rules = [
 
         'page.title' => 'required',
+        'page.title1' => 'required',
         'page.content' => 'required',
         'page.button_name' => 'required',
         'page.button_url' => '',
@@ -104,9 +105,51 @@ class PagesDetail extends Component
         }
 
         if ($this->image3) {
-            $path_url = $this->image3->storePublicly('media','public');
+            $path_url3 = $this->image3->storePublicly('media','public');
         }else{
-            $path_url = $this->page['image'];
+            $path_url3 = $this->page['image'];
+        }
+
+        if ($this->product_image1) {
+            $product_image_url1 = $this->product_image1->storePublicly('media','public');
+        }else{
+            $product_image_url1 = $this->page['image'];
+        }
+
+        if ($this->product_image2) {
+            $product_image_url2 = $this->product_image2->storePublicly('media','public');
+        }else{
+            $product_image_url2 = $this->page['image'];
+        }
+
+        if ($this->product_image3) {
+            $product_image_url3 = $this->product_image3->storePublicly('media','public');
+        }else{
+            $product_image_url3 = $this->page['image'];
+        }
+
+        if ($this->product_image4) {
+            $product_image_url4 = $this->product_image4->storePublicly('media','public');
+        }else{
+            $product_image_url4 = $this->page['image'];
+        }
+
+        if ($this->product_image5) {
+            $product_image_url5 = $this->product_image5->storePublicly('media','public');
+        }else{
+            $product_image_url5 = $this->page['image'];
+        }
+
+         if ($this->flat_image1) {
+            $flat_image_url1 = $this->flat_image1->storePublicly('media','public');
+        }else{
+            $flat_image_url1 = $this->page['image'];
+        }
+
+         if ($this->flat_image2) {
+            $flat_image_url2 = $this->flat_image2->storePublicly('media','public');
+        }else{
+            $flat_image_url2 = $this->page['image'];
         }
 
         page::where('id', $this->page['id'])->update(
@@ -114,10 +157,30 @@ class PagesDetail extends Component
                 [
 
                     'title'            => $this->page['title'],
+                   
+                    'title1'            => $this->page['title1'],
 
                     'content'          => $this->page['content'],
                     
                     'image'          => $path_url,
+                    
+                    'image3'          => $path_url3,
+                    
+                    'image3'          => $path_url3,
+                    
+                    'product_image1'          => $product_image_url1,
+                    
+                    'product_image2'          => $product_image_url2,
+                    
+                    'product_image3'          => $product_image_url3,
+                    
+                    'product_image4'          => $product_image_url4,
+                    
+                    'product_image5'          => $product_image_url5,
+                   
+                    'flat_image1'          => $flat_image_url1,
+                   
+                    'flat_image2'          => $flat_image_url2,
 
                     'button_name'            => $this->page['button_name'],
 

@@ -45,8 +45,13 @@
               
                 <div class="card">
                     <div class="row">
-                        <label>Title</label>
+                        <label>Main Title</label>
                         <input type="text" name="title" wire:model="page.title">
+                    </div>
+
+                    <div class="row">
+                        <label>Title</label>
+                        <input type="text" name="title" wire:model="page.title1">
                     </div>
                     <div wire:ignore class="form-group row">
                         <label>Content</label>
@@ -131,7 +136,7 @@
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -170,7 +175,7 @@
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }})); display: block;">
                                 </div>
                             </div>
                             @else
@@ -201,7 +206,7 @@
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -232,7 +237,7 @@
                             </div>
                             @if(!empty($page->product_image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -263,7 +268,7 @@
                             </div>
                             @if(!empty($page->product_image4))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image4) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -294,7 +299,7 @@
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -335,7 +340,7 @@
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url(); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -354,7 +359,7 @@
                                 </div>
                                 @if(!empty($page->flat_image2))
                                 <div class="avatar-preview">  
-                                    <div id="logoPreview" style="background-image: url(); display: block;">
+                                    <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
                                     </div>
                                 </div>
                                 @else
