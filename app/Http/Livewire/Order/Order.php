@@ -33,7 +33,7 @@ class Order extends Component
     public function render()
     {
     	
-		$orders = Orders::with('user')->where('transactionid','!=','0' )->get();
+		$orders = Orders::with('user')->get();
         $items = $orders->forPage($this->page, $this->perPage);
         $paginator = new LengthAwarePaginator($items, $orders->count(), $this->perPage, $this->page);
         
