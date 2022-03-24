@@ -281,6 +281,20 @@
                         @endif
                     </tbody>
                 </table>
+                 <div class="pd-pagination-sec">
+                <select wire:model="perPage">
+                    <option value="9999999">All</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+                <div class="pagination">
+
+                 {{$order->links() }}
+
+                </div>
+            </div>
             </div>
         </div>
     </div>
