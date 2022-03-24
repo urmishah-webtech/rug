@@ -25,6 +25,7 @@ Route::get('products/{id}', 'App\Http\Controllers\Api\ProductlistController@getI
 Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
 Route::get('related-product/{id}', 'App\Http\Controllers\Api\ProductlistController@get_related_Products');
 Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetchPrice');
+Route::get('featureproduct', 'App\Http\Controllers\Api\SliderController@FeatureProduct');
 
 Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
 Route::get('homepage', 'App\Http\Controllers\Api\SliderController@getHomepage');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\page;
+use App\Models\Product;
 use DB;
 
 class SliderController extends Controller
@@ -29,10 +30,38 @@ class SliderController extends Controller
     	return response($data,200);
     }
 
+    public function FeatureProduct(){
+        $product = Product::with('productmediaget')->where('featured',1)->get();
+        $data=array();
+        $i=0; 
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
+        foreach ($product as $key => $val)
+        {
+
+            if (isset($val['productmediaget'][$key]))
+            {
+                $data['image'] = $image_path . $val['productmediaget'][$key]['image'];
+            }
+            else
+            {
+                $data['image'] = url('/') . '/image/defult-image.png';
+            }
+
+            $data[$i]['id'] = $val->id;
+            $data[$i]['title'] = $val->title;
+            $data[$i]['description'] = $val->descripation;
+            $data[$i]['price'] = $val->price;
+            $i++;
+
+        }
+
+            return response($data, 200);
+    }
+
     public function getHomepage(){
         $homeget =  page::where('id',10)->first();
         $data=array();
-        $image_path= public_path().'/storage/';
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
             $data['homepagetitle'] = $homeget->title;
            
@@ -98,7 +127,7 @@ class SliderController extends Controller
     public function getStudiopage(){
         $studioget =  page::where('id',11)->first();
         $data=array();
-        $image_path= storage_path().'/storage/';
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
             $data['studiopagetitle'] = $studioget->title;
            
@@ -148,7 +177,7 @@ class SliderController extends Controller
     public function getApartmentpage(){
         $apartmentget =  page::where('id',12)->first();
         $data=array();
-        $image_path= storage_path().'/storage/';
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
             $data['apartmentpagetitle'] = $apartmentget->title;
            
