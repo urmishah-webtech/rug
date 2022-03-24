@@ -172,11 +172,11 @@ class SliderController extends Controller
            
             $data['singlebigimage'] = $image_path.$apartmentget->product_image1;
 
-            $data['marrakechtitle'] = $studioget->title6;
-            $data['marrakechdescripation'] = $studioget->descripation6;
-            $data['marrakechimage'] = $image_path.$studioget->image;
-            $data['marrakechbuttonname'] = $studioget->button_name;
-            $data['marrakechbuttonlink'] = $studioget->button_url;
+            $data['marrakechtitle'] = $apartmentget->title6;
+            $data['marrakechdescripation'] = $apartmentget->descripation6;
+            $data['marrakechimage'] = $image_path.$apartmentget->image;
+            $data['marrakechbuttonname'] = $apartmentget->button_name;
+            $data['marrakechbuttonlink'] = $apartmentget->button_url;
 
           
         return response($data,200);
