@@ -32,7 +32,7 @@ class SliderController extends Controller
     public function getHomepage(){
         $homeget =  page::where('id',10)->first();
         $data=array();
-        $image_path= storage_path().'/storage/';
+        $image_path= public_path().'/storage/';
          
             $data['homepagetitle'] = $homeget->title;
            
@@ -134,7 +134,7 @@ class SliderController extends Controller
             $data['operationdescripation'] = $studioget->descripation2;
             $data['operationimage'] = $image_path.$studioget->flat_image2;
 
-            $data['onlydescripation'] = $studioget->product_title1;
+            $data['onlydescripation'] = $studioget->product_title2;
             $data['onlyimage'] = $image_path.$studioget->product_image5;
 
             $data['nyctitle'] = $studioget->title6;
@@ -142,6 +142,43 @@ class SliderController extends Controller
             $data['nycimage'] = $image_path.$studioget->image;
             $data['nycbuttonname'] = $studioget->button_name;
             $data['nycbuttonlink'] = $studioget->button_url;
+        return response($data,200);
+    }
+
+    public function getApartmentpage(){
+        $apartmentget =  page::where('id',12)->first();
+        $data=array();
+        $image_path= storage_path().'/storage/';
+         
+            $data['apartmentpagetitle'] = $apartmentget->title;
+           
+            $data['bringingmoroccotitle'] = $apartmentget->title1;
+            $data['bringingmoroccodescripation'] = $apartmentget->content;
+           
+            $data['detailstitle'] = $apartmentget->title3;
+            $data['detailsdescriaption'] = $apartmentget->descripation3;
+            $data['detailsimage'] = $image_path.$apartmentget->image3;
+
+            $data['leafytitle'] = $apartmentget->title2;
+            $data['leafydescriaption'] = $apartmentget->descripation2;
+            $data['leafyimage'] = $image_path.$apartmentget->flat_image2;
+
+            $data['onlytitle'] = $apartmentget->product_title1;
+            $data['onlydescriaption'] = $apartmentget->product_button_name1;
+
+            $data['expecttitle'] = $apartmentget->product_title5;
+            $data['expectdescriaption'] = $apartmentget->product_button_name5;
+            $data['expectimage'] = $image_path.$apartmentget->product_image5;
+           
+            $data['singlebigimage'] = $image_path.$apartmentget->product_image1;
+
+            $data['marrakechtitle'] = $studioget->title6;
+            $data['marrakechdescripation'] = $studioget->descripation6;
+            $data['marrakechimage'] = $image_path.$studioget->image;
+            $data['marrakechbuttonname'] = $studioget->button_name;
+            $data['marrakechbuttonlink'] = $studioget->button_url;
+
+          
         return response($data,200);
     }
 }

@@ -110,8 +110,7 @@
     
     <section class="full-width flex-wrap admin-body-width">
         <div class="page-bottom-btn">
-            <button class="warning">Delete page</button>
-            <input type="submit" name="master-save">Save</button>
+            <input type="submit" name="master-save" value="save">
         </div>
     </section>
     </form>
