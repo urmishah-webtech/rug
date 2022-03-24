@@ -94,4 +94,54 @@ class SliderController extends Controller
 
         return response($data,200);
     }
+
+    public function getStudiopage(){
+        $studioget =  page::where('id',11)->first();
+        $data=array();
+        $image_path= storage_path().'/storage/';
+         
+            $data['studiopagetitle'] = $studioget->title;
+           
+            $data['beniexperiencetitle'] = $studioget->title1;
+            $data['beniexperiencedescripation'] = $studioget->content;
+           
+            $data['newwayshoptitle'] = $studioget->title3;
+            $data['newwayshopdescriaption'] = $studioget->descripation3;
+            $data['newwayshopimage'] = $image_path.$studioget->image3;
+
+            $data['newwayshopmaintitle'] = $studioget->title4;
+            $data['newwayshopimage1'] = $image_path.$studioget->product_image1;
+            $data['newwayshoptitle1'] = $studioget->product_title1;
+            $data['newwayshopdescriaption1'] = $studioget->product_button_name1;
+
+            $data['newwayshopimage2'] = $image_path.$studioget->product_image2;
+            $data['newwayshoptitle2'] = $studioget->product_title2;
+            $data['newwayshopdescriaption2'] = $studioget->product_button_name2;
+
+            $data['newwayshopimage3'] = $image_path.$studioget->product_image3;
+            $data['newwayshoptitle3'] = $studioget->product_title3;
+            $data['newwayshopdescriaption3'] = $studioget->product_button_name3;
+
+            $data['newwayshopimage4'] = $image_path.$studioget->product_image4;
+            $data['newwayshoptitle4'] = $studioget->product_title4;
+            $data['newwayshopdescriaption4'] = $studioget->product_button_name4;
+
+            $data['ourteamtitle'] = $studioget->title5;
+            $data['ourteamdescripation'] = $studioget->desctipation5;
+            $data['ourteamimage'] = $image_path.$studioget->flat_image1;
+
+            $data['operationtitle'] = $studioget->title2;
+            $data['operationdescripation'] = $studioget->descripation2;
+            $data['operationimage'] = $image_path.$studioget->flat_image2;
+
+            $data['onlydescripation'] = $studioget->product_title1;
+            $data['onlyimage'] = $image_path.$studioget->product_image5;
+
+            $data['nyctitle'] = $studioget->title6;
+            $data['nycdescripation'] = $studioget->descripation6;
+            $data['nycimage'] = $image_path.$studioget->image;
+            $data['nycbuttonname'] = $studioget->button_name;
+            $data['nycbuttonlink'] = $studioget->button_url;
+        return response($data,200);
+    }
 }

@@ -28,6 +28,7 @@ Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetch
 
 Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
 Route::get('homepage', 'App\Http\Controllers\Api\SliderController@getHomepage');
+Route::get('studiopage', 'App\Http\Controllers\Api\SliderController@getStudiopage');
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
 Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
 
