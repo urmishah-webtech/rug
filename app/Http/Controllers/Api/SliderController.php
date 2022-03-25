@@ -210,4 +210,45 @@ class SliderController extends Controller
           
         return response($data,200);
     }
+
+
+     public function getProcesspage(){
+        $processget =  page::where('id',13)->first();
+        $data=array();
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
+         
+            $data['processpagetitle'] = $processget->title;
+           
+            $data['singletitle1'] = $processget->title1;
+          
+            $data['rugsproducttitle1'] = $processget->product_title1;
+            $data['rugsproductbuttonname1'] = $processget->product_button_name1;
+            $data['rugsproductproductimage1'] = $image_path.$processget->product_image1;
+
+            $data['processtitle2'] = $processget->product_title2;
+            $data['processbuttonname2'] = $processget->product_button_name2;
+            $data['processproductimage2'] = $image_path.$processget->product_image2;
+          
+            $data['singletitle2'] = $image_path.$processget->product_button_link1;
+
+            $data['processtitle3'] = $processget->product_title3;
+            $data['processbuttonname3'] = $processget->product_button_name3;
+            $data['processproductimage3'] = $image_path.$processget->product_image3;
+
+            $data['processtitle4'] = $processget->product_title4;
+            $data['processbuttonname4'] = $processget->product_button_name4;
+            $data['processproductimage4'] = $image_path.$processget->product_image4;
+
+            $data['singletitle3'] = $image_path.$processget->product_button_link2;
+
+            $data['processtitle5'] = $processget->product_title5;
+            $data['processbuttonname5'] = $processget->product_button_name5;
+            $data['processproductimage5'] = $image_path.$processget->product_image5;
+
+            $data['processtitle6'] = $processget->title6;
+            $data['processbuttonname6'] = $processget->button_name;
+            $data['processproductimage6'] = $image_path.$processget->image;
+
+        return response($data,200);
+    }
 }
