@@ -40,11 +40,11 @@ class SliderController extends Controller
 
             if (isset($val['productmediaget'][$key]))
             {
-                $data['image'] = $image_path . $val['productmediaget'][$key]['image'];
+                $data[$i]['image'] = $image_path . $val['productmediaget'][$key]['image'];
             }
             else
             {
-                $data['image'] = url('/') . '/image/defult-image.png';
+                $data[$i]['image'] = url('/') . '/image/defult-image.png';
             }
 
             $data[$i]['id'] = $val->id;
@@ -55,7 +55,7 @@ class SliderController extends Controller
 
         }
 
-            return response($data, 200);
+        return response($data, 200);
     }
 
     public function getHomepage(){
