@@ -61,7 +61,30 @@
                         </div>
                     </div>
                     @endif
-
+                    @if($page->id == 14)
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->image3))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    @endif
 
                     @if($page->id == 10)
                     <div class="columns six row field_style1 mb-2">
@@ -1125,6 +1148,172 @@
                     </div>
                 </div>
                 @endif
+
+                <!-- In the beginning-->
+
+                @if($page->id == 14)
+                 <div class="card">
+                    <div class="row">
+                        <label>Title</label>
+                        <input type="text" name="title3" wire:model="page.title3">
+                    </div>
+                    <div wire:ignore class="form-group row">
+                        <label>Content</label>
+                        <div class="col-md-9">
+                            <textarea wire:model="page.descripation3" class="form-control required" name="description1" id="description1"></textarea>
+                        </div>
+                    </div>
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->image3))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <label>Button Name</label>
+                        <input type="text" name="button_name3" wire:model="page.button_name3">
+                        <label>Button Link</label>
+                        <input type="text" name="button_link3" wire:model="page.button_link3">
+                    </div>
+                </div>
+                @endif
+
+                @if($page->id == 14)
+                <div class="card">
+                    <!-- In the beginning -->
+                    <div class="row">
+                        <label>Title </label>
+                        <input type="text" name="product_title1" wire:model="page.product_title1">
+                    </div>
+                    <div wire:ignore class="form-group row">
+                        <label>Content</label>
+                        <div class="col-md-9">
+                            <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
+                        </div>
+                    </div>
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->product_image1))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <label>Button Name 1</label>
+                        <input type="text" name="product_button_name1" wire:model="page.product_button_name1">
+                        <label>Button Link 1</label>
+                        <input type="text" name="product_button_link1" wire:model="page.product_button_link1">
+                    </div>
+                </div>
+                @endif
+                @if($page->id == 14)
+                <div class="card">
+                    <!-- product 2  -->
+                    <div class="row">
+                        <label>Title</label>
+                        <input type="text" name="product_title2" wire:model="page.product_title2">
+                    </div>
+                    <div wire:ignore class="form-group row">
+                        <label>Content</label>
+                        <div class="col-md-9">
+                            <textarea wire:model="page.descripation6" class="form-control required" name="descripation6" id="descripation6"></textarea>
+                        </div>
+                    </div>
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->product_image2))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <label>Button Name 2</label>
+                        <input type="text" name="product_button_name1" wire:model="page.product_button_name2">
+                        <label>Button Link 2</label>
+                        <input type="text" name="product_button_link1" wire:model="page.product_button_link2">
+                    </div>
+                </div>
+                @endif
+
+                <!-- Supporting Community -->
+                @if($page->id == 14)
+                <div class="card">
+                    <div class="row">
+                        <label>Title</label>
+                        <input type="text" name="title" wire:model="page.title5">
+                    </div>
+                    <div wire:ignore class="form-group row">
+                        <label>Content</label>
+                        <div class="col-md-9">
+                            <textarea wire:model="page.desctipation5" class="form-control required" name="desctipation5" id="desctipation5"></textarea>
+                        </div>
+                    </div>
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->flat_image1))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+
 
                 <div class="card search-engine-listing-card">
                     <div class="card-header">

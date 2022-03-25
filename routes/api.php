@@ -32,6 +32,7 @@ Route::get('homepage', 'App\Http\Controllers\Api\SliderController@getHomepage');
 Route::get('studiopage', 'App\Http\Controllers\Api\SliderController@getStudiopage');
 Route::get('apartmentpage', 'App\Http\Controllers\Api\SliderController@getApartmentpage');
 Route::get('proceesspage', 'App\Http\Controllers\Api\SliderController@getProcesspage');
+Route::get('ourstorypage', 'App\Http\Controllers\Api\SliderController@getStorypage');
 
 Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
 

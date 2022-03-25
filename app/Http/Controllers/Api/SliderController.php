@@ -294,4 +294,41 @@ class SliderController extends Controller
 
         return response($data,200);
     }
+
+    public function getStorypage(){
+        $storyget =  page::where('id',14)->first();
+        $data=array();
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
+         
+            $data['storymaintitle'] = $storyget->title;
+           
+            $data['wowearetitle1'] = $storyget->title1;
+            $data['wowearedescripation'] = $storyget->content;
+            $data['woweareimage'] = $image_path.$storyget->image3;
+          
+            $data['beginningtitle'] = $storyget->title3;
+            $data['beginningdescripation'] = $storyget->descripation3;
+            $data['beginningimage'] = $image_path.$storyget->image3;
+            $data['beginningbuttonname'] = $storyget->button_name3;
+            $data['beginningbuttonelink'] = $storyget->button_link3;
+          
+            $data['inspiredtitle1'] = $storyget->product_title1;
+            $data['inspireddescripation1'] = $storyget->descripation2;
+            $data['inspiredproductimage1'] = $image_path.$storyget->product_image1;
+            $data['inspiredbuttonname1'] = $storyget->product_button_name1;
+            $data['inspiredproductbuttonlink1'] = $storyget->product_button_link1;
+
+            $data['dedicationtitle2'] = $storyget->product_title2;
+            $data['dedicationdescripation2'] = $storyget->descripation6;
+            $data['dedicationproductimage2'] = $image_path.$storyget->product_image2;
+            $data['dedicationbuttonname2'] = $storyget->product_button_name2;
+            $data['dedicationproductbuttonlink2'] = $storyget->product_button_link2;
+
+            $data['communitytitle'] = $storyget->title5;
+            $data['communitydesctipation'] = $storyget->desctipation5;
+            $data['communityimage1'] = $image_path.$storyget->flat_image1;
+
+
+        return response($data,200);
+    }
 }
