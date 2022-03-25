@@ -304,7 +304,7 @@ class SliderController extends Controller
            
             $data['wowearetitle1'] = $storyget->title1;
             $data['wowearedescripation'] = $storyget->content;
-            $data['woweareimage'] = $image_path.$storyget->image3;
+            $data['woweareimage'] = $image_path.$storyget->image;
           
             $data['beginningtitle'] = $storyget->title3;
             $data['beginningdescripation'] = $storyget->descripation3;
