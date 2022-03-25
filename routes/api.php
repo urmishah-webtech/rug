@@ -33,6 +33,8 @@ Route::get('studiopage', 'App\Http\Controllers\Api\SliderController@getStudiopag
 Route::get('apartmentpage', 'App\Http\Controllers\Api\SliderController@getApartmentpage');
 Route::get('proceesspage', 'App\Http\Controllers\Api\SliderController@getProcesspage');
 
+Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
+
 
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
 Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');

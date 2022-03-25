@@ -7,10 +7,53 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\page;
 use App\Models\Product;
+use App\Models\contact;
+use Validator;
 use DB;
 
 class SliderController extends Controller
 {
+
+    public function sendJson($data, $withDie = false)
+    {
+        if ($withDie)
+        {
+            echo json_encode($data);
+            die;
+        }
+        else
+        {
+            return response()->json($data);
+        }
+    }
+
+    public function ContactSave(Request $request){
+
+        $validator = Validator::make($request->all() , ['firstname' => 'required', 'email' => 'required', 'message' => 'required']);
+
+         if ($validator->fails())
+        {
+            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
+        }
+
+        $contact = contact::create([
+
+            'firstname' => $request->firstname,
+
+            'lastname' => $request->lastname,
+
+            'email' => $request->email,
+
+            'mobilenumber' => $request->mobilenumber,
+
+            'message' => $request->message,
+
+        ]);
+
+        return response(['status' => 0, 'message' => 'Save successed']);
+
+    }
+
     public function getSlider(){
     	$sliders =  Slider::get();
     	$data=array();
@@ -229,7 +272,7 @@ class SliderController extends Controller
             $data['processbuttonname2'] = $processget->product_button_name2;
             $data['processproductimage2'] = $image_path.$processget->product_image2;
           
-            $data['singletitle2'] = $image_path.$processget->product_button_link1;
+            $data['singletitle2'] = $processget->product_button_link1;
 
             $data['processtitle3'] = $processget->product_title3;
             $data['processbuttonname3'] = $processget->product_button_name3;
@@ -239,7 +282,7 @@ class SliderController extends Controller
             $data['processbuttonname4'] = $processget->product_button_name4;
             $data['processproductimage4'] = $image_path.$processget->product_image4;
 
-            $data['singletitle3'] = $image_path.$processget->product_button_link2;
+            $data['singletitle3'] = $processget->product_button_link2;
 
             $data['processtitle5'] = $processget->product_title5;
             $data['processbuttonname5'] = $processget->product_button_name5;
