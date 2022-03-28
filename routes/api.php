@@ -38,6 +38,7 @@ Route::get('sizeguidepage', 'App\Http\Controllers\Api\SliderController@getSizeGu
 Route::get('footerinformation', 'App\Http\Controllers\Api\SliderController@getfooterpage');
 
 Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
+Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
 
 
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');

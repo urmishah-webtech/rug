@@ -8,6 +8,7 @@ use App\Models\Slider;
 use App\Models\page;
 use App\Models\Product;
 use App\Models\contact;
+use App\Models\TradeModel;
 use Validator;
 use DB;
 
@@ -45,6 +46,37 @@ class SliderController extends Controller
             'email' => $request->email,
 
             'mobilenumber' => $request->mobilenumber,
+
+            'message' => $request->message,
+
+        ]);
+
+        return response(['status' => 0, 'message' => 'Save successed']);
+
+    }
+
+    public function TradeSave(Request $request){
+
+        $validator = Validator::make($request->all() , ['firstname' => 'required', 'mobilenumber' => 'required', 'companyname' => 'required', 'companywebsite' => 'required', 'message' => 'required']);
+
+        if ($validator->fails())
+        {
+            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
+        }
+
+        $trade = TradeModel::create([
+
+            'firstname' => $request->firstname,
+
+            'lastname' => $request->lastname,
+
+            'email' => $request->email,
+
+            'mobilenumber' => $request->mobilenumber,
+           
+            'companyname' => $request->companyname,
+            
+            'companywebsite' => $request->companywebsite,
 
             'message' => $request->message,
 
