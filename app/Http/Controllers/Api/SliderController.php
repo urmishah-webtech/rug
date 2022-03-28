@@ -410,8 +410,7 @@ class SliderController extends Controller
             $data['footermaintitle'] = $footerget->title;
            
             $data['footerabouttitle1'] = $footerget->title1;
-            $data['footeraboutdescripation'] = $footerget->content;\
-
+            $data['footeraboutdescripation'] = $footerget->content;
             $data['footercompanyemail'] = $footerget->title5;
             $data['footercompanynumber'] = $footerget->button_name5;
             $data['footerlogo'] = $image_path.$footerget->flat_image1;
