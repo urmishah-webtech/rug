@@ -366,39 +366,55 @@ class SliderController extends Controller
     }
 
      public function getSizeGuidepage(){
-        $swatchesget =  page::where('id',16)->first();
+        $sizeguideget =  page::where('id',16)->first();
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
-            $data['sizeguidetitle'] = $swatchesget->title;
+            $data['sizeguidetitle'] = $sizeguideget->title;
            
-            $data['sizeguidetitle1'] = $swatchesget->title1;
-            $data['sizeguidedescripation'] = $swatchesget->content;
+            $data['sizeguidetitle1'] = $sizeguideget->title1;
+            $data['sizeguidedescripation'] = $sizeguideget->content;
 
-            $data['sizeguidesmalltitle1'] = $swatchesget->title2;
-            $data['sizeguidesmallcommonsize1'] = $swatchesget->video_link;
-            $data['sizeguidesmallimage1'] = $image_path.$swatchesget->image3;
-            $data['sizeguidesmallimagename1'] = $swatchesget->button_name3;
-            $data['sizeguidesmallimage2'] = $image_path.$swatchesget->product_image1;
-            $data['sizeguidesmallimagename1'] = $swatchesget->product_button_name1;
-            $data['sizeguidesmallimage3'] = $image_path.$swatchesget->product_image2;
-            $data['sizeguidesmallimagename'] = $swatchesget->product_button_name2;
+            $data['sizeguidesmalltitle1'] = $sizeguideget->title2;
+            $data['sizeguidesmallcommonsize1'] = $sizeguideget->video_link;
+            $data['sizeguidesmallimage1'] = $image_path.$sizeguideget->image3;
+            $data['sizeguidesmallimagename1'] = $sizeguideget->button_name3;
+            $data['sizeguidesmallimage2'] = $image_path.$sizeguideget->product_image1;
+            $data['sizeguidesmallimagename1'] = $sizeguideget->product_button_name1;
+            $data['sizeguidesmallimage3'] = $image_path.$sizeguideget->product_image2;
+            $data['sizeguidesmallimagename'] = $sizeguideget->product_button_name2;
 
-            $data['sizeguidemediumtitle1'] = $swatchesget->title4;
-            $data['sizeguidemediumcommonsize1'] = $swatchesget->product_title3;
-            $data['sizeguidemediumimage1'] = $image_path.$swatchesget->product_image3;
-            $data['sizeguidemediumimagename1'] = $swatchesget->product_button_name3;
-            $data['sizeguidemediumimage2'] = $image_path.$swatchesget->product_image4;
-            $data['sizeguidemediumimagename1'] = $swatchesget->product_button_name4;
-            $data['sizeguidemediumimage3'] = $image_path.$swatchesget->product_image5;
-            $data['sizeguidemediumimagename'] = $swatchesget->product_button_name5;
+            $data['sizeguidemediumtitle1'] = $sizeguideget->title4;
+            $data['sizeguidemediumcommonsize1'] = $sizeguideget->product_title3;
+            $data['sizeguidemediumimage1'] = $image_path.$sizeguideget->product_image3;
+            $data['sizeguidemediumimagename1'] = $sizeguideget->product_button_name3;
+            $data['sizeguidemediumimage2'] = $image_path.$sizeguideget->product_image4;
+            $data['sizeguidemediumimagename1'] = $sizeguideget->product_button_name4;
+            $data['sizeguidemediumimage3'] = $image_path.$sizeguideget->product_image5;
+            $data['sizeguidemediumimagename'] = $sizeguideget->product_button_name5;
 
-            $data['sizeguidelargetitle1'] = $swatchesget->title5;
-            $data['sizeguidelargecommonsize1'] = $swatchesget->title6;
-            $data['sizeguidelargeimage1'] = $image_path.$swatchesget->flat_image1;
-            $data['sizeguidelargeimagename1'] = $swatchesget->button_link5;
-            $data['sizeguidelargeimage2'] = $image_path.$swatchesget->flat_image2;
-            $data['sizeguidelargeimagename1'] = $swatchesget->button_name5;
+            $data['sizeguidelargetitle1'] = $sizeguideget->title5;
+            $data['sizeguidelargecommonsize1'] = $sizeguideget->title6;
+            $data['sizeguidelargeimage1'] = $image_path.$sizeguideget->flat_image1;
+            $data['sizeguidelargeimagename1'] = $sizeguideget->button_link5;
+            $data['sizeguidelargeimage2'] = $image_path.$sizeguideget->flat_image2;
+            $data['sizeguidelargeimagename1'] = $sizeguideget->button_name5;
+
+        return response($data,200);
+    }
+    public function getfooterpage(){
+        $footerget =  page::where('id',17)->first();
+        $data=array();
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
+         
+            $data['footermaintitle'] = $footerget->title;
+           
+            $data['footerabouttitle1'] = $footerget->title1;
+            $data['footeraboutdescripation'] = $footerget->content;\
+
+            $data['footercompanyemail'] = $footerget->title5;
+            $data['footercompanynumber'] = $footerget->button_name5;
+            $data['footerlogo'] = $image_path.$footerget->flat_image1;
 
         return response($data,200);
     }

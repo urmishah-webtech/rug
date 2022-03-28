@@ -35,6 +35,7 @@ Route::get('proceesspage', 'App\Http\Controllers\Api\SliderController@getProcess
 Route::get('ourstorypage', 'App\Http\Controllers\Api\SliderController@getStorypage');
 Route::get('swatchespage', 'App\Http\Controllers\Api\SliderController@getSwatchespage');
 Route::get('sizeguidepage', 'App\Http\Controllers\Api\SliderController@getSizeGuidepage');
+Route::get('footerinformation', 'App\Http\Controllers\Api\SliderController@getfooterpage');
 
 Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
 

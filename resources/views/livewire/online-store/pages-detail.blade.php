@@ -500,6 +500,40 @@
 
                 <!-- END Size Guide -->
 
+                <!--  Footer Information -->
+                @if($page->id == 17)
+                <div class="card">
+                    <div class="row">
+                        <label>Company Email</label>
+                        <input type="email" name="title" wire:model="page.title5">
+                        <label>Contact Number</label>
+                        <input type="number" name="button_name5" wire:model="page.button_name5">
+                    </div>
+                    <div class="columns six row field_style1 mb-2">
+                        <label>Image</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
+                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <button class="secondary">Add Image</button>
+                                <label for="logoUpload">or drop files to upload</label>
+                            </div>
+                            @if(!empty($page->flat_image1))
+                            <div class="avatar-preview">  
+                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                </div>
+                            </div>
+                            @else
+                            <div class="avatar-preview">
+                                <div id="logoPreview" style="background-image: url();">
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <!-- END Footer Information -->
 
                 @if($page->id == 10)
                 <div class="card">
