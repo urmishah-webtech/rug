@@ -331,4 +331,37 @@ class SliderController extends Controller
 
         return response($data,200);
     }
+
+     public function getSwatchespage(){
+        $swatchesget =  page::where('id',15)->first();
+        $data=array();
+        $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
+         
+            $data['swatchesmaintitle'] = $swatchesget->title;
+           
+            $data['swatchsettitle1'] = $swatchesget->title1;
+            $data['swatchsedescripation'] = $swatchesget->content;
+            $data['swatchseimage'] = $image_path.$swatchesget->image;
+            $data['swatchsebuttonname'] = $swatchesget->button_name;
+            $data['swatchsebuttonelink'] = $swatchesget->button_url;
+
+            $data['pickcolorettitle1'] = $swatchesget->title3;
+            $data['pickcoloredescripation'] = $swatchesget->descripation3;
+            $data['pickcoloreimage'] = $image_path.$swatchesget->image3;
+          
+            $data['knottedflattitle'] = $swatchesget->title5;
+            $data['knottedflatdescripation'] = $swatchesget->desctipation5;
+            $data['knottedflatimage1'] = $image_path.$swatchesget->flat_image1;
+            $data['knottedflatbuttonname1'] = $swatchesget->button_name2;
+            $data['knottedflatbuttonlink1'] = $swatchesget->button_link2;
+            $data['knottedflatimage2'] = $image_path.$swatchesget->flat_image2;
+            $data['knottedflatbuttonname2'] = $swatchesget->button_name5;
+            $data['knottedflatbuttonlink2'] = $swatchesget->button_link5;
+
+            $data['videotitle'] = $swatchesget->title6;
+            $data['videoimage'] = $image_path.$swatchesget->product_image1;
+
+
+        return response($data,200);
+    }
 }

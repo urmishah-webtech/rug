@@ -88,7 +88,7 @@
 
                     @if($page->id == 10 || $page->id == 15)
                     <div class="columns six row field_style1 mb-2">
-                        <label>Our Story Image</label>
+                        <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
@@ -230,7 +230,7 @@
                         <input type="text" name="title6" wire:model="page.title6">
                     </div>
                     <div class="columns six row field_style1 mb-2">
-                        <label>Image 1</label>
+                        <label>Video Upload</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
