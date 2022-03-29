@@ -6,13 +6,18 @@ use Livewire\Component;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\page;
 use Livewire\WithFileUploads;
 
 class SliderCreate extends Component
 {
 	use WithFileUploads;
 
-	public $title,$buttne_text,$button_link,$description,$image;
+	public $title,$buttne_text,$button_link,$description,$image,$pageget,$page_id;
+
+    public function mount(){
+         $this->pageget =  page::get();
+    }
 
     public function render()
     {
@@ -24,9 +29,11 @@ class SliderCreate extends Component
         if($flag == 'add-slider')
         {
 
+           
             $this->validate([
                 'title' => 'required',
-                'image' => 'required|image|max:1024'
+                'image' => 'required|image|max:1024',
+                'page_id' => 'required'
             ]);
 
             if(!empty($this->image)){
@@ -41,6 +48,7 @@ class SliderCreate extends Component
              	'buttne_text' => $this->buttne_text,
              	'button_link' => $this->button_link,
              	'description' => $this->description,
+                'page_id' => $this->page_id,
              	'slider_image' => $path_url,
 
              ]);

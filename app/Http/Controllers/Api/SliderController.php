@@ -11,6 +11,8 @@ use App\Models\contact;
 use App\Models\TradeModel;
 use Validator;
 use DB;
+use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Mail;
 
 class SliderController extends Controller
 {
@@ -51,6 +53,15 @@ class SliderController extends Controller
 
         ]);
 
+        $user['to'] = 'prajapativishal999991@gmail.com';
+
+        $contactget = TradeModel::orderBy('id', 'DESC')->first();
+        
+        Mail::send('livewire.mail-template.contact-mail', ['contactget' => $contactget], function($message) use($user) {
+                $message->to($user['to']);
+                $message->subject('Rug Contact Mail!!!');
+            });
+
         return response(['status' => 0, 'message' => 'Save successed']);
 
     }
@@ -82,12 +93,21 @@ class SliderController extends Controller
 
         ]);
 
+        $user['to'] = 'prajapativishal999991@gmail.com';
+
+        $tradeget = TradeModel::orderBy('id', 'DESC')->first();
+
+        Mail::send('livewire.mail-template.trade-mail', ['tradeget' => $tradeget], function($message) use($user) {
+                $message->to($user['to']);
+                $message->subject('Rug Trade Mail!!!');
+            });
+
         return response(['status' => 0, 'message' => 'Save successed']);
 
     }
 
     public function getSlider(){
-    	$sliders =  Slider::get();
+    	$sliders =  Slider::where('page_id',10)->get();
     	$data=array();
     	$i=0; 
     	$image_path= public_path().'/image/slider/';
