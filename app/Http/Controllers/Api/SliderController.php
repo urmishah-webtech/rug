@@ -486,7 +486,9 @@ class SliderController extends Controller
 				$insert_stock['id']=$result['id'];
 				$insert_stock['label']=$result['label'];
 				$insert_stock['link']=$result['link'];
+				if($result['image']){
 				$insert_stock['image']=$image_path.'/'.$result['image'];
+				}
 				$data_result[$key1] = $insert_stock;
 			}
 			return response($data_result , 200);
