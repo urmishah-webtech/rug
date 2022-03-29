@@ -1,5 +1,68 @@
 <div>
 <x-admin-layout>
+    <style>
+        .container {
+            box-shadow: 0 0 0 1px rgb(63 63 68 / 5%), 0 1px 3px 0 rgb(63 63 68 / 15%);
+            color: #1a1919;
+            box-sizing: border-box;
+            margin-bottom: 0;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .question {
+            padding-bottom: 7px;
+          font-weight: 600;
+          
+          position: relative;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+        .answer .card{
+            padding:0 !important;
+        }
+        
+        .question::after {
+          content: "\002B";
+          font-size: 2.2rem;
+          position: absolute;
+          right: 20px;
+          transition: 0.2s;
+        }
+        
+        .question.active::after {
+          transform: rotate(45deg);
+        }
+        
+        .answercont {
+          max-height: 0;
+          overflow: hidden;
+          transition: 0.3s;
+        }
+        
+        .answer {
+          
+          line-height: 1.5rem;
+        }
+        
+        .question.active + .answercont {
+        }
+        
+        label {
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
+        
+        @media screen and (max-width: 790px){
+         
+          .wrapper {
+          width: 80%;
+        }
+        }
+            </style>
     <div wire:key="alert">
 
          @if (session()->has('message'))
@@ -62,7 +125,7 @@
                     </div>
                     @endif
                     @if($page->id == 14)
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -87,7 +150,7 @@
                     @endif
 
                     @if($page->id == 10 || $page->id == 15)
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -128,7 +191,7 @@
                             <textarea wire:model="page.descripation3" class="form-control required" name="description1" id="description1"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -166,7 +229,7 @@
                             <textarea wire:model="page.desctipation5" class="form-control required" name="desctipation5" id="desctipation5"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -229,7 +292,7 @@
                         <label>Title</label>
                         <input type="text" name="title6" wire:model="page.title6">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Video Upload</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -267,7 +330,7 @@
                         <label>Comman Sizes (ft):</label>
                         <input type="text" name="videolink" wire:model="page.video_link">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 1</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -291,7 +354,7 @@
                         <label>image Name 1</label>
                         <input type="text" name="button_name3" wire:model="page.button_name3">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -316,7 +379,7 @@
                         <input type="text" name="product_button_name1" wire:model="page.product_button_name1">
                     </div>
 
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 3</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -353,7 +416,7 @@
                         <label>Comman Sizes (ft):</label>
                         <input type="text" name="product_title1" wire:model="page.product_title3">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 1</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -378,7 +441,7 @@
                         <input type="text" name="product_button_name3" wire:model="page.product_button_name3">
                     </div>
                     <!-- product 4 -->
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -403,7 +466,7 @@
                         <input type="text" name="product_button_name4" wire:model="page.product_button_name4">
                     </div>
                     <!-- product 5 -->
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 3</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -440,7 +503,7 @@
                         <label>Comman Sizes (ft):</label>
                         <input type="text" name="title6" wire:model="page.title6">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -468,7 +531,7 @@
                     <input type="text" name="button_link5" wire:model="page.button_link5">
                     </div>
 
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -509,7 +572,7 @@
                         <label>Contact Number</label>
                         <input type="number" name="button_name5" wire:model="page.button_name5">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -534,31 +597,49 @@
                 </div>
                 @endif
                 <!-- END Footer Information -->
-
-                @if($page->id == 10)
-                <div class="card">
-                    <div class="row">
-                        <label>Video Link</label>
-                        <input type="text" name="videolink" wire:model="page.video_link">
-                    </div>
-                    <div class="row">
-                        <label>Title</label>
-                        <input type="text" name="title2" wire:model="page.title2">
-                    </div>
-                    <div wire:ignore class="form-group row">
-                        <label>Content</label>
-                        <div class="col-md-9">
-                            <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
+                <div class="wrapper">
+                    <div class="container">
+                        <div class="question">
+                          Our Success Section
+                        </div>
+                        <div class="answercont">
+                          <div class="answer">
+                    @if($page->id == 10)
+                    <div class="card">
+                        <div class="row">
+                            <label>Video Link</label>
+                            <input type="text" name="videolink" wire:model="page.video_link">
+                        </div>
+                        <div class="row">
+                            <label>Title</label>
+                            <input type="text" name="title2" wire:model="page.title2">
+                        </div>
+                        <div wire:ignore class="form-group row">
+                            <label>Content</label>
+                            <div class="col-md-9">
+                                <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
+                            </div>
+                        </div>
+                        <div class="row field_style1 mb-2">
+                            <label>Button Name</label>
+                            <input type="text" name="button_name2" wire:model="page.button_name2">
+                            <label>Button Link</label>
+                            <input type="text" name="button_link2" wire:model="page.button_link2">
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
-                        <label>Button Name</label>
-                        <input type="text" name="button_name2" wire:model="page.button_name2">
-                        <label>Button Link</label>
-                        <input type="text" name="button_link2" wire:model="page.button_link2">
-                    </div>
+                    @endif
                 </div>
-                @endif
+            </div>
+          </div>
+
+                
+
+          <div class="container">
+            <div class="question">
+              Meet Resolute Section
+            </div>
+            <div class="answercont">
+              <div class="answer">
                 @if($page->id == 10)
                 <div class="card">
                     <div class="row">
@@ -571,7 +652,7 @@
                             <textarea wire:model="page.descripation3" class="form-control required" name="description1" id="description1"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -599,6 +680,21 @@
                     </div>
                 </div>
                 @endif
+            </div>
+        </div>
+      </div>
+
+
+
+            
+
+
+      <div class="container">
+        <div class="question">
+          Rugs Accordance Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 @if($page->id == 10)
                 <div class="card">
                     <!-- product 1 -->
@@ -610,7 +706,7 @@
                         <label>Product Title 1</label>
                         <input type="text" name="product_title1" wire:model="page.product_title1">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 1</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -641,7 +737,7 @@
                         <label>Product Title 2</label>
                         <input type="text" name="product_title2" wire:model="page.product_title2">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -672,7 +768,7 @@
                         <label>Product Title 3</label>
                         <input type="text" name="product_title1" wire:model="page.product_title3">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 3</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -703,7 +799,7 @@
                         <label>Product Title 4</label>
                         <input type="text" name="product_title1" wire:model="page.product_title4">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image </label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -734,7 +830,7 @@
                         <label>Product Title 5</label>
                         <input type="text" name="product_title1" wire:model="page.product_title5">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -762,6 +858,19 @@
                     </div>
                 </div>
                 @endif
+            </div>
+        </div>
+      </div>
+
+
+    
+
+      <div class="container">
+        <div class="question">
+          Flat & Knotted Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 @if($page->id == 10)
                 <!-- Flat @ Knotted -->
                 <div class="card">
@@ -775,7 +884,7 @@
                             <textarea wire:model="page.desctipation5" class="form-control required" name="desctipation5" id="desctipation5"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -823,7 +932,18 @@
                     </div>
                 </div>
                 @endif
+            </div>
+        </div>
+      </div>
 
+
+            
+      <div class="container">
+        <div class="question">
+            Our Collection Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 @if($page->id == 10)
                 <!-- Collection -->
                 <div class="card">
@@ -837,7 +957,7 @@
                             <textarea wire:model="page.descripation6" class="form-control required" name="descripation6" id="descripation6"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Button Name</label>
                         <input type="text" name="button_name6" wire:model="page.button_name6">
                         <label>Button Link</label>
@@ -845,6 +965,12 @@
                     </div>
                 </div>
                 @endif
+
+            </div>
+        </div>
+      </div>
+    
+  </div>
 
 
 
@@ -863,7 +989,7 @@
                             <textarea wire:model="page.descripation3" class="form-control required" name="descripation3" id="descripation3"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -895,7 +1021,7 @@
                         <label>Title</label>
                         <input type="text" name="title4" wire:model="page.title4">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 1</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -924,7 +1050,7 @@
                         <textarea wire:model="page.product_button_name1" class="form-control required" name="product_button_name1" id="product_button_name1"></textarea>
                     </div>
                     <!-- product 2  -->
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -953,7 +1079,7 @@
                         <textarea wire:model="page.product_button_name2" class="form-control required" name="product_button_name2" id="product_button_name2"></textarea>
                     </div>
                     <!-- product 3 -->
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 3</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -982,7 +1108,7 @@
                         <textarea wire:model="page.product_button_name3" class="form-control required" name="product_button_name3" id="product_button_name3"></textarea>
                     </div>
                     <!-- product 4 -->
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image </label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1027,7 +1153,7 @@
                             <textarea wire:model="page.desctipation5" class="form-control required" name="desctipation5" id="desctipation5"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1066,7 +1192,7 @@
                             <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1098,7 +1224,7 @@
                         <label>Title</label>
                         <input type="text" name="product_title1" wire:model="page.product_title5">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1138,7 +1264,7 @@
                             <textarea wire:model="page.descripation6" class="form-control required" name="descripation6" id="descripation6"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1183,7 +1309,7 @@
                             <textarea wire:model="page.descripation3" class="form-control required" name="descripation3" id="descripation3"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1221,7 +1347,7 @@
                             <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1249,7 +1375,7 @@
                 <!-- Simple Paragraph 1 -->
                 @if($page->id == 12)
                 <div class="card">
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <div class="row">
                             <label>Title </label>
                             <input type="text" name="product_title1" wire:model="page.product_title1">
@@ -1270,7 +1396,7 @@
                     <label>Descripation</label>
                         <textarea wire:model="page.product_button_name5" class="form-control required" name="product_button_name5" id="product_button_name5"></textarea>
 
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1333,7 +1459,7 @@
                             <textarea wire:model="page.descripation6" class="form-control required" name="descripation6" id="descripation6"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1374,7 +1500,7 @@
                         <label>Title 1</label>
                         <input type="text" name="product_button_name1" wire:model="page.product_button_name1">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 1</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1405,7 +1531,7 @@
                         <label>Title 2</label>
                         <input type="text" name="product_button_name2" wire:model="page.product_button_name2">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1444,7 +1570,7 @@
                         <label>Title 3</label>
                         <input type="text" name="product_button_name3" wire:model="page.product_button_name3">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image 3</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1475,7 +1601,7 @@
                         <label>Title 4</label>
                         <input type="text" name="product_button_name4" wire:model="page.product_button_name4">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image </label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1513,7 +1639,7 @@
                         <label>Title 5</label>
                         <input type="text" name="product_button_name5" wire:model="page.product_button_name5">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1543,7 +1669,7 @@
                         <label>Title 6</label>
                         <input type="text" name="button_name" wire:model="page.button_name">
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1582,7 +1708,7 @@
                             <textarea wire:model="page.descripation3" class="form-control required" name="description1" id="description1"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1624,7 +1750,7 @@
                             <textarea wire:model="page.descripation2" class="form-control required" name="description2" id="description2"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1665,7 +1791,7 @@
                             <textarea wire:model="page.descripation6" class="form-control required" name="descripation6" id="descripation6"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1707,7 +1833,7 @@
                             <textarea wire:model="page.desctipation5" class="form-control required" name="desctipation5" id="desctipation5"></textarea>
                         </div>
                     </div>
-                    <div class="columns six row field_style1 mb-2">
+                    <div class="row field_style1 mb-2">
                         <label>Image</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
@@ -1857,6 +1983,26 @@ editor.on('change', function (event) {
     $( ".edit-website-seo-btn" ).click(function() {     
         $('.search-engine-listing-card .card-middle').toggle();
     });
+
+    // accordion js
+    let question = document.querySelectorAll(".question");
+    
+    question.forEach(question => {
+      question.addEventListener("click", event => {
+        const active = document.querySelector(".question.active");
+        if(active && active !== question ) {
+          active.classList.toggle("active");
+          active.nextElementSibling.style.maxHeight = 0;
+        }
+        question.classList.toggle("active");
+        const answer = question.nextElementSibling;
+        if(question.classList.contains("active")){
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        } else {
+          answer.style.maxHeight = 0;
+        }
+      })
+    })
 </script>
 </x-admin-layout>
 </div>
