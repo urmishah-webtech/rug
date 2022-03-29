@@ -23,9 +23,9 @@
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                         </button>
                     </a>
-                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
+                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <!-- <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span> --><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
                 </div>
-                <div class="product-header-btn">
+               <!--  <div class="product-header-btn">
                     <a href="{{route('order-refund')}}" class="button link">Refund</a>
                     <button class="button link" onclick="document.getElementById('unable-to-edit-order-modal').style.display='block'">Edit</button>
                     <div class="more-actions-dp">
@@ -61,7 +61,7 @@
                             <button class="secondary icon-next"></button>
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </article>
     </section>
@@ -145,16 +145,16 @@
                         </li>
                     </ul>
                 </div>
-                <div class="timeline-sec">
+                <!-- <div class="timeline-sec">
                     <h3 class="fs-16 fw-6 mb-0">Timeline</h3>
                     <label><input type="checkbox" name="option2a" checked="checked">Show comments</label>
-                </div>
+                </div> -->
                 <div class="order-tracking" wire:ignore>
                     <div class="row add-note-textarea comment-box mb-0">
                         <textarea wire:model='messagetext' placeholder="Leave a comment..."></textarea>
                         @error('messagetext') <span class="error">{{ $message }}</span> @enderror
                         <div class="comment-button">
-                            <button class="secondary">
+                            <!-- <button class="secondary">
                                 <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
                                     <path d="M10 0C4.486 0 0 4.486 0 10s4.486 10 10 10 10-4.486 10-10S15.514 0 10 0m0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8M7 9a1 1 0 100-2 1 1 0 000 2m6-2a1 1 0 100 2 1 1 0 000-2m-.696 4.281c-.03.03-.786.72-2.304.72-1.497 0-2.252-.67-2.303-.718a1 1 0 00-1.404 1.424C6.425 12.84 7.653 14 10 14c2.346 0 3.575-1.16 3.707-1.293a.993.993 0 00.005-1.397 1.006 1.006 0 00-1.408-.029"></path>
                                 </svg>
@@ -173,7 +173,7 @@
                                 <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
                                     <path d="M5.243 20a5.228 5.228 0 0 1-3.707-1.533A5.213 5.213 0 0 1 0 14.759c0-1.402.546-2.719 1.536-3.708l9.515-9.519a5.25 5.25 0 0 1 8.553 1.7A5.21 5.21 0 0 1 20 5.24a5.208 5.208 0 0 1-1.535 3.708l-4.258 4.26a3.124 3.124 0 0 1-5.092-1.012A3.098 3.098 0 0 1 8.879 11c0-.835.324-1.619.914-2.208l4.5-4.501a1 1 0 1 1 1.414 1.414l-4.5 4.501a1.112 1.112 0 0 0-.328.794A1.114 1.114 0 0 0 12 12.12c.297 0 .582-.118.793-.327l4.258-4.26A3.223 3.223 0 0 0 18 5.24c0-.866-.337-1.681-.949-2.293a3.248 3.248 0 0 0-4.586 0L2.95 12.465A3.224 3.224 0 0 0 2 14.76c0 .866.338 1.68.95 2.293a3.248 3.248 0 0 0 4.586 0l1.757-1.758a1 1 0 1 1 1.414 1.414L8.95 18.467A5.236 5.236 0 0 1 5.243 20z"></path>
                                 </svg>
-                            </button>
+                            </button> -->
                             <button class="secondary post-btn" wire:click.prevent="ordercommentpost">Post</button>
                         </div>
                     </div>
@@ -207,14 +207,14 @@
                 </div>
             </div>
             <div class="columns one-third right-details">
-                <div class="card">
+               <!--  <div class="card">
                     <div class="card-header">
                         <div class="header-title">
                             <h4 class="fs-16  fw-6 mb-0">Notes</h4><button class="link" onclick="document.getElementById('add-note-modal').style.display='block'">Edit</button>
                         </div>
                         <p class="mb-0">No notes from customer</p>
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -243,10 +243,10 @@
                     </div>
                     @endif
                     <div class="card-middle">
-                        <div class="header-title">
+                        <!-- <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">CONTACT INFORMATION </h4>
                             <button class="link" onclick="document.getElementById('edit-contact-informatio-modal').style.display='block'">Edit</button>
-                        </div>
+                        </div> -->
                         
                         @if(!empty($order['user'][0]))
                         <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">@if($order['user']){{$order['user'][0]['email']}}@endif</a> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
@@ -259,24 +259,24 @@
                     </div>
                     
                     <div class="card-middle">
-                        <div class="header-title">
+                        <!-- <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">SHIPPING ADDRESS</h4>
                             <button class="link" onclick="document.getElementById('add-address-modal').style.display='block'">Edit</button>
-                        </div>
+                        </div> -->
                         @if(!empty($order))
 
                         <p><span>{{$order->first_name}} <br> {{$order->company}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
                         @endif
                     </div>
                     
-                    <div class="card-footer">
+                   <!--  <div class="card-footer">
                         <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">BILLING ADDRESS</h4>
                         </div>
                         <p><span>{{$order->b_first_name}} <br> {{$order->b_company}} <br> {{$order->b_address}} <br> {{$order->b_city}}<br> {{$order->b_country}}<br> {{$order->b_pincode}}<br> {{$order->b_mobile}}</span> <a href="#"></a></p>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="card">
+               <!--  <div class="card">
                     <div class="card-header">
                         <div class="header-title">
                             <h4 class="fs-16  fw-6 mb-0">Conversion summary</h4>
@@ -308,7 +308,7 @@
                         <option class="tag_added" value="News">
                         </option>
                     </datalist>
-                </div>
+                </div> -->
             </div>
         </article>
     </section>
