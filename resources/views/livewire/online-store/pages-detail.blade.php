@@ -179,7 +179,16 @@
                     @endif
                 </div>
                  <!-- Start GIFT CARD  -->
+
+                 <div class="wrapper">
+
                 @if($page->id == 15)
+                <div class="container">
+                    <div class="question">
+                        Pick a Color Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -214,9 +223,24 @@
                         </div>
                     </div>
                 </div>
+                
+
+            </div>
+        </div>
+      </div>
+    
+ 
                 @endif
 
+            
+
                 @if($page->id == 15)
+                <div class="container">
+                    <div class="question">
+                        Knotted vs. Flat Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <!-- Knotted vs. Flat -->
                 <div class="card">
                     <div class="row">
@@ -283,9 +307,21 @@
                         <input type="text" name="button_link5" wire:model="page.button_link5">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
+            
+
                 @if($page->id == 15)
+                <div class="container">
+                    <div class="question">
+                        10,000 Years of Tradition. Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <!-- Collection -->
                 <div class="card">
                     <div class="row">
@@ -316,7 +352,15 @@
                             @endif
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
+    </div>
+
+
                 <!-- END GIFT CARD  -->
                 
                 <!-- Start Size Guide -->
@@ -598,13 +642,14 @@
                 @endif
                 <!-- END Footer Information -->
                 <div class="wrapper">
+                    @if($page->id == 10)
                     <div class="container">
                         <div class="question">
                           Our Success Section
                         </div>
                         <div class="answercont">
                           <div class="answer">
-                    @if($page->id == 10)
+                   
                     <div class="card">
                         <div class="row">
                             <label>Video Link</label>
@@ -627,20 +672,21 @@
                             <input type="text" name="button_link2" wire:model="page.button_link2">
                         </div>
                     </div>
-                    @endif
+                    
                 </div>
             </div>
           </div>
+          @endif
 
                 
-
+          @if($page->id == 10)
           <div class="container">
             <div class="question">
               Meet Resolute Section
             </div>
             <div class="answercont">
               <div class="answer">
-                @if($page->id == 10)
+                
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -679,23 +725,23 @@
                         <input type="text" name="button_link3" wire:model="page.button_link3">
                     </div>
                 </div>
-                @endif
+               
             </div>
         </div>
       </div>
-
+      @endif
 
 
             
 
-
+      @if($page->id == 10)
       <div class="container">
         <div class="question">
           Rugs Accordance Section
         </div>
         <div class="answercont">
           <div class="answer">
-                @if($page->id == 10)
+               
                 <div class="card">
                     <!-- product 1 -->
                     <div class="row">
@@ -857,21 +903,21 @@
                         <input type="text" name="product_button_link5" wire:model="page.product_button_link5">
                     </div>
                 </div>
-                @endif
+               
             </div>
         </div>
       </div>
-
+      @endif
 
     
-
+      @if($page->id == 10)
       <div class="container">
         <div class="question">
           Flat & Knotted Section
         </div>
         <div class="answercont">
           <div class="answer">
-                @if($page->id == 10)
+               
                 <!-- Flat @ Knotted -->
                 <div class="card">
                     <div class="row">
@@ -931,20 +977,21 @@
                         </div>
                     </div>
                 </div>
-                @endif
+               
             </div>
         </div>
       </div>
+      @endif
 
 
-            
+      @if($page->id == 10)
       <div class="container">
         <div class="question">
             Our Collection Section
         </div>
         <div class="answercont">
           <div class="answer">
-                @if($page->id == 10)
+                
                 <!-- Collection -->
                 <div class="card">
                     <div class="row">
@@ -964,13 +1011,13 @@
                         <input type="text" name="button_link6" wire:model="page.button_link6">
                     </div>
                 </div>
-                @endif
+               
 
             </div>
         </div>
       </div>
-    
-  </div>
+      @endif
+  
 
 
 
@@ -978,6 +1025,12 @@
                 <!-- Studio page  -->
 
                 @if($page->id == 11)
+                <div class="container">
+                    <div class="question">
+                        New Way To Shop Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1012,9 +1065,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+      </div>
                 @endif
+
+                
                 <!-- What To Expect -->
                 @if($page->id == 11)
+                <div class="container">
+                    <div class="question">
+                        What To Expect Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <!-- product 1 -->
                     <div class="row">
@@ -1137,11 +1201,20 @@
                         <textarea wire:model="page.product_button_name4" class="form-control required" name="product_button_name4" id="product_button_name4"></textarea>
                     </div>
                 </div>
+            </div>
+        </div>
+      </div>
                 @endif
 
 
                 @if($page->id == 11)
                 <!-- Our Team    -->
+                <div class="container">
+                    <div class="question">
+                        Our Team Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1176,11 +1249,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+      </div>
                 @endif
 
 
                 @if($page->id == 11)
                 <!-- The Operation  -->
+                <div class="container">
+                    <div class="question">
+                        The Operation Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1215,10 +1297,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+      </div>
                 @endif
 
                 @if($page->id == 11)
                 <!-- We want visitors  -->
+                <div class="container">
+                    <div class="question">
+                        We want visitors Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                    <div class="row">
                         <label>Title</label>
@@ -1247,12 +1338,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+      </div>
                 @endif
 
 
 
                 @if($page->id == 11)
                 <!-- Visit Us In NYC  -->
+                <div class="container">
+                    <div class="question">
+                        Visit Us In NYC Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                      <div class="row">
                         <label>Title</label>
@@ -1291,13 +1391,27 @@
                         <input type="text" name="button_url" wire:model="page.button_url">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
+
+
+           
 
 
 
                  <!-- Apartment page  -->
                  <!-- It’s In The Details -->
                 @if($page->id == 12)
+                <div class="container">
+                    <div class="question">
+                        It’s In The Details Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1332,10 +1446,20 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
                 <!-- A Leafy Tree  -->
                 @if($page->id == 12)
+                <div class="container">
+                    <div class="question">
+                        A Leafy Tree Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1370,10 +1494,20 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
                 <!-- Simple Paragraph 1 -->
                 @if($page->id == 12)
+                <div class="container">
+                    <div class="question">
+                        Simple Paragraph Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row field_style1 mb-2">
                         <div class="row">
@@ -1384,9 +1518,19 @@
                         <textarea wire:model="page.product_button_name1" class="form-control required" name="product_button_name1" id="product_button_name1"></textarea>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
                  @if($page->id == 12)
+                 <div class="container">
+                    <div class="question">
+                        What to expect Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <!-- What to expect  -->
                 <div class="card">
                    <div class="row">
@@ -1419,8 +1563,19 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
                 @if($page->id == 12)
+                <div class="container">
+                    <div class="question">
+                        Image Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <label>Image</label>
                     <div class="avatar-upload">
@@ -1443,10 +1598,20 @@
                         @endif
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
 
                 @if($page->id == 12)
+                <div class="container">
+                    <div class="question">
+                        Visit Us In Marrakech Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <!-- Visit Us In Marrakech  -->
                 <div class="card">
                      <div class="row">
@@ -1486,10 +1651,27 @@
                         <input type="text" name="button_url" wire:model="page.button_url">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
+
+
+
+            
 
                 <!-- Process Page -->
                 @if($page->id == 13)
+
+                <div class="container">
+                    <div class="question">
+                        Number 1 Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
+
                 <div class="card">
                     <!-- product 1 -->
                     <div class="row">
@@ -1522,6 +1704,20 @@
                             @endif
                         </div>                        
                     </div>
+                    
+                </div>
+
+            </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="question">
+            Number 2 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
+                <div class="card">
                     <!-- product 2  -->
                     <div class="row">
                         <label>Number 2</label>
@@ -1555,11 +1751,33 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="question">
+           Text 2 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 <div class="card">
                     <label>Text 2</label>
                     <input type="text" name="product_button_link1" wire:model="page.product_button_link1">
                 </div>
 
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="question">
+            Number 3 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 <div class="card">
                     <!-- product 3 -->
                     <div class="row">
@@ -1592,6 +1810,22 @@
                             @endif
                         </div>
                     </div>
+                    
+                </div>
+
+            </div>
+        </div>
+      </div>
+
+
+
+      <div class="container">
+        <div class="question">
+            Number 4 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
+                <div class="card">
                     <!-- product 4 -->
                     <div class="row">
                         <label>Number 4</label>
@@ -1624,11 +1858,34 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="question">
+            Text 3 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 <div class="card">
                     <label>Text 3</label>
                     <input type="text" name="product_button_link2" wire:model="page.product_button_link2">
                 </div>
 
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="question">
+            Number 5 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
                 <div class="card">
                     <!-- product 5 -->
                     <div class="row">
@@ -1661,6 +1918,23 @@
                             @endif
                         </div>
                     </div>
+
+
+                    
+                </div>
+
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="question">
+            Number 6 Section
+        </div>
+        <div class="answercont">
+          <div class="answer">
+                <div class="card">
                     <div class="row">
                         <label>Number 6</label>
                         <input type="text" name="title6" wire:model="page.title6">
@@ -1692,11 +1966,25 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
+
                 @endif
+
+
+            
 
                 <!-- In the beginning-->
 
                 @if($page->id == 14)
+                <div class="container">
+                    <div class="question">
+                        In the beginning Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1735,9 +2023,20 @@
                         <input type="text" name="button_link3" wire:model="page.button_link3">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
+                
                 @endif
 
                 @if($page->id == 14)
+                <div class="container">
+                    <div class="question">
+                        Forever inspired Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <!-- In the beginning -->
                     <div class="row">
@@ -1777,8 +2076,20 @@
                         <input type="text" name="product_button_link1" wire:model="page.product_button_link1">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
+
                 @if($page->id == 14)
+                <div class="container">
+                    <div class="question">
+                        Dedication to design Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <!-- product 2  -->
                     <div class="row">
@@ -1818,10 +2129,20 @@
                         <input type="text" name="product_button_link1" wire:model="page.product_button_link2">
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
 
                 <!-- Supporting Community -->
                 @if($page->id == 14)
+                <div class="container">
+                    <div class="question">
+                        Supporting Community Section
+                    </div>
+                    <div class="answercont">
+                      <div class="answer">
                 <div class="card">
                     <div class="row">
                         <label>Title</label>
@@ -1856,7 +2177,13 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+      </div>
                 @endif
+
+            </div>
 
 
                 <div class="card search-engine-listing-card">
