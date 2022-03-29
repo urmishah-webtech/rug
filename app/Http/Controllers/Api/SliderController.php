@@ -224,6 +224,22 @@ class SliderController extends Controller
 
     public function getStudiopage(){
         $studioget =  page::where('id',11)->first();
+		$sliders =  Slider::where('page_id',11)->get();
+		$data1=array();
+    	$i=0; 
+    	$image_path= public_path().'/image/slider/';
+    	 
+    	foreach($sliders as $value)
+    	{
+    		$data1[$i]['id'] = $value->id;
+    		$data1[$i]['slider_image'] =$image_path.$value->slider_image;
+    		$data1[$i]['title'] = $value->title;
+    		$data1[$i]['description'] = $value->description;
+    		$data1[$i]['buttne_text'] = $value->buttne_text;
+    		$data1[$i]['button_link'] = $value->button_link;
+    		$i++;
+    	}
+		
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -269,7 +285,7 @@ class SliderController extends Controller
             $data['nycimage'] = $image_path.$studioget->image;
             $data['nycbuttonname'] = $studioget->button_name;
             $data['nycbuttonlink'] = $studioget->button_url;
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
     public function getApartmentpage(){
