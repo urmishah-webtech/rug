@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+ 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
@@ -13,6 +13,9 @@ use Validator;
 use DB;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Menu;
+use App\Models\MenuItem;
+
 
 class SliderController extends Controller
 {
@@ -221,6 +224,22 @@ class SliderController extends Controller
 
     public function getStudiopage(){
         $studioget =  page::where('id',11)->first();
+		$sliders =  Slider::where('page_id',11)->get();
+		$data1=array();
+    	$i=0; 
+    	$image_path= public_path().'/image/slider/';
+    	 
+    	foreach($sliders as $value)
+    	{
+    		$data1[$i]['id'] = $value->id;
+    		$data1[$i]['slider_image'] =$image_path.$value->slider_image;
+    		$data1[$i]['title'] = $value->title;
+    		$data1[$i]['description'] = $value->description;
+    		$data1[$i]['buttne_text'] = $value->buttne_text;
+    		$data1[$i]['button_link'] = $value->button_link;
+    		$i++;
+    	}
+		
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -266,7 +285,7 @@ class SliderController extends Controller
             $data['nycimage'] = $image_path.$studioget->image;
             $data['nycbuttonname'] = $studioget->button_name;
             $data['nycbuttonlink'] = $studioget->button_url;
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
     public function getApartmentpage(){
@@ -469,4 +488,26 @@ class SliderController extends Controller
 
         return response($data,200);
     }
+	
+	 public function getFooterNavigationList($id)
+	{	 
+			 
+		if (Menu::where('id', $id)->exists())
+		{	$image_path = url('/storage/uploads');
+			$menu_list = MenuItem::join('admin_menus as m2', 'm2.id', '=', 'admin_menu_items.menu')
+			->where('admin_menu_items.menu', $id)->where('admin_menu_items.parent',0)->get(['admin_menu_items.*', 'm2.name']); 
+		 
+			foreach($menu_list as $key1 => $result)
+			{
+				$insert_stock['id']=$result['id'];
+				$insert_stock['label']=$result['label'];
+				$insert_stock['link']=$result['link'];
+				if($result['image']){
+				$insert_stock['image']=$image_path.'/'.$result['image'];
+				}
+				$data_result[$key1] = $insert_stock;
+			}
+			return response($data_result , 200);
+		}
+	}
 }
