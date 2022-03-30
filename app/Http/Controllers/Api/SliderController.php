@@ -345,6 +345,23 @@ class SliderController extends Controller
 
      public function getProcesspage(){
         $processget =  page::where('id',13)->first();
+        $sliders =  Slider::where('page_id',13)->get();
+        $data1=array();
+        $i=0; 
+        $image_path= url('/storage/'); 
+         
+        foreach($sliders as $value)
+        {
+            $data1[$i]['id'] = $value->id;
+            $data1[$i]['slider_image'] =$image_path.$value->slider_image;
+            $data1[$i]['title'] = $value->title;
+            $data1[$i]['description'] = $value->description;
+            $data1[$i]['buttne_text'] = $value->buttne_text;
+            $data1[$i]['button_link'] = $value->button_link;
+            $i++;
+        }
+
+
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -380,11 +397,28 @@ class SliderController extends Controller
             $data['processbuttonname6'] = $processget->button_name;
             $data['processproductimage6'] = $image_path.$processget->image;
 
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
     public function getStorypage(){
         $storyget =  page::where('id',14)->first();
+        $sliders =  Slider::where('page_id',14)->get();
+        $data1=array();
+        $i=0; 
+        $image_path= url('/storage/'); 
+         
+        foreach($sliders as $value)
+        {
+            $data1[$i]['id'] = $value->id;
+            $data1[$i]['slider_image'] =$image_path.$value->slider_image;
+            $data1[$i]['title'] = $value->title;
+            $data1[$i]['description'] = $value->description;
+            $data1[$i]['buttne_text'] = $value->buttne_text;
+            $data1[$i]['button_link'] = $value->button_link;
+            $i++;
+        }
+
+
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -417,11 +451,26 @@ class SliderController extends Controller
             $data['communityimage1'] = $image_path.$storyget->flat_image1;
 
 
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
      public function getSwatchespage(){
         $swatchesget =  page::where('id',15)->first();
+        $sliders =  Slider::where('page_id',15)->get();
+        $data1=array();
+        $i=0; 
+        $image_path= url('/storage/'); 
+         
+        foreach($sliders as $value)
+        {
+            $data1[$i]['id'] = $value->id;
+            $data1[$i]['slider_image'] =$image_path.$value->slider_image;
+            $data1[$i]['title'] = $value->title;
+            $data1[$i]['description'] = $value->description;
+            $data1[$i]['buttne_text'] = $value->buttne_text;
+            $data1[$i]['button_link'] = $value->button_link;
+            $i++;
+        }
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -450,11 +499,26 @@ class SliderController extends Controller
             $data['videoimage'] = $image_path.$swatchesget->product_image1;
 
 
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
      public function getSizeGuidepage(){
         $sizeguideget =  page::where('id',16)->first();
+        $sliders =  Slider::where('page_id',16)->get();
+        $data1=array();
+        $i=0; 
+        $image_path= url('/storage/'); 
+         
+        foreach($sliders as $value)
+        {
+            $data1[$i]['id'] = $value->id;
+            $data1[$i]['slider_image'] =$image_path.$value->slider_image;
+            $data1[$i]['title'] = $value->title;
+            $data1[$i]['description'] = $value->description;
+            $data1[$i]['buttne_text'] = $value->buttne_text;
+            $data1[$i]['button_link'] = $value->button_link;
+            $i++;
+        }
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -488,7 +552,7 @@ class SliderController extends Controller
             $data['sizeguidelargeimage2'] = $image_path.$sizeguideget->flat_image2;
             $data['sizeguidelargeimagename1'] = $sizeguideget->button_name5;
 
-        return response($data,200);
+        return response([$data,$data1],200);
     }
     public function getfooterpage(){
         $footerget =  page::where('id',17)->first();
