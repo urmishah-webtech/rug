@@ -26,35 +26,68 @@
                         
                     </div>
                 </div>
+                
+
+          
             </article>
        
-           <!--  <div class="card suggested-reading-card">
-                <article>
-                    <div class="column">
-                        <div class="suggested-reading-card-left ta-center">
-                            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/admin/home/blogs/blog-card--big-43ceac7c0165886502361aad700356c7ec063ced597ccbba4ff4408b3e41a4a4.svg">
-                            <h3 class="fs-12 fw-6 mb-0">SUGGESTED READING</h3>
+           <div class="dash-pd-sale-stock">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="dash-card">
+                        <div class="card-header">
+                           <h4>product wise sale</h4>
                         </div>
-                    </div>
-                    <div class="column">
-                        <div class="suggested-reading-card-right">
-                            <p class="text-grey fs-12">Because you added a product <button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6 10a2 2 0 1 1-4.001-.001A2 2 0 0 1 6 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 12 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 18 10z"></path></svg></button></p>
-                            <h3 class="fs-16 fw-6">Compelling product descriptions can persuade visitors to buy. Here are 9 things to add to yours.</h3>
-                            <div class="read-blog-btn">
-                                <button class="secondary">Read blog post</button>
-                                <span class="fs-12 text-grey">6 min read</span>
-                            </div>
+                        <div class="chart-body">
+                           <ul class="chart-info">
+                              <li>
+                                 <span class="chart-info-color blue-color"></span>
+                                 <b>Number of sale</b>
+                              </li>
+                           </ul>
+                           <canvas id="PdSaleChart" width="250" height="250"></canvas>
                         </div>
-                    </div>
-                </article>
-            </div> -->
+                     </div>
+                  </div>
+               </div>
+            </div>
 
-
+            <div class="top-products-sec dash-card">
+               <div class="card-header">
+                  <h4>Top  {{ count($mostsellingproduct) }} Products</h4>
+               </div>
+               <div class="card-body">
+                  <div class="top-products-slider">
+                  @if($mostsellingproduct)
+                    @foreach($mostsellingproduct as $result)
+                     <div>
+                        <a class="top-pd">
+                           @if(!empty($result->image))
+                           <img src="{{ url($result->image) }}">
+                           @else
+                           <img src="{{ url('assets/blank-img.jpg') }}">
+                           @endif
+                           <div class="top-pd-details">
+                              <span class="pd-price">
+                                 <?php /* @if(!empty($result->product_MOQ)) <?php echo number_format($result->product_MOQ, 2, '.', ','); ?> @endif */ ?></span>
+                                 
+                              <span class="pd-name">{{$result->title}}</span>
+                           </div>
+                        </a>
+                     </div>
+                     @endforeach
+                  @endif
+                  </div>
+               </div>
+            </div> 
 
         </div>
        
 </div>
 </article>
 </section>
+<script type="text/javascript">
+   
+</script>
 </x-admin-layout>
 </div>

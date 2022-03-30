@@ -30,6 +30,8 @@ class Order extends Component
     public $bulkDisabled = true;
 
     public $perPage = 10;
+  
+  
 
 
     public function mount() {
@@ -45,16 +47,9 @@ class Order extends Component
     	
         $this->bulkDisabled = count($this->selecteorder) < 1;
 
-		$orders = Orders::with('user')->where('transactionid','!=','0' )->when($this->filter_order, function ($query, $filter_order) {
-
-            $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
-            $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');
-
-            })->get();
-        $items = $orders->forPage($this->page, $this->perPage);
-        $paginator = new LengthAwarePaginator($items, $orders->count(), $this->perPage, $this->page);
+		
         
-        return view('livewire.order.order', ['order' => $paginator]);
+        return view('livewire.order.order', ['order' => $this->Orderpaginate]);
     }
 
     public function deleteselected(){
@@ -73,12 +68,32 @@ class Order extends Component
         $this->selectall = false;
     }
 
+    public function getOrderpaginateProperty(){
+        $orders = Orders::with('user')->where('transactionid','!=','0' )->when($this->filter_order, function ($query, $filter_order) {
+
+            $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
+            $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');
+
+            })->get();
+        $items = $orders->forPage($this->page, $this->perPage);
+        return new LengthAwarePaginator($items, $orders->count(), $this->perPage, $this->page);
+    }
+
     public function updatedSelectAll($value){
 
         if($value){
-            $this->selecteorder = Orders::pluck('id');
+            $this->selecteorder = $this->Orderpaginate->pluck('id')->toArray();
+        
         }else{
             $this->selecteorder = [];
         }
+    }
+
+    public function updatedSelecteorder(){
+         $this->selectall = false;
+    }
+
+    public function isSelecteorder($order_id){
+        return in_array($order_id, $this->selecteorder);
     }
 }
