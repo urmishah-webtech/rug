@@ -72,4 +72,13 @@ class Order extends Component
         $this->selecteorder = [];
         $this->selectall = false;
     }
+
+    public function updatedSelectAll($value){
+
+        if($value){
+            $this->selecteorder = Orders::pluck('id');
+        }else{
+            $this->selecteorder = [];
+        }
+    }
 }
