@@ -146,7 +146,7 @@ class PaymentController extends Controller
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
-            $pay->status = $payment->status;
+            $pay->status = 'successed';
             $pay->payment_link = '';
             $pay->save();
 
