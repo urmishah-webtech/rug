@@ -227,12 +227,12 @@ class SliderController extends Controller
 		$sliders =  Slider::where('page_id',11)->get();
 		$data1=array();
     	$i=0; 
-    	$image_path= public_path().'/image/slider/';
+    	$image_path= url('/storage/'); 
     	 
     	foreach($sliders as $value)
     	{
     		$data1[$i]['id'] = $value->id;
-    		$data1[$i]['slider_image'] =$image_path.$value->slider_image;
+    		$data1[$i]['slider_image'] =$image_path.'/'.$value->slider_image;
     		$data1[$i]['title'] = $value->title;
     		$data1[$i]['description'] = $value->description;
     		$data1[$i]['buttne_text'] = $value->buttne_text;
@@ -290,6 +290,23 @@ class SliderController extends Controller
 
     public function getApartmentpage(){
         $apartmentget =  page::where('id',12)->first();
+		
+		$sliders =  Slider::where('page_id',12)->get();
+		$data1=array();
+    	$i=0; 
+    	$image_path= url('/storage/'); 
+    	 
+    	foreach($sliders as $value)
+    	{
+    		$data1[$i]['id'] = $value->id;
+    		$data1[$i]['slider_image'] =$image_path.$value->slider_image;
+    		$data1[$i]['title'] = $value->title;
+    		$data1[$i]['description'] = $value->description;
+    		$data1[$i]['buttne_text'] = $value->buttne_text;
+    		$data1[$i]['button_link'] = $value->button_link;
+    		$i++;
+    	}
+		
         $data=array();
         $image_path= 'https://projects.webtech-evolution.com/rug/public/storage/';
          
@@ -322,7 +339,7 @@ class SliderController extends Controller
             $data['marrakechbuttonlink'] = $apartmentget->button_url;
 
           
-        return response($data,200);
+        return response([$data,$data1],200);
     }
 
 
