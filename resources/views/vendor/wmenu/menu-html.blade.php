@@ -742,6 +742,17 @@ $currentUrl = url()->current();
                                                                                         Url
 
                                                                                         <br>
+                                                                                        @if($m->type_category != 2 || $m->type_category != 3)
+                                                                                        <input type="text"
+
+                                                                                           id="url_menu_{{$m->id}}"
+
+                                                                                           class="widefat code edit-menu-item-url"
+
+                                                                                           id="url_menu_{{$m->id}}"
+
+                                                                                           value="{{$m->link}}">
+                                                                                        @endif
                                                                                         @if($m->type_category == 2)
                                                                                         <a href="{{ url('/product').'/'.$m->link }}">{{ url('/collection').'/'.$m->link }}</a>
                                                                                         <input type="text"

@@ -146,7 +146,7 @@ class PaymentController extends Controller
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
-            $pay->status = $payment->status;
+            $pay->status = 'successed';
             $pay->payment_link = '';
             $pay->save();
 
@@ -206,11 +206,12 @@ class PaymentController extends Controller
 
 
 
-                $data = ['name'=>'vishal', 'data'=>'hello vishal'];
-                $user['to'] = 'prajapativishal999991@gmail.com';
+            //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
+            $user['to'] = $order['email'];
+
              Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
                     $message->to($user['to']);
-                    $message->subject('New email!!!');
+                    $message->subject('Rug Order Mail!!!');
                 });
          
             return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);

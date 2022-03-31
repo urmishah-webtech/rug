@@ -26,6 +26,14 @@
                     <input type="text" name="buttne_text" wire:model="buttne_text" placeholder="Enter Button Text">
                     <label>Button Link</label>
                     <input type="text" name="button_link" wire:model="button_link" placeholder="Enter Button Link">
+                    <label>select page</label>
+                    <select name="page_id" wire:model="page_id" class="country-drop" id="customer_phone_code" >
+                        <option value=""><i class="fa fa-globe"></i></option>
+                        @foreach($pageget as $row)
+                            <option value="{{$row->id}}">{{$row->title}}
+                            </option>
+                        @endforeach
+                    </select>
                     <div class="product-des-customize">
                         <label>Description (optional)</label>
                         <div class="product-des-customize-inner">
@@ -41,7 +49,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="columns one-third right-details">  
                 <div class="card pd-20 tag-card card-grey-bg collection-upload-image">

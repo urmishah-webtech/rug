@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +36,8 @@ Route::get('ourstorypage', 'App\Http\Controllers\Api\SliderController@getStorypa
 Route::get('swatchespage', 'App\Http\Controllers\Api\SliderController@getSwatchespage');
 Route::get('sizeguidepage', 'App\Http\Controllers\Api\SliderController@getSizeGuidepage');
 Route::get('footerinformation', 'App\Http\Controllers\Api\SliderController@getfooterpage');
+Route::get('footermenu/{id}', 'App\Http\Controllers\Api\SliderController@getFooterNavigationList');
+
 
 Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
 Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
@@ -51,8 +53,8 @@ Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogP
 
 Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
 Route::get('getmenu', 'App\Http\Controllers\Api\NavigationController@getnavigation');
-//Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
-//Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
+Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 

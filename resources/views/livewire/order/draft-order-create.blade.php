@@ -31,10 +31,10 @@
                             </div>
                         </div>
                         <div class="card-middle">
-                            <div class="card-column">
+                            <!-- <div class="card-column">
                                  <label>Notes</label>
                                  <textarea></textarea>
-                            </div>
+                            </div> -->
                             <div class="card-column">
                                 <div class="card-inner-col">
                                     <ul>
@@ -62,7 +62,7 @@
                         <input type="search" placeholder="Search customers">
                     </p>
                 </div>
-                <div class="card pd-20">
+                <!-- <div class="card pd-20">
                     <div class="header-title">
                         <h3 class="fs-16 fw-6 mb-0">Tags</h3>
                          <button class="link" onclick="document.getElementById('view-all-tags').style.display='block'">View all tags</button>
@@ -70,7 +70,7 @@
                     <p class="mb-0">
                         <input type="text" placeholder="Urgent, reviewed, wholesale">
                     </p>
-                </div>
+                </div> -->
             </div>    
         </article>
     </section>

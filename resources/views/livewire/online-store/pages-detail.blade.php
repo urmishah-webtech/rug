@@ -931,7 +931,7 @@
                         </div>
                     </div>
                     <div class="row field_style1 mb-2">
-                        <label>Image</label>
+                        <label>Image 2</label>
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
@@ -950,7 +950,10 @@
                                 </div>
                             </div>
                             @endif
-                            <label>Image</label>
+                        </div>
+                    </div>
+                    <div class="row field_style1 mb-2">
+                            <label>Image 2</label>
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
                                     <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
@@ -970,12 +973,12 @@
                                 </div>
                                 @endif
                             </div>
-                            <label>Button Name</label>
-                            <input type="text" name="button_name5" wire:model="page.button_name5">
-                            <label>Button Link</label>
-                            <input type="text" name="button_link5" wire:model="page.button_link5">
                         </div>
-                    </div>
+             
+                    <label>Button Name</label>
+                    <input type="text" name="button_name5" wire:model="page.button_name5">
+                    <label>Button Link</label>
+                    <input type="text" name="button_link5" wire:model="page.button_link5">
                 </div>
                
             </div>
