@@ -152,38 +152,21 @@
        <div id="container">
        <div id="slider-container">
        <span onclick="slideRight()" class="btn"></span>
-       <h5>Product Wise Sale</h5>
+       <h5>Product {{ count($mostsellingproduct) }} Wise Sale</h5>
        <div id="slider">
+       @if($mostsellingproduct)
+       @foreach($mostsellingproduct as $result)
        <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+       @if(!empty($result->image))
+       <img src="{{ url('storage/'.$result->image) }}" class="w-h-image">
+       @else
+       <img src="{{ url('assets/blank-img.jpg') }}" class="w-h-image">
+       @endif
+       <span>{{$result->price}}</span>
+       <p>{{$result->title}}</p>
        </div>
-       <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
-       </div>
-       <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
-       </div>
-       <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
-       </div>
-       <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
-       </div>
-       <div class="slide">
-       <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
-       <span>100</span>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
-       </div>
+       @endforeach
+       @endif
        </div>
        <span onclick="slideLeft()" class="btn"></span>
        </div>
@@ -219,7 +202,9 @@
                        
                        }
                     },
-                  categories: ['May 5', 'May 6', 'May 7', 'May 8', 'May 9', 'May 10', 'May 11']
+                  categories: [<?php foreach ($mostsellingproduct as $key => $value): ?>
+            '{{$value->title}}',
+         <?php endforeach; ?>]
               },
               yAxis: {
                  gridLineWidth: .5,
@@ -233,7 +218,7 @@
                   },
                   labels: {
                     formatter: function() {
-                              return '$'+Highcharts.numberFormat(this.value, 0, '', ',');
+                              return '$'+Highcharts.numberFormat(<?php foreach ($mostsellingproduct as $key => $value): ?>'{{$value->total}}',<?php endforeach; ?>, 0, '', ',');
                           },
                     style: {
                         color: '#6d7175',

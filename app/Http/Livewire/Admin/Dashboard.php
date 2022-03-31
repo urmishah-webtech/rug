@@ -22,10 +22,11 @@ class Dashboard extends Component
             ->JOIN('product_media', 'product_media.product_id', '=', 'product.id')
             ->selectRaw('product.*,product_media.image')
             ->groupBy('product.id')
+            ->selectRaw('count(order_items.product_id) as total')
             ->orderBy('product.id','desc')
             ->take(10)
             ->get();
-        
+
         /* $mostsellingproduct = DB::table('bdtdc_product_description')->JOIN('bdtdc_order_details', 'bdtdc_product_description.product_id', '=', 'bdtdc_order_details.product_id')
             ->JOIN('bdtdc_product_images', 'bdtdc_product_images.product_id', '=', 'bdtdc_product_description.product_id')
             ->JOIN('bdtdc_product_prices', 'bdtdc_product_prices.product_id', '=', 'bdtdc_product_description.product_id')
