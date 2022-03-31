@@ -1,6 +1,124 @@
 <div>
 <x-admin-layout>
-<section class="full-width home-page">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        #containergraph{
+  width: 100% ;
+  padding-top: 2%;
+  height: 400px;
+}
+
+#container {
+  
+  
+  display: grid ;
+  
+}
+
+#slider-container {
+  
+    box-shadow: 0 0 0 1px rgb(63 63 68 / 5%), 0 1px 3px 0 rgb(63 63 68 / 15%);
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+#slider-container .btn {
+  position: absolute;
+  top: calc(50% - 30px);
+  height: 20px;
+  width: 20px;
+  border-left: 8px solid #ccc;
+  border-top: 8px solid #ccc;
+}
+
+#slider-container .btn:hover {
+  transform: scale(1.2);
+}
+
+#slider-container .btn.inactive {
+  border-color: rgb(153, 121, 126)
+}
+
+#slider-container .btn:first-of-type {
+  transform: rotate(-45deg);
+  left: 10px
+}
+
+#slider-container .btn:last-of-type {
+  transform: rotate(135deg);
+  right: 10px;
+}
+
+#slider-container #slider {
+  display: flex;
+  width: 1000%;
+  height: 100%; 
+  transition: all .5s;
+}
+
+#slider-container #slider .slide {
+    box-shadow: 0 0 0 1px rgb(63 63 68 / 5%), 0 1px 3px 0 rgb(63 63 68 / 15%);
+  margin: auto 10px;
+  
+  
+}
+
+#slider-container #slider .slide span {
+    color: #000;
+    font-size: 16px;
+    text-align: left;
+    display: block;
+    padding: 10px 20px 5px 20px;
+    font-weight: 500;
+}
+
+#slider-container #slider .slide p {
+    color: #000;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    padding: 0px 20px 5px 20px;
+}
+
+@media only screen and (min-width: 1100px) {
+
+  #slider-container #slider .slide {
+    width: calc(2.5% - 20px);
+  }
+
+}
+
+@media only screen and (max-width: 1100px) {
+
+  #slider-container #slider .slide {
+    width: calc(3.3333333% - 20px);
+  }
+
+}
+
+@media only screen and (max-width: 900px) {
+
+  #slider-container #slider .slide {
+    width: calc(5% - 20px);
+  }
+
+}
+
+@media only screen and (max-width: 550px) {
+
+  #slider-container #slider .slide {
+    width: calc(10% - 20px);
+  }
+
+}
+.w-h-image{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+    </style>
+<section class="">
     <article>
         <div class="columns home-left-sec">
             
@@ -20,7 +138,8 @@
                     </div>
                 </div>
             </article>
-       
+
+
            <!--  <div class="card suggested-reading-card">
                 <article>
                     <div class="column">
@@ -45,9 +164,233 @@
 
 
         </div>
+
+        
+        
        
-</div>
+
 </article>
 </section>
+
+<section class="">
+
+    <div class="card">
+
+        <h5>Product Wise Sale</h5>
+    <div id="containergraph"></div>
+</div>
+</section>
+
+<section>
+    
+<div id="container">
+    
+    <div id="slider-container">
+      <span onclick="slideRight()" class="btn"></span>
+      <h5>Product Wise Sale</h5>
+        <div id="slider">
+            <div class="slide">
+              <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+              <span>100</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+
+            </div>
+            <div class="slide">
+                <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+                <span>100</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+  
+              </div>
+              <div class="slide">
+                <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+                <span>100</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+  
+              </div>
+              <div class="slide">
+                <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+                <span>100</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+  
+              </div>
+              <div class="slide">
+                <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+                <span>100</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+  
+              </div>
+              <div class="slide">
+                <img src="https://rug.webtech-evolution.com/assets/img/sec1-img.png" alt="" class="w-h-image">
+                <span>100</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit maxime placeat architecto illo</p>
+  
+              </div>
+      </div>
+      <span onclick="slideLeft()" class="btn"></span>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<script>
+    $(function () { 
+  Highcharts.setOptions({
+    colors: ['#67BCE6'],
+    chart: {
+        style: {
+            
+            color: '#fff'
+        }
+    }
+});  
+  $('#containergraph').highcharts({
+        chart: {
+            type: 'column',
+            backgroundColor: '#fff'
+        },
+        title: {
+            text: 'No. of Sale',
+            style: {  
+              color: '#6d7175'
+            }
+        },
+        xAxis: {
+            tickWidth: 0,
+            labels: {
+              style: {
+                  color: '#6d7175',
+                 
+                 }
+              },
+            categories: ['May 5', 'May 6', 'May 7', 'May 8', 'May 9', 'May 10', 'May 11']
+        },
+        yAxis: {
+           gridLineWidth: .5,
+		      gridLineDashStyle: 'dash',
+		      gridLineColor: 'black',
+           title: {
+                text: '',
+                style: {
+                  color: '#6d7175'
+                 }
+            },
+            labels: {
+              formatter: function() {
+                        return '$'+Highcharts.numberFormat(this.value, 0, '', ',');
+                    },
+              style: {
+                  color: '#6d7175',
+                 }
+              }
+            },
+        legend: {
+            enabled: false,
+        },
+        credits: {
+            enabled: false
+        },
+        tooltip: {
+           valuePrefix: '$'
+        },
+        plotOptions: {
+		      column: {
+			      borderRadius: 2,
+             pointPadding: 0,
+			      groupPadding: 0.1
+            } 
+		    },
+        series: [{
+            name: 'Revenue',
+            data: [2200, 2800, 2300, 1700, 2000, 1200, 1400]
+        }]
+    });
+});
+
+
+var container = document.getElementById('container')
+var slider = document.getElementById('slider');
+var slides = document.getElementsByClassName('slide').length;
+var buttons = document.getElementsByClassName('btn');
+
+
+var currentPosition = 0;
+var currentMargin = 0;
+var slidesPerPage = 0;
+var slidesCount = slides - slidesPerPage;
+var containerWidth = container.offsetWidth;
+var prevKeyActive = false;
+var nextKeyActive = true;
+
+window.addEventListener("resize", checkWidth);
+
+function checkWidth() {
+    containerWidth = container.offsetWidth;
+    setParams(containerWidth);
+}
+
+function setParams(w) {
+    if (w < 551) {
+        slidesPerPage = 1;
+    } else {
+        if (w < 901) {
+            slidesPerPage = 2;
+        } else {
+            if (w < 1101) {
+                slidesPerPage = 3;
+            } else {
+                slidesPerPage = 4;
+            }
+        }
+    }
+    slidesCount = slides - slidesPerPage;
+    if (currentPosition > slidesCount) {
+        currentPosition -= slidesPerPage;
+    };
+    currentMargin = - currentPosition * (100 / slidesPerPage);
+    slider.style.marginLeft = currentMargin + '%';
+    if (currentPosition > 0) {
+        buttons[0].classList.remove('inactive');
+    }
+    if (currentPosition < slidesCount) {
+        buttons[1].classList.remove('inactive');
+    }
+    if (currentPosition >= slidesCount) {
+        buttons[1].classList.add('inactive');
+    }
+}
+
+setParams();
+
+function slideRight() {
+    if (currentPosition != 0) {
+        slider.style.marginLeft = currentMargin + (100 / slidesPerPage) + '%';
+        currentMargin += (100 / slidesPerPage);
+        currentPosition--;
+    };
+    if (currentPosition === 0) {
+        buttons[0].classList.add('inactive');
+    }
+    if (currentPosition < slidesCount) {
+        buttons[1].classList.remove('inactive');
+    }
+};
+
+function slideLeft() {
+    if (currentPosition != slidesCount) {
+        slider.style.marginLeft = currentMargin - (100 / slidesPerPage) + '%';
+        currentMargin -= (100 / slidesPerPage);
+        currentPosition++;
+    };
+    if (currentPosition == slidesCount) {
+        buttons[1].classList.add('inactive');
+    }
+    if (currentPosition > 0) {
+        buttons[0].classList.remove('inactive');
+    }
+};
+</script>
 </x-admin-layout>
 </div>

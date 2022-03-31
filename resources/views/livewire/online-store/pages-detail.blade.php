@@ -185,7 +185,7 @@
                 @if($page->id == 15)
                 <div class="container">
                     <div class="question">
-                        Pick a Color Section
+                        Pick a Color
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -237,7 +237,7 @@
                 @if($page->id == 15)
                 <div class="container">
                     <div class="question">
-                        Knotted vs. Flat Section
+                        Knotted vs. Flat
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -318,7 +318,7 @@
                 @if($page->id == 15)
                 <div class="container">
                     <div class="question">
-                        10,000 Years of Tradition. Section
+                        10,000 Years of Tradition.
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -645,7 +645,7 @@
                     @if($page->id == 10)
                     <div class="container">
                         <div class="question">
-                          Our Success Section
+                          Our Success
                         </div>
                         <div class="answercont">
                           <div class="answer">
@@ -682,7 +682,7 @@
           @if($page->id == 10)
           <div class="container">
             <div class="question">
-              Meet Resolute Section
+              Meet Resolute
             </div>
             <div class="answercont">
               <div class="answer">
@@ -737,7 +737,7 @@
       @if($page->id == 10)
       <div class="container">
         <div class="question">
-          Rugs Accordance Section
+          Rugs Accordance
         </div>
         <div class="answercont">
           <div class="answer">
@@ -913,7 +913,7 @@
       @if($page->id == 10)
       <div class="container">
         <div class="question">
-          Flat & Knotted Section
+          Flat & Knotted
         </div>
         <div class="answercont">
           <div class="answer">
@@ -987,7 +987,7 @@
       @if($page->id == 10)
       <div class="container">
         <div class="question">
-            Our Collection Section
+            Our Collection
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1027,7 +1027,7 @@
                 @if($page->id == 11)
                 <div class="container">
                     <div class="question">
-                        New Way To Shop Section
+                        New Way To Shop
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1075,7 +1075,7 @@
                 @if($page->id == 11)
                 <div class="container">
                     <div class="question">
-                        What To Expect Section
+                        What To Expect
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1211,7 +1211,7 @@
                 <!-- Our Team    -->
                 <div class="container">
                     <div class="question">
-                        Our Team Section
+                        Our Team
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1259,7 +1259,7 @@
                 <!-- The Operation  -->
                 <div class="container">
                     <div class="question">
-                        The Operation Section
+                        The Operation
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1306,7 +1306,7 @@
                 <!-- We want visitors  -->
                 <div class="container">
                     <div class="question">
-                        We want visitors Section
+                        We want visitors
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1349,7 +1349,7 @@
                 <!-- Visit Us In NYC  -->
                 <div class="container">
                     <div class="question">
-                        Visit Us In NYC Section
+                        Visit Us In NYC
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1408,7 +1408,7 @@
                 @if($page->id == 12)
                 <div class="container">
                     <div class="question">
-                        It’s In The Details Section
+                        It’s In The Details
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1456,7 +1456,7 @@
                 @if($page->id == 12)
                 <div class="container">
                     <div class="question">
-                        A Leafy Tree Section
+                        A Leafy Tree
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1504,7 +1504,7 @@
                 @if($page->id == 12)
                 <div class="container">
                     <div class="question">
-                        Simple Paragraph Section
+                        Simple Paragraph
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1527,7 +1527,7 @@
                  @if($page->id == 12)
                  <div class="container">
                     <div class="question">
-                        What to expect Section
+                        What to expect
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1572,7 +1572,7 @@
                 @if($page->id == 12)
                 <div class="container">
                     <div class="question">
-                        Image Section
+                        Image
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1608,7 +1608,7 @@
                 @if($page->id == 12)
                 <div class="container">
                     <div class="question">
-                        Visit Us In Marrakech Section
+                        Visit Us In Marrakech
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1667,7 +1667,7 @@
 
                 <div class="container">
                     <div class="question">
-                        Number 1 Section
+                        Number 1
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -1713,7 +1713,7 @@
 
       <div class="container">
         <div class="question">
-            Number 2 Section
+            Number 2
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1758,7 +1758,7 @@
 
       <div class="container">
         <div class="question">
-           Text 2 Section
+           Text 2
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1774,7 +1774,7 @@
 
       <div class="container">
         <div class="question">
-            Number 3 Section
+            Number 3
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1821,7 +1821,7 @@
 
       <div class="container">
         <div class="question">
-            Number 4 Section
+            Number 4
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1866,7 +1866,7 @@
 
       <div class="container">
         <div class="question">
-            Text 3 Section
+            Text 3
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1882,7 +1882,7 @@
 
       <div class="container">
         <div class="question">
-            Number 5 Section
+            Number 5
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1930,7 +1930,7 @@
 
       <div class="container">
         <div class="question">
-            Number 6 Section
+            Number 6
         </div>
         <div class="answercont">
           <div class="answer">
@@ -1981,7 +1981,7 @@
                 @if($page->id == 14)
                 <div class="container">
                     <div class="question">
-                        In the beginning Section
+                        In the beginning
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -2033,7 +2033,7 @@
                 @if($page->id == 14)
                 <div class="container">
                     <div class="question">
-                        Forever inspired Section
+                        Forever inspired
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -2086,7 +2086,7 @@
                 @if($page->id == 14)
                 <div class="container">
                     <div class="question">
-                        Dedication to design Section
+                        Dedication to design
                     </div>
                     <div class="answercont">
                       <div class="answer">
@@ -2139,7 +2139,7 @@
                 @if($page->id == 14)
                 <div class="container">
                     <div class="question">
-                        Supporting Community Section
+                        Supporting Community
                     </div>
                     <div class="answercont">
                       <div class="answer">

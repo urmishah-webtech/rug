@@ -1,5 +1,11 @@
 <div>
 <x-admin-layout>
+    <style>
+        #custom-sliderbtn{
+            background: linear-gradient(180deg, #6371c7, #5563c1);
+            color: #fff;
+        }
+    </style>
     <div wire:key="alert">
 
      @if (session()->has('message'))
@@ -86,7 +92,7 @@
     </section>
     <section class="full-width flex-wrap admin-body-width create-collection-footer" wire:ignore>
         <div class="page-bottom-btn">
-             <button class="fw-6 button secondary" wire:ignore wire:click.prevent="update()">Save</button>
+             <button class="fw-6 button secondary" id="custom-sliderbtn" wire:ignore wire:click.prevent="update()">Save</button>
         </div>
     </section>
     
