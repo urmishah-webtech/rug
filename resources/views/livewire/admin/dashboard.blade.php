@@ -218,7 +218,7 @@
                   },
                   labels: {
                     formatter: function() {
-                              return '$'+Highcharts.numberFormat(<?php foreach ($mostsellingproduct as $key => $value): ?>'{{$value->total}}',<?php endforeach; ?>, 0, '', ',');
+                              return '$'+Highcharts.numberFormat(this.value, 0, '', ',');
                           },
                     style: {
                         color: '#6d7175',
