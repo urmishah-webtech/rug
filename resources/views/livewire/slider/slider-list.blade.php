@@ -1,5 +1,10 @@
 <div>
     <x-admin-layout>
+        <style>
+            .one-bg.border-every-row th, .one-bg.border-every-row td{
+                padding: 15px 16px;
+            }
+        </style>
     <section class="full-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -41,16 +46,21 @@
                     <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing collections-sec">
                         <tbody>
                             <tr>
+                                <th>S No.</th>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Button Text</th>
+                                <th>Page N
+                                    ame</th>
                                 <th class="ta-right">
                                 	Created Date
                                 </th>
                             </tr>
+
+                           
                             @if($slider)
-                          	@foreach($slider as $result)
+                          	@foreach($slider as $reskey => $result)
                             <tr>
+                                <td>{{$reskey+1}}</td>
                                 <td class="product-table-item">
                                 	<img src="{{ url('storage/'.$result['slider_image']) }}" />
                                 </td>
