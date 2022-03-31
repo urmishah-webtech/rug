@@ -4,12 +4,12 @@
         <ul>
             <li ><a href="{{ route('admin-dashboard') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M18 7.261V17.5c0 .841-.672 1.5-1.5 1.5h-2c-.828 0-1.5-.659-1.5-1.5V13H7v4.477C7 18.318 6.328 19 5.5 19h-2c-.828 0-1.5-.682-1.5-1.523V7.261a1.5 1.5 0 0 1 .615-1.21l6.59-4.82a1.481 1.481 0 0 1 1.59 0l6.59 4.82A1.5 1.5 0 0 1 18 7.26z"></path></svg>Home</a></li>
             <li class="<?php if(request()->route()->getName() === 'order-list' || request()->route()->getName() === 'draft-orders' || request()->route()->getName() === 'checkout-list') echo "active"; ?>">
-                <a class="nav-dropdown"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M11 1a1 1 0 1 0-2 0v7.586L7.707 7.293a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.414 0l3-3a1 1 0 0 0-1.414-1.414L11 8.586V1z"></path><path d="M3 14V3h4V1H2.5A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19h15a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 17.5 1H13v2h4v11h-3.5c-.775 0-1.388.662-1.926 1.244l-.11.12A1.994 1.994 0 0 1 10 16a1.994 1.994 0 0 1-1.463-.637l-.111-.12C7.888 14.664 7.275 14 6.5 14H3z"></path></svg> Orders</a>
-                <ul class="sub_items">
+                <a href="{{ route('order-list') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false"  aria-hidden="true"><path d="M11 1a1 1 0 1 0-2 0v7.586L7.707 7.293a1 1 0 0 0-1.414 1.414l3 3a1 1 0 0 0 1.414 0l3-3a1 1 0 0 0-1.414-1.414L11 8.586V1z"></path><path d="M3 14V3h4V1H2.5A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19h15a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 17.5 1H13v2h4v11h-3.5c-.775 0-1.388.662-1.926 1.244l-.11.12A1.994 1.994 0 0 1 10 16a1.994 1.994 0 0 1-1.463-.637l-.111-.12C7.888 14.664 7.275 14 6.5 14H3z"></path></svg> Orders</a>
+                <!-- <ul class="sub_items">
                     <li class="{{ request()->route()->getName() === 'order-list' ?  'active' : '' }}"><a href="{{ route('order-list') }}">All Orders</a></li>
-                    <!-- <li class="{{ request()->route()->getName() === 'draft-orders' ?  'active' : '' }}"><a href="{{ route('draft-orders') }}">Drafts</a></li>
-                    <li class="{{ request()->route()->getName() === 'checkout-list' ?  'active' : '' }}"><a href="{{ route('checkout-list') }}">Abandoned checkouts</a></li> -->
-                </ul>
+                    <li class="{{ request()->route()->getName() === 'draft-orders' ?  'active' : '' }}"><a href="{{ route('draft-orders') }}">Drafts</a></li>
+                    <li class="{{ request()->route()->getName() === 'checkout-list' ?  'active' : '' }}"><a href="{{ route('checkout-list') }}">Abandoned checkouts</a></li>
+                </ul> -->
             </li>
           <?php /*   <li class="have_sub_item <?php if(request()->route()->getName() === 'products' || request()->route()->getName() === 'inventory' || request()->route()->getName() === 'transfers' || request()->route()->getName() === 'collections' || request()->route()->getName() === 'gift-cards') echo "active"; ?>">
                 <a class="nav-dropdown"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10.293 1.293A1 1 0 0 1 11 1h7a1 1 0 0 1 1 1v7a1 1 0 0 1-.293.707l-9 9a1 1 0 0 1-1.414 0l-7-7a1 1 0 0 1 0-1.414l9-9zM15.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg> Products</a>

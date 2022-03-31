@@ -1,3 +1,4 @@
+<div>
 <x-admin-layout>
     <section class="full-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
@@ -27,6 +28,7 @@
                                 <div class="search-product-field">
                                     <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_collection" id="search_products" placeholder="Filter Collection">
                                 </div>
+                                <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >delete Selected</button>
                                 <div class="form-field">
                                     <!-- Status -->
                                     <!-- <div class="fs-14 fw-6 status-dropdown dropdown-field">
@@ -132,7 +134,7 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
+                                    <div class="row"><label><input type="checkbox" wire:model="selectall" name="option6a"></label></div>
                                 </th>
                                 <th class="fw-6">
                                    <!--  <div class="select-customers">
@@ -158,7 +160,7 @@
                             @foreach($collection as $row)
                             <tr>
                                 <td>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
+                                    <div class="row"><label><input type="checkbox" wire:model="selectecollection" value="{{$row->id}}" name="option6a"></label></div>
                                 </td>
                                <a class="tc-black fw-6" href="{{ route('collections-detail', $row->seo_url) }}"> <td class="product-img">
                                     @if($row->image != "")
@@ -180,8 +182,23 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pd-pagination-sec">
+                        <select wire:model="perPage">
+                            <option value="9999999">All</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                        <div class="pagination">
+
+                         {{ $collection->links() }}
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>     
 </x-admin-layout>
+</div>

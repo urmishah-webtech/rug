@@ -6,9 +6,9 @@
             <h4 class="mb-0 fw-5">Orders</h4>
             <div class="header-btn-group">
              <!--    <a class="link" data-toggle="modal" data-target="#export" >Export</a> -->
-                @if(user_permission('orderlist','create'))
+               <!--  @if(user_permission('orderlist','create'))
                 <a class="button green-btn" href="{{ route('draft-orders-create') }}">Create order</a>
-                @endif
+                @endif -->
             </div>
         </div>
     </section>

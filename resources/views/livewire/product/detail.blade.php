@@ -1223,8 +1223,8 @@
     
                                 <div class="url-input">
     
-                                    <span>{{ url('/product') }}/</span>
-                                    <input type="hidden" name="urlpath" value="{{ url('/product') }}">
+                                    <span>https://rug.webtech-evolution.com/</span>
+                                    <input type="hidden" name="urlpath" value="https://rug.webtech-evolution.com/">
                                     <input type="text" name="seo_utl" wire:model="product.seo_utl">
     
                                 </div>

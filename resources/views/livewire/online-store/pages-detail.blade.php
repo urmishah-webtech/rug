@@ -90,14 +90,14 @@
                     <h4 class="mb-0 fw-5">{{$page->title}}</h4>
                 </div>
                 <div class="product-header-btn">
-                    <button class="button link" onclick="document.getElementById('duplicate-page').style.display='block'"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg> Duplicate</button>
-                    <button class="button link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17.928 9.628C17.837 9.399 15.611 4 10 4S2.162 9.399 2.07 9.628a1.017 1.017 0 0 0 0 .744C2.163 10.601 4.389 16 10 16s7.837-5.399 7.928-5.628a1.017 1.017 0 0 0 0-.744zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 .002 4.001A2 2 0 0 0 9.999 8z"></path></svg> View page</button>
-                    <div class="pagination">
+                   <!--  <button class="button link" onclick="document.getElementById('duplicate-page').style.display='block'"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg> Duplicate</button> -->
+                   
+                   <!--  <div class="pagination">
                         <span class="button-group">
                         <button class="secondary icon-prev"></button>
                         <button class="secondary icon-next"></button>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </article>
@@ -2213,15 +2213,15 @@
                         <div class="row">
                             <label>URL and handle</label>
                             <div class="url-input">
-                                <span>http://185.160.67.108/estore/public/pages/</span>
-                                <input type="hidden" name="urlpath" value="http://185.160.67.108/estore/public/pages">
+                                <span>https://rug.webtech-evolution.com/</span>
+                                <input type="hidden" name="urlpath" value="https://rug.webtech-evolution.com/">
                                 <input type="text" name="seo_utl" wire:model="page.seo_url">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="columns one-third right-details">
+           <!--  <div class="columns one-third right-details">
                 <div class="card">
                     <div class="p-3">
                         <h3 class="fs-16 fw-6 lh-normal">Visibility</h3>
@@ -2260,7 +2260,7 @@
                         <p class="mb-0">Assign a template from your current theme to define how the page is displayed.</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </article>
     </section>
     <section class="full-width flex-wrap admin-body-width" wire:ignore.self>

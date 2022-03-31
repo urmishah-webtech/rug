@@ -30,19 +30,18 @@
             <li class="tab titled" data-toggle="tab"><a href="#">Archived</a></li>
         </ul> -->
         
-        <div class="card-section tab_content  active" id="all_customers" wire:ignore.self>
+        <div class="card-section tab_content  active" id="all_customers">
+        
             <div class="order-form">
                 <article class="full-width">
-                    <div class="columns" wire:ignore.self>
+                    <div class="columns" wire:ignore="">
                         <div class="input-group">
                             <!-- Search Field -->
                             <div class="search-product-field">
-                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_product" placeholder="Filter Product">
+                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" placeholder="Filter orders" wire:model="filter_order">
                             </div>
-                            <div class="form-field">
-                               
-                            </div>
-                        </div>
+                            <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >delete Selected</button>
+                        </div> 
                     </div>
                 </article>
             </div>
@@ -65,13 +64,13 @@
                                 <div class="select-customers" style="display:none">
                                     <span class="button-group product-more-action">
                                         <button class="secondary all-customer-select">
-                                             <input type="checkbox" class="checked_all_clone" name="customer_all">
+                                             <input type="checkbox"  wire:model="selectall" name="customer_all">
                                             <span><span class="selected_count"></span> selected</span>
                                         </button>
-                                        <button class="secondary select-customer-more-actions" onclick="openOption('email_subscription_status')">
+                                        <!-- <button class="secondary select-customer-more-actions" onclick="openOption('email_subscription_status')">
                                             More actions
                                             <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                        </button>
+                                        </button> -->
                                         <ul class="filter_email_subscription_status filter-dropdown more-action-dropdown" style="list-style-type: none" wire:ignore.self>
                                             <li>
                                                 <button class="link" wire:click.prevent="store('active')" wire:ignore.self>Set as active</button>
@@ -79,12 +78,12 @@
                                             <li>
                                                 <button class="link" wire:click.prevent="store('draft')" wire:ignore.self>Set as Disactive</button>
                                             </li>
-                                            <!-- <li>
+                                            <li>
                                                 <button class="link" wire:click.prevent="store('archive')" wire:ignore.self>Archive products</button>
                                             </li>
                                             <li>
                                                 <button class="link" wire:click.prevent="store('delete')" wire:ignore.self>Delete products</button>
-                                            </li> -->
+                                            </li>
                                         </ul>
                                     </span>
                                 </div>
@@ -101,8 +100,8 @@
 
                         <span>@foreach($product as $row)
                         <tr>
-                            <td>
-                                <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="{{$row->id}}" wire:model.lazy="selectedproducts"></label></div>
+                            <td class="sticky-col">
+                                <div class="row"><label><input type="checkbox" wire:model="selectedproducts" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
                             <td class="product-img">
                                 

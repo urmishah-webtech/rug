@@ -7,13 +7,14 @@ use App\Models\page;
 
 class Pages extends Component
 {
-    public $pages;
+    public $filter_pages;
 
-    public function mount() {
-        $this->pages = page::All();
-    }
+ 
     public function render()
     {
-        return view('livewire.online-store.pages');
+    	$pages = page::when($this->filter_pages, function ($query, $filter_pages) {
+            $query->Where('title', 'LIKE', '%' . $filter_pages . '%');
+            })->get();
+        return view('livewire.online-store.pages', ['pages' => $pages]);
     }
 }

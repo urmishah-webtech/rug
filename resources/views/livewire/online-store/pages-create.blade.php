@@ -57,7 +57,7 @@
                         <div class="row">
                             <label>URL and handle</label>
                             <div class="url-input">
-                                <span>http://185.160.67.108/estore/public/product/</span>
+                                <span>https://rug.webtech-evolution.com/</span>
                                
                                 <input type="text" name="seo_url">
                             </div>

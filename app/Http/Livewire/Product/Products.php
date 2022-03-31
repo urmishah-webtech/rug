@@ -43,9 +43,13 @@ class Products extends Component
 
     public $perPage = 10;
 
+    public $selectall = false;
+  
+    public $bulkDisabled = true;
+
     public function mount()
     {
-
+        $this->selectedproducts = collect();
         $this->user_id = Auth::user()->role;
         $this->getProduct();
     }
@@ -53,9 +57,11 @@ class Products extends Component
 
     public function render()
     {
+
+        $this->bulkDisabled = count($this->selectedproducts) < 1;
         $filter_clone = $this->filter;
 
-        $this->getProduct();
+        
 
         if ($filter_clone != $this->filter) {
 
@@ -63,20 +69,51 @@ class Products extends Component
 
         }
 
-        $items = $this->getproduct->forPage($this->page, $this->perPage);
+        return view('livewire.product.products', ['product'=> $this->Productpaginate]);
+    } 
 
-        $paginator = new LengthAwarePaginator($items, $this->getproduct->count(), $this->perPage, $this->page);
+    public function getProductpaginateProperty(){
+        $this->getProduct();
+         $items = $this->getproduct->forPage($this->page, $this->perPage);
+
+        return  new LengthAwarePaginator($items, $this->getproduct->count(), $this->perPage, $this->page);
+      
+    }
+
+    public function deleteselected(){
+
+        Product::where('id',$this->selectedproducts)->delete();
+
+        CollectionProduct::where('product_id',$this->selectedproducts)->delete();
+
+        ProductMedia::where('product_id',$this->selectedproducts)->delete();
+
+        ProductVariant::where('product_id',$this->selectedproducts)->delete();
+        
+        VariantStock::where('product_id',$this->selectedproducts)->delete();
 
         
+        $this->selectedproducts = [];
+        $this->selectall = false;
+    }
 
-        // $offset = max(0, ($this->page - 1) * $this->perPage);
+    public function updatedSelectAll($value){
 
-        // $items = $this->getproduct->slice($offset, $this->perPage + 1);
+        if($value){
+            $this->selectedproducts = $this->Productpaginate->pluck('id')->toArray();
+        
+        }else{
+            $this->selectedproducts = [];
+        }
+    }
 
-        // $paginator  = new Paginator($items, $this->perPage, $this->page);
-       // $paginator = Product::query()->paginate($this->perPage);
-        return view('livewire.product.products', ['product'=> $paginator]);
-    } 
+    public function updatedselectedproducts(){
+         $this->selectall = false;
+    }
+
+    public function isselectedproducts($product_id){
+        return in_array($product_id, $this->selectedproducts);
+    }
 
     public function store($flag = "")
     {

@@ -26,7 +26,7 @@
                             <div class="input-group">
                                 <!-- Search Field -->
                                 <div class="search-product-field">
-                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Slider">
+                                    <input class="fs-13 placeholder_gray fw-4" wire:model="filter_slider" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Slider">
                                 </div>
                             </div>
                         </div>

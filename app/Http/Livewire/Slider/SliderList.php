@@ -7,14 +7,14 @@ use App\Models\Slider;
 
 class SliderList extends Component
 {
-	public $slider;
+	public $filter_slider;
 
-    public function mount()
-    {
-        $this->slider = Slider::all();
-    }
     public function render()
     {
-        return view('livewire.slider.slider-list');
+    	 $slider = Slider::when($this->filter_slider, function ($query, $filter_slider) {
+            $query->Where('title', 'LIKE', '%' . $filter_slider . '%');
+            })->get();
+
+        return view('livewire.slider.slider-list',  ['slider' => $slider]);
     }
 }

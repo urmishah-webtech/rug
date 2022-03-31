@@ -572,9 +572,9 @@
 
                             <div class="url-input">
 
-                                <span>{{ url('/product') }}/</span>
+                                <span>https://rug.webtech-evolution.com/</span>
 
-                                <input name="seo_url" type="text" value="{{ old('seo_url') }}">
+                                <input name="seo_url" type="text" value="">
                             </div>
                             @error('seo_url') <span class="text-danger">{{ $message }}</span>@enderror
 

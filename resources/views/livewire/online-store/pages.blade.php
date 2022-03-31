@@ -1,3 +1,4 @@
+<div>
 <x-admin-layout>
     <section class="full-width flex-wrap admin-full-width">
         <article class="full-width">
@@ -26,7 +27,7 @@
                             <div class="input-group" disabled="disabled">
                                 <!-- Search Field -->
                                 <div class="search-product-field" disabled="disabled">
-                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_product" placeholder="Filter Page">
+                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_pages" placeholder="Filter Page">
                                 </div>
                                 <!-- <div class="form-field" disabled="disabled">
                                     
@@ -97,7 +98,7 @@
                         <tbody id="product-name">
                             <tr>
                                 <th>
-                                    <div class="row all-select-checkbox"><label><input type="checkbox" class="checked_all" name="customer_all"></label></div>
+                                  
                                 </th>
                                 <th class="fw-6">
                                     <span class="all-customer-list">
@@ -138,7 +139,7 @@
                             @foreach($pages as $result)
                             <tr>
                                 <td>
-                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117"></label></div>
+                                    <div class="row"></div>
                                 </td>
                                 <td>
                                     @if(user_permission('pages','update'))
@@ -161,3 +162,4 @@
         </div>
     </section>
 </x-admin-layout>
+</div>

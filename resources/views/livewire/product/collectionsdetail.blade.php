@@ -247,7 +247,7 @@
                         <div class="row">
                             <label>URL and handle</label>
                             <div class="url-input">
-                                <span>{{ url('/collection') }}/</span>
+                                <span>https://rug.webtech-evolution.com/</span>
                                 <input type="text" wire:model.lazy="collection.seo_url">
                             </div>
                         </div>
