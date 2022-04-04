@@ -23,7 +23,7 @@ class ProductlistController extends Controller
 
         foreach ($product as $val)
         {
-            $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
+            $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price','product.price as main_price')
                 ->where('product.id', $val->id)
                 ->whereNotNull('product_variants.price')
                 ->get();
@@ -43,9 +43,7 @@ class ProductlistController extends Controller
             {
                 $min = min($price_array);
                 $max = max($price_array);
-            }
-            else
-            {
+            }else{
                 $min = '';
                 $max = '';
             }
@@ -53,7 +51,11 @@ class ProductlistController extends Controller
             $data[$i]['title'] = $val->title;
             $data[$i]['description'] = $val->descripation;
             $data[$i]['image'] = $image_path . $product_image->image;
+            if (!empty($price_array)){
             $data[$i]['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
+            }else{
+                 $data[$i]['price_range'] = $symbol['currency'] . $val->price;
+            }
             $i++;
 
         }
@@ -91,9 +93,12 @@ class ProductlistController extends Controller
                     $min = min($price_array);
                     $max = max($price_array);
                 }
-                else
+                elseif(!empty($product->price))
                 {
-                    $min = '';
+                    $min = $product->price;
+                    $max = $product->price;
+                }else{
+                     $min = '';
                     $max = '';
                 }
                 //dump($key);
@@ -110,7 +115,13 @@ class ProductlistController extends Controller
                 {
                     $product_arra['image'] = url('/') . '/image/defult-image.png';
                 }
-                $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
+
+                if (!empty($price_array)){
+                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
+                }else{
+                     $data[$i]['price_range'] = $symbol['currency'] . $val->price;
+                }
+               
                 $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
 
 
