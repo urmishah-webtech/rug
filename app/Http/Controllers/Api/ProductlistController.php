@@ -119,7 +119,7 @@ class ProductlistController extends Controller
                 if (!empty($price_array)){
                  $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
                 }else{
-                     $data[$i]['price_range'] = $symbol['currency'] . $val->price;
+                     $product_arra['price_range'] = $symbol['currency'] . $val->price;
                 }
                
                 $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
