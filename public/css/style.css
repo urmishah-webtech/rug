@@ -1365,7 +1365,11 @@ code {
     
 }
 
-
+.cutsom-heightscroll{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
  #search_products {
      width: 100%;
 }

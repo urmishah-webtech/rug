@@ -52,7 +52,7 @@
                     <div class="card-header">
                         <h3 class="fs-16 fw-6 mb-0">Variants</h3>
                     </div>
-                    <div class="card-middle">
+                    <div class="card-middle cutsom-heightscroll">
                         @foreach($Productvariant as $row)
                         <p><span><img src="@if($row->photo != '') {{ url('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ url('image/defult-image.png') }} @endif"></span>
                             <a href="{{ route('variant-detail', $row->id) }}">
