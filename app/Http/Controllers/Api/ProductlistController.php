@@ -108,7 +108,7 @@ class ProductlistController extends Controller
                 {
                     $product_arra['image'] = url('/') . '/image/defult-image.png';
                 }
-                $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
+                $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
                 $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
 
 
@@ -171,7 +171,7 @@ class ProductlistController extends Controller
                 $product_arra['description'] = $val['descripation'];
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
-                $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
+                $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
 
                 $data_color = [];
                 $data_size = [];
@@ -408,7 +408,7 @@ class ProductlistController extends Controller
                                 $dataArr['title'] = $value['title'];
                                 $dataArr['collection'] = json_decode($value['collection']);
                                 $dataArr['image'] = (!empty($value['productmediaget'][$key]['image'])) ? $image_path . $value['productmediaget'][$key]['image'] : '';
-                                $dataArr['price_range'] = '$' . $min . '-' . '$' . $max;
+                                $dataArr['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
                                 $data_result[$key] = $dataArr;
                                 $data[] = $dataArr;
 
@@ -434,7 +434,7 @@ class ProductlistController extends Controller
                                 $data['title']=$value['title'];
                                 $data['description']=$value['descripation'];
                                 $data['image']= (!empty($value['productmediaget'][$key]['image']))? $image_path.$value['productmediaget'][$key]['image'] : '' ;*/
-                                // $data['price_range']='$'.$min.'-'.'$'.$max;
+                                // $data['price_range']=$symbol['currency'].$min.'-'.$symbol['currency'].$max;
                                 // $data_result[$key] = $data;
                                 
 
