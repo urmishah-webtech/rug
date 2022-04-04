@@ -2,6 +2,7 @@
 <x-admin-layout>
 
     <style type="text/css">
+   
     .bootstrap-tagsinput .tag {
             margin-right: 2px;
             color: #d64949;
@@ -99,28 +100,7 @@
 
                 </div>
 
-                <div class="card">
-                    <div class="col-md-2">
-                        <div class="form-group change">
-                            <label for="">&nbsp;</label><br/>
-                            <a class="btn btn-success add-more">+ Add More</a>
-                        </div>
-                    </div>
-                    <div id="tab_logic" class="after-add-more">
-                        <div class="row">
-                            <label>Question</label>
-                            <input type="text" name="product_array[1][question]">
-                        </div>
-                        <div wire:ignore class="form-group row">
-                            <label>Answer</label>
-                            <div class="col-md-9">
-                                <textarea name="product_array[1][answer]" class="form-control"  id="descripation"></textarea>
-                              
-                            </div>
-                        </div>
-                    </div>
-                    <div class="more-feilds"></div>
-                </div>
+                
               
 
                 <div class="card product-media-card">
@@ -581,6 +561,67 @@
 
                     </div>     
 
+                </div>
+
+
+                <div class="card">
+                    <div class="row">
+                        <h3>Product Tab descripation</h3>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <div class="form-group change">
+                                
+                                <a class="btn btn-success add-more custom-addmorebtn">+ Add More</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 custom-flex-sign">
+                            
+                            {{-- plus minus sign --}}
+
+        {{-- <div class="panel-group" id="accordion">
+        
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        
+                        </a>
+                    </h4>
+        
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body"></div>
+                </div>
+            </div>
+        </div> --}}
+   
+                        </div>
+                    </div>
+                   
+                   
+                    <div id="tab_logic" class="after-add-more">
+                        <div class="row">
+                            <label>Title</label>
+                            <input type="text" name="product_array[1][question]">
+                        </div>
+                        <div wire:ignore class="form-group row">
+                            <label>Description</label>
+                            <div class="col-md-9">
+                                <textarea name="product_array[1][answer]" class="form-control"  id="descripation"></textarea>
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove(0)"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
+                    </div>
+                    <div class="more-feilds"></div>
                 </div>
 
             </div>
@@ -1117,11 +1158,11 @@
         x = Math.random().toString(36).substr(2, 9);
         var html = $("#tab_logic").html();
         $(".more-feilds").append(`<div class="row">
-        <label>Question</label>
+        <label>Title</label>
         <input type="text" name="product_array[${x}][question]" value="">
     </div>
     <div wire:ignore class="form-group row">
-        <label>Answer</label>
+        <label>Description</label>
         <div class="col-md-9">
             <textarea name="product_array[${x}][answer]" class="form-control required" id="descripation"></textarea>
           

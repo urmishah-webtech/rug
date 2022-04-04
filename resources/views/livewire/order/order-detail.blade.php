@@ -240,8 +240,10 @@
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Customer</h3>
                         </div>
-                        <a href="{{route('customer.details', $order['user'][0]['uuid'])}}">@if($order['user']){{$order['user'][0]['first_name']}}@endif</a>
-                        <a href="#">9 orders</a>
+                        <div class="custom-flex">
+                        <p>@if($order['user']){{$order['user'][0]['first_name']}}@endif</p>
+                        <p>9 orders</p>
+                    </div>
                     </div>
                     @endif
                     <div class="card-middle">

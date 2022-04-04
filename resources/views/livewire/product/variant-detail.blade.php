@@ -320,7 +320,7 @@
                 </div> -->
 
                   <!-- detail -->
-                <div class="card " >
+                {{-- <div class="card " >
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Detail</h3>
@@ -359,7 +359,7 @@
                         <button id="add_new" wire:click.prevent="addProductDetailSection">Add New</button>
                     </div>
                     
-                </div>
+                </div> --}}
                 <!-- end detail -->
             </div>
         </article>

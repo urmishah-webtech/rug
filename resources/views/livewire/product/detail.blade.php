@@ -418,7 +418,7 @@
     
                                 </div>
     
-                                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
+                                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing custom-table-height">
     
                                     <tbody>
                                         <?php $stocksum = 0;  ?>

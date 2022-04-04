@@ -1302,11 +1302,78 @@ code {
  table.comman-th th.fw-6 {
      font-weight: 600;
 }
+.custom-flex{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.custom-table-height tbody, .custom-table-height thead tr { display: block; }
+
+.custom-table-height tbody {
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.custom-addmorebtn {
+    background: transparent !important;
+    box-shadow: none;
+    border: 1px solid #007ace !important;
+    color: #007ace !important;
+    padding: 7px 15px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: 600;
+    margin: 0;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: right;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.custom-deleteebtn {
+    background: transparent !important;
+    box-shadow: none;
+    border: 1px solid #d82c0d !important;
+    color: #d82c0d !important;
+    padding: 7px 15px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: 600;
+    margin: 0;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: right;
+}
+.custom-flex-sign{
+    display: flex;
+    
+    float: right;
+}
+
+.panel-title > a:before {
+    float: left !important;
+    content: "\2212";
+    padding-right: 5px;
+}
+.panel-title > a.collapsed:before {
+    float: left !important;
+    content: '\002B';
+    
+}
+
  #search_products {
      width: 100%;
 }
  .search-product-field {
      flex: 1 1 auto;
+     margin-right: 20px;
+}
+.secondary.select-customer-edit{
+    border: 1px solid #c4cdd5;
 }
  .search-product-field input#search_products {
      border-radius: 3px;
@@ -3945,7 +4012,10 @@ code {
      position: relative;
 }
  .variant-pricing-card .row .form-field-list input {
-     padding: 5px 12px 5px 44px;
+     padding: 5px 12px 5px 24px;
+}
+.variant-pricing-card .row .form-field-list input#stock-change-input{
+    padding: 5px 12px 5px 10px;
 }
  .variant-pricing-checkbox {
      padding: 4px 0;
