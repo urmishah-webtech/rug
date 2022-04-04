@@ -150,6 +150,7 @@
           padding: 10px 10px 5px 10px;
           font-weight: 500;
           }
+          
           .carousel-col p {
           color: #000;
           font-size: 14px;

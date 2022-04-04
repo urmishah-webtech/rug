@@ -21,6 +21,7 @@
         </div>
 
     </div> 
+    
 
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>

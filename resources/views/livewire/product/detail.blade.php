@@ -5,6 +5,7 @@
                 margin-right: 2px;
                 color: #d64949;
             }
+            
             .custom-addmorebtn {
         background: transparent !important;
         box-shadow: none;
