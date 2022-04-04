@@ -5275,7 +5275,7 @@ code {
      position: relative;
 }
  .dollar-input::after {
-     content: "US$";
+     content: "€";
      position: absolute;
      left: 12px;
      top: 8px;
@@ -5292,7 +5292,7 @@ code {
     display: block;
 }
 .rupee-input::before {
-    content: "₹";
+    content: "€";
     position: absolute;
     font-size: 14px;
     top: 8px;
@@ -5301,7 +5301,7 @@ code {
     color: #6d7175;
 }
 .only-dollar-input::before {
-    content: "$";
+    content: "€";
 }
 .rupee-input input {
     padding-left: 26px;

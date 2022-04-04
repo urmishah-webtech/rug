@@ -34,7 +34,6 @@
     .show {display: block;}
     .text-danger{color: red;}
     </style>
-
     <div wire:key="main">
     <section class="full-width flex-wrap admin-body-width add-customer-head-sec product-details-header">
 
@@ -284,7 +283,7 @@
 
                                 <input type="text" name="price_main" value="{{ old('price_main') }}" placeholder="0.00" id="price-change-input" class="price-change-input">
 
-                                <label for="input">US{{$symbol['currency']}}</label>
+                                <label for="input">{{$symbol['currency']}}</label>
 
                                 @error('price_main') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -308,7 +307,7 @@
 
                                 <input type="text" name="compare_selling_price" value="{{ old('compare_selling_price') }}" placeholder="0,00">
 
-                                <label for="input">US{{$symbol['currency']}}</label>
+                                <label for="input">{{$symbol['currency']}}</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
 

@@ -1,5 +1,6 @@
 <div>
 <x-admin-layout>
+@php $symbol = CurrencySymbol(); @endphp
 <section class="full-width flex-wrap admin-full-width list-customers" wire:ignore.self>
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
 
@@ -171,13 +172,13 @@
                                 ?>
                                 @if(!empty($price_array))
                                     @if(count($price_data) != '1')
-                                    <span>$</span><span><?php echo $min; ?></span>
-                                    <span> - $</span><span><?php echo $max; ?></span>
+                                    <span>{{$symbol['currency']}}</span><span><?php echo $min; ?></span>
+                                    <span> - {{$symbol['currency']}}</span><span><?php echo $max; ?></span>
                                     @else
-                                    <span>$</span><span><?php echo $min; ?></span>
+                                    <span>{{$symbol['currency']}}</span><span><?php echo $min; ?></span>
                                     @endif
                                 @else
-                                <span>$</span><span><?php echo $row->price; ?></span>
+                                <span>{{$symbol['currency']}}</span><span><?php echo $row->price; ?></span>
                                 @endif
                             </td>
                             

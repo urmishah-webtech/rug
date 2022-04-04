@@ -553,7 +553,7 @@
     
                                             <td class="vendor-table-item">
     
-                                                <p>@if($row->price)US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
+                                                <p>@if($row->price){{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
                                                 @endif</p>
                                                 <?php $location_count = count($location); ?>
                                                 <?php 
@@ -917,7 +917,7 @@
     
                                     <input type="text" name="price_main" id="price-change-input" class="price-change-input" wire:model="product.price" wire:ignore placeholder="0,00">
     
-                                    <label for="input">US{{$symbol['currency']}}</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
     
                                     @error('price') <span class="text-danger">{{ $message }}</span>@enderror
     
