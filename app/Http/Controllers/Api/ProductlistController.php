@@ -13,6 +13,8 @@ class ProductlistController extends Controller
 {
     public function getAllProducts()
     {
+
+        $symbol = CurrencySymbol();
         $product = DB::table('product')->get();
 
         $data = array();
@@ -51,7 +53,7 @@ class ProductlistController extends Controller
             $data[$i]['title'] = $val->title;
             $data[$i]['description'] = $val->descripation;
             $data[$i]['image'] = $image_path . $product_image->image;
-            $data[$i]['price_range'] = '$' . $min . '-' . '$' . $max;
+            $data[$i]['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
             $i++;
 
         }
