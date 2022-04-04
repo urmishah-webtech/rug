@@ -126,6 +126,8 @@ class ProductlistController extends Controller
 
     public function getIndividualProduct_variant($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
@@ -344,6 +346,8 @@ class ProductlistController extends Controller
 
     public function get_related_Products($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             $productget = Product::where('id', $id)->first();
