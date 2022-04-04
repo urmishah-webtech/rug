@@ -62,6 +62,8 @@ class ProductlistController extends Controller
 
     public function getIndividualProduct($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             $product = Product::with('productmediaget')->with('favoriteget')
