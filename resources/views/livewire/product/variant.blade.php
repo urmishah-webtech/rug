@@ -261,7 +261,7 @@
                   <!--           <div class="form-field-list">
                                 <label>Compare at price</label>
                                 <input type="text" name="compare_price" value="" >
-                                <label for="input">{{$symbol['currency']}}</label>
+                                <label for="input">{{$symbol['currency']}}</label> 
                             </div> -->
                         </div>
                         <div class="row">
