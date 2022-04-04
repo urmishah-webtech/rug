@@ -71,15 +71,15 @@
                 <div class="card unfulfilled-product-card">
                     <div class="card-header">
                         <div class="header-title">
-                            <h3 class="fs-16 fw-6 mb-0"><span><svg viewBox="0 0 17 17" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><circle cx="8.5" cy="8.59" r="7.2" fill="currentColor"></circle><path d="M10.09 16.41a.8.8 0 01-.18-1.58 6.46 6.46 0 002-.81L12 14a.79.79 0 011.07.35.8.8 0 01-.3 1.05 7.89 7.89 0 01-2.46 1 .55.55 0 01-.22.01zm-3.2 0h-.18a7.89 7.89 0 01-2.47-1A.8.8 0 015.09 14a6.49 6.49 0 002 .82.8.8 0 01.6 1 .81.81 0 01-.78.62zm7.7-3.18a.8.8 0 01-.8-.8.79.79 0 01.12-.42 6.27 6.27 0 00.83-2 .8.8 0 011.56.36 7.89 7.89 0 01-1 2.47.77.77 0 01-.71.39zm-12.19 0a.78.78 0 01-.67-.37 8.14 8.14 0 01-1-2.46.8.8 0 011.53-.4 6.19 6.19 0 00.82 2 .8.8 0 01-.68 1.23zm13.12-5.4a.81.81 0 01-.78-.63 6.46 6.46 0 00-.81-2 .81.81 0 01.24-1.11.79.79 0 011.1.24 8 8 0 011 2.47.8.8 0 01-.6 1h-.18zm-14 0a.58.58 0 01-.19 0 .79.79 0 01-.6-1 8.22 8.22 0 011-2.47.82.82 0 011.11-.26.8.8 0 01.25 1.11 6.49 6.49 0 00-.82 2 .78.78 0 01-.77.62zM12.33 3.3a.83.83 0 01-.43-.13 6.49 6.49 0 00-2-.82.79.79 0 01-.63-.93.8.8 0 01.94-.64 8.15 8.15 0 012.48 1A.8.8 0 0113 2.92a.78.78 0 01-.68.37zm-7.65 0A.82.82 0 014 2.93a.8.8 0 01.22-1.1l.1-.06a7.93 7.93 0 012.39-1 .8.8 0 011 .61.79.79 0 01-.6 1 6.43 6.43 0 00-2 .82.82.82 0 01-.43.12z"></path></svg></span>Unfulfilled (1)</h3>
-                            <button class="link three-dots-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6 10a2 2 0 1 1-4.001-.001A2 2 0 0 1 6 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 12 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 18 10z"></path></svg></button>
+                           <!--  <h3 class="fs-16 fw-6 mb-0"><span><svg viewBox="0 0 17 17" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><circle cx="8.5" cy="8.59" r="7.2" fill="currentColor"></circle><path d="M10.09 16.41a.8.8 0 01-.18-1.58 6.46 6.46 0 002-.81L12 14a.79.79 0 011.07.35.8.8 0 01-.3 1.05 7.89 7.89 0 01-2.46 1 .55.55 0 01-.22.01zm-3.2 0h-.18a7.89 7.89 0 01-2.47-1A.8.8 0 015.09 14a6.49 6.49 0 002 .82.8.8 0 01.6 1 .81.81 0 01-.78.62zm7.7-3.18a.8.8 0 01-.8-.8.79.79 0 01.12-.42 6.27 6.27 0 00.83-2 .8.8 0 011.56.36 7.89 7.89 0 01-1 2.47.77.77 0 01-.71.39zm-12.19 0a.78.78 0 01-.67-.37 8.14 8.14 0 01-1-2.46.8.8 0 011.53-.4 6.19 6.19 0 00.82 2 .8.8 0 01-.68 1.23zm13.12-5.4a.81.81 0 01-.78-.63 6.46 6.46 0 00-.81-2 .81.81 0 01.24-1.11.79.79 0 011.1.24 8 8 0 011 2.47.8.8 0 01-.6 1h-.18zm-14 0a.58.58 0 01-.19 0 .79.79 0 01-.6-1 8.22 8.22 0 011-2.47.82.82 0 011.11-.26.8.8 0 01.25 1.11 6.49 6.49 0 00-.82 2 .78.78 0 01-.77.62zM12.33 3.3a.83.83 0 01-.43-.13 6.49 6.49 0 00-2-.82.79.79 0 01-.63-.93.8.8 0 01.94-.64 8.15 8.15 0 012.48 1A.8.8 0 0113 2.92a.78.78 0 01-.68.37zm-7.65 0A.82.82 0 014 2.93a.8.8 0 01.22-1.1l.1-.06a7.93 7.93 0 012.39-1 .8.8 0 011 .61.79.79 0 01-.6 1 6.43 6.43 0 00-2 .82.82.82 0 01-.43.12z"></path></svg></span>Unfulfilled (1)</h3> -->
+                           <!--  <button class="link three-dots-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6 10a2 2 0 1 1-4.001-.001A2 2 0 0 1 6 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 12 10zm6 0a2 2 0 1 1-4.001-.001A2 2 0 0 1 18 10z"></path></svg></button>
                             <ul class="filter-dropdown unfulfilled-dropdown">
                                 <li><button class="link" onclick="document.getElementById('change-location-modal').style.display='block'">Change location</button></li>
                                 <li><button class="link" onclick="document.getElementById('hold-fulfillment-modal').style.display='block'">Hold fulfillment</button></li>
-                            </ul>
+                            </ul> -->
                         </div>
-                        <span>Location</span>
-                        <p>H-28, Sector 63</p>
+                        <!-- <span>Location</span>
+                        <p>H-28, Sector 63</p> -->
                         @if($OrderItem)
                         @foreach($OrderItem as $item)
                         <div class="unfulfilled-product-sec">
@@ -223,7 +223,7 @@
                             <label>Reason</label>
                             <select wire:model="order.paymentstatus">
                                 <option value="" disabled="">Select Option</option>
-                                <option value="pending">Pendding</option>
+                                <option value="pending">Pending</option>
                                 <option value="processing">Processing</option>
                                 <option value="shipped">Shipped</option>
                                 <option value="fulfilled">fulfilled</option>

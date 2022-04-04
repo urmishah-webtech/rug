@@ -84,7 +84,7 @@
     
                         <!-- <button class="button link" onclick="document.getElementById('duplicate-product-modal').style.display='block'">Duplicate</button> -->
     
-                        <button class="button link">Preview</button>
+                        <!-- <button class="button link">Preview</button> -->
     
                         <!-- <div class="pagination">
     
@@ -558,7 +558,9 @@
                                                 <?php $location_count = count($location); ?>
                                                 <?php 
                                                  $stocksum += $row->stock; ?>
-                                                <p>available at {{$row->stock}} Stock</p>
+                                                 @if($row->stock)
+                                                <p>Available at {{$row->stock}} Stock</p>
+                                                @endif
     
                                             </td>
     
@@ -1238,8 +1240,9 @@
                     <div class="card">                
     
                         <div id="tab_logic" class="after-add-more">
-                         
+                            
                            <div class="col-md-2">
+                            <h3>Product Tab descripation</h3>
                                <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add({{$last_key}})">Add</button>
                            </div>
                        </div>
@@ -1247,7 +1250,6 @@
     
     
                        @foreach($product_array as $key => $row)
-                      
                        <div id="tab_logic" class="after-add-more">
                            <div class="row">
                                <label>Title</label>

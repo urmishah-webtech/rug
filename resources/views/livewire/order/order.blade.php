@@ -77,7 +77,6 @@
                             <th>Customer</th>
                             <th>Total</th>
                             <th>Payment</th>
-                            <th>Fulfillment</th>
                             <th>Items</th>
                             <th>Delivery method</th>
                         </tr>
@@ -116,9 +115,7 @@
                             <td>
                                 <span class="tag grey"><span class="grey-circle"></span>{{$row->paymentstatus}}</span>
                             </td>
-                            <td>
-                                <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span>
-                            </td>
+                           
                             <td>
 
                                 <?php $itemcount = 0; $i = 1; ?>
