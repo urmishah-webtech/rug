@@ -371,13 +371,10 @@ Route::middleware(['checkRole'])->group(function () {
 
             });
 
-            
 
             //customer import
 
             Route::post('import', [Livewire\Customer\ListCustomers::class, 'importCustomers'])->name('import');
-
-
 
 
 
@@ -416,6 +413,16 @@ Route::middleware(['checkRole'])->group(function () {
 
 
 
+             //Shipping
+
+            Route::get('/admin/shipping', function (){
+
+                return view('livewire.admin.detail');
+
+            });
+
+            Route::get('admin/shipping', Livewire\Shipping\Shipping::class)->name('shipping-admin');
+
         });
 
   
@@ -453,15 +460,7 @@ Route::middleware(['checkRole'])->group(function () {
 
 
     Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
-
-   
-
     Route::get('/faqs', Livewire\Front\Faqs::class)->name('faqs');
-
-    
-
-
-
     
 
 });
