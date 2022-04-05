@@ -26,15 +26,18 @@
         }
         
         .question::after {
-          content: "\002B";
-          font-size: 2.2rem;
-          position: absolute;
-          right: 20px;
-          transition: 0.2s;
+            background-image: url(/../assets/images/arrow-down.png);
+    content: "";
+    position: absolute;
+    display: block;
+    background-size: 100%;
+    width: 14px;
+    height: 14px;
+    right: 10px;
         }
         
         .question.active::after {
-          transform: rotate(45deg);
+          transform: rotate(180deg);
         }
         
         .answercont {

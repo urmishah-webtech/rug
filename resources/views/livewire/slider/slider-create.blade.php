@@ -26,7 +26,7 @@
                     <input type="text" name="buttne_text" wire:model="buttne_text" placeholder="Enter Button Text">
                     <label>Button Link</label>
                     <input type="text" name="button_link" wire:model="button_link" placeholder="Enter Button Link">
-                    <label>select page</label>
+                    <label>Select page</label>
                     <select name="page_id" wire:model="page_id" class="country-drop" id="customer_phone_code" >
                         <option value=""><i class="fa fa-globe"></i></option>
                         @foreach($pageget as $row)
