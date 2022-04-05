@@ -1248,8 +1248,6 @@
                            </div>
                        </div>
     
-    
-    
                        @foreach($product_array as $key => $row)
                        <div id="tab_logic" class="after-add-more">
                            <div class="row">
@@ -1263,11 +1261,10 @@
                                  
                                </div>
                            </div>
-                       </div>
-    
-                       <div class="col-md-2">
-                           <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
-                       </div>
+        
+                           <div class="col-md-2">
+                               <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
+                           </div>
                        @endforeach
                        <div class="more-feilds"></div>
                    </div>
