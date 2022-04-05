@@ -15,7 +15,7 @@
                     <div class="columns ten">
 
                         <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
-
+ 
                             <h4 class="mb-0 fw-5">Settings</h4>
 
                         </div>
