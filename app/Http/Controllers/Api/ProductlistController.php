@@ -13,6 +13,8 @@ class ProductlistController extends Controller
 {
     public function getAllProducts()
     {
+
+        $symbol = CurrencySymbol();
         $product = DB::table('product')->get();
 
         $data = array();
@@ -21,7 +23,7 @@ class ProductlistController extends Controller
 
         foreach ($product as $val)
         {
-            $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
+            $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price','product.price as main_price')
                 ->where('product.id', $val->id)
                 ->whereNotNull('product_variants.price')
                 ->get();
@@ -41,9 +43,7 @@ class ProductlistController extends Controller
             {
                 $min = min($price_array);
                 $max = max($price_array);
-            }
-            else
-            {
+            }else{
                 $min = '';
                 $max = '';
             }
@@ -51,7 +51,11 @@ class ProductlistController extends Controller
             $data[$i]['title'] = $val->title;
             $data[$i]['description'] = $val->descripation;
             $data[$i]['image'] = $image_path . $product_image->image;
-            $data[$i]['price_range'] = '$' . $min . '-' . '$' . $max;
+            if (!empty($price_array)){
+            $data[$i]['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
+            }else{
+                 $data[$i]['price_range'] = $symbol['currency'] . $val->price;
+            }
             $i++;
 
         }
@@ -60,6 +64,8 @@ class ProductlistController extends Controller
 
     public function getIndividualProduct($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             $product = Product::with('productmediaget')->with('favoriteget')
@@ -87,9 +93,12 @@ class ProductlistController extends Controller
                     $min = min($price_array);
                     $max = max($price_array);
                 }
-                else
+                elseif(!empty($product->price))
                 {
-                    $min = '';
+                    $min = $product->price;
+                    $max = $product->price;
+                }else{
+                     $min = '';
                     $max = '';
                 }
                 //dump($key);
@@ -106,7 +115,13 @@ class ProductlistController extends Controller
                 {
                     $product_arra['image'] = url('/') . '/image/defult-image.png';
                 }
-                $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
+
+                if (!empty($price_array)){
+                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
+                }else{
+                     $product_arra['price_range'] = $symbol['currency'] . $val->price;
+                }
+               
                 $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
 
 
@@ -124,6 +139,8 @@ class ProductlistController extends Controller
 
     public function getIndividualProduct_variant($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
@@ -169,7 +186,7 @@ class ProductlistController extends Controller
                 $product_arra['description'] = $val['descripation'];
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
-                $product_arra['price_range'] = '$' . $min . '-' . '$' . $max;
+                $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
 
                 $data_color = [];
                 $data_size = [];
@@ -342,6 +359,8 @@ class ProductlistController extends Controller
 
     public function get_related_Products($id)
     {
+
+        $symbol = CurrencySymbol();
         if (Product::where('id', $id)->exists())
         {
             $productget = Product::where('id', $id)->first();
@@ -406,7 +425,7 @@ class ProductlistController extends Controller
                                 $dataArr['title'] = $value['title'];
                                 $dataArr['collection'] = json_decode($value['collection']);
                                 $dataArr['image'] = (!empty($value['productmediaget'][$key]['image'])) ? $image_path . $value['productmediaget'][$key]['image'] : '';
-                                $dataArr['price_range'] = '$' . $min . '-' . '$' . $max;
+                                $dataArr['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
                                 $data_result[$key] = $dataArr;
                                 $data[] = $dataArr;
 
@@ -432,7 +451,7 @@ class ProductlistController extends Controller
                                 $data['title']=$value['title'];
                                 $data['description']=$value['descripation'];
                                 $data['image']= (!empty($value['productmediaget'][$key]['image']))? $image_path.$value['productmediaget'][$key]['image'] : '' ;*/
-                                // $data['price_range']='$'.$min.'-'.'$'.$max;
+                                // $data['price_range']=$symbol['currency'].$min.'-'.$symbol['currency'].$max;
                                 // $data_result[$key] = $data;
                                 
 

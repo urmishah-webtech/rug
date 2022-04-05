@@ -27,6 +27,7 @@
 
     .show {display: block;}
     </style>
+     @php $symbol = CurrencySymbol(); @endphp
     <section class="full-width flex-wrap admin-body-width add-variant-header" wire:ignore.self>
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -248,19 +249,19 @@
                             <div class="form-field-list">
                                 <label>Price</label>
                                 <input type="text" name="price" id="price-change-input" value="" class="change-value-main-price" >
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                                 @error('price') <span class="text-danger">{{ $message }}</span>@enderror
                                 
                             </div>
                             <div class="form-field-list">
                                 <label>Selling prices</label>
                                 <input type="text" name="selling_price" value="" >
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                             </div>
                   <!--           <div class="form-field-list">
                                 <label>Compare at price</label>
                                 <input type="text" name="compare_price" value="" >
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label> 
                             </div> -->
                         </div>
                         <div class="row">
@@ -279,7 +280,7 @@
                             <div class="form-field-list">
                                 <label>Cost per item</label>
                                 <input type="text" name="cost"  id="cost-change-input"  value="" class="change-value-main-cost">
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                                 <p>Customers won’t see this</p>
                             </div>
                             <div class="form-field-list">

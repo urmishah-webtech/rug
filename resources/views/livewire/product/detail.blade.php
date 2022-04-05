@@ -5,6 +5,7 @@
                 margin-right: 2px;
                 color: #d64949;
             }
+            
             .custom-addmorebtn {
         background: transparent !important;
         box-shadow: none;
@@ -84,7 +85,7 @@
     
                         <!-- <button class="button link" onclick="document.getElementById('duplicate-product-modal').style.display='block'">Duplicate</button> -->
     
-                        <button class="button link">Preview</button>
+                        <!-- <button class="button link">Preview</button> -->
     
                         <!-- <div class="pagination">
     
@@ -418,7 +419,7 @@
     
                                 </div>
     
-                                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
+                                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing custom-table-height">
     
                                     <tbody>
                                         <?php $stocksum = 0;  ?>
@@ -553,12 +554,14 @@
     
                                             <td class="vendor-table-item">
     
-                                                <p>@if($row->price)US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
+                                                <p>@if($row->price){{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
                                                 @endif</p>
                                                 <?php $location_count = count($location); ?>
                                                 <?php 
                                                  $stocksum += $row->stock; ?>
-                                                <p>available at {{$row->stock}} Stock</p>
+                                                 @if($row->stock)
+                                                <p>Available at {{$row->stock}} Stock</p>
+                                                @endif
     
                                             </td>
     
@@ -917,7 +920,7 @@
     
                                     <input type="text" name="price_main" id="price-change-input" class="price-change-input" wire:model="product.price" wire:ignore placeholder="0,00">
     
-                                    <label for="input">US{{$symbol['currency']}}</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
     
                                     @error('price') <span class="text-danger">{{ $message }}</span>@enderror
     
@@ -1238,25 +1241,24 @@
                     <div class="card">                
     
                         <div id="tab_logic" class="after-add-more">
-                         
+                            
                            <div class="col-md-2">
+                            <h3>Product Tab descripation</h3>
                                <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add({{$last_key}})">Add</button>
                            </div>
                        </div>
     
                        @foreach($product_array as $key => $row)
-                      
-                           <div id="tab_logic" class="after-add-more">
-                               <div class="row">
-                                   <label>Title</label>
-                                   <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
-                               </div>
-                               <div class="form-group row">
-                                   <label>Description</label>
-                                   <div class="col-md-9">
-                                       <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"  wire:ignore></textarea>
-                                     
-                                   </div>
+                       <div id="tab_logic" class="after-add-more">
+                           <div class="row">
+                               <label>Title</label>
+                               <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
+                           </div>
+                           <div class="form-group row">
+                               <label>Description</label>
+                               <div class="col-md-9">
+                                   <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"  wire:ignore></textarea>
+                                 
                                </div>
                            </div>
         

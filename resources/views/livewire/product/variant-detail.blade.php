@@ -1,6 +1,6 @@
 <div>
    <x-admin-layout>
-
+     @php $symbol = CurrencySymbol(); @endphp
     <section class="full-width flex-wrap admin-body-width add-variant-header">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -52,7 +52,7 @@
                     <div class="card-header">
                         <h3 class="fs-16 fw-6 mb-0">Variants</h3>
                     </div>
-                    <div class="card-middle">
+                    <div class="card-middle cutsom-heightscroll">
                         @foreach($Productvariant as $row)
                         <p><span><img src="@if($row->photo != '') {{ url('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ url('image/defult-image.png') }} @endif"></span>
                             <a href="{{ route('variant-detail', $row->id) }}">
@@ -179,12 +179,12 @@
                             <div class="form-field-list">
                                 <label>Price</label>
                                 <input type="text" name="price" class="change-value-main-price" wire:model="Productvariant_first.price">
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                             </div>
                             <div class="form-field-list">
                                 <label>Selling at price</label>
                                 <input type="text" name="compare_price" wire:model="Productvariant_first.selling_price">
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -203,7 +203,7 @@
                             <!-- <div class="form-field-list">
                                 <label>Cost per item</label>
                                 <input type="text" name="cost" class="change-value-main-cost" wire:model="Productvariant_first.cost">
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
                                 <p>Customers won’t see this</p>
                             </div> -->
                             <!-- <div class="form-field-list">
@@ -320,7 +320,7 @@
                 </div> -->
 
                   <!-- detail -->
-                <div class="card " >
+                {{-- <div class="card " >
                     <div class="row-items">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Detail</h3>
@@ -359,7 +359,7 @@
                         <button id="add_new" wire:click.prevent="addProductDetailSection">Add New</button>
                     </div>
                     
-                </div>
+                </div> --}}
                 <!-- end detail -->
             </div>
         </article>

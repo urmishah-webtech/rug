@@ -1,5 +1,6 @@
 <div>
 <x-admin-layout>
+@php $symbol = CurrencySymbol(); @endphp
 <section class="full-width flex-wrap admin-full-width list-customers" wire:ignore.self>
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
 
@@ -20,6 +21,7 @@
         </div>
 
     </div> 
+    
 
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>
@@ -38,7 +40,7 @@
                         <div class="input-group">
                             <!-- Search Field -->
                             <div class="search-product-field">
-                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" placeholder="Filter orders" wire:model="filter_order">
+                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" placeholder="Filter product" wire:model="filter_product">
                             </div>
                             <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >delete Selected</button>
                         </div> 
@@ -109,7 +111,7 @@
                                  @if($row_img[0]['product_id'] == $row->id)
                                 <div class="pd-blank-img">
                                     @if($row_img && isset($row_img[0]))
-                                    <a class="tc-black fw-6" href="{{ route('product-front-detail', $row->seo_utl) }}">
+                                    <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">
                                     <img src="{{ url('storage/'.$row_img[0]['image']) }}" />
 
                                     </a>
@@ -171,13 +173,13 @@
                                 ?>
                                 @if(!empty($price_array))
                                     @if(count($price_data) != '1')
-                                    <span>$</span><span><?php echo $min; ?></span>
-                                    <span> - $</span><span><?php echo $max; ?></span>
+                                    <span>{{$symbol['currency']}}</span><span><?php echo $min; ?></span>
+                                    <span> - {{$symbol['currency']}}</span><span><?php echo $max; ?></span>
                                     @else
-                                    <span>$</span><span><?php echo $min; ?></span>
+                                    <span>{{$symbol['currency']}}</span><span><?php echo $min; ?></span>
                                     @endif
                                 @else
-                                <span>$</span><span><?php echo $row->price; ?></span>
+                                <span>{{$symbol['currency']}}</span><span><?php echo $row->price; ?></span>
                                 @endif
                             </td>
                             

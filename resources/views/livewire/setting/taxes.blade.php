@@ -33,11 +33,11 @@
         <article class="full-width">
             <div class="columns ten">
                 <article class="full-width">
-                    <div class="columns four pt-3 pr-3">
+             <!--        <div class="columns four pt-3 pr-3">
                         <h4 class="fs-15 fw-5 mb-16">Tax regions</h4>
                         <p>Manage how your store charges sales tax in your <a class="blue-color td-underline" href="#">shipping profiles.</a> Check with a tax expert to understand your tax obligations.</p>
                         <p class="text-grey">Learn more about <a class="arrow-with-link" href="#"> taxes<svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14 13v1a1 1 0 0 1-1 1H6c-.575 0-1-.484-1-1V7a1 1 0 0 1 1-1h1c1.037 0 1.04 1.5 0 1.5-.178.005-.353 0-.5 0v6h6V13c0-1 1.5-1 1.5 0zm-3.75-7.25A.75.75 0 0 1 11 5h4v4a.75.75 0 0 1-1.5 0V7.56l-3.22 3.22a.75.75 0 1 1-1.06-1.06l3.22-3.22H11a.75.75 0 0 1-.75-.75z"></path></svg></a></p>
-                    </div>                
+                    </div>   -->              
                     <div class="columns eight">
                         <div class="card card-pd-0">
                             <!-- <div class="sales-channels-list">
@@ -52,23 +52,28 @@
                                     <button class="secondary fw-6">Manage</button>
                                 </div>
                             </div> -->
-                            <div class="sales-channels-list">
-                                <div class="sales-channels-list-img">
+                             @foreach($taxes as $key => $row)
+                            <div class="sales-channels-list" wire:ignore>
+                               <!--  <div class="sales-channels-list-img">
                                     <img src="https://cdn.shopify.com/shopifycloud/web/assets/v1/1ae10ee3926d9bbebd5cd1fec685e91a.svg">
                                 </div>
+                                -->
                                 <div class="sales-channels-title">
-                                    <h3 class="fs-14 fw-4 mb-0">India</h3>    
+                                    <h3 class="fs-14 fw-4 mb-0">{{$row->country_name}}</h3>    
                                 </div>
                                 <form class="mb-0 ml-auto" enctype="multipart/form-data" wire:ignore>
                                     @csrf
                                     <div class="sales-channels-btn-grp row side-elements mb-0">
                                         <!-- <span class="tag taxes-tag blue">Collecting</span> -->
-                                        <input type="text" wire:model="taxes.rate" value="{{$taxes->rate}}">
-                                       <button class="fw-6 button secondary" wire:ignore wire:click.prevent="taxStore()">Save</button>
+                                        <input type="text" wire:model="taxes.{{ $key }}.rate">
+                                      
                                     </div>
                                 </form>
+                             
                             </div>
-                            <div class="sales-channels-list">
+                            @endforeach
+                             <button class="fw-6 button secondary" wire:ignore wire:click.prevent="taxStore({{$submit->id}})">Save</button>
+                       <!--      <div class="sales-channels-list">
                                 <div class="sales-channels-list-img">
                                     <img src="http://127.0.0.1:8000/assets/images/Flag_of_the_Netherlands.png">
                                 </div>
@@ -106,13 +111,13 @@
                             </div>
                             <div class="sales-channels-btn-grp card-grey-bg p-3">
                                 <p class="mb-0">These regions are from your <a class="blue-color td-underline" href="#">shipping profiles.</a> To add a region, edit your shipping settings.</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </article>
             </div>
         </article>
-        <article class="full-width sec-border">
+       <!--  <article class="full-width sec-border">
             <div class="columns ten">
                 <article class="full-width">
                     <div class="columns four pt-3 pr-3">
@@ -150,7 +155,7 @@
                     </div>
                 </article>
             </div>
-        </article>
+        </article> -->
     </section>
 </x-admin-layout>
 </div>
