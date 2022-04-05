@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 }); 
@@ -77,6 +76,7 @@ Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartPro
 
 
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
+Route::any('shipping-cost', 'App\Http\Controllers\Api\CartController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
 
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');

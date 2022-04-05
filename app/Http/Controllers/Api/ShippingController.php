@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\ShippingInfo;
 
+use App\Models\Country;
+use App\Models\ShippingZone;
+use App\Models\ShippingZoneCountry;
+
+
 class ShippingController extends Controller
 {
 	public function shippingInfo(Request $request){
@@ -50,7 +55,8 @@ class ShippingController extends Controller
 			}else{
 				return response()->json(['status' => false, 'message' =>'Somthing worng, Please try again']);
 			}
-
 		}
 	}
+
+	
 }

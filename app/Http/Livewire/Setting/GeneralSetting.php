@@ -37,6 +37,7 @@ class GeneralSetting extends Component
         'getgeneral.pincode' => [],
 
     ];
+    
     public function mount()
     {
         $this->getgeneral = General::where('id',1)->first();

@@ -17,6 +17,12 @@ use App\Models\Cart;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 
+use App\Models\Country;
+use App\Models\ShippingZone;
+use App\Models\ShippingZoneCountry;
+
+use App\Http\Controllers\Api\CartController;
+
 class PaymentController extends Controller
 {
     public function sendJson($data, $withDie = false)
@@ -31,6 +37,27 @@ class PaymentController extends Controller
             return response()->json($data);
         }
     }
+
+    public function getshipping($amount, $country_name){
+
+        $country = Country::where('name',$country_name)->get()->first();
+        $code = (!empty($country)) ? $country->code : 'all';
+        $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
+
+        if (empty($get_zone_ids)) {
+            return ['cost' => 0, 'success' => true];
+        }
+
+        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
+
+        if (!empty($get_zone)) {
+            return ['cost' => $get_zone->price, 'success' => true];
+        }else{
+            return ['cost' => 0, 'success' => true];
+        }
+        
+    }
+
     public function payment(Request $request)
     {
         $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
@@ -46,8 +73,12 @@ class PaymentController extends Controller
 
         $Cart = Cart::where('user_id',$user_detail['id'])->get();
   
-         $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
-            $Order_insert = orders::insert($order_arr = [
+        $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+
+
+        $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
+
+        $Order_insert = orders::insert($order_arr = [
 
             'user_id' => $user_detail['id'],
 
@@ -56,6 +87,8 @@ class PaymentController extends Controller
             'email' => $user_detail['email'],
 
             'netamout' => $request->amount,
+
+            'shipping_cost' => $shipping_cost_data['cost'],
 
             'paymentstatus' => 'pending',
 
@@ -77,7 +110,8 @@ class PaymentController extends Controller
             
             'payment_type' => $payment_type,
 
-            ]);
+        ]);
+
 
         if($Order_insert){
             // Insert Record Order Item

@@ -118,6 +118,9 @@
                          $gst_include =  ($withoutgstaount*$gst) / 100;
                          //$gst_amount = ($netamount + $gst_include);
 
+                         $shipping_cost = $order->shipping_cost;
+
+                         $total = $netamount + $shipping_cost;
                         ?>
                         <li>
                             <span>Subtotal(excluding GST)</span>
@@ -129,21 +132,27 @@
                             <span>IGST {{$gst}}%</span>
                             <span>{{$symbol['currency']}}{{number_format($gst_include,2,'.',',')}}</span>
                         </li>
+
                         <li>
                             <span>Subtotal(including GST)</span>
                             <span>{{$Stock_sum}} item</span>
                             <span>{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
                         </li>
+
+                        <li>
+                            <span>Shipping</span>
+                            <span>{{$symbol['currency']}}{{number_format($shipping_cost,2,'.',',')}}</span>
+                        </li>
                         
                         <li>
                             <span class="fw-6">Total</span>
                             <span class="fw-6"></span>
-                            <span class="fw-6">{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
+                            <span class="fw-6">{{$symbol['currency']}}{{number_format($total,2,'.',',')}}</span>
                         </li>
                         <li>
                             <span>Paid by customer</span>
                             <span></span>
-                            <span>{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
+                            <span>{{$symbol['currency']}}{{number_format($total,2,'.',',')}}</span>
                         </li>
                     </ul>
                 </div>

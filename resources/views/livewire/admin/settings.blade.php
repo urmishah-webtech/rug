@@ -41,23 +41,41 @@
 
                                 </a>
 
-                                <a href="{{ route('taxes') }}" class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('setting-general') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M4.5 0h11c.828 0 1.5.677 1.5 1.512v18.21a.2.2 0 0 1-.334.149l-1.664-1.515a.497.497 0 0 0-.67 0l-1.664 1.514a.497.497 0 0 1-.67 0l-1.663-1.514a.497.497 0 0 0-.67 0L8.002 19.87a.497.497 0 0 1-.67 0l-1.664-1.514a.497.497 0 0 0-.67 0l-1.664 1.559a.2.2 0 0 1-.334-.15V1.512C3 .677 3.672 0 4.5 0zm3 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6.5 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-.293-4.793a1 1 0 0 0-1.414-1.414l-6 6a1 1 0 1 0 1.414 1.414l6-6z"></path></svg>
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M9.027 0a1 1 0 0 0-.99.859l-.37 2.598A6.993 6.993 0 0 0 5.742 4.57l-2.437-.98a1 1 0 0 0-1.239.428L.934 5.981a1 1 0 0 0 .248 1.287l2.066 1.621a7.06 7.06 0 0 0 0 2.222l-2.066 1.621a1 1 0 0 0-.248 1.287l1.132 1.962a1 1 0 0 0 1.239.428l2.438-.979a6.995 6.995 0 0 0 1.923 1.113l.372 2.598a1 1 0 0 0 .99.859h2.265a1 1 0 0 0 .99-.859l.371-2.598a6.995 6.995 0 0 0 1.924-1.112l2.438.978a1 1 0 0 0 1.238-.428l1.133-1.962a1 1 0 0 0-.249-1.287l-2.065-1.621a7.063 7.063 0 0 0 0-2.222l2.065-1.621a1 1 0 0 0 .249-1.287l-1.133-1.962a1 1 0 0 0-1.239-.428l-2.437.979a6.994 6.994 0 0 0-1.924-1.113L12.283.86a1 1 0 0 0-.99-.859H9.027zm1.133 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></svg>
 
                                     </div>
 
                                     <div class="setting-details">
 
-                                       <label>Taxes</label>
+                                        <label>Shipping</label>
+                                        <p>View & Update your Shipping Detail</p>
 
+                                    </div>
+
+                                </a>
+
+
+                                <a href="{{ route('taxes') }}" class="settings-option row field_style1 mb-2">
+
+                                    <div class="setting-icon">
+
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M9.027 0a1 1 0 0 0-.99.859l-.37 2.598A6.993 6.993 0 0 0 5.742 4.57l-2.437-.98a1 1 0 0 0-1.239.428L.934 5.981a1 1 0 0 0 .248 1.287l2.066 1.621a7.06 7.06 0 0 0 0 2.222l-2.066 1.621a1 1 0 0 0-.248 1.287l1.132 1.962a1 1 0 0 0 1.239.428l2.438-.979a6.995 6.995 0 0 0 1.923 1.113l.372 2.598a1 1 0 0 0 .99.859h2.265a1 1 0 0 0 .99-.859l.371-2.598a6.995 6.995 0 0 0 1.924-1.112l2.438.978a1 1 0 0 0 1.238-.428l1.133-1.962a1 1 0 0 0-.249-1.287l-2.065-1.621a7.063 7.063 0 0 0 0-2.222l2.065-1.621a1 1 0 0 0 .249-1.287l-1.133-1.962a1 1 0 0 0-1.239-.428l-2.437.979a6.994 6.994 0 0 0-1.924-1.113L12.283.86a1 1 0 0 0-.99-.859H9.027zm1.133 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></svg>
+
+                                    </div>
+
+                                    <div class="setting-details">
+
+                                        <label>Taxes</label>
                                         <p>Manage how your store charges taxes</p>
 
                                     </div>
 
                                 </a>
+
 
                                <!--  <a href="{{ route('notifications') }}" class="settings-option row field_style1 mb-2">
 
