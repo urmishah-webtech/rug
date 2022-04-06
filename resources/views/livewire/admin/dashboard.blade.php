@@ -191,13 +191,7 @@
                      <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL CUSTOMER</h3>
                      <p class="fw-6 fs-26">
                         @if(!empty($User)) {{$User}} @else No sales yet @endif
-                        <svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                           <g fill="none">
-                              <polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon>
-                              <path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path>
-                              <circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle>
-                           </g>
-                        </svg>
+                        
                      </p>
                   </div>
                </div>
@@ -206,13 +200,7 @@
                      <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL PRODUCT</h3>
                      <p class="fw-6 fs-26">
                         @if($product) {{$product}} @else No sales yet @endif
-                        <svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                           <g fill="none">
-                              <polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon>
-                              <path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path>
-                              <circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle>
-                           </g>
-                        </svg>
+                        
                      </p>
                   </div>
                </div>
@@ -223,13 +211,7 @@
                      <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL ORDERS</h3>
                      <p class="fw-6 fs-26">
                         @if($order) {{$order}} @else No sales yet @endif
-                        <svg class="chart-svg _1KiF5" viewBox="0 0 50 30" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                           <g fill="none">
-                              <polygon points="0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00 50 30 0 30" class="_2xfgW" style="fill: rgb(0, 161, 159); fill-opacity: 0.3;"></polygon>
-                              <path class="_1Pq_P" d="M 0.00 30.00 5.56 30.00 11.11 30.00 16.67 30.00 22.22 0.00 27.78 30.00 33.33 30.00 38.89 30.00 44.44 30.00 50.00 30.00" stroke-dasharray="95.60269927978516" stroke-dashoffset="95.60269927978516" stroke-width="1.5" style="stroke: rgb(0, 161, 159);"></path>
-                              <circle class="_3HS19" cx="50" cy="30" r="2" style="fill: rgb(0, 161, 159);"></circle>
-                           </g>
-                        </svg>
+                        
                      </p>
                   </div>
                </div>
@@ -350,7 +332,7 @@
                 enabled: false
             },
             tooltip: {
-               valuePrefix: '$'
+               valuePrefix: '€'
             },
             plotOptions: {
             column: {
