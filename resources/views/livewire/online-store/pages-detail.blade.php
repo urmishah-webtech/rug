@@ -26,7 +26,7 @@
         }
         
         .question::after {
-            background-image: url(/../assets/images/arrow-down.png);
+            background-image: url(../../assets/images/arrow-down.png);
     content: "";
     position: absolute;
     display: block;
