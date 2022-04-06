@@ -355,6 +355,38 @@
 
                 </div>
 
+                <div class="card variant-pricing-card" wire:ignore>
+                        <div class="row-items">
+                            <div class="header-title">
+                                <h3 class="fs-16 fw-6 mb-0">Shipping Parcel</h3>
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+                                <div class="form-field-list">
+                                    <label>Shipping Weight (kg)</label>
+                                    <input type="text" name="shipping_weight" value="{{ old('shipping_weight') }}">
+                                     @error('shipping_weight') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="form-field-list">
+                                    <label>Width (cm)</label>
+                                    <input type="text" name="width" value="{{ old('width') }}">
+                                     @error('width') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-field-list">
+                                    <label>Height (cm)</label>
+                                    <input type="text" name="height" value="{{ old('height') }}">
+                                     @error('height') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="form-field-list">
+                                    <label>Depth (cm)</label>
+                                    <input type="text" name="depth" value="{{ old('depth') }}">
+                                     @error('depth') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <!-- <div class="card variant-inventory-card">
 
                     <div class="row-items">

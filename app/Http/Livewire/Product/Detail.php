@@ -174,6 +174,10 @@ class Detail extends Component
         'LocationId.name' => '',
         'product.weight' => '',
         'product.weight_lable' => '',
+        'product.shipping_weight' => '',
+        'product.width' => '',
+        'product.height' => '',
+        'product.depth' => '',
         'product.country' => '',
         'product.sku' => '',
         'product.barcode' => '',
@@ -547,6 +551,14 @@ class Detail extends Component
                     'weight'           => $this->product['weight'],
                     
                     'weight_lable'     => $this->product['weight_lable'],
+
+                    'shipping_weight'     => $this->product['shipping_weight'],
+
+                    'width'     => $this->product['width'],
+
+                    'height'     => $this->product['height'],
+                    
+                    'depth'     => $this->product['depth'],
                     
                     'country'          => $this->product['country'],
                     

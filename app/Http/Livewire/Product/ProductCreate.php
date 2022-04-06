@@ -271,7 +271,15 @@ class ProductCreate extends Component
                 'weight' => $request['weight'],
                 
                 'weight_lable' => $request['weight_lable'],
+
+                'shipping_weight' => $request['shipping_weight'],
+
+                'width' => $request['width'],
+
+                'height' => $request['height'],
                 
+                'depth' => $request['depth'],
+            
                 'country' => $request['country'],
 
                 'hscode' => $request['hscode'],

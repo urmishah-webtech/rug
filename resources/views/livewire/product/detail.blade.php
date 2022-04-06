@@ -901,7 +901,8 @@
                     
     
                 @endif
-    
+                    
+
                     <div class="card variant-pricing-card" wire:ignore>
     
                         <div class="row-items">
@@ -1012,6 +1013,41 @@
                         </div>
     
                     </div>
+
+
+                    <div class="card variant-pricing-card" wire:ignore>
+                        <div class="row-items">
+                            <div class="header-title">
+                                <h3 class="fs-16 fw-6 mb-0">Shipping Parcel</h3>
+                            </div>
+                            <div class="row" style="margin-bottom:10px">
+                                <div class="form-field-list">
+                                    <label>Shipping Weight (kg)</label>
+                                    <input type="text" name="shipping_weight" wire:model="product.shipping_weight" wire:ignore >
+                                     @error('shipping_weight') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="form-field-list">
+                                    <label>Width (cm)</label>
+                                    <input type="text" name="width" wire:model="product.width" wire:ignore >
+                                     @error('width') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-field-list">
+                                    <label>Height (cm)</label>
+                                    <input type="text" name="height" wire:model="product.height" wire:ignore >
+                                     @error('height') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="form-field-list">
+                                    <label>Depth (cm)</label>
+                                    <input type="text" name="depth" wire:model="product.depth" wire:ignore>
+                                     @error('depth') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
     
                 
                    <!--  @if(count($Productvariant) == 0)
@@ -1239,17 +1275,13 @@
                     </div>
     
                     <div class="card">                
-    
                         <div id="tab_logic" class="after-add-more">
-                            
                            <div class="col-md-2">
                             <h3>Product Tab descripation</h3>
                                <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add({{$last_key}})">Add</button>
                            </div>
                        </div>
-    
                        @foreach($product_array as $key => $row)
-                       <div id="tab_logic" class="after-add-more">
                            <div class="row">
                                <label>Title</label>
                                <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
@@ -1258,7 +1290,6 @@
                                <label>Description</label>
                                <div class="col-md-9">
                                    <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"  wire:ignore></textarea>
-                                 
                                </div>
                            </div>
         
