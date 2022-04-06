@@ -16,7 +16,7 @@ use App\Models\User;
 use App\Models\Cart;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\tax;
 use App\Models\Country;
 use App\Models\ShippingZone;
 use App\Models\ShippingZoneCountry;
@@ -41,19 +41,20 @@ class PaymentController extends Controller
     public function getshipping($amount, $country_name){
 
         $country = Country::where('name',$country_name)->get()->first();
+        $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
 
         if (empty($get_zone_ids)) {
-            return ['cost' => 0, 'success' => true];
+            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
         }
 
         $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
 
         if (!empty($get_zone)) {
-            return ['cost' => $get_zone->price, 'success' => true];
+            return ['cost' => $get_zone->price, 'taxes' => $taxes->rate, 'success' => true];
         }else{
-            return ['cost' => 0, 'success' => true];
+            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
         }
         
     }

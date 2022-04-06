@@ -235,7 +235,7 @@
                                 <option value="pending">Pending</option>
                                 <option value="processing">Processing</option>
                                 <option value="shipped">Shipped</option>
-                                <option value="fulfilled">fulfilled</option>
+                                <option value="fulfilled">Fulfilled</option>
                             </select>
                         </div>
                         <div class="ta-right">

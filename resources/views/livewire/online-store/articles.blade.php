@@ -39,7 +39,7 @@
                             <div class="search-product-field">
                                 <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" placeholder="Filter orders" wire:model="filter_blog">
                             </div>
-                            <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >delete Selected</button>
+                            <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >Delete Selected</button>
                         </div> 
                         </div>
                     </article>
