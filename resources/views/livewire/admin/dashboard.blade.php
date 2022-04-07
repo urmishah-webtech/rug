@@ -321,12 +321,12 @@
              column: {
               borderRadius: 2,
                   pointPadding: 0,
-              groupPadding: 0.1
+              groupPadding: 0.4
                  } 
            },
              series: [{
                  name: 'Revenue',
-                 data: [2200, 2800, 2300, 1700, 2000, 1200, 1400]
+                 data: [2200, 2800, 2300, 1700, 2000, 1200, 1400, 1500, 1600, 6000]
              }]
          });
          });

@@ -34,7 +34,7 @@ class OrderDetail extends Component
             return $data->updated_at->format('Y-m-d');
         })->toArray();
 
-       $this->Taxes = tax::where('id',1)->first();
+       $this->Taxes = tax::where('country_name',$this->order->country)->first();
 
        $this->OrderItem = order_item::with('order_product')->with('media_product')->where('order_id',$id)->get();
 

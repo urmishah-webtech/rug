@@ -23,9 +23,11 @@
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                         </button>
                     </a>
-                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <!-- <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span> --><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
+                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <!-- <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span> -->
+                    <?php $d=strtotime($order->created_at); ?>
+                    <p class="header-leble"><?php echo date("d M Y h:i", $d); ?> from Orders</p></h4>
                 </div>
-               <!--  <div class="product-header-btn">
+               <!-- 25 May 2021 at 7:30   <div class="product-header-btn">
                     <a href="{{route('order-refund')}}" class="button link">Refund</a>
                     <button class="button link" onclick="document.getElementById('unable-to-edit-order-modal').style.display='block'">Edit</button>
                     <div class="more-actions-dp">
@@ -95,9 +97,9 @@
                         @endforeach
                         @endif
                     </div>
-                    <div class="card-middle ta-right">
+                   <!--  <div class="card-middle ta-right">
                         <button class="button green-btn ta-right">Fulfill item</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card od-paid-card">
 
@@ -110,7 +112,11 @@
                         <?php $Stock_sum  += $item['stock']; ?>
                         @endforeach
                         <?php 
+                         if(!empty($Taxes->rate)){
                          $gst = $Taxes->rate;
+                         }else{
+                         $gst = 0;
+                         }
                          $netamount = $order->netamout;
                          $GetGst = ($gst/100)+1;
                          $withoutgstaount = $netamount / $GetGst;
@@ -272,6 +278,9 @@
                     </div>
                     
                     <div class="card-middle">
+                        <div class="header-title">
+                            <h3 class="fs-16 fw-6 mb-0">Shipping Address</h3>
+                        </div>
                         <!-- <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">SHIPPING ADDRESS</h4>
                             <button class="link" onclick="document.getElementById('add-address-modal').style.display='block'">Edit</button>
