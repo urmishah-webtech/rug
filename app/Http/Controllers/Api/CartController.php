@@ -278,8 +278,9 @@ class CartController extends Controller
             foreach ($CartItem as $key => $result)
             {
 
-                if(!empty($result['product_variant'][0]['photo'])){
+                if(!empty($result['product_variant'][0]['photo'])){ 
                     $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
+                    dd($CartItem);
                 }else{
                     $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                 }
