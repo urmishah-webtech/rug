@@ -275,16 +275,11 @@ class CartController extends Controller
         {
             $finalamount = 0;
             $i=0;
-            $variantimage = "";
             foreach ($CartItem as $key => $result)
             {
-                foreach ($result['product_variant'] as $key => $value) {
 
-                   $variantimage = $image_path.$value['photo'];
-                }
-
-                if(!empty($variantimage)) { 
-                    $CartItem[$key]['image']= $variantimage;
+                if($resul['product_variant'][0]['photo']){ 
+                    $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
                 }else{
                     $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                 }
