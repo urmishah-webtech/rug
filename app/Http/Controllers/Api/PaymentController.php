@@ -99,7 +99,7 @@ class PaymentController extends Controller
 
             'email' => $user_detail['email'],
 
-            'netamout' => $includeshipping,
+            'netamout' => $netamount,
 
             'shipping_cost' => $shipping_cost_data['cost'],
 
@@ -173,7 +173,7 @@ class PaymentController extends Controller
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $request->amount;
+            $pay->amount = $includeshipping;
             $pay->payment_type = $payment_type;
             $pay->payment_link = $payment->_links->checkout->href;
             $pay->status = $payment->status;
