@@ -19,7 +19,7 @@ class ProductlistController extends Controller
 
         $data = array();
         $i = 0;
-        $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+        $image_path = 'https://rug.webtech-evolution.com/public/storage/';
 
         foreach ($product as $val)
         {
@@ -73,7 +73,7 @@ class ProductlistController extends Controller
                 ->where('id', $id)->get();
 
             $product_arra = array();
-            $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+            $image_path = 'https://rug.webtech-evolution.com/public/storage/';
 
             foreach ($product as $key => $val)
             {
@@ -153,7 +153,7 @@ class ProductlistController extends Controller
                 ->where('id', $id)->get();
 
             $product_arra = array();
-            $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+            $image_path = 'https://rug.webtech-evolution.com/public/storage/';
 
             foreach ($product as $key => $val)
             {
@@ -374,7 +374,7 @@ class ProductlistController extends Controller
             // dd()
             $data = array();
             $price_array = array();
-            $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+            $image_path = 'https://rug.webtech-evolution.com/public/storage/';
             foreach ($product as $key => $value)
             {
                 $decodeA = json_decode($value['collection']);
@@ -479,7 +479,7 @@ class ProductlistController extends Controller
             ->get();
         $productimage = ProductMedia::Where('product_id', $request->product_id)
             ->first();
-        $image_path = 'https://projects.webtech-evolution.com/rug/public/storage/';
+        $image_path = 'https://rug.webtech-evolution.com/public/storage/';
         if (!empty($productvariants) && count($productvariants) > 0)
         {
 

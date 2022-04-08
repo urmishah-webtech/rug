@@ -362,6 +362,7 @@ class Detail extends Component
 
     public function variantimgsubmit($variantid)
     {
+        
         if($this->imgvariant != ''){
              $getimg =  ProductMedia::where('id', $this->imgvariant)->first();
              if ($getimg->image) {

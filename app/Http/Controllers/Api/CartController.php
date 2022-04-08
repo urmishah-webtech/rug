@@ -270,7 +270,7 @@ class CartController extends Controller
         } else {
            $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
         }
-        $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
+        $image_path='https://rug.webtech-evolution.com/public/storage/';
         if ($CartItem)
         {
             $finalamount = 0;
@@ -278,7 +278,7 @@ class CartController extends Controller
             foreach ($CartItem as $key => $result)
             {
 
-                if($resul['product_variant'][0]['photo']){ 
+                if($result['product_variant'][0]['photo']){ 
                     $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
                 }else{
                     $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
