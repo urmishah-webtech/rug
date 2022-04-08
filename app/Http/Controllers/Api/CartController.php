@@ -277,7 +277,12 @@ class CartController extends Controller
             $i=0;
             foreach ($CartItem as $key => $result)
             {
-                $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
+
+                if(!empty($result['product_variant'][0]['photo'])){
+                    $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
+                }else{
+                    $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
+                }
                 $Totalamount = ($result->stock * $result->price);
                 $finalamount += $Totalamount;
             }
