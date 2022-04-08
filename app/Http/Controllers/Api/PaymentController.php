@@ -79,6 +79,18 @@ class PaymentController extends Controller
 
         $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
 
+        $netamount = 0;
+        foreach($Cart as $res) {         
+            if($res) {
+                $totalamout = ($res->price * $res->stock);
+                $netamount += $totalamout;
+            }               
+        }
+
+
+        $includeshipping = $netamount + $shipping_cost_data['cost'];
+
+
         $Order_insert = orders::insert($order_arr = [
 
             'user_id' => $user_detail['id'],
@@ -87,7 +99,7 @@ class PaymentController extends Controller
 
             'email' => $user_detail['email'],
 
-            'netamout' => $request->amount,
+            'netamout' => $includeshipping,
 
             'shipping_cost' => $shipping_cost_data['cost'],
 
@@ -136,7 +148,7 @@ class PaymentController extends Controller
                         
                         'stock' => $res->stock,
                         
-                        'total' => '230',
+                        'total' => $totalamout,
 
                     ];
                     $insert_order_item[] = $order_item_arr;

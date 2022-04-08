@@ -24,11 +24,40 @@
                             </button>
                         </a>
                         <h4 class="mb-0 fw-5">Taxes</h4>
+                        <li><a class="link" onclick="document.getElementById('add-taxes').style.display='block'">Add country</a></li>
                     </div>
                 </div>
             </div>
         </article>
     </section>
+
+        <!-- Price Modal -->
+    <div id="add-taxes" class="customer-modal-main variants-edit-option-modal" wire:ignore>
+        <div class="customer-modal-inner">
+            <div class="customer-modal">
+                <div class="modal-header">
+                    <h2>Add Country</h2>
+                    <span onclick="document.getElementById('add-taxes').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row side-elements align-item-bt">
+                        <div class="form-field-list">
+                            <label>Country Name</label>
+                                <input type="text" id="country_name" wire:model="country_name" class="apply-price" value="">
+
+                            <label>Rate</label>
+                                <input type="text" id="rate" wire:model="rate" class="apply-price" value="">
+                        </div> 
+                    </div>
+         
+                </div>
+                <div class="modal-footer">
+                    <a onclick="document.getElementById('add-taxes').style.display='none'" class="button secondary">Cancel</a>
+                    <a class="button green-btn child-price-submit" onclick="document.getElementById('add-taxes').style.display='none'"  data-recordid="" wire:click.prevent="AddCountryRecord()">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="full-width flex-wrap admin-body-width setting-taxes-sec" wire:ignore>
         <article class="full-width">
             <div class="columns ten">

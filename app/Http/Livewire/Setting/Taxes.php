@@ -8,7 +8,7 @@ use App\Models\tax;
 
 class Taxes extends Component
 {
-    public $taxes,$submit;
+    public $taxes,$submit,$rate,$country_name;
 
     protected $rules = [ 'taxes.*.rate' => '' ];
     public function mount() {
@@ -36,6 +36,14 @@ class Taxes extends Component
          }
         
        session()->flash('message', 'Tax Updated Successfully.');
+        
+    }
+
+    public function AddCountryRecord()
+    {
+        tax::insert(['country_name' => $this->country_name, 'rate' => $this->rate]);
+        $this->taxes = tax::get();
+       session()->flash('message', 'Tax Create Successfully.');
         
     }
 }

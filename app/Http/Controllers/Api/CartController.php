@@ -263,8 +263,10 @@ class CartController extends Controller
     }
     public function getCart($id)
     {
+
         if (preg_match("/^\d+$/", $id)) {
           $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)->get();
+          
         } else {
            $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
         }
