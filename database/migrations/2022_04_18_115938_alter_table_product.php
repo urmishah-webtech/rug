@@ -18,6 +18,10 @@ class AlterTableProduct extends Migration
             $table->integer('width')->comment("unit cm")->nullable()->default(0);
             $table->integer('height')->comment("unit cm")->nullable()->default(0);
             $table->integer('depth')->comment("unit cm")->nullable()->default(0);
+            $table->boolean("custom_variant")->comment("unit cm")->nullable()->default(0);
+            $table->json("custom_variant_price")->comment("per unit")->nullable();
+            $table->float("cv_width_price", 8, 2)->comment("per unit")->nullable();
+            $table->float("cv_height_price", 8, 2)->comment("per unit")->nullable();
         });
     }
 
@@ -33,6 +37,10 @@ class AlterTableProduct extends Migration
             $table->dropColumn('width');
             $table->dropColumn('height');
             $table->dropColumn('depth');
+            $table->dropColumn('custom_variant');
+            $table->dropColumn('custom_variant_price');
+            $table->dropColumn('cv_width_price');
+            $table->dropColumn('cv_height_price');
         });
     }
 }

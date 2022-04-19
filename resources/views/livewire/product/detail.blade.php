@@ -43,17 +43,29 @@
     #tab_logic{
         padding-top:30px;
     }
+
+    .variant_fixed_price{
+        display: none !important;
+    }
+
+    .CustomVariant_active .variant_fixed_price{
+        display: block !important;
+    }
+
+    .custom_variant_hw{ display: none !important; }
+    .CustomVariant_active .custom_variant_hw{ display: block !important; }
+
         </style>
     
         <div wire:key="alert">
     
              @if (session()->has('message'))
     
-             <div class="alert alert-success">
-    
-                {{ session('message') }}
-    
-             </div>
+                 <div class="alert alert-success">
+        
+                    {{ session('message') }}
+        
+                 </div>
     
              @endif
     
@@ -600,18 +612,22 @@
     
                             <div class="header-title">
     
-                                <h4 class="fs-16 mb-0 fw-6">Variants</h4>
+                                <h4 class="fs-16 mb-0 fw-6">Variants s</h4>
     
                             </div>
     
                             <label><input type="checkbox" name="option2a" class="edit-website-Attribute">This product has multiple options, like different sizes or colors</label>
-    
+        
+                            
+
                         </div>
     
-                    <div class="card-middle-arrtibute" style="display: none;">
-    
+                    <div class="card-middle-arrtibute CustomVariant_wrap" style="display: none;">
+                        
+                        
+
                         <div class="card-middle">
-    
+                            <label><input type="checkbox" name="custom_variant" class="CustomVariant_checkox">Custom Variant</label>
                             <div class="varition-append">
     
                                 <label class="form-label fs-14 fw-6">Option 1</label>
@@ -625,10 +641,14 @@
                                         @endforeach
                                     </select>
     
-                                    <input type="text" value=""  name="option" class="varition_tags variant-tags-error" id="varition_tags_1" data-role="tagsinput"  placeholder="Separate options with a comma">
-    
+                                    <input type="text" value="" name="option" class="varition_tags variant-tags-error" id="varition_tags_1" data-role="tagsinput"  placeholder="Separate options with a comma">
+                                       
+
                                 </div>
-    
+                                
+                                <div class="row variant_fixed_price">
+                                    <input type="number" value="" name="variant_custom_price" class="variant-tags-error" id="custom_price_tags_1" placeholder="Variant Price">    
+                                </div>
                             </div>
     
                             <div class="row pd-variants-card-btn">
@@ -636,7 +656,20 @@
                                 <a class="fw-6 button secondary addBtn">Add another option</a>
     
                             </div>
-    
+                            
+                            <div class="custom_variant_hw mt-3 mb-3">
+                                <div class="div">
+                                    <label class="mb-0 pb-0" style="padding:0 !important">Height Price (Per Unit)</label>
+                                    <input type="number" value="" name="variant_custom_price" class="variant-tags-error" id="custom_price_tags_1" placeholder="Price">    
+                                </div>
+                                <div class="div">
+                                    <label class="mb-0 pb-0" style="padding:0 !important">Width Price (Per Unit)</label>
+                                    <input type="number" value="" name="variant_custom_price" class="variant-tags-error" id="custom_price_tags_1" placeholder="Price">    
+                                </div>
+                            </div>
+
+                            <div class="custom_variant_hw"></div>
+
                         </div>
                         
                         <div class="card-footer add-product-footer">
@@ -878,11 +911,13 @@
                                                         </div>
                                                     </div>
                                                 </div>  
-                                                 <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
+                                                <div class="row pl-3 pt-3">
+                                                    <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
                                                     <input type="submit" class="button" name="submit" id="master-save" value="save">
                                                     <tbody class="variants-option">
                                                     </tbody>
                                                 </table>
+                                                </div>
                                                 </form>
                                                
                                 
@@ -2670,7 +2705,13 @@
          });
     
         $(document).ready(function(){
-    
+            
+            if ($(".CustomVariant_checkox" ).is(':checked')) {
+                $('.CustomVariant_wrap').addClass("CustomVariant_active");
+            }else{
+                $('.CustomVariant_wrap').removeClass("CustomVariant_active");
+            }
+
             $( ".click-varients-type" ).click(function() {     
                 window.livewire.emit('UpdateVarient', 'add-varient-type');
                 $('.main-variant-card .card-middle-varient').toggle("slide");
@@ -2682,7 +2723,16 @@
                 $('.main-variant-attribute .card-middle-arrtibute').toggle("slide");
     
             });
+            
+            $( ".CustomVariant_checkox" ).click(function() {     
+                 
+                if ($(".CustomVariant_checkox" ).is(':checked')) {
+                    $('.CustomVariant_wrap').addClass("CustomVariant_active");
+                }else{
+                    $('.CustomVariant_wrap').removeClass("CustomVariant_active");
+                }
     
+            });
     
     
         });
@@ -2746,6 +2796,9 @@
     
                                             <input type="text" class="varition_tags variant-tags-error" id="varition_tags_${rowIdx}" value="" name="option" data-role="tagsinput" placeholder="Separate options with a comma">
     
+                                        </div>
+                                        <div class="row variant_fixed_price">
+                                            <input type="number" value="" name="variant_custom_price" class="variant-tags-error" id="custom_price_tags_${rowIdx}" placeholder="Variant Price">    
                                         </div>
                                 </div>
                             </div>    
