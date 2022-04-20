@@ -137,6 +137,42 @@
                 </div>
 
                 <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
+                    <div class="row-items">
+                        <div class="header-title">
+                            <h4 class="fs-16 mb-0 fw-6">Custome Modual</h4>
+                        </div>
+                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute">Custome variants</label>
+
+                    <div class="card-cutome-arrtibute" style="display: none;" wire:ignore.self>
+                        <div class="row">
+                        @foreach($variantag as $row)
+                            <div class="form-field-list">
+                                <label>Name </label>
+                                 <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
+                                 <input class="price-change-input" type="hidden" value="{{ $row->id }}"  name="variantid[]"   readonly>
+                               
+                            </div>
+                            <div class="form-field-list">
+
+                                <label>Variant Price</label>
+
+                                <input class="price-change-input" type="text" value=""  name="variantprice[]">
+
+                            </div>
+                        @endforeach
+                        </div>
+                        <div class="custom_variant_hw mt-3 mb-3">
+                            <div class="div">
+                                <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
+                                <input type="number" value="" name="heightwidthprice" class="variant-tags-error" id="custom_price_tags_1" placeholder="Price">    
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+
+                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
                     <div class="card-header">
                         <div class="header-title">
                              @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
@@ -1209,6 +1245,18 @@
 });
 </script>
 <script>
+
+    $('#custom_variant').on('change', function(){
+           this.value = this.checked ? 1 : 0;
+        });
+        $(document).ready(function() {
+             // $('.save-button').prop('disabled', true);
+             $('form').keyup(function() {
+                if($(this).val() != '') {
+                   $('.save-button').prop('disabled', false);
+                }
+             });
+         });
     $('.sales-channel-btn').on('click', function() {
         $('.sales-channels-apps').toggleClass('channels-dropdown-open');
     });
@@ -1272,6 +1320,15 @@ $(document).ready(function(){
     $( ".edit-website-Attribute" ).click(function() {     
 
         $('.main-variant-attribute .card-middle-arrtibute').slideToggle(500);
+    });
+
+});
+
+$(document).ready(function(){
+
+    $( ".edit-update-Attribute" ).click(function() {     
+
+        $('.card-cutome-arrtibute').slideToggle(500);
     });
 
 });

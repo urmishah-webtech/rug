@@ -174,14 +174,30 @@ class ProductCreate extends Component
             ]);
         }
 
-        foreach ($request as $key => $find_contant) {
 
-            foreach ($find_contant as $key_value => $result_content) {
+        $variantprice = $request->variantprice;
+        $variantid = $request->variantid;
+        $i=0;
+        foreach ($variantprice as $key => $value) {
+          if($variantprice[$i] != ""){
+            $price = $variantprice[$i];
+            $varientcheckid = $variantid[$i];
+            $custom_variant_Save_arry[] =  array(
+                'price' => $price,
+                'lable' => $varientcheckid,
+            );
 
-                if($key_value == 'product_array')
-                {
-                    foreach ($result_content as $content_key => $content_value) {
+            $i++;
+          }
+        }
 
+              foreach ($request as $key => $find_contant) {
+
+                foreach ($find_contant as $key_value => $result_content) {
+
+                    if($key_value == 'product_array')
+                    {
+                      foreach ($result_content as $content_key => $content_value) {
 
                         foreach($content_value as $final_key =>$final_value){
                             if($final_key == 'question')
@@ -199,11 +215,11 @@ class ProductCreate extends Component
                             }else{
                                  $insertquestion = '';
                             }
-                    }
+                        }
+                      }
+                  }
                 }
-            }
-        }
-    }
+              }
 
             $varition_arrray_crunch = $request['varition_arrray'];
             $price_arr = $request['att_price'];
@@ -232,21 +248,9 @@ class ProductCreate extends Component
 
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
-    
-            /*foreach ($request->request as $key => $value) {
+            $locationid = json_encode($arr);   
 
-               $id = explode("_",$key);
-               $stockname = $id[0];
-               if($stockname == "stock")
-                {
-                   
-                    $stock = $value;   
-                     $arr[$id[1]] = $value[0];               
-                }           
-                   
-            }     */
-            
-            $locationid = json_encode($arr);     
+            //dd($requestcustom_variant_check) ; 
 
             $product_detail_arr = [
 
@@ -291,6 +295,12 @@ class ProductCreate extends Component
                 'location' => $locationid,
                 
                 'faq' => $insertquestion,
+                
+                'custom_variant' => $request->custom_variant_check,
+                
+                'cv_width_height_price' => $request->heightwidthprice,
+                
+                'cv_option_price' => json_encode($custom_variant_Save_arry),
 
                 'product_new'  => json_encode($product_new_arrray),
 
@@ -302,7 +312,7 @@ class ProductCreate extends Component
 
                 //'collection' => $request['collection'],
 
-               // 'tags' => $request['tags'],
+               // 'tags' => $request['tags'], 
 
                 'seo_title' => $request['seo_title'],
 

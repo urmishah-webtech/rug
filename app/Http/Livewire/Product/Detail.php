@@ -46,11 +46,15 @@ class Detail extends Component
 
     public $att_price = [], $varition_arrray = [];
 
-    public $imgvariant;
+    public $imgvariant,$varientsarray;
 
     public $filesvariant = [];
    
     public $removeimage = [];
+  
+    public $variantname = [];
+  
+    public $variantid = [];
    
 
     
@@ -116,6 +120,17 @@ class Detail extends Component
         $this->fullStock = VariantStock::All();
         $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get(); 
         $this->locationarray = (array) json_decode($this->product['location']);
+        $this->varientsarray = (array) json_decode($this->product['cv_option_price']);
+            
+        if($this->product['custom_variant'] == 1) {
+
+            $this->product['custom_variant'] = true;
+
+        } else {
+
+            $this->product['custom_variant'] = false;
+
+        }
 
         if($this->product['trackqtn'] == 'true') {
 
@@ -188,6 +203,8 @@ class Detail extends Component
         'product.trackqtn' => '',
         'product.outofstock' => '',
         'product.featured' => '',
+        'product.custom_variant' => '',
+        'product.cv_width_height_price' => '',
         'Productvariant.*.price' => 'required',
         'Productvariant.*.selling_price' => '',
         'Productvariant.*.sku' => '',
@@ -198,6 +215,8 @@ class Detail extends Component
         'Productvariant.*.photo' => [],
         'product_array.*.question' => '',
         'product_array.*.answer' => '',
+        'varientsarray.*.price' => '',
+        'varientsarray.*.lable' => '',
         'att_price' => [],
 
     ];
@@ -381,10 +400,18 @@ class Detail extends Component
 
     public function storeProductvarient(Request $request)
     {
+       // dd($request);
+
         $varition_arrray_crunch = $request['varition_arrray'];
+        $varition_name = $request['varition_name'];
+        $heightwidthprice = $request['heightwidthprice'];
+       // $varition_name_two = array_unique($request['varition_name']["two"]);
         $price_arr = $request['att_price'];
+        $size = $request['size'];
+        $variant_custom_price = $request['variant_custom_price'];
         $price_selling_arr = $request['att_price_selling'];
         $stock_single_arr = $request['att_stock_qtn'];
+        $custom_variant = $request['custom_variant'];
 /*        $cost_arr = $request['att_cost'];
         $sku_arr = $request['att_sku'];
         $barcode_arr = $request['att_barcode'];
@@ -396,7 +423,45 @@ class Detail extends Component
         $arr = [];
         $productCollection_arrray = [];
         $product_new_arrray = [];
+       
 
+        $priceincrement = 0;
+        foreach ($variant_custom_price as $price) {
+            $priceincrement += $price;
+        }
+
+        $i = 0;
+        foreach ($varition_name as $key => $value) {
+           
+            $price = $variant_custom_price[$i];
+            $sizearry = $size[$i];
+            $custom_variant_Save_arry[] =  array(
+
+                'varientname' => array_unique($varition_name[$key]),
+                'price' => $price,
+                'lable' => $sizearry,
+            );
+
+        $i++;
+        }
+     //   dd($custom_variant_Save_arry);
+  //dd($request['product_id_request'],$custom_variant);
+       $save = Product::where('id', $request['product_id_request'])->update([
+
+            'custom_variant'            => $custom_variant,
+
+            'cv_option_price'           => $custom_variant_Save_arry,
+
+            'cv_width_height_price'     => $heightwidthprice,
+        ]);
+
+      
+        if($varition_arrray_crunch){
+             foreach ($varition_arrray_crunch as  $key => $value) {
+                $explode_array = explode("/",$value);
+              //   dd($explode_array);
+            }
+        }
             if($varition_arrray_crunch){
              foreach ($varition_arrray_crunch as  $key => $value) {
                 $explode_array = explode("/",$value);
@@ -498,25 +563,23 @@ class Detail extends Component
     {  
     	date_default_timezone_set('Asia/Kolkata');
 
-       // $this->product_array = json_decode($this->product['faq']);
-              
-        /*foreach ($this->product_array as $key => $value) {
-              $arry['answer'] = $this->product_array[$key]['answer'];                       
-              $arry['question'] =  $this->product_array[$key]['question'];          
-         }*/
+       if ($this->product['custom_variant'] == 1) {
+            $customvariant = '1';
+        } 
 
-     //  $insert_data[] = json_decode($insert); 
+        else {
+            $customvariant = '0';
+        } 
 
 
         if ($this->product['trackqtn'] == 'false') {
-
             $trackqtn = 'true';
-
         } 
 
         else {
             $trackqtn = 'false';
         }
+
         if ($this->product['outofstock'] == 'false') {
             $outofstock = 'true';
         } 
@@ -545,7 +608,7 @@ class Detail extends Component
 
                     'vender'           => $this->product['vender'],
                     
-                   'faq'              => json_encode($this->product_array),
+                    'faq'              => json_encode($this->product_array),
                     
                     'status'           => $this->product['status'],
                     
@@ -593,13 +656,37 @@ class Detail extends Component
                     
                     'compare_selling_price' => $this->product['compare_selling_price'],       
                     
-                    'updated_at' => now(),
+                    'cv_width_height_price' => $this->product['cv_width_height_price'],       
+                    
+                    'custom_variant'        => $customvariant,       
+                    
+                    'updated_at'            => now(),
 
-                    'featured'            => $this->product['featured'],
+                    'featured'              => $this->product['featured'],
 
                 ]
 
             );
+
+
+        $i=0;
+        foreach ($this->varientsarray as $key => $value) {
+          if($this->varientsarray[$key] != ""){
+            $price = $this->varientsarray[$i]['price'];
+            $varientcheckid = $this->varientsarray[$i]['lable'];
+            $custom_variant_Save_arry[] =  array(
+                'price' => $price,
+                'lable' => $varientcheckid,
+            );
+
+            $i++;
+          }
+        }
+
+
+        if($custom_variant_Save_arry){
+        Product::where('id', $this->product['id'])->update( ['cv_option_price' => json_encode($custom_variant_Save_arry) ]);
+        }
 
         if($this->productCollection){
         Product::where('id', $this->product['id'])->update( ['collection' => json_encode($this->productCollection) ]);
