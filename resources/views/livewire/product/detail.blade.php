@@ -241,14 +241,14 @@
                         </div>
                         <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome variants</label>
 
-                    <div class="card-cutome-arrtibute" style="display: none;" wire:ignore>
-                        <div class="row showvarient">
+                    <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
+                        
                         
                         @foreach($variantag as $key2 => $row)
                            @if($this->varientsarray)
                                 @foreach ($this->varientsarray as $key => $value) 
                                     @if(!empty($value->lable) && $value->lable == $row->id) 
-                                
+                            <div class="row showvarient">        
                                 <div class="form-field-list">
                                     <label>Name </label>
                                      <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
@@ -261,11 +261,12 @@
                                     <input class="price-change-input" type="number"  wire:model="varientsarray.{{ $key }}.price">
                                        
                                 </div>
+                           </div>
                                 @endif
                               @endforeach      
                             @endif
                         @endforeach
-                        </div>
+                        
                         <div class="div">
                             <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
                             <input type="number" wire:model="product.cv_width_height_price" name="heightwidthprice" class="variant-tags-error">    
