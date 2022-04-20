@@ -569,5 +569,26 @@ class ProductlistController extends Controller
             'image' => $image_path . $image
         ));
     }
+	
+	public function Custome_Modual_InProduct($id)
+    { 
+		if (Product::where('id', $id)->exists())
+        {
+			$product = Product::where('id', $id)->get(); 
+			 $data = array();
+			foreach ($product as $val)
+			{
+				$data['id'] = $val->id;
+				$data['custom_variant'] = $val->custom_variant;
+				$data['cv_option_price'] = json_decode($val->cv_option_price);
+				$data['cv_width_height_price'] = $val->cv_width_height_price;
+			}
+			return response($data, 200);    
+		}
+		else
+        {
+            return response()->json(["message" => "Product not found"], 404);
+        }
+	}
 }
 
