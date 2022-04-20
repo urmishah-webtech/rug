@@ -9233,3 +9233,47 @@ input[type=number]::-webkit-inner-spin-button {
 table.marketing-table .order-filed, table.marketing-table .order-filed {
     width: auto;
 }
+
+/*Product Custome Modual css*/
+.one-half-row-card .row {
+    display: flex;
+    margin: 0 0 0 -20px;
+}
+.one-half-row-card .form-field-list {
+    flex: 1 1 auto;
+    position: relative;
+    margin-left: 20px;
+}
+.one-half-row-card .form-field-list:last-child {
+    max-width: 30%;
+}
+
+.one-half-row-card .form-field-list input[type=number]::-webkit-inner-spin-button, 
+.one-half-row-card .form-field-list input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.success-alert {
+    margin-left: auto;
+    margin-right: 16px;
+}
+.success-alert .alert {
+    margin: -3px 0;
+    background-color: #e3f1df;
+    padding: 11px 12px 11px 50px;
+    box-shadow: none;
+    color: #5eb14e;
+}
+.success-alert .alert:before {
+    background: #a4df99;
+    top: 7px;
+    width: 28px;
+    height: 28px;
+}
+.success-alert .alert:after {
+     background-size: 14px 14px;
+     top: 6px;
+}
