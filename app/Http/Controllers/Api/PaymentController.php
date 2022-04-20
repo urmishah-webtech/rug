@@ -167,7 +167,7 @@ class PaymentController extends Controller
                 ->payments
 
                 ->create(["amount" => ["currency" => "EUR", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://rug.webtech-evolution.com/thankyou/",
-                    "webhookUrl"  => "https://projects.webtech-evolution.com/rug/public/api/webhook",
+                    "webhookUrl"  => "https://rug.webtech-evolution.com/public/api/webhook",
             ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
@@ -238,7 +238,7 @@ class PaymentController extends Controller
             
             $order_item = order_item::with('media_product')->with('variant_product')->with('order_product')->where('order_id',$order->id)->orderBy('id', 'DESC')->get();
 
-            $image_path='https://projects.webtech-evolution.com/rug/public/storage/';
+            $image_path='https://rug.webtech-evolution.com/public/storage/';
 
             $finalamount = 0;
                 $i=0;

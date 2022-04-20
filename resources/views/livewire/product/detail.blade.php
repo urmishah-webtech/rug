@@ -55,6 +55,27 @@
     .custom_variant_hw{ display: none !important; }
     .CustomVariant_active .custom_variant_hw{ display: block !important; }
 
+    .success-alert {
+    margin-left: auto;
+    margin-right: 16px;
+    }
+    .success-alert .alert {
+        margin: -3px 0;
+        background-color: #e3f1df;
+        padding: 11px 12px 11px 50px;
+        box-shadow: none;
+        color: #5eb14e;
+    }
+    .success-alert .alert:before {
+        background: #a4df99;
+        top: 7px;
+        width: 28px;
+        height: 28px;
+    }
+    .success-alert .alert:after {
+         background-size: 14px 14px;
+         top: 6px;
+    }
         </style>
     
         @php $symbol = CurrencySymbol(); @endphp
@@ -407,7 +428,7 @@
     
                             <div class="table-loader">
     
-                                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant">
+                                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
     
                                     <div class="page-loading"></div>
     
@@ -1644,12 +1665,6 @@
     
         </section>
         </form>
-        <div wire:key="alert">
-    
-            @if (session()->has('message'))
-             <div class="alert alert-success">{{ session('message') }}</div>
-            @endif
-        </div>
     
         <section class="full-width flex-wrap admin-body-width">
     
@@ -1662,7 +1677,12 @@
                     <a class="warning" data-toggle="modal" data-target="#delete-variant-product">Delete product</a>
                     @endif
                 </p>
+                <div wire:key="alert" class='success-alert'>
     
+                    @if (session()->has('message'))
+                     <div class="alert alert-success">{{ session('message') }}</div>
+                    @endif
+                </div>
                 <input type="button" class="button save-button" wire:click="updateDetail" value="Save">
     
             </div>
