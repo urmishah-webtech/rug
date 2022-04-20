@@ -186,10 +186,16 @@ class ProductCreate extends Component
                 'price' => $price,
                 'lable' => $varientcheckid,
             );
-
-            $i++;
+          }else{
+            $price = '';
+            $varientcheckid = $variantid[$i];
+            $custom_variant_Save_arry[] =  array(
+                'price' => $price,
+                'lable' => $varientcheckid,
+                );
           }
-        }
+          $i++;
+        }      
 
               foreach ($request as $key => $find_contant) {
 
