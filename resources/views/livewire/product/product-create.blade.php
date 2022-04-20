@@ -139,9 +139,9 @@
                 <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
                     <div class="row-items">
                         <div class="header-title">
-                            <h4 class="fs-16 mb-0 fw-6">Custome Modual</h4>
+                            <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                         </div>
-                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute">Custome variants</label>
+                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute">Custome Price</label>
 
                     <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore.self>
                         
@@ -155,7 +155,7 @@
                             </div>
                             <div class="form-field-list">
 
-                                <label>Variant Price</label>
+                                <label>Price</label>
 
                                 <input class="price-change-input" type="text" value=""  name="variantprice[]">
 

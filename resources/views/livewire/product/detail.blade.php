@@ -237,9 +237,9 @@
                     <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
                     <div class="row-items question">
                         <div class="header-title">
-                            <h4 class="fs-16 mb-0 fw-6">Custome Modual</h4>
+                            <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                         </div>
-                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome variants</label>
+                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome Price</label>
 
                     <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
                         

@@ -684,7 +684,7 @@ class Detail extends Component
         }
 
 
-        if($custom_variant_Save_arry){
+        if(!empty($custom_variant_Save_arry)){
         Product::where('id', $this->product['id'])->update( ['cv_option_price' => json_encode($custom_variant_Save_arry) ]);
         }
 
