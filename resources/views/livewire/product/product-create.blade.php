@@ -143,9 +143,10 @@
                         </div>
                         <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute">Custome variants</label>
 
-                    <div class="card-cutome-arrtibute" style="display: none;" wire:ignore.self>
-                        <div class="row">
+                    <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore.self>
+                        
                         @foreach($variantag as $row)
+                        <div class="row">
                             <div class="form-field-list">
                                 <label>Name </label>
                                  <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
@@ -159,8 +160,9 @@
                                 <input class="price-change-input" type="text" value=""  name="variantprice[]">
 
                             </div>
-                        @endforeach
                         </div>
+                        @endforeach
+                        
                         <div class="custom_variant_hw mt-3 mb-3">
                             <div class="div">
                                 <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
