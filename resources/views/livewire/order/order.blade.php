@@ -53,26 +53,6 @@
                                 <div class="row"><label><input type="checkbox" wire:model="selectall" name="option6a"></label></div>
                             </th>
                             <th class="sticky-col">Order</th>
-                            <th class="fw-6">
-                                <div class="select-customers">
-                                    <span class="button-group">
-                                        <button class="secondary all-customer-select">
-                                            <input type="checkbox" name="option2a" checked="checked">
-                                            <span>27 selected</span>
-                                        </button>
-                                        <button class="secondary select-customer-edit">
-                                            Mark as fulfilled
-                                        </button>
-                                        <button class="secondary select-customer-edit">
-                                            Capture payments
-                                        </button>
-                                        <button class="secondary select-customer-more-actions">
-                                            More actions
-                                            <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                        </button>
-                                    </span>
-                                </div>
-                            </th>
                             <th>Date</th>
                             <th>Customer</th>
                             <th>Total</th>
@@ -93,11 +73,7 @@
                             <td class="fw-6 sticky-col">#{{$row->id}}</td>
                             @endif
                            
-                            <td>
-                                <div class="order-flags">
-                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M13 10a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm5-8c-4.411 0-8 3.589-8 8 0 1.504.425 2.908 1.15 4.111l-1.069 2.495a1 1 0 0 0 1.314 1.313l2.494-1.069A7.939 7.939 0 0 0 10 18c4.411 0 8-3.589 8-8s-3.589-8-8-8z"></path></svg>
-                                </div>
-                            </td>
+                            
                             <td>
                                {{$row->updated_at}}
                             </td>

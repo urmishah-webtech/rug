@@ -255,403 +255,359 @@
     
                     </div> -->
                     <!-- end detail -->
-                    <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
-                    <div class="row-items question">
-                        <div class="header-title">
-                            <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
-                        </div>
-                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome Price</label>
-
-                    <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
-                        
-                        
-                        @foreach($variantag as $key2 => $row)
-                           @if($this->varientsarray)
-                                @foreach ($this->varientsarray as $key => $value) 
-                                    @if(!empty($value->lable) && $value->lable == $row->id) 
-                            <div class="row showvarient">        
-                                <div class="form-field-list">
-                                    <label>Name </label>
-                                     <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
-                                     <input class="price-change-input" type="hidden" wire:model="varientsarray.{{ $key }}.lable"   readonly>
-                                   
-                                </div>
-                                <div class="form-field-list">
-
-                                    <label>Price</label>
-                                    <input class="price-change-input" type="number"  wire:model="varientsarray.{{ $key }}.price">
-                                       
-                                </div>
-                           </div>
-                                @endif
-                              @endforeach      
-                            @endif
-                        @endforeach
-                        
-                        <div class="div">
-                            <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
-                            <input type="number" wire:model="product.cv_width_height_price" name="heightwidthprice" class="variant-tags-error">    
-                        </div>
-                 
-
-                    </div>
-                </div>
-                </div>
           
-    
-                    @if(count($Productvariant) != 0)
-                     <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
-    
-    
-    
-                        <div class="card-header">
-    
-    
-    
-                            <div class="header-title">
-    
-    
-    
-                                <h4 class="fs-16 mb-0 fw-6">Attribute</h4>
-    
-    
-    
-                            </div>
-    
-    
-    
-                            <label><input type="checkbox" name="option2a" wire:ignore class="click-varients-type">This product has multiple options, like different sizes or colors</label>
-    
-     
-    
+                @if(count($Productvariant) != 0)
+                <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
+
+
+
+                    <div class="card-header">
+
+
+
+                        <div class="header-title">
+
+
+
+                            <h4 class="fs-16 mb-0 fw-6">Attribute</h4>
+
+
+
                         </div>
-    
-    
-    
-                        <div class="card-middle card-middle-varient" wire:ignore style="display: none;"> 
-    
-    
-    
-                                <div class="row">
-    
-    
-    
-                                    <label class="form-label fs-14 fw-6">Attribute Type</label>
-    
-    
-    
-                                    <input type="text" value="" class="varition_type_tag" id="varition_tye_tag"  wire:model="varition_name" placeholder="Variant Type" wire:ignore>
-    
-    
-    
-                                </div>
-    
-    
-    
-                            <div class="row pd-variants-card-btn">
-    
-    
-    
-                                <button class="fw-6 button secondary" wire:ignore wire:click.prevent="UpdateVarient('add-varient-type')">Save</button>
-    
-    
-    
-                            </div>
-    
-    
-    
-                        </div>
-            
-    
+
+
+
+                        <label><input type="checkbox" name="option2a" wire:ignore class="click-varients-type">This product has multiple options, like different sizes or colors</label>
+
+ 
+
                     </div>
-                    <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table">
-    
-                        <div class="product-table-title">
-    
-                            <h3>Variants</h3>
-    
-                            <span>
-    
-                                <a href="{{ route('variant-new', $product->uuid) }}" class="link">Add variant</a>
-    
-                               <!--  <button class="link variants-option-btn">More options <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button> -->
-    
-                                <ul class="variants-option-dropdown">
-    
-                                    <li><button class="link" onclick="document.getElementById('edit-options-modal').style.display='block'">Edit options</button></li>
-    
-                                    <li><button class="link" onclick="document.getElementById('reorder-variants-modal').style.display='block'">Reorder variants</button></li>
-    
-                                </ul>
-    
-                            </span>
-    
+
+
+
+                    <div class="card-middle card-middle-varient" wire:ignore style="display: none;"> 
+
+
+
+                            <div class="row">
+
+
+
+                                <label class="form-label fs-14 fw-6">Attribute Type</label>
+
+
+
+                                <input type="text" value="" class="varition_type_tag" id="varition_tye_tag"  wire:model="varition_name" placeholder="Variant Type" wire:ignore>
+
+
+
+                            </div>
+
+
+
+                        <div class="row pd-variants-card-btn">
+
+
+
+                            <button class="fw-6 button secondary" wire:ignore wire:click.prevent="UpdateVarient('add-varient-type')">Save</button>
+
+
+
                         </div>
-    
-                        <!-- <div class="product-tab-details">
-    
-                            <span>Select:</span>
-    
-                            <ul class="tabs">
-    
-                                <li class="tab all" data-toggle="tab"><a href="#">All</a></li>
-    
-                                <li class="tab titled" data-toggle="tab"><a href="#">None</a></li>
-    
-                                <li class="tab titled" data-toggle="tab"><a href="#">Blue</a></li>
-    
-                                <li class="tab titled" data-toggle="tab"><a href="#">Red</a></li>
-    
-                                <li class="tab titled active" data-toggle="tab"><a href="#">white</a></li>
-    
+
+
+
+                    </div>
+        
+
+                </div>
+                <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table">
+
+                    <div class="product-table-title">
+
+                        <h3>Variants</h3>
+
+                        <span>
+
+                            <a href="{{ route('variant-new', $product->uuid) }}" class="link">Add variant</a>
+
+                           <!--  <button class="link variants-option-btn">More options <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button> -->
+
+                            <ul class="variants-option-dropdown">
+
+                                <li><button class="link" onclick="document.getElementById('edit-options-modal').style.display='block'">Edit options</button></li>
+
+                                <li><button class="link" onclick="document.getElementById('reorder-variants-modal').style.display='block'">Reorder variants</button></li>
+
                             </ul>
-    
-                        </div>
-     -->
-                        <!-- <div class="product-all-location">
-    
-                            <label>Available inventory</label>
-    
-                            <button class="link"><svg class="location-icon" viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-8C6.69 2 4 4.87 4 8.4c0 6 5.4 9.35 5.63 9.49.11.07.24.11.37.11s.26-.04.37-.11C10.6 17.75 16 14.4 16 8.4 16 4.87 13.31 2 10 2z"></path></svg> All locations <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-    
-                            <ul class="all-location-dropdown">
-                                <li class="active">All locations</li>
-                                @foreach($location as $row)
-                                <li>{{$row->name}}</li>
-                                @endforeach
-    
-                            </ul>
-    
-                        </div> -->
-    
-                        <div class="card-section tab_content  active" id="all_customers">
-    
-                            <div class="table-loader">
-    
-                                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
-    
-                                    <div class="page-loading"></div>
-    
+
+                        </span>
+
+                    </div>
+
+                    <!-- <div class="product-tab-details">
+
+                        <span>Select:</span>
+
+                        <ul class="tabs">
+
+                            <li class="tab all" data-toggle="tab"><a href="#">All</a></li>
+
+                            <li class="tab titled" data-toggle="tab"><a href="#">None</a></li>
+
+                            <li class="tab titled" data-toggle="tab"><a href="#">Blue</a></li>
+
+                            <li class="tab titled" data-toggle="tab"><a href="#">Red</a></li>
+
+                            <li class="tab titled active" data-toggle="tab"><a href="#">white</a></li>
+
+                        </ul>
+
+                    </div>
+ -->
+                    <!-- <div class="product-all-location">
+
+                        <label>Available inventory</label>
+
+                        <button class="link"><svg class="location-icon" viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-8C6.69 2 4 4.87 4 8.4c0 6 5.4 9.35 5.63 9.49.11.07.24.11.37.11s.26-.04.37-.11C10.6 17.75 16 14.4 16 8.4 16 4.87 13.31 2 10 2z"></path></svg> All locations <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
+
+                        <ul class="all-location-dropdown">
+                            <li class="active">All locations</li>
+                            @foreach($location as $row)
+                            <li>{{$row->name}}</li>
+                            @endforeach
+
+                        </ul>
+
+                    </div> -->
+
+                    <div class="card-section tab_content  active" id="all_customers">
+
+                        <div class="table-loader">
+
+                            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
+
+                                <div class="page-loading"></div>
+
+                            </div>
+
+                            <div class="product-table-details">
+
+                            <div class="product-table-checkbox">
+
+                                <div class="product-all-check">
+
+                                    <input type="checkbox" name="option6a">
+                                
+                                        <?php $variation_count = count($Productvariant); ?>
+                                  
+                                    <label>Showing {{$variation_count}} variants</label>
+
                                 </div>
-    
-                                <div class="product-table-details">
-    
-                                <div class="product-table-checkbox">
-    
-                                    <div class="product-all-check">
-    
-                                        <input type="checkbox" name="option6a">
-                                    
-                                            <?php $variation_count = count($Productvariant); ?>
-                                      
-                                        <label>Showing {{$variation_count}} variants</label>
-    
-                                    </div>
-    
-                                    <div class="product-edite-variants">
-    
-                                        <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
-    
-                                        <ul class="edite-variants-dropdown">
-    
-                                           <!--  <li><a class="link">Open bulk editor</a></li> -->
-    
-                                            <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
-    
-                                            <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-    
-                                            <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
-    
-                                            <!-- <li><a class="link"  onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li> -->
-    
-                                            <!-- <li><a class="link" onclick="document.getElementById('edit-option-values-modal').style.display='block'">Edit option values</a></li> -->
-    
-                                            <!-- <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
-    
-                                            <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
-    
-                                            <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
-    
-                                            <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
-    
-                                        </ul>
-    
-                                    </div>
-    
+
+                                <div class="product-edite-variants">
+
+                                    <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
+
+                                    <ul class="edite-variants-dropdown">
+
+                                       <!--  <li><a class="link">Open bulk editor</a></li> -->
+
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
+
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
+
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
+
+                                        <!-- <li><a class="link"  onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li> -->
+
+                                        <!-- <li><a class="link" onclick="document.getElementById('edit-option-values-modal').style.display='block'">Edit option values</a></li> -->
+
+                                        <!-- <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
+
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
+
+                                        <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
+
+                                        <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
+
+                                    </ul>
+
                                 </div>
-    
-                                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing custom-table-height">
-    
-                                    <tbody>
-                                        <?php $stocksum = 0;  ?>
-                                        @foreach($Productvariant as $key => $row)
-    
-                                        <tr>
-    
-                                            <td>
-    
-                                                <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-    
-                                            </td>
-    
-                                            <td class="product-img">
-    
-                                                <div class="product-variants-ulpload-img" data-toggle="modal" data-dismiss="modal" data-target="#update-variant-image-modal-{{$row->id}}">
-    
-                                                    <!--<input type="file" accept="image/*" id="{{$row->id}}" class="loadFile">-->
-    
-                                                    <div class="pd-blank-img">
-                                                        @if($row->photo == "")
-                                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M19 2.5A1.5 1.5 0 0 0 17.5 1h-15A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19H10v-2H3.497c-.41 0-.64-.46-.4-.79l3.553-4.051c.19-.21.52-.21.72-.01L9 14l3.06-4.781a.5.5 0 0 1 .84.02l.72 1.251A5.98 5.98 0 0 1 16 10h3V2.5zm-11.5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12.207 10.793A1 1 0 0 0 19 15h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 0 0 .707-1.707z"></path></svg>
-                                                        @else
-    
-                                                         <img src="{{ url('storage/'.$row->photo) }}" />
-    
-                                                         @endif
-    
-                                                    </div>
-    
-                                                    <img id="output-{{$row->id}}" />
-    
+
+                            </div>
+
+                            <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing custom-table-height">
+
+                                <tbody>
+                                    <?php $stocksum = 0;  ?>
+                                    @foreach($Productvariant as $key => $row)
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="row"><label><input type="checkbox" name="option6a"></label></div>
+
+                                        </td>
+
+                                        <td class="product-img">
+
+                                            <div class="product-variants-ulpload-img" data-toggle="modal" data-dismiss="modal" data-target="#update-variant-image-modal-{{$row->id}}">
+
+                                                <!--<input type="file" accept="image/*" id="{{$row->id}}" class="loadFile">-->
+
+                                                <div class="pd-blank-img">
+                                                    @if($row->photo == "")
+                                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M19 2.5A1.5 1.5 0 0 0 17.5 1h-15A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19H10v-2H3.497c-.41 0-.64-.46-.4-.79l3.553-4.051c.19-.21.52-.21.72-.01L9 14l3.06-4.781a.5.5 0 0 1 .84.02l.72 1.251A5.98 5.98 0 0 1 16 10h3V2.5zm-11.5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12.207 10.793A1 1 0 0 0 19 15h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 0 0 .707-1.707z"></path></svg>
+                                                    @else
+
+                                                     <img src="{{ url('storage/'.$row->photo) }}" />
+
+                                                     @endif
+
                                                 </div>
-    
-    
-                                                <!--Update variant image modal css-->
-    
-                                                <div id="update-variant-image-modal-{{$row->id}}" class="customer-modal-main" wire:ignore>
-    
-                                                   
-                                                    <div class="customer-modal-inner">
-                                                        <div class="customer-modal">
-                                                            <div class="modal-header">
-                                                                <h2>Select variant image</h2>
-                                                                <span data-dismiss="modal" class="modal-close-btn">
-                                                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                                                        <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-                                                                    </svg>
+
+                                                <img id="output-{{$row->id}}" />
+
+                                            </div>
+
+
+                                            <!--Update variant image modal css-->
+
+                                            <div id="update-variant-image-modal-{{$row->id}}" class="customer-modal-main" wire:ignore>
+
+                                               
+                                                <div class="customer-modal-inner">
+                                                    <div class="customer-modal">
+                                                        <div class="modal-header">
+                                                            <h2>Select variant image</h2>
+                                                            <span data-dismiss="modal" class="modal-close-btn">
+                                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="modal-body ta-left">
+                                                            <div class="card product-media-card">
+                                                                <div class="card-header upload-media-header">
+                                                                    <h3 class="fs-16 fw-6 m-0">Media</h3>
+                                                                    <button class="link add-media-url-btn">Add media from URL <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
+                                                                    <ul class="add-media-dropdown">
+                                                                        <li><button class="link">Edit options</button></li>
+                                                                        <li><button class="link">Reorder variants</button></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <p class="mb-0 grey-color">You can only choose images as variant media</p>
+                                                                <div class="card-middle">
+                                                                    <div class="upload-img-modal">
+                                                                        <form id="myForm" method="post">
+                                                                            <ul id="selectedFiles">
+                                                                                <li class="img-upload-btn">
+                                                                                    <p class="secondary">Add files</p>
+                                                                                    <span class="fs-14">or drop files to upload</span>
+                                                                                    <input type="file" id="files" wire:model.debounce.lazy="filesvariant" multiple>
+                                                                                </li>
+                                                                                @foreach($Productmedia as $rowimg)
+                                                                                <li>
+                                                                                   <input value="{{$rowimg->id}}"  wire:model.debounce.lazy="imgvariant" name="product"  type="radio">
+
+                                                                                    <img src="{{ url('storage/'.$rowimg->image) }}">
+                                                                                </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="pagination">
+                                                                <span class="button-group">
+                                                                    <button class="secondary icon-prev"></button>
+                                                                    <button class="secondary icon-next"></button>
                                                                 </span>
                                                             </div>
-                                                            <div class="modal-body ta-left">
-                                                                <div class="card product-media-card">
-                                                                    <div class="card-header upload-media-header">
-                                                                        <h3 class="fs-16 fw-6 m-0">Media</h3>
-                                                                        <button class="link add-media-url-btn">Add media from URL <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-                                                                        <ul class="add-media-dropdown">
-                                                                            <li><button class="link">Edit options</button></li>
-                                                                            <li><button class="link">Reorder variants</button></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <p class="mb-0 grey-color">You can only choose images as variant media</p>
-                                                                    <div class="card-middle">
-                                                                        <div class="upload-img-modal">
-                                                                            <form id="myForm" method="post">
-                                                                                <ul id="selectedFiles">
-                                                                                    <li class="img-upload-btn">
-                                                                                        <p class="secondary">Add files</p>
-                                                                                        <span class="fs-14">or drop files to upload</span>
-                                                                                        <input type="file" id="files" wire:model.debounce.lazy="filesvariant" multiple>
-                                                                                    </li>
-                                                                                    @foreach($Productmedia as $rowimg)
-                                                                                    <li>
-                                                                                       <input value="{{$rowimg->id}}"  wire:model.debounce.lazy="imgvariant" name="product"  type="radio">
-    
-                                                                                        <img src="{{ url('storage/'.$rowimg->image) }}">
-                                                                                    </li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <div class="pagination">
-                                                                    <span class="button-group">
-                                                                        <button class="secondary icon-prev"></button>
-                                                                        <button class="secondary icon-next"></button>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="footer-btn-group">
-                                                                    <button class="button secondary" data-dismiss="modal">calcel</button>
-                                                                    <button class="button secondary">Add image</button>
-                                                                    <button class="button green-btn" data-dismiss="modal" wire:click.prevent="variantimgsubmit({{$row->id}})">Done</button>
-                                                                </div>
+                                                            <div class="footer-btn-group">
+                                                                <button class="button secondary" data-dismiss="modal">calcel</button>
+                                                                <button class="button secondary">Add image</button>
+                                                                <button class="button green-btn" data-dismiss="modal" wire:click.prevent="variantimgsubmit({{$row->id}})">Done</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-    
-                                            </td>
-    
-                                            <td class="product-table-item">
-    
-                                                <a href="{{ route('variant-detail', $row->id) }}" class="tc-black fw-6">
-    
-                                                    @if($row->attribute1 != ""){{$row->attribute1}} @endif
-    
-                                                    @if($row->attribute2 != "")/{{$row->attribute2}} @endif
-    
-                                                    @if($row->attribute3 != "")/{{$row->attribute3}} @endif
-    
-                                                    @if($row->attribute4 != "")/{{$row->attribute4}} @endif 
-    
-                                                    @if($row->attribute5 != "")/{{$row->attribute5}} @endif 
-    
-                                                    @if($row->attribute6 != "")/{{$row->attribute6}} @endif 
-    
-                                                    @if($row->attribute7 != "")/{{$row->attribute7}} @endif 
-    
-                                                    @if($row->attribute8 != "")/{{$row->attribute8}} @endif 
-    
-                                                    @if($row->attribute9 != "")/{{$row->attribute9}} @endif 
-    
-                                                    @if($row->attribute10 != "")/{{$row->attribute10}} @endif
-    
-                                                </a>
-    
-                                                
-    
-                                            </td>
-    
-                                            <td class="vendor-table-item">
-    
-                                                <p>@if($row->price){{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
-                                                @endif</p>
-                                                <?php $location_count = count($location); ?>
-                                                <?php 
-                                                 $stocksum += $row->stock; ?>
-                                                 @if($row->stock)
-                                                <p>Available at {{$row->stock}} Stock</p>
-                                                @endif
-    
-                                            </td>
-    
-                                        </tr>
-    
-                                        @endforeach
-    
-                                    </tbody>
-    
-                                </table>
-    
-                                <hr>
-    
-                             
-                               <div class="product-table-footer">
-    
-                                   <p>Total inventory at all stock</p>
-    
-                                   <p> {{$stocksum}} available</p>
-    
-                               </div>
-    
-                            </div>
-    
+                                            </div>
+
+                                        </td>
+
+                                        <td class="product-table-item">
+
+                                            <a href="{{ route('variant-detail', $row->id) }}" class="tc-black fw-6">
+
+                                                @if($row->attribute1 != ""){{$row->attribute1}} @endif
+
+                                                @if($row->attribute2 != "")/{{$row->attribute2}} @endif
+
+                                                @if($row->attribute3 != "")/{{$row->attribute3}} @endif
+
+                                                @if($row->attribute4 != "")/{{$row->attribute4}} @endif 
+
+                                                @if($row->attribute5 != "")/{{$row->attribute5}} @endif 
+
+                                                @if($row->attribute6 != "")/{{$row->attribute6}} @endif 
+
+                                                @if($row->attribute7 != "")/{{$row->attribute7}} @endif 
+
+                                                @if($row->attribute8 != "")/{{$row->attribute8}} @endif 
+
+                                                @if($row->attribute9 != "")/{{$row->attribute9}} @endif 
+
+                                                @if($row->attribute10 != "")/{{$row->attribute10}} @endif
+
+                                            </a>
+
+                                            
+
+                                        </td>
+
+                                        <td class="vendor-table-item">
+
+                                            <p>@if($row->price){{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
+                                            @endif</p>
+                                            <?php $location_count = count($location); ?>
+                                            <?php 
+                                             $stocksum += $row->stock; ?>
+                                             @if($row->stock)
+                                            <p>Available at {{$row->stock}} Stock</p>
+                                            @endif
+
+                                        </td>
+
+                                    </tr>
+
+                                    @endforeach
+
+                                </tbody>
+
+                            </table>
+
+                            <hr>
+
+                         
+                           <div class="product-table-footer">
+
+                               <p>Total inventory at all stock</p>
+
+                               <p> {{$stocksum}} available</p>
+
+                           </div>
+
                         </div>
-    
-                        </div>
-    
+
                     </div>
+
+                    </div>
+                </div>
     
                 @else
     
@@ -982,8 +938,47 @@
                     </form>
                 </div>
                     
-    
                 @endif
+
+                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
+                        <div class="row-items question">
+                            <div class="header-title">
+                                <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
+                            </div>
+                            <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome Price</label>
+
+                            <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
+                             
+                                @foreach($variantag as $key2 => $row)
+                                   @if($this->varientsarray)
+                                        @foreach ($this->varientsarray as $key => $value) 
+                                            @if(!empty($value->lable) && $value->lable == $row->id) 
+                                    <div class="row showvarient">        
+                                        <div class="form-field-list">
+                                            <label>Name </label>
+                                             <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
+                                             <input class="price-change-input" type="hidden" wire:model="varientsarray.{{ $key }}.lable"   readonly>
+                                           
+                                        </div>
+                                        <div class="form-field-list">
+
+                                            <label>Price</label>
+                                            <input class="price-change-input" type="number"  wire:model="varientsarray.{{ $key }}.price">
+                                               
+                                        </div>
+                                   </div>
+                                        @endif
+                                      @endforeach      
+                                    @endif
+                                @endforeach
+                                
+                                <div class="div">
+                                    <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
+                                    <input type="number" wire:model="product.cv_width_height_price" name="heightwidthprice" class="variant-tags-error">    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
 
                     <div class="card variant-pricing-card" wire:ignore>

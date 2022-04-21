@@ -227,9 +227,7 @@ class ProductlistController extends Controller
 
                 }
 
-                foreach ($val
-                    ->variants
-                    ->unique('attribute1') as $sizekey1 => $row1)
+                foreach ($val->variants->unique('attribute1') as $sizekey1 => $row1)
                 {
                     $variant_tag = VariantTag::where('id', $val->variants[0]['varient1'])
                         ->first();
@@ -255,12 +253,16 @@ class ProductlistController extends Controller
                     }
 
                 }
-                $color_arry[] = $color;
-                $color_arry[] = $colorvarient;
 
-                foreach ($val
-                    ->variants
-                    ->unique('attribute2') as $sizekey2 => $row2)
+                if($$color && $colorvarient){
+                    $color_arry[] = $color;
+                    $color_arry[] = $colorvarient;
+                }else{
+                    $color_arry[] = '';
+                    $color_arry[] = '';
+                }
+
+                foreach ($val->variants->unique('attribute2') as $sizekey2 => $row2)
                 {
                     $variant_tag = VariantTag::where('id', $val->variants[0]['varient2'])
                         ->first();

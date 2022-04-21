@@ -178,26 +178,31 @@
  
            <div class="home-left-sec card-bg">
              <div class="row">
-                <div class="column six">
-                   <div class="card">
-                      <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL CUSTOMER</h3>
-                      <p class="fw-6 fs-26">
-                         @if(!empty($User)) {{$User}} @else No sales yet @endif
-                         
-                      </p>
-                   </div>
-                </div>
-                <div class="column six">
-                   <div class="card">
-                      <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL PRODUCT</h3>
-                      <p class="fw-6 fs-26">
-                         @if($product) {{$product}} @else No sales yet @endif
-                         
-                      </p>
-                   </div>
-                </div>
+
+                <a href="{{ route('customers') }}">
+                  <div class="column six">
+                     <div class="card">
+                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL CUSTOMER</h3>
+                        <p class="fw-6 fs-26">
+                           @if(!empty($User)) {{$User}} @else No sales yet @endif
+                           
+                        </p>
+                     </div>
+                  </div>
+                </a>
+                <a href="{{ route('products') }}">
+                  <div class="column six">
+                     <div class="card">
+                        <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL PRODUCT</h3>
+                        <p class="fw-6 fs-26">
+                           @if($product) {{$product}} @else No sales yet @endif        
+                        </p>
+                     </div>
+                  </div>
+                </a>
              </div>
              <div class="row">
+              <a href="{{ route('order-list') }}">
                 <div class="column six">
                    <div class="card">
                       <h3 class="text-grey fs-12 fw-6 mb-8 tt-u lh-normal">TOTAL ORDERS</h3>
@@ -207,6 +212,7 @@
                       </p>
                    </div>
                 </div>
+              </a>
              </div>
              <div class="card suggested-reading-card"></div>
           </div>
