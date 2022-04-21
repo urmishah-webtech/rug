@@ -193,7 +193,7 @@ class ProductlistController extends Controller
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
-
+                $data_result = [];
                 foreach ($val['variants'] as $key => $result)
                 {
 
@@ -227,6 +227,9 @@ class ProductlistController extends Controller
 
                 }
 
+                $color = [];
+                $colorvarient = [];
+
                 foreach ($val->variants->unique('attribute1') as $sizekey1 => $row1)
                 {
                     $variant_tag = VariantTag::where('id', $val->variants[0]['varient1'])
@@ -248,19 +251,22 @@ class ProductlistController extends Controller
                     }
                     else
                     {
-                        $colorvarient[] = "";
-                        $color[] = "";
+                        $colorvarient[] = "null";
+                        $color[] = "null";
                     }
 
                 }
-
-                if($$color && $colorvarient){
+                   
+                if($color && $colorvarient){
                     $color_arry[] = $color;
                     $color_arry[] = $colorvarient;
                 }else{
                     $color_arry[] = '';
                     $color_arry[] = '';
                 }
+
+                $othercolor = [];
+                $othercolorvarient = [];
 
                 foreach ($val->variants->unique('attribute2') as $sizekey2 => $row2)
                 {
@@ -290,6 +296,8 @@ class ProductlistController extends Controller
                 $other_color_arry[] = $othercolor;
                 $other_color_arry[] = $othercolorvarient;
 
+                $size = [];
+                $sizevarient = [];
                 foreach ($val
                     ->variants
                     ->unique('attribute3') as $sizekey => $row3)
@@ -320,9 +328,10 @@ class ProductlistController extends Controller
                 $size_arry[] = $size;
                 $size_arry[] = $sizevarient;
 
-                foreach ($val
-                    ->variants
-                    ->unique('attribute4') as $sizekey4 => $row4)
+
+                $tassels = [];
+                $tasselsverient = [];
+                foreach ($val->variants->unique('attribute4') as $sizekey4 => $row4)
                 {
                     $variant_tag = VariantTag::where('id', $val->variants[0]['varient2'])
                         ->first();
