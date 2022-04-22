@@ -133,13 +133,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -158,13 +158,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$page->image) }}'); display: block;">
+                                <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$page->image) }}'); display: block;">
                                 </div>
                             </div>
                             @else
@@ -208,13 +208,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -261,13 +261,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -287,13 +287,13 @@
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
                                     <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
-                                    <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                    <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                     <button class="secondary">Add Image</button>
                                     <label for="logoUpload">or drop files to upload</label>
                                 </div>
                                 @if(!empty($page->flat_image2))
                                 <div class="avatar-preview">  
-                                    <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
+                                    <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image2) }}); display: block;">
                                     </div>
                                 </div>
                                 @else
@@ -336,14 +336,14 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Video</button>
                             </div>
                         </div>
                          @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
                                 <video width="320" height="240" controls>
-                                  <source id="logoPreview"  src="{{ url('storage/'.$page->product_image1) }}" type="video/mp4">
+                                  <source id="logoPreview"  src="{{ asset('storage/'.$page->product_image1) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -382,13 +382,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -406,13 +406,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -431,13 +431,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -468,13 +468,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image3" wire:model="product_image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -493,13 +493,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image4" wire:model="product_image4" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image4))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image4) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image4) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -518,13 +518,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image5" wire:model="product_image5" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -555,13 +555,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -583,13 +583,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -624,13 +624,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -706,13 +706,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -760,13 +760,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -791,13 +791,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -822,13 +822,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image3" wire:model="product_image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -853,13 +853,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image4" wire:model="product_image4" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image4))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image4) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image4) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -884,13 +884,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image5" wire:model="product_image5" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -938,13 +938,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -960,13 +960,13 @@
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
                                     <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
-                                    <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                    <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                     <button class="secondary">Add Image</button>
                                     <label for="logoUpload">or drop files to upload</label>
                                 </div>
                                 @if(!empty($page->flat_image2))
                                 <div class="avatar-preview">  
-                                    <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
+                                    <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image2) }}); display: block;">
                                     </div>
                                 </div>
                                 @else
@@ -1053,13 +1053,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1096,13 +1096,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1125,13 +1125,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1154,13 +1154,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image3" wire:model="product_image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1183,13 +1183,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image4" wire:model="product_image4" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image4))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image4) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image4) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1237,13 +1237,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1285,13 +1285,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1326,13 +1326,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image5" wire:model="product_image5" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1375,13 +1375,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$page->image) }}'); display: block;">
+                                <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$page->image) }}'); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1434,13 +1434,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1482,13 +1482,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image2" wire:model="flat_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1551,13 +1551,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image5" wire:model="product_image5" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1587,13 +1587,13 @@
                     <div class="avatar-upload">
                         <div class="avatar-edit">
                             <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                             <button class="secondary">Add Image</button>
                             <label for="logoUpload">or drop files to upload</label>
                         </div>
                         @if(!empty($page->product_image1))
                         <div class="avatar-preview">  
-                            <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                            <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                             </div>
                         </div>
                         @else
@@ -1635,13 +1635,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$page->image) }}'); display: block;">
+                                <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$page->image) }}'); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1693,13 +1693,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1738,13 +1738,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1799,13 +1799,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image3" wire:model="product_image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1846,13 +1846,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image4" wire:model="product_image4" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image4))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image4) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image4) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1907,13 +1907,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image5" wire:model="product_image5" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image5))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image5) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image5) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -1954,13 +1954,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image" wire:model="image" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -2007,13 +2007,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="image3" wire:model="image3" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->image3))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -2060,13 +2060,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image1" wire:model="product_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -2113,13 +2113,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="product_image2" wire:model="product_image2" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->product_image2))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->product_image2) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->product_image2) }}); display: block;">
                                 </div>
                             </div>
                             @else
@@ -2165,13 +2165,13 @@
                         <div class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' id="flat_image1" wire:model="flat_image1" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             @if(!empty($page->flat_image1))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ url('storage/'.$page->flat_image1) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->flat_image1) }}); display: block;">
                                 </div>
                             </div>
                             @else

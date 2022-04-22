@@ -334,9 +334,9 @@
                         </label>
 
                          @if($collection->image != "")
-                        <img id="uploadedImage" src="{{ url('storage/'.$collection->image) }}" alt="Uploaded Image" accept="image/png, image/jpeg">
+                        <img id="uploadedImage" src="{{ asset('storage/'.$collection->image) }}" alt="Uploaded Image" accept="image/png, image/jpeg">
                         @else
-                        <img id="uploadedImage" src="{{ url('storage/'.$collection->image) }}" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;">
+                        <img id="uploadedImage" src="{{ asset('storage/'.$collection->image) }}" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;">
                         @endif
                         
                     </div>

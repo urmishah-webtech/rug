@@ -134,7 +134,7 @@
                                             <div class="my-cart-pd-details">
                                                 <div class="my-cart-img">
                                                     <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}">
-                                                    <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}"></a>
+                                                    <img src="{{ asset('storage/'.$cart['media_product'][0]['image']) }}"></a>
                                                 </div>
                                                 <div class="my-cart-desc">
                                                     <span>Vans</span>

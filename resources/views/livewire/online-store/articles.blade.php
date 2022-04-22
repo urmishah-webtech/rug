@@ -103,9 +103,9 @@
                                 </td>
                                 <td class="product-img">
                                     @if(@$val->image)
-                                    <img src="{{ url('storage/'.@$val->image) }}">
+                                    <img src="{{ asset('storage/'.@$val->image) }}">
                                     @else
-                                    <video autoplay muted loop ><source src="{{ url('storage/'.@$val->video)}}" type="video/mp4"></source></video>
+                                    <video autoplay muted loop ><source src="{{ asset('storage/'.@$val->video)}}" type="video/mp4"></source></video>
                                     @endif
                                 </td>
                                 <td class="product-table-item">

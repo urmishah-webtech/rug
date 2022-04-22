@@ -211,7 +211,7 @@ $value = \App\Models\preference::where(['id' => 1])->first();
                 <div class="alert-success-modal">
                     <div class="container">
                         <p class="success-msg">
-                            <img src="{{ url('assets/success.png') }}">
+                            <img src="{{ asset('assets/success.png') }}">
                             {{ session('message') }}
 
                         </p>
@@ -227,7 +227,7 @@ $value = \App\Models\preference::where(['id' => 1])->first();
                 <div class="alert-warning-modal">
                     <div class="container">
                         <p class="delete-msg">
-                            <img src="{{ url('assets/warning-icon.png') }}">
+                            <img src="{{ asset('assets/warning-icon.png') }}">
                             {{ session('warning') }}
                         </p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
@@ -243,7 +243,7 @@ $value = \App\Models\preference::where(['id' => 1])->first();
                 <div class="alert-danger-modal">
                     <div class="container">
                         <p class="delete-msg">
-                            <img src="{{ url('assets/delete-icon.png') }}">
+                            <img src="{{ asset('assets/delete-icon.png') }}">
                             {{ session('alert') }}
                         </p>
                     </div>
@@ -258,7 +258,7 @@ $value = \App\Models\preference::where(['id' => 1])->first();
                 <div class="alert-success-modal">
                     <div class="container">
                         <p class="success-msg">
-                            <img src="{{ url('assets/success.png') }}">
+                            <img src="{{ asset('assets/success.png') }}">
                             {{ session('success') }}
                         </p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>

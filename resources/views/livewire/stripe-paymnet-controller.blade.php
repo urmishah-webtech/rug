@@ -849,7 +849,7 @@
                             <div class="alert-success-modal">
                                 <div class="container">
                                     <p class="success-msg">
-                                        <img src="{{ url('assets/success.png') }}">
+                                        <img src="{{ asset('assets/success.png') }}">
                                         {{ Session::get('shipp_success') }}
                                     </p>
                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
@@ -2307,7 +2307,7 @@
 
 
 
-                            <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}">
+                            <img src="{{ asset('storage/'.$cart['media_product'][0]['image']) }}">
 
 
 

@@ -78,13 +78,13 @@
                     <div class="avatar-upload">
                         <div class="avatar-edit">
                             <input type='file' id="logoUpload" wire:model="slider_image" accept=".png, .jpg, .jpeg" />
-                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                             <button class="secondary">Add logo</button>
                             <label for="logoUpload">or drop files to upload</label>
                         </div>
                         @if(!empty($slider->slider_image))
                         <div class="avatar-preview">  
-                            <div id="logoPreview" style="background-image: url('{{ url('storage/'.$slider->slider_image) }}'); display: block;">
+                            <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$slider->slider_image) }}'); display: block;">
                             </div>
                         </div>
                         @else

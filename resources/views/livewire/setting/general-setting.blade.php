@@ -53,13 +53,13 @@
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="logoUpload" wire:model="admin_logo" accept=".png, .jpg, .jpeg" />
-                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                             <button class="secondary">Add logo</button>
                                             <label for="logoUpload">or drop files to upload</label>
                                         </div>
                                         @if(!empty($getgeneral->backend_logo))
                                         <div class="avatar-preview">  
-                                            <div id="logoPreview" style="background-image: url('{{ url('storage/'.$getgeneral->backend_logo) }}'); display: block;">
+                                            <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$getgeneral->backend_logo) }}'); display: block;">
                                             </div>
                                         </div>
                                         @else
@@ -75,13 +75,13 @@
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="favUpload" wire:model="admin_favicon" accept=".png, .jpg, .jpeg" />
-                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                             <button class="secondary">Add favicon</button>
                                             <label for="favUpload">or drop files to upload</label>
                                         </div>
                                         @if(!empty($getgeneral->favicon_logo))
                                         <div class="avatar-preview">
-                                            <div id="favPreview" style="background-image: url('{{ url('storage/'.$getgeneral->favicon_logo) }}'); display: block;">
+                                            <div id="favPreview" style="background-image: url('{{ asset('storage/'.$getgeneral->favicon_logo) }}'); display: block;">
                                             </div>
                                         </div>
                                         @else

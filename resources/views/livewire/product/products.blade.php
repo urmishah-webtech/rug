@@ -112,7 +112,7 @@
                                 <div class="pd-blank-img">
                                     @if($row_img && isset($row_img[0]))
                                     <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">
-                                    <img src="{{ url('storage/'.$row_img[0]['image']) }}" />
+                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}" />
 
                                     </a>
                                      @endif

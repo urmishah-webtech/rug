@@ -241,9 +241,9 @@
          <div class="item">
           
            @if(!empty($result->image))
-      <img src="{{ url('storage/'.$result->image) }}" class="w-h-image">
+      <img src="{{ asset('storage/'.$result->image) }}" class="w-h-image">
       @else
-      <img src="{{ url('assets/blank-img.jpg') }}" class="w-h-image">
+      <img src="{{ asset('assets/blank-img.jpg') }}" class="w-h-image">
       @endif
       <div class="heightbox">
       <span>{{$result->price}}</span>

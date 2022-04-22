@@ -754,7 +754,7 @@
 
 
 
-                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
+                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}"><img src="{{ asset('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
 
 
 
@@ -1540,7 +1540,7 @@
 
                 <span class="navbar-toggler-icon">
 
-                    <img src="{{ url('assets/mobile-menu.png') }}">
+                    <img src="{{ asset('assets/mobile-menu.png') }}">
 
                 </span>
 

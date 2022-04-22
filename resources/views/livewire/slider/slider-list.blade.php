@@ -62,7 +62,7 @@
                             <tr>
                                 <td>{{$reskey+1}}</td>
                                 <td class="product-table-item">
-                                	<img src="{{ url('storage/'.$result['slider_image']) }}" />
+                                	<img src="{{ asset('storage/'.$result['slider_image']) }}" />
                                 </td>
                                 <td class="product-table-item">
                                    <a class="tc-black fw-6" href="{{ route('slider-detail', $result->id) }}">

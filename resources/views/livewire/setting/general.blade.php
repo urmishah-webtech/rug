@@ -52,7 +52,7 @@
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="logoUpload" accept=".png, .jpg, .jpeg" />
-                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                             <button class="secondary">Add logo</button>
                                             <label for="logoUpload">or drop files to upload</label>
                                         </div>
@@ -67,7 +67,7 @@
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="favUpload" accept=".png, .jpg, .jpeg" />
-                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                             <button class="secondary">Add favicon</button>
                                             <label for="favUpload">or drop files to upload</label>
                                         </div>

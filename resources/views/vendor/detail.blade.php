@@ -128,7 +128,7 @@
 
                                         @foreach($Productmedia as $row)
 
-                                        <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" name="image[]" class="image-checkbox"></div><img src="{{ url('storage/'.$row->image) }}" style="width:100%;" /> <div class="order-number">0</div></li>
+                                        <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" name="image[]" class="image-checkbox"></div><img src="{{ asset('storage/'.$row->image) }}" style="width:100%;" /> <div class="order-number">0</div></li>
 
                                          @endforeach
 

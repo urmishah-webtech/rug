@@ -117,7 +117,7 @@
                              <td class="product-img">
                                 <div class="pd-blank-img">
                                     <a class="tc-black fw-6" href="{{ route('product-front-detail', $row->seo_utl) }}">
-                                    <img src="{{ url('storage/'.$row->icon) }}" />
+                                    <img src="{{ asset('storage/'.$row->icon) }}" />
 
                                     </a>
                                 </div>

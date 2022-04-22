@@ -67,7 +67,7 @@
             <div class="columns one-third">
                 <div class="card variant-details-card card-grey-bg">
                     <div class="variant-img">
-                       <img src="{{ url('image/defult-image.png') }}" />
+                       <img src="{{ asset('image/defult-image.png') }}" />
                     </div>
                     <div class="variant-details">
                         <h2>{{$product->title}}</h2>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="card-middle">
                         @foreach($Productvariant as $row)
-                        <p><span><img src="@if($row->photo != '') {{ url('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ url('image/defult-image.png') }} @endif">
+                        <p><span><img src="@if($row->photo != '') {{ asset('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ asset('image/defult-image.png') }} @endif">
                            </span>
                             <a href="{{ route('variant-detail', $row->id) }}">
                             @if($row->attribute1 != ""){{$row->attribute1}} @endif

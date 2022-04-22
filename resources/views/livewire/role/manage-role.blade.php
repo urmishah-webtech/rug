@@ -24,7 +24,7 @@
                         <div class="card-middle bd_none lh-normal">
                             <div class="d-flex align-center">
                                 <div class="card-img">
-                                    <img src="{{ url('/assets/images/avatar.png') }}">
+                                    <img src="{{ asset('/assets/images/avatar.png') }}">
                                 </div>
                                 <div class="ssd-local-delivery-tittle">
                                     <h3 class="fs-14 fw-6 mb-0 lh-normal blue-color">Demo EStore</h3>

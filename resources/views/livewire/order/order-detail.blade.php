@@ -86,7 +86,7 @@
                         @foreach($OrderItem as $item)
                         <div class="unfulfilled-product-sec">
                             <div class="unful-pd-img">
-                                <p class="unful-img"><sapn class="inful-count">{{$item['stock']}}</sapn><img src="@if(!empty($item['media_product'][0])){{ url('storage/'.$item['media_product'][0]['image']) }}@endif"></p>
+                                <p class="unful-img"><sapn class="inful-count">{{$item['stock']}}</sapn><img src="@if(!empty($item['media_product'][0])){{ asset('storage/'.$item['media_product'][0]['image']) }}@endif"></p>
                                 <a href="#">{{$item['order_product'][0]['title']}}</a>
                             </div>
                             <p class="unful-pd-price">

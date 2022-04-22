@@ -39,7 +39,7 @@
             <div class="columns one-third">
                 <div class="card variant-details-card card-grey-bg">
                     <div class="variant-img">
-                        <img src="@if($Productvariant_first->photo != '') {{ url('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ url('image/defult-image.png') }} @endif">
+                        <img src="@if($Productvariant_first->photo != '') {{ asset('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ asset('image/defult-image.png') }} @endif">
                     </div>
                     <div class="variant-details">
                         <h2>{{$product->title}}</h2>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="card-middle cutsom-heightscroll">
                         @foreach($Productvariant as $row)
-                        <p><span><img src="@if($row->photo != '') {{ url('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ url('image/defult-image.png') }} @endif"></span>
+                        <p><span><img src="@if($row->photo != '') {{ asset('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ asset('image/defult-image.png') }} @endif"></span>
                             <a href="{{ route('variant-detail', $row->id) }}">
                             @if($row->attribute1 != ""){{$row->attribute1}} @endif
                             @if($row->attribute2 != "")/{{$row->attribute2}} @endif
@@ -162,7 +162,7 @@
                                     <span class="fs-12">or drop an image to upload</span>
                                 </label>
                       
-                                <img id="uploadedImage" src="@if($Productvariant_first->photo != '') {{ url('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ url('image/defult-image.png') }} @endif" alt="Uploaded Image" accept="image/png, image/jpeg">
+                                <img id="uploadedImage" src="@if($Productvariant_first->photo != '') {{ asset('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ asset('image/defult-image.png') }} @endif" alt="Uploaded Image" accept="image/png, image/jpeg">
                        
                                 
                             </div>

@@ -93,13 +93,13 @@
                         <div id="blog_image_up" class="avatar-upload" @if($edit_post->image)style="display:block" @else style="display:none" @endif>
                             <div class="avatar-edit">
                                 <input type='file' name="image" id="logoUpload" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Files</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             <div class="avatar-preview">
                             @if($edit_post->image)                              
-                                <div id="logoPreview" style="background-image: url('{{ url('storage/'.$edit_post->image) }}'); @if($edit_post->image) display:block @endif" ></div>
+                                <div id="logoPreview" style="background-image: url('{{ asset('storage/'.$edit_post->image) }}'); @if($edit_post->image) display:block @endif" ></div>
                                  @endif
                                 </div>
                             </div>
@@ -107,13 +107,13 @@
                         <div id="blog_video_up" class="avatar-upload" @if($edit_post->video)style="display:block" @else style="display:none" @endif>
                             <div class="avatar-edit">
                                 <input type="file" id="logoUpload_video" name="video" accept=".mp4">
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Video</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
                             <div class="avatar-preview">
                                  @if($edit_post->video)   
-                                <div  id="logoPreview_video" @if($edit_post->video)style="display:block" @endif><video autoplay muted loop ><source src="{{ url('storage/'.@$edit_post->video)}}" type="video/mp4"></source></video></div>
+                                <div  id="logoPreview_video" @if($edit_post->video)style="display:block" @endif><video autoplay muted loop ><source src="{{ asset('storage/'.@$edit_post->video)}}" type="video/mp4"></source></video></div>
                                  @endif
                                 </div>
                          </div>

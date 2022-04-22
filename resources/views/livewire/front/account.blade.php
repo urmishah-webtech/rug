@@ -19,7 +19,7 @@
                 <div class="alert-success-modal">
                     <div class="container">
 <!--                         <p class="success-msg">{{ Session::get('message') }}</p> -->
-                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('name_email_password_message') }}</p>
+                        <p class="success-msg"><img src="{{ asset('assets/success.png') }}">{{ Session::get('name_email_password_message') }}</p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
             <div class="alert alert-danger alert-msg-modal text-center">
                 <div class="alert-danger-modal">
                     <div class="container">
-                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('deleteshipmessage') }}</p>
+                        <p class="delete-msg"><img src="{{ asset('assets/delete-icon.png') }}">{{ Session::get('deleteshipmessage') }}</p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="alert alert-success alert-msg-modal text-center">
                 <div class="alert-success-modal">
                     <div class="container">
-                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_bill') }}</p>
+                        <p class="success-msg"><img src="{{ asset('assets/success.png') }}">{{ Session::get('add_bill') }}</p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="alert alert-success alert-msg-modal text-center">
                 <div class="alert-success-modal">
                     <div class="container">
-                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_shipp') }}</p>
+                        <p class="success-msg"><img src="{{ asset('assets/success.png') }}">{{ Session::get('add_shipp') }}</p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
 
                                                 <div class="alert alert-success alert-msg-modal alrt-no-modal text-center">
 
-                                                    <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editship') }}</p>
+                                                    <p class="success-msg"><img src="{{ asset('assets/success.png') }}">{{ Session::get('editship') }}</p>
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                 </div>
@@ -112,7 +112,7 @@
                                             @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ asset('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
@@ -419,7 +419,7 @@
 
                                                 <div class="alert alert-success alert-msg-modal alrt-no-modal text-center">
 
-                                                    <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editbill') }}</p>
+                                                    <p class="success-msg"><img src="{{ asset('assets/success.png') }}">{{ Session::get('editbill') }}</p>
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                 </div>
@@ -429,7 +429,7 @@
                                             @foreach($billing_address['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ asset('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
@@ -807,7 +807,7 @@
 
                                                     <div class="alert alert-danger alert-msg-modal alrt-no-modal text-center">
 
-                                                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('emailpassword') }}</p>
+                                                        <p class="delete-msg"><img src="{{ asset('assets/delete-icon.png') }}">{{ Session::get('emailpassword') }}</p>
 
                                                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
@@ -868,7 +868,7 @@
 
                                                     <div class="alert alert-danger alert-msg-modal alrt-no-modal text-center">
 
-                                                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('oldpassworderror') }}</p>
+                                                        <p class="delete-msg"><img src="{{ asset('assets/delete-icon.png') }}">{{ Session::get('oldpassworderror') }}</p>
 
                                                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
@@ -1036,7 +1036,7 @@
                                                 @if($item->order_id == $row['id'])
                                                 <div class="unfulfilled-product-sec">
                                                     <div class="unful-pd-img">
-                                                        <p class="unful-img"><sapn class="inful-count">{{$item['stock']}}</sapn><img src="{{ url('storage/'.$item['media_product'][0]['image']) }}"></p>
+                                                        <p class="unful-img"><sapn class="inful-count">{{$item['stock']}}</sapn><img src="{{ asset('storage/'.$item['media_product'][0]['image']) }}"></p>
                                                         <a href="#">{{$item['order_product'][0]['title']}}</a>
                                                     </div>
                                                     <p class="unful-pd-price">

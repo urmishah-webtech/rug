@@ -104,7 +104,7 @@
                         <div id="blog_image_up" class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type='file' name="image" id="logoUpload" accept=".png, .jpg, .jpeg" />
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Files</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
@@ -116,7 +116,7 @@
                         <div id="blog_video_up" class="avatar-upload">
                             <div class="avatar-edit">
                                 <input type="file" id="logoUpload_video" name="video" accept=".mp4">
-                                <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                <img src="{{ asset('assets/images/upload-icon.svg') }}">
                                 <button class="secondary">Add Video</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>

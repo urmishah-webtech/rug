@@ -3,7 +3,7 @@
 
         <!-- banner start -->
         <div class="banner">        
-            <img src="{{ url('assets/main.gif') }}">
+            <img src="{{ asset('assets/main.gif') }}">
         </div>
         <!-- banner end -->
 
