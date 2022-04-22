@@ -1,6 +1,14 @@
 <div>
    <x-admin-layout>
      @php $symbol = CurrencySymbol(); @endphp
+
+     <style>
+         #custom-single-upload-img{
+            width: 100%;
+    height: 100%;
+    object-fit: cover;
+         }
+     </style>
     <section class="full-width flex-wrap admin-body-width add-variant-header">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -154,7 +162,7 @@
                         </div>
                          <div class="card card-pd-0 tag-card collection-upload-image" wire:ignore>
                   
-                            <div class="single-upload-img">
+                            <div class="single-upload-img" id="custom-single-upload-img">
                                 <input type='file' id="readUrl" wire:model="photo">
                                 <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>

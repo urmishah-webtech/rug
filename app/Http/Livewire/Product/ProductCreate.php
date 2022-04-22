@@ -324,7 +324,7 @@ class ProductCreate extends Component
 
                 'seo_descripation' => $request['seo_descripation'],
 
-                'seo_utl' => $urllink,
+                'seo_utl' => str_replace(' ', '-', $urllink),
 
                 'status' => $request['status']
 

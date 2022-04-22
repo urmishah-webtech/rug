@@ -121,7 +121,19 @@ class Detail extends Component
         $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get(); 
         $this->locationarray = (array) json_decode($this->product['location']);
         $this->varientsarray = (array) json_decode($this->product['cv_option_price']);
-            
+        $this->collectionarray = (array) json_decode($this->product['collection']);
+        
+/*
+        foreach($this->tagsale as $res){
+            foreach($this->collectionarray as $checking){
+                if($res->id == $checking){
+                     $this->product['product_new'] = true;
+                 }else{
+                    $this->product['product_new'] = 'selected';   
+                 }
+            }
+        }
+*/
         if($this->product['custom_variant'] == 1) {
 
             $this->product['custom_variant'] = true;
@@ -129,6 +141,16 @@ class Detail extends Component
         } else {
 
             $this->product['custom_variant'] = false;
+
+        }
+
+        if($this->product['featured'] == 1) {
+
+            $this->product['featured'] = true;
+
+        } else {
+
+            $this->product['featured'] = false;
 
         }
 
@@ -587,6 +609,16 @@ class Detail extends Component
             $outofstock = 'false';
         }
 
+        if($this->product['featured'] == 1) {
+
+           $featuredvalue = '1';
+
+        } else {
+
+           $featuredvalue = '0';
+
+        }
+
         $product_price = (!empty($this->product['price'])) ? $this->product['price'] : '' ;
         $product_selling = (!empty($this->product['compare_price'])) ? $this->product['compare_price'] : '' ;
 
@@ -602,7 +634,7 @@ class Detail extends Component
 
                     'seo_descripation' => $this->product['seo_descripation'],
 
-                    'seo_utl'          => $this->product['seo_utl'],
+                    'seo_utl'          => str_replace(' ', '-', $this->product['seo_utl']),
 
                     'product_type'     => $this->product['product_type'],
 
@@ -662,7 +694,7 @@ class Detail extends Component
                     
                     'updated_at'            => now(),
 
-                    'featured'              => $this->product['featured'],
+                    'featured'              => $featuredvalue,
 
                 ]
 

@@ -60,7 +60,7 @@ class Collectionscreate extends Component
 
             'seo_description' => $request['seo_description'],
 
-            'seo_url' => $request['seo_url'],
+            'seo_url' => str_replace(' ', '-', $request['seo_url']),
 
             'status' => 'invited'
 
