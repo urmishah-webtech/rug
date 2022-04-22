@@ -228,6 +228,18 @@ class Collectionsdetail extends Component
 
             }
 
+            if ($this->collection['featured'] == '1') {
+
+                $featured_cate = '1';
+
+            } 
+
+            else {
+
+                $featured_cate = '0';
+
+            }
+
             Collection::where('id', $this->collection['id'])->update(
 
                 [
@@ -246,7 +258,7 @@ class Collectionsdetail extends Component
 
                     'status'           => $this->collection['status'],
 
-                    'featured'            => $this->collection['featured'],
+                    'featured'         => $featured_cate,
 
                 ]
 

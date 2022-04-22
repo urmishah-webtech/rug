@@ -594,13 +594,13 @@
                             <hr>
 
                          
-                           <div class="product-table-footer">
+                           <!-- <div class="product-table-footer">
 
                                <p>Total inventory at all stock</p>
 
                                <p> {{$stocksum}} available</p>
 
-                           </div>
+                           </div> -->
 
                         </div>
 
@@ -707,7 +707,7 @@
                                         <div class="product-table-details">
                                             <div class="product-table-checkbox">
                                                 <div class="product-all-check">
-                                                    <input type="checkbox" name="option6a">
+                                                    <!-- <input type="checkbox" name="option6a"> -->
                                                     <label class="fw-6">Showing 3 variants</label>
                                                 </div>
                                                 <div class="product-edite-variants">
@@ -924,11 +924,11 @@
                                                 </div>
                                               
                                 
-                                            <hr>
+                                            <!-- <hr>
                                             <div class="product-table-footer">
                                                 <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory at all stock</a>
                                                 <p>15 available</p>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -945,7 +945,7 @@
                             <div class="header-title">
                                 <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                             </div>
-                            <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute" wire:model.lazy="product.custom_variant">Custome Price</label>
+                            <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant">Custome Price</label>
 
                             <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
                              
@@ -972,10 +972,10 @@
                                     @endif
                                 @endforeach
                                 
-                                <div class="div">
+                                <!-- <div class="div">
                                     <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
                                     <input type="number" wire:model="product.cv_width_height_price" name="heightwidthprice" class="variant-tags-error">    
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1306,7 +1306,7 @@
                                 <p><a href="{{ url('/product').'/'.$product->seo_utl }}">{{ url('/product').'/'.$product->seo_utl }}</a></p>
                                 @endif
     
-                                <span>hello</span>
+                                <span>{{$product->seo_descripation}}</span>
     
                             </div>
     
@@ -1523,7 +1523,7 @@
     
                                 <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
     
-                                <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')">
+                                <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')" >
     
                                 <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
                           
@@ -2758,11 +2758,12 @@
 
         $(document).ready(function(){
               //  var answer = $('#showvarient');
-                if($('.showvarient').checked){
-                    $('.card-cutome-arrtibute').slideToggle(500);
-                } else {
-                    $('.card-cutome-arrtibute').slideToggle(500);
+                if($('.custom_variant_checked').is(':checked')){
+                    $('.card-cutome-arrtibute').slideDown(500);
+                } if($('.custom_variant_checked').not(':checked')) {
+                    $('.card-cutome-arrtibute').slideUp(500);
                 }
+
             });
     
         $(document).ready(function(){
@@ -4181,8 +4182,17 @@
                    }
     
                 }
-    
-            
+        
+
+    $(document).ready(function(){
+
+        $( ".edit-update-Attribute" ).click(function() {     
+
+            $('.card-cutome-arrtibute').slideToggle(500);
+        });
+
+    });
+                
     
     </script>
     @livewireScripts

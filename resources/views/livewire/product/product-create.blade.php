@@ -213,8 +213,8 @@
                                         <div class="product-table-details">
                                             <div class="product-table-checkbox">
                                                 <div class="product-all-check">
-                                                    <input type="checkbox" name="option6a">
-                                                    <label class="fw-6 variants-count-show">Showing  variants</label>
+                                                    <!-- <input type="checkbox" name="option6a"> -->
+                                                    <label class="fw-6 variants-count-show">Showing variants</label>
                                                 </div>
                                                 <div class="product-edite-variants">
                                                    <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
@@ -234,11 +234,11 @@
                                                 <tbody class="variants-option">
                                                 </tbody>
                                             </table>
-                                            <hr>
+                                            <!-- <hr>
                                             <div class="product-table-footer">
                                                 <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory</a>
                                                 <p>0 available</p>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                             </div> -->
                         </div>
                     </div>
-                </div>
+                </div> 
 
                 <div class="card variant-pricing-card">
 
@@ -831,9 +831,9 @@
                             <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')">
 
                             <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
-                            @foreach($Collection as $row)
+                            @foreach($Collection as $row) 
                             
-                                <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{old($row->title)}}</label>
+                                <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{$row->title}}</label>
                                
                             @endforeach    
                             </div>

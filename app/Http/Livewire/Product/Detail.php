@@ -123,17 +123,6 @@ class Detail extends Component
         $this->varientsarray = (array) json_decode($this->product['cv_option_price']);
         $this->collectionarray = (array) json_decode($this->product['collection']);
         
-/*
-        foreach($this->tagsale as $res){
-            foreach($this->collectionarray as $checking){
-                if($res->id == $checking){
-                     $this->product['product_new'] = true;
-                 }else{
-                    $this->product['product_new'] = 'selected';   
-                 }
-            }
-        }
-*/
         if($this->product['custom_variant'] == 1) {
 
             $this->product['custom_variant'] = true;
