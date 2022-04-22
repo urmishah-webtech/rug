@@ -84,7 +84,7 @@ class Products extends Component
 
         Product::where('id',$this->selectedproducts)->delete();
 
-        CollectionProduct::where('product_id',$this->selectedproducts)->delete();
+       // CollectionProduct::where('product_id',$this->selectedproducts)->delete();
 
         ProductMedia::where('product_id',$this->selectedproducts)->delete();
 

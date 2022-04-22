@@ -306,7 +306,7 @@
     </form>
 
             <div class="columns one-third right-details">
-                <div class="card collection-availability-card">
+                <!-- <div class="card collection-availability-card">
                     <div class="card-middle sales-channels-apps">
                         <div class="header-title">
                             <h4 class="fs-16  fw-6 mb-0">Collection availability</h4><a class="link" onclick="document.getElementById('sales-channels-apps-modal').style.display='block'">Manage</a>
@@ -320,7 +320,7 @@
                     <div class="card-footer">
                         <a class="link sales-channel-btn">Show more <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10 14a.997.997 0 0 1-.707-.293l-5-5a.999.999 0 1 1 1.414-1.414L10 11.586l4.293-4.293a.999.999 0 1 1 1.414 1.414l-5 5A.997.997 0 0 1 10 14z"></path></svg></a>
                     </div>
-                </div>
+                </div> -->
                 <div class="card pd-20 tag-card card-grey-bg collection-upload-image">
                     <div class="header-title">
                         <h3 class="fs-16  fw-6 mb-0">Collection image</h3>
@@ -350,14 +350,14 @@
                         <input type="file" name="file" id="et_pb_contact_brand_file_request_0" class="file-upload" onchange="importCustomers()">
                     </div> -->
                 </div>
-                <div class="card tag-card card-grey-bg pd-20 pd-online-store-card">
+                <!-- <div class="card tag-card card-grey-bg pd-20 pd-online-store-card">
                     <h3 class="fs-16  fw-6">Online store</h3>
                     <label>Theme template</label>
                         <select>
                             <option>Default product</option>
                         </select>
                     <p>Assign a template from your current theme to define how the product is displayed.</p>
-                </div>
+                </div> -->
             </div>
         </article>
     </section>

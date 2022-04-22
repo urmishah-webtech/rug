@@ -181,7 +181,7 @@
                 </div>
             </div>
             <div class="columns one-third right-details">
-                <div class="card collection-avail-card">
+                <!-- <div class="card collection-avail-card">
                     <div class="card-top">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Collection availability</h3>
@@ -193,7 +193,7 @@
                         <label><input type="checkbox" name="online_store">Online Store<a href="#">Schedule availability</a></label>
                         <label><input type="checkbox" name="point_of_sale">Point of Sale</label>
                     </div>
-                </div>
+                </div> -->
                 <div class="card pd-20 tag-card card-grey-bg collection-upload-image">
                     <div class="header-title">
                         <h3 class="fs-16  fw-6 mb-0">Collection image</h3>
@@ -208,14 +208,14 @@
                         <input type="file" name="image" id="et_pb_contact_brand_file_request_0" class="file-upload" onchange="importCustomers()">
                     </div>
                 </div>
-                <div class="card tag-card card-grey-bg pd-20 pd-online-store-card">
+                <!-- <div class="card tag-card card-grey-bg pd-20 pd-online-store-card">
                     <h3 class="fs-16  fw-6">Online store</h3>
                     <label>Theme template</label>
                         <select>
                             <option>Default product</option>
                         </select>
                     <p>Assign a template from your current theme to define how the product is displayed.</p>
-                </div>
+                </div> -->
             </div>
         </article>
     </section>
