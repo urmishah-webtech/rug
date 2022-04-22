@@ -4752,7 +4752,7 @@ label {
     background-size: 8px;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #ffffff;
+    background-color: #2E72D2;
 }
 .modal-body ul#selectedFiles input[type="radio"]:after {
     display: none;

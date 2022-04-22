@@ -2,7 +2,9 @@
 <x-admin-layout>
 
     <style type="text/css">
-   
+   #pt-0{
+       padding-top: 0;
+   }
     .bootstrap-tagsinput .tag {
             margin-right: 2px;
             color: #d64949;
@@ -2130,7 +2132,7 @@ $(document).ready(function () {
                                     <label for="input">{{$symbol['currency']}}</label>
                                   
                                 </div>
-                                <div class="form-field-list cost-input">
+                                <div class="form-field-list cost-input " id="pt-0">
                                     <label>Stock</label>
                                     <input type="text" name="cost" value="`+stockinput+`" id="main-popup-stock-`+id_value+`" class="change-value-main-stock">
            

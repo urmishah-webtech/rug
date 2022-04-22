@@ -133,7 +133,7 @@
          object-fit: cover;
          }
          .home-left-sec {
-         padding: 32px;
+         padding: 32px 20px;
          max-width: unset;
          margin: 0 auto !important;
          }
@@ -169,6 +169,9 @@
          }
          .bg-custom-shadow h5{
           padding-bottom: 20px;
+         }
+         .home-left-sec .column.six{
+            padding: 0px 10px 0px 0px;
          }
       </style>
       <section class="">
