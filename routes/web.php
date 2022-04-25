@@ -28,6 +28,10 @@ use App\Http\Livewire;
 
 */
 
+$route_prefix = env('ROUTE_PREFIX');
+
+Route::group(['prefix' => $route_prefix], function () {
+
 
 Route::middleware(['checkRole'])->group(function () {
 // 
@@ -460,6 +464,7 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/faqs', Livewire\Front\Faqs::class)->name('faqs');
     
 
+});
 });
 
 
