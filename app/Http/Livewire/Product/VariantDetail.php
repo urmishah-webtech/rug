@@ -12,6 +12,8 @@ use App\Models\VariantTag;
 
 use App\Models\ProductMedia;
 
+use App\Models\VariantMedia;
+
 use App\Models\VariantStock;
 
 use App\Models\Location;
@@ -28,12 +30,17 @@ class VariantDetail extends Component
 
     public $product,$Country, $Productvariant, $Productvariant_first, $Varianttype, $variantStock, $location;
 
-    public $photo, $locationarray,  $selectedlocation = [];
+    public $photo = [], $locationarray,  $selectedlocation = [];
 
 
     protected $listeners = ['changevariant'];
 
     public $productDetail, $existDetailCount = 0;
+
+    public $VariantMedia, $image;
+    public $files = [];
+    public $removeimage = [];
+    public $selectall = false;
 
 
     protected $rules = [
@@ -83,6 +90,7 @@ class VariantDetail extends Component
        $this->Varianttype = VariantTag::All();
        $this->location = Location::All();
        $this->Country = Country::All();
+       $this->VariantMedia = VariantMedia::where('variant_id',$id)->get();
 
       //  $this->locationarray = (array) json_decode($this->Productvariant_first['location']);
 
@@ -131,6 +139,7 @@ class VariantDetail extends Component
         //  $this->initial();
 
     }
+
 
     public function deletevariant($deleteid)
     {
@@ -195,21 +204,41 @@ class VariantDetail extends Component
                 $trackqtn_first = '0';
 
             }
+            if ($this->image) {
+                foreach ($this->image as $photo) {
+                    
+                    // $file_extension = $photo->extension();
+                    $path_url = $photo->storePublicly('media','public');
+        
+                   $mediaimg = VariantMedia::create([
+                        'product_id' => $this->product->id,
+                        'variant_id' => $this->Productvariant_first['id'],
+                        'image' => $path_url,
+                    ]);
+                }
 
-            if($this->photo)
-            {
+                if($mediaimg){
 
-                $filename =  $this->photo->storePublicly('variant','public');
-                ProductVariant::where('id', $flag)->update(
-
-                    [
-                        
-                        'photo'            => $filename,
-
-                    ]
-
-                );
+                    $this->VariantMedia = VariantMedia::where(['variant_id'=>$this->Productvariant_first['id'], 'product_id' => $this->product->id])->get();
+                }
             }
+
+
+
+            // if($this->photo)
+            // {
+
+            //     $filename =  $this->photo->storePublicly('variant','public');
+            //     ProductVariant::where('id', $flag)->update(
+
+            //         [
+                        
+            //             'photo'            => $filename,
+
+            //         ]
+
+            //     );
+            // }
 
             if($this->variantStock)
             {
@@ -325,5 +354,36 @@ class VariantDetail extends Component
         unset($this->productDetail[$index]);
         $this->productDetail = array_values($this->productDetail);
 
+    }
+     public function deleteimage()
+    {
+
+        if($this->selectall) {
+            $this->removeimage = VariantMedia::where('variant_id',$this->Productvariant_first->id)->get()->pluck('id')->toArray();
+        }
+
+        foreach ($this->removeimage as $key => $result) {
+            $unlinkimg = VariantMedia::where('id',$result)->first();
+            $deleteimg = "";
+
+            if(storage_path("app/public/{$unlinkimg->image}")) {
+            $image_path = storage_path("app/public/{$unlinkimg->image}");
+            $deleteimg = unlink($image_path);
+            }
+
+            if($unlinkimg){
+                $unlinkimg = VariantMedia::where('id',$result)->delete();
+            }
+        }
+         return redirect()->back();
+        $this->VariantMedia = VariantMedia::where('variant_id',$this->Productvariant_first->id)->get();
+        
+        session()->flash('message', 'Deleted Record Successfully.');
+        
+    }
+
+    public function selectAllImages($value='')
+    {
+        $this->selectall = $value;
     }
 }

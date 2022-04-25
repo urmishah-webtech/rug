@@ -44,14 +44,13 @@ Route::middleware(['checkRole'])->group(function () {
 
     // })->name('admin.login');
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-        Route::get('/', Livewire\Admin\Dashboard::class)->name('home');
         
         Route::get('/dashboard', Livewire\Dashboard::class)->name('dashboard');
 
 
         Route::middleware(['guest'])->group(function () {
+             Route::get('/', Livewire\Admin\Dashboard::class)->name('admin-dashboard');
 
-            Route::get('/admin', Livewire\Admin\Dashboard::class)->name('admin-dashboard');
 
             //users
 

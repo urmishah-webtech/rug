@@ -160,24 +160,87 @@
                                  @endif
                             @endforeach
                         </div>
-                         <div class="card card-pd-0 tag-card collection-upload-image" wire:ignore>
-                  
-                            <div class="single-upload-img" id="custom-single-upload-img">
-                                <input type='file' id="readUrl" wire:model="photo">
-                                <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>
-                                    <p class="secondary">Add images</p>
-                                    <span class="fs-12">or drop an image to upload</span>
-                                </label>
-                      
-                                <img id="uploadedImage" src="@if($Productvariant_first->photo != '') {{ asset('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ asset('image/defult-image.png') }} @endif" alt="Uploaded Image" accept="image/png, image/jpeg">
-                       
-                                
-                            </div>
-                            
-                        </div>
+                         
                     </div>
                 </div>
+                <div class="card card-pd-0 tag-card collection-upload-image" wire:ignore>
+
+                                <div class="card product-media-card"  wire:ignore>
+    
+                                    <div class="card-header upload-media-header">
+                
+                                        <h3 class="fs-16 fw-6 m-0">Media</h3>
+                
+                                        <button class="link add-media-url-btn">Add media from URL <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
+                
+                                        <ul class="add-media-dropdown">
+                
+                                            <li><button class="link">Edit options</button></li>
+                
+                                            <li><button class="link">Reorder variants</button></li>
+                
+                                        </ul>
+                
+                                    </div>
+                
+                                    <div class="media-delete-option">
+                
+                                        <label class="all-select-media"><input type="checkbox" name="option2a" id="select-all" wire:change="selectAllImages($event.target.value)"><span class="count-image"></span> Media </label>
+                
+                                        <a wire:click.prevent="deleteimage()" class="link warning delete-media">Delete media</a>
+                
+                                    </div>
+                
+                                    <div class="card-middle">
+                
+                                        <div class="uplod-main-demo">
+                
+                                            <input type="file" id="images" wire:model.debounce.lazy="image" multiple name="image" multiple="multiple"/>
+                
+                                            <div class="import-file">
+                
+                                                <div id="multiple-file-preview">
+                                                    @if(count($VariantMedia) > 0)
+                                                    <ul id="sortable" class="import-file-big">
+                                                    @else
+                                                    <ul id="sortable">
+                                                    @endif
+                
+                                                        @if(count($VariantMedia) > 0)
+                
+                                                        @foreach($VariantMedia as $row)
+                
+                                                        <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'"><div class="file-upload-overlay"><input type="checkbox" name="removeimage" wire:model="removeimage" value="{{$row->id}}" class="image-checkbox"></div><img src="{{ asset('storage/'.$row->image) }}" style="width:100%;" /> <div class="order-number">0</div></li>
+                
+                                                         @endforeach
+                
+                                                         @endif
+                
+                                                        <label class="custome-file-upload" for="images">
+                
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>
+                
+                                                            <p class="secondary">Add files</p>
+                
+                                                            <span class="fs-14">or drop files to upload</span>
+                
+                                                        </label>
+                
+                                                    </ul>
+                
+                                                </div>
+                
+                                            </div>
+                
+                                        </div>
+                
+                                    </div>
+                
+                                </div>
+                  
+                         
+                            
+                        </div>
                 <div class="card variant-pricing-card">
                     <div class="row-items">
                         <div class="header-title">
@@ -476,6 +539,131 @@
 <!--/Update variant image modal-->
 
 <script type="text/javascript">
+     $(function() {
+        $('#images').change(function(e) {
+            var files = e.target.files;
+            for(var i = 0; i <= files.length; i++) {
+                // when i == files.length reorder and break
+                if(i == files.length) {
+                    // need timeout to reorder beacuse prepend is not done
+                    setTimeout(function() {
+                        reorderImages();
+                    }, 100);
+                    break;
+                }
+                var file = files[i];
+                var reader = new FileReader();
+                reader.onload = (function(file) {
+                    return function(event) {
+                        $('#sortable').prepend('<li class="ui-state-default remove-image" data-id="' + file.lastModified + '"><img src="' + event.target.result + '" style="width:100%;" /> <div class="order-number">0</div></li>');
+                        $('#sortable').find('li').eq(0).insertAfter('#sortable>li:last');
+                    };
+                })(file);
+                reader.readAsDataURL(file);
+            } // end for;
+        });
+        //$('#sortable').sortable();
+        // $('#sortable').disableSelection();
+        //sortable events
+        $('#sortable').on('sortbeforestop', function(event) {
+            reorderImages();
+        });
+    
+        function reorderImages() {
+            // get the items
+            var images = $('#sortable li');
+            var i = 0,
+                nrOrder = 0;
+            for(i; i < images.length; i++) {
+                var image = $(images[i]);
+                if(image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder')) {
+                    image.attr('data-order', nrOrder);
+                    var orderNumberBox = image.find('.order-number');
+                    orderNumberBox.html(nrOrder + 1);
+                    nrOrder++;
+                } // end if;
+            } // end for;
+        }
+    });
+    
+        $(document).on("click", '.delete-media', function() {
+    
+             $('.remove-image').has('input:checkbox:checked').remove();
+    
+              var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
+    
+            $('.count-image').text('');
+    
+    
+        });
+
+
+        $(document).on("click", '#select-all', function() {
+    
+          
+    
+            $('.image-checkbox').prop('checked', this.checked);
+
+            if(this.checked) {
+                var countCheckedCheckboxes = $('.image-checkbox').length;
+            } else {
+                var countCheckedCheckboxes = 0;
+            }
+
+            console.log(countCheckedCheckboxes);
+
+            if(countCheckedCheckboxes > 0)
+    
+            {
+        
+                $('#select-all').prop("checked", true);
+        
+                $('.count-image').text(countCheckedCheckboxes);
+        
+            }
+        
+            else
+        
+            {
+        
+                $('#select-all').removeAttr('checked'); 
+        
+                $('.count-image').text('');
+        
+            }
+
+            
+            
+    
+        })
+
+        $(document).on("change", '.image-checkbox', function() {
+    
+            var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
+    
+            if(countCheckedCheckboxes > 0)
+    
+            {
+    
+              // $('#select-all').prop("checked", true);
+    
+              $('.count-image').text(countCheckedCheckboxes);
+    
+            }
+    
+            else
+    
+            {
+    
+               $('#select-all').removeAttr('checked'); 
+    
+                $('.count-image').text('');
+    
+            }
+    
+        });
+
+
     $(document).on("keyup", ".change-value-main-price", function () {
 
         var price = $(this).val();

@@ -3888,7 +3888,7 @@
     
           
     
-            $('.image-checkbox').attr('checked', this.checked);
+            $('.image-checkbox').prop('checked', this.checked);
     
         })
     
@@ -3900,7 +3900,7 @@
     
             {
     
-              $('#select-all').attr("checked",'checked');
+              $('#select-all').prop("checked", true);
     
               $('.count-image').text(countCheckedCheckboxes);
     
