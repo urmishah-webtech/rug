@@ -539,6 +539,19 @@
 <!--/Update variant image modal-->
 
 <script type="text/javascript">
+     $(document).on('DOMNodeRemoved', function(e) {
+        if($(e.target).hasClass('ui-state-default')) {
+            if($('.ui-state-default').length <= 1) {
+                $(e.target).parent().removeClass('import-file-big');
+            }
+        }
+    });
+    $(document).on('DOMNodeInserted', function(e) {
+        if($(e.target).hasClass('ui-state-default')) {
+            // $('#save').prop('disabled', false);
+            $(e.target).parent().addClass('import-file-big');
+        }
+    });
      $(function() {
         $('#images').change(function(e) {
             var files = e.target.files;
