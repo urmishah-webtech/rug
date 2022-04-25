@@ -49,8 +49,7 @@
                                 <th>S No.</th>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Page N
-                                    ame</th>
+                                <th>Page Name</th>
                                 <th class="ta-right">
                                 	Created Date
                                 </th>

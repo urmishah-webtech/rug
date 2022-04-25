@@ -2090,13 +2090,13 @@
     
                                 <span class="dollar-input">
     
-                                    <input type="text" name="price" placeholder="0,00">
+                                    <input type="text" id="apply-price" class="apply-price" name="price" placeholder="0,00">
     
                                 </span>
     
                             </div>
     
-                            <button class="button fw-6" disabled="disabled">Apply to all</button>
+                            <button class="button fw-6" id="apply-price-submit">Apply to all</button>
     
                         </div>
     
@@ -2126,7 +2126,7 @@
     
                             <span class="dollar-input">
     
-                                <input type="text" wire:model.debounce.lazy="Productvariant.{{ $key }}.price" wire:ignore>
+                                <input class="att_price_class" type="text" wire:model.debounce.lazy="Productvariant.{{ $key }}.price" wire:ignore>
     
        
     
@@ -2184,7 +2184,7 @@
     
                             </div>
     
-                            <button class="button fw-6" disabled="disabled">Apply to all</button>
+                            <button class="button fw-6">Apply to all</button>
     
                         </div>
     
@@ -2611,7 +2611,7 @@
     
                             </div>
     
-                            <button class="button fw-6" disabled="disabled">Apply to all</button>
+                            <button class="button fw-6">Apply to all</button>
     
                         </div>
     
@@ -2797,6 +2797,12 @@
             });
     
     
+        });
+
+         $(document).on("click", '#apply-price-selling-submit', function() {
+            var val = $('.apply-selling-price').val();
+
+            $('.att_price_selling_class').attr("value", val);
         });
     
        //  $('#description').ckeditor();

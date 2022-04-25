@@ -136,10 +136,14 @@
                                 <th></th>
                             </tr>
                             @if($pages)
+                            @php $i=1; @endphp
                             @foreach($pages as $result)
                             <tr>
                                 <td>
                                     <div class="row"></div>
+                                </td>
+                                <td>
+                                    <p><b>{{$i}}</b></p>
                                 </td>
                                 <td>
                                     @if(user_permission('pages','update'))
@@ -153,6 +157,7 @@
                                     <span class="text-grey pr-3">{{$result->created_at}}</span>
                                 </td>
                             </tr>
+                            @php $i++; @endphp
                             @endforeach
                             @endif
                         </tbody>
