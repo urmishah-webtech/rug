@@ -121,7 +121,7 @@ class Detail extends Component
         $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get(); 
         $this->locationarray = (array) json_decode($this->product['location']);
         $this->varientsarray = (array) json_decode($this->product['cv_option_price']);
-        $this->collectionarray = (array) json_decode($this->product['collection']);
+        $this->collectionarray = (array) json_decode($this->product['collection']); 
         
         if($this->product['custom_variant'] == 1) {
 
@@ -173,6 +173,7 @@ class Detail extends Component
         }
 
         $this->getProductDetail();
+        $this->productCollection = (array) json_decode($this->product->collection);
 
        
     }
@@ -777,6 +778,8 @@ class Detail extends Component
          $this->getProductDetail();
 
         $this->product = Product::where('uuid',$this->uuid)->first();
+
+        $this->collectionarray = $this->productCollection;
 
          session()->flash('message', 'Product Updated Successfully.');
     }
