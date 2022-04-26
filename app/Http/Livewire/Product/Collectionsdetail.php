@@ -23,8 +23,9 @@ use Illuminate\Pagination\Paginator;
 class Collectionsdetail extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     
-    public $collection,$uuid,$online_store,$point_of_sale,$condition_match,$productpaginator,$filter_customers, $variationValue, $collection_product, $selected_product, $selectedproducts = [];
+    public $collection,$uuid,$online_store,$point_of_sale,$condition_match,$productpaginator,$filter_customers, $variationValue, $collection_product,$collectionimage, $selected_product, $selectedproducts = [];
 
     public $perPage = 10;
 
@@ -240,6 +241,14 @@ class Collectionsdetail extends Component
 
             }
 
+
+            if($this->collectionimage){
+                $photo = $this->collectionimage;
+                $path_url = $photo->storePublicly('collection','public');
+            }else{
+                $path_url = $this->collection['image'];          
+            }
+
             Collection::where('id', $this->collection['id'])->update(
 
                 [
@@ -247,6 +256,8 @@ class Collectionsdetail extends Component
                     'title'            => $this->collection['title'],
 
                     'description'      => $this->collection['description'],
+                   
+                    'image'            => $path_url,
 
                     'condition_match'  => $condition_match_update,
 
@@ -264,7 +275,7 @@ class Collectionsdetail extends Component
 
             );
 
-            session()->flash('message', 'Users Updated Successfully.');
+            session()->flash('message', 'Collection Updated Successfully.');
         }
 
          $this->collection = Collection::where('uuid',$this->uuid)->first();

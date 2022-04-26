@@ -238,7 +238,7 @@ class PaymentController extends Controller
             
             $order_item = order_item::with('media_product')->with('variant_product')->with('order_product')->where('order_id',$order->id)->orderBy('id', 'DESC')->get();
 
-            $image_path='https://rug.webtech-evolution.com/public/storage/';
+            $image_path= env('IMAGE_PATH');
 
             $finalamount = 0;
                 $i=0;
