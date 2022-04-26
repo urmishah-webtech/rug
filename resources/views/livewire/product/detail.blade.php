@@ -1519,7 +1519,7 @@
     
                         <div class="card-middle">
     
-                            <div class="row sidebar-collection-checkbox">
+                            <div class="row sidebar-collection-checkbox" wire:ignore>
     
                                 <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
     
@@ -1528,11 +1528,17 @@
                                 <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
                           
                                 @foreach($Collection as $row)
-                                    @foreach($collectionarray as $checking)
-                                    <label><input type="checkbox" name="option2a" wire:model.lazy="productCollection" value="{{$row->id}}" @if($row->id == $checking) selected @endif>{{$row->title}}</label>
-                                    @endforeach    
-                                @endforeach    
+                                    <label><input type="checkbox" name="option2a" wire:model.lazy="productCollection" value="{{$row->id}}">{{$row->title}}</label>  
+                                @endforeach   
                                 </div>
+
+                                 @foreach($Collection as $row)
+                                    @foreach($collectionarray as $checking)
+                                    @if($row->id == $checking) 
+                                <label> {{$row->title}} </label>
+                                 @endif  
+                                 @endforeach    
+                                @endforeach 
     
                             </div>
     
