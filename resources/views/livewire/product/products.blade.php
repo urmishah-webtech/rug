@@ -129,11 +129,12 @@
                                 @endif
                             </td>
                             <td class="subscribed-label status-table-item">
-                                <p class="tag green order-filed">
-                                 @if($row->status == 'active') Active @endif
-                                 @if($row->status == 'invited') Draft @endif
-                                 @if($row->status == 'disabled') Archive @endif
-                                 </p>
+                                @if($row->status == 'active')
+                                <p class="tag green order-filed Activeclass">Active</p>
+                                @endif
+                                @if($row->status == 'invited')
+                                <p class="tag red order-filed invitedclass">Draft</p>
+                                @endif
                             </td>
                             <td class="inventory-table-item">
                                 <?php $sum = 0; ?>
