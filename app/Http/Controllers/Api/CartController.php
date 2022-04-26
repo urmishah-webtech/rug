@@ -270,7 +270,7 @@ class CartController extends Controller
         } else {
            $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
         }
-        $image_path='https://rug.webtech-evolution.com/public/storage/';
+        $image_path= env('IMAGE_PATH');
         if ($CartItem)
         {
             $finalamount = 0;

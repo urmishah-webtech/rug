@@ -132,7 +132,7 @@ class SliderController extends Controller
         $product = Product::with('productmediaget')->where('featured',1)->get();
         $data=array();
         $i=0; 
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
         foreach ($product as $key => $val)
         {
 
@@ -159,7 +159,7 @@ class SliderController extends Controller
     public function getHomepage(){
         $homeget =  page::where('id',10)->first();
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['homepagetitle'] = $homeget->title;
            
@@ -241,7 +241,7 @@ class SliderController extends Controller
     	}
 		
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['studiopagetitle'] = $studioget->title;
            
@@ -308,7 +308,7 @@ class SliderController extends Controller
     	}
 		
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['apartmentpagetitle'] = $apartmentget->title;
            
@@ -363,7 +363,7 @@ class SliderController extends Controller
 
 
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['processpagetitle'] = $processget->title;
            
@@ -420,7 +420,7 @@ class SliderController extends Controller
 
 
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['storymaintitle'] = $storyget->title;
            
@@ -472,7 +472,7 @@ class SliderController extends Controller
             $i++;
         }
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['swatchesmaintitle'] = $swatchesget->title;
            
@@ -520,7 +520,7 @@ class SliderController extends Controller
             $i++;
         }
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['sizeguidetitle'] = $sizeguideget->title;
            
@@ -557,7 +557,7 @@ class SliderController extends Controller
     public function getfooterpage(){
         $footerget =  page::where('id',17)->first();
         $data=array();
-        $image_path= 'https://rug.webtech-evolution.com/public/storage/';
+        $image_path=  env('IMAGE_PATH');
          
             $data['footermaintitle'] = $footerget->title;
            
