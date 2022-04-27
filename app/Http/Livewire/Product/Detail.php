@@ -108,7 +108,7 @@ class Detail extends Component
         $this->uuid = $id;
         $this->editQuantitiesDetailsModal = false;
         $this->product = Product::where('uuid',$this->uuid)->first();
-        $this->product_array = (array) json_decode($this->product['faq']);
+        $this->product_array = (array) ($this->product['faq']);
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
         $this->tagsale = tagsale::get();
@@ -169,7 +169,7 @@ class Detail extends Component
         }
 
         if(!empty($this->product_array['faq'])) {
-           $this->product_array['faq'] =  json_decode($this->product_array['faq']);
+           $this->product_array['faq'] =  (array) ($this->product_array['faq']);
         }
 
         $this->getProductDetail();
@@ -630,7 +630,7 @@ class Detail extends Component
 
                     'vender'           => $this->product['vender'],
                     
-                    'faq'              => json_encode($this->product_array),
+                    'faq'              => (array) ($this->product_array),
                     
                     'status'           => $this->product['status'],
                     

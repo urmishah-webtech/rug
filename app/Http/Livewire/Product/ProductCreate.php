@@ -216,7 +216,7 @@ class ProductCreate extends Component
                             }
                             if(!empty($arry))
                             {
-                                $insertquestion = json_encode($arry);
+                                $insertquestion = (array) ($arry);
                                 
                             }else{
                                  $insertquestion = '';

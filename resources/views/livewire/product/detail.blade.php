@@ -1684,6 +1684,9 @@
                     @endif
                 </div>
                 <input type="button" class="button save-button" wire:click="updateDetail" value="Save">
+                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
+                    <div class="page-loading"></div>
+                </div>
     
             </div>
     

@@ -71,6 +71,7 @@ Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
 Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
 
 Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
+Route::post('customecart', 'App\Http\Controllers\Api\CartController@CustomeCartSave');
 Route::get('getcart/{id}', 'App\Http\Controllers\Api\CartController@getCart');
 Route::get('cartdelete/{id}', 'App\Http\Controllers\Api\CartController@DeleteCartProduct');
 Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartProduct');

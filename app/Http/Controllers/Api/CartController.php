@@ -128,6 +128,7 @@ class CartController extends Controller
             {
                 $price = $product['price'];
             }
+
             if (!empty($request->user_id))
             {
                 $exist = Cart::where('product_id', $product->id)
@@ -164,7 +165,7 @@ class CartController extends Controller
             else
             {
                 $cart = Cart::where('product_id', $product->id)
-                    ->where('session_id', '!=', null)
+                    ->where('session_id', $request->session_id)
                     ->where('varientid', '=', null)
                     ->first(['id', 'stock', 'product_id']);
                 //  $cart = session()->get('cart');
@@ -334,5 +335,126 @@ class CartController extends Controller
             ]);
         }
         
+    }
+
+    public function CustomeCartSave(Request $request){
+        $product = Product::where('id', $request->product_id)->first();
+        $price = $request->price;
+
+            
+            if (!empty($request->user_id))
+            {
+                $exist = Cart::where('product_id', $product->id)
+                    ->where('user_id', $request->user_id)
+                    ->where('cutomeid', '=', 1)->where('varient1', $request->varient1)->where('attribute1', $request->attribute1)->where('varient2',$request->varient2)->where('attribute2', $request->attribute2)->where('varient3',$request->varient3)->where('attribute3', $request->attribute3)->where('varient4', $request->varient4)->where('height', $request->height)->where('width', $request->width)
+                    ->first(['id', 'stock']);
+                if (empty($exist))
+                {
+                    $cart = Cart::create([
+                        'product_id' => $product->id,
+                        'cutomeid' => '1',
+                        'user_id' => $request->user_id,
+                        'price' => $price,
+                        'stock' => '1',
+                        'varient1' => $request->varient1,
+                        'attribute1' => $request->attribute1,
+                        'varient2' => $request->varient2,
+                        'attribute2' => $request->attribute2,
+                        'varient3' => $request->varient3,
+                        'attribute3' => $request->attribute3,
+                        'varient4' => $request->varient4,
+                        'height' => $request->height,
+                        'width' => $request->width
+                    ]);
+                    $cartcount = Cart::where('user_id', $request->user_id)->count();
+                    return response()
+                        ->json(['message' => 'insert Record', 'success' => true, 'cartcount' => $cartcount, 'cart' => $cart,
+                    ]);
+                    // $this->emitTo('header','getCart');
+                }
+                else
+                {
+                    $cart = Cart::where('id', $exist->id)
+                        ->update(['stock' => $request->stock]);
+                    /*$exist->stock++;
+                     $exist->save();*/
+                    return response()
+                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
+                    ]);
+                    //$this->emitTo('header','getCart');
+                }
+            }
+            else
+            {
+                $cart = Cart::where('product_id', $product->id)
+                    ->where('session_id', $request->session_id)
+                    ->where('cutomeid', '=', 1)->where('varient1', $request->varient1)->where('attribute1', $request->attribute1)->where('varient2',$request->varient2)->where('attribute2', $request->attribute2)->where('varient3',$request->varient3)->where('attribute3', $request->attribute3)->where('varient4', $request->varient4)->where('height', $request->height)->where('width', $request->width)->first(['id', 'stock']);
+
+
+                    dd($cart);
+                //  $cart = session()->get('cart');
+                $product_detail = Product::find($product->id)
+                    ->toArray();
+                $media_product = ProductMedia::where('product_id', $product->id)
+                    ->get()
+                    ->toArray();
+                if (!$cart)
+                {
+                    $cart = Cart::create([
+                        //   'type' => 'product',
+                        'product_id' => $product->id,
+                        'cutomeid' => '1',
+                        'session_id' => $request->session_id,
+                        'price' => $price,
+                        'stock' => '1',
+                        'varient1' => $request->varient1,
+                        'attribute1' => $request->attribute1,
+                        'varient2' => $request->varient2,
+                        'attribute2' => $request->attribute2,
+                        'varient3' => $request->varient3,
+                        'attribute3' => $request->attribute3,
+                        'varient4' => $request->varient4,
+                        'height' => $request->height,
+                        'width' => $request->width
+                        //    'product_detail' => $product_detail,
+                        //   'media_product' => $media_product
+                    ]);
+                    $cartcount = Cart::where('session_id', $request->session_id)->count();
+                    return response()
+                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount,'cart' => $cart,
+                    ]);
+                }
+                else if (isset($cart['product_id']))
+                {
+                    $cart['product_id'] = Cart::where('id', $cart->id)
+                        ->update(['stock' => ($cart->id+$request->stock)]);
+                    return response()
+                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
+                    ]);
+                    // $cart[$product->id]['stock']++;
+                    //  session()->put('cart', $cart);
+                    //  $this->emitTo('header','getCart');
+                }
+                else
+                {
+                    // if item not exist in cart then add to cart with quantity = 1
+                    $cart['product_id'] = Cart::create([
+                        'type' => 'product',
+                        'product_id' => $product->id,
+                        'price' => $price,
+                        'stock' => $request->stock,
+                        'session_id' => $request->session_id,
+                        'locationid' => '1',
+                        'product_detail' => $product_detail,
+                        'media_product' => $media_product
+                    ]);
+                    $cartcount = Cart::where('session_id', $request->session_id)->count();
+                    return response()->json(['message' => 'Updated Record', 'success' => true,'cartcount' => $cartcount ,'cart' => $cart,
+                    ]);
+                    //  session()->put('cart', $cart);
+                    //    $this->emitTo('header','getCart');
+                }
+            }
+
     }
 }
