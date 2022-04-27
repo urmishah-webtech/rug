@@ -41,7 +41,7 @@
 
                                 </a>
 
-                                <a href="{{ route('setting-general') }}" class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('shipping-admin') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
