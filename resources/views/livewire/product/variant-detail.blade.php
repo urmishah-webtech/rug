@@ -47,7 +47,7 @@
             <div class="columns one-third">
                 <div class="card variant-details-card card-grey-bg">
                     <div class="variant-img">
-                        <img src="@if($Productvariant_first->photo != '') {{ asset('storage/'.$Productvariant_first->photo) }} @endif @if($Productvariant_first->photo == '') {{ asset('image/defult-image.png') }} @endif">
+                        <img src="@if(!empty($Productvariant_first['variantmedia'][0]['image'])) {{ asset('storage/'.$Productvariant_first['variantmedia'][0]['image']) }} @endif @if(empty($Productvariant_first['variantmedia'][0]['image'])) {{ asset('image/defult-image.png') }} @endif">
                     </div>
                     <div class="variant-details">
                         <h2>{{$product->title}}</h2>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-middle cutsom-heightscroll">
                         @foreach($Productvariant as $row)
-                        <p><span><img src="@if($row->photo != '') {{ asset('storage/'.$row->photo) }} @endif @if($row->photo == '') {{ asset('image/defult-image.png') }} @endif"></span>
+                        <p><span><img src="@if(!empty($row['variantmedia'][0]['image'])) {{ asset('storage/'.$row['variantmedia'][0]['image']) }} @endif @if(empty($row['variantmedia'][0]['image'])) {{ asset('image/defult-image.png') }} @endif"></span>
                             <a href="{{ route('variant-detail', $row->id) }}">
                             @if($row->attribute1 != ""){{$row->attribute1}} @endif
                             @if($row->attribute2 != "")/{{$row->attribute2}} @endif

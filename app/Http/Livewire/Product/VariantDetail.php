@@ -83,14 +83,15 @@ class VariantDetail extends Component
 
        //$this->product = Product::where('uuid',$this->uuid)->first();
        //$this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
-       $this->Productvariant_first = ProductVariant::where('id',$id)->first();
-       $this->Productvariant = ProductVariant::where('product_id',$this->Productvariant_first["product_id"])->get();
+       $this->Productvariant_first = ProductVariant::with('variantmedia')->where('id',$id)->first();
+       $this->Productvariant = ProductVariant::with('variantmedia')->where('product_id',$this->Productvariant_first["product_id"])->get();
        $this->product = Product::where('id',$this->Productvariant_first["product_id"])->first();
        $this->variantStock = VariantStock::where('variant_main_id',$this->Productvariant_first["id"])->get();
        $this->Varianttype = VariantTag::All();
        $this->location = Location::All();
        $this->Country = Country::All();
        $this->VariantMedia = VariantMedia::where('variant_id',$id)->get();
+    //   dd($this->Productvariant_first);
 
       //  $this->locationarray = (array) json_decode($this->Productvariant_first['location']);
 
