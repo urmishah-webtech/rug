@@ -410,6 +410,7 @@ class CartController extends Controller
 
                 if (!$cart)
                 {
+
                     $cart = Cart::create([
                         //   'type' => 'product',
                         'product_id' => $product->id,
@@ -426,8 +427,8 @@ class CartController extends Controller
                         'varient4' => $request->varient4,
                         'height' => $request->height,
                         'width' => $request->width,
-                        'product_detail' => $product_detail,
-                        'media_product' => $media_product
+                       // 'product_detail' => $product_detail,
+                       // 'media_product' => $media_product
                     ]);
                     $cartcount = Cart::where('session_id', $request->session_id)->count();
                     return response()
