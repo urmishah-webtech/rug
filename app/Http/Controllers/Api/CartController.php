@@ -299,7 +299,7 @@ class CartController extends Controller
             $cartStock = $CartItem->sum('stock');
             $cartCount = count($CartItem);
             return response()
-                ->json(['message' => 'success','cartcount' => $cartCount, 'cartitem' => $CartItem, 'Totalstock' => $cartStock, 'Totalamount' => $finalamount, 'image' => $CartItem, 'success' => true, ]);
+                ->json(['message' => 'success','cartcount' => $cartCount, 'cartitem' => $CartItem, 'Totalstock' => $cartStock, 'Totalamount' => $finalamount, 'success' => true, ]);
         }
         /*if (count($CartsessionItem) != 0)
         {
