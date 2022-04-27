@@ -333,7 +333,7 @@ class ProductlistController extends Controller
                 $tasselsverient = [];
                 foreach ($val->variants->unique('attribute4') as $sizekey4 => $row4)
                 {
-                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient2'])
+                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient4'])
                         ->first();
                     if ($variant_tag)
                     {
