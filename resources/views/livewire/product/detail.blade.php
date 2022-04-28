@@ -1378,7 +1378,7 @@
                            </div>
                        </div>
                        @foreach($product_array as $key => $row)
-                           <div class="row">
+                           <div class="row mt-40">
                                <label>Title</label>
                                <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
                            </div>

@@ -230,7 +230,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
+                                            <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing customtableclass">
                                                 <tbody class="variants-option">
                                                 </tbody>
                                             </table>
@@ -270,7 +270,9 @@
 
                                 </div>
                             </div>
+                            <br>
                             @endforeach
+                            
                             
                             <!-- <div class="custom_variant_hw mt-3 mb-3">
                                 <div class="div">
@@ -1236,7 +1238,7 @@
           
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 mb-40">
         <a class="btn btn-danger btn-sm custom-deleteebtn remove-detail" id="remove-detail"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</a>
     </div>
     </div>`);        

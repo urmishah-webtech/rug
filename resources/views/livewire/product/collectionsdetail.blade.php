@@ -91,7 +91,7 @@
                             <input type="search" id="search-product" placeholder="Search products">
                             <button class="secondary browse-products-btn" onclick="document.getElementById('collection-edit-product-modal').style.display='block'">Browse</button>
                         </div>
-                        <select>
+                        {{-- <select>
                             <option value="BEST_SELLING">Best selling</option>
                             <option value="ALPHA_ASC">Product title A-Z</option>
                             <option value="ALPHA_DESC">Product title Z-A</option>
@@ -100,7 +100,7 @@
                             <option value="CREATED_DESC">Newest</option>
                             <option value="CREATED">Oldest</option>
                             <option value="MANUAL">Manually</option>
-                        </select>
+                        </select> --}}
                     </div>
                     <div class="product-table-details">
                         <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">

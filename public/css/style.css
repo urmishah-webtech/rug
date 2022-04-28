@@ -3135,6 +3135,19 @@ label {
  .organization-card label {
      margin-bottom: 4px;
      color: #202223;
+     width: max-content;
+}
+.mt-40{
+    margin-top: 40px;
+}
+.mb-40{
+    margin-bottom: 40px;
+}
+.customtableclass input[type="checkbox"]{
+    display: none;
+}
+.customtableclass td:first-child{
+    width: 20px !important;
 }
  .Polaris-TextStyle--variationSubdued_1segu {
      color: #6d7175;
