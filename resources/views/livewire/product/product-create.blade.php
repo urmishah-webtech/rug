@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="card-middle-arrtibute" style="display: none;" wire:ignore.self>
-                        <div class="card-middle pd-add-attri-card"> 
+                        <!-- <div class="card-middle pd-add-attri-card"> 
                             <div class="add-attri-list">
                                 <div class="row side-elements mb-0">
                                     <label class="form-label fs-14 fw-6">Attribute Type</label>
@@ -163,7 +163,7 @@
                                     @endif
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card-middle">
                             <label class="fs-12  fw-6 mb-0">OPTIONS</label>
                             <div class="varition-append">
@@ -259,16 +259,14 @@
                             @foreach($variantag as $row)
                             <div class="row">
                                 <div class="form-field-list">
-                                    <label>Name </label>
                                      <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
                                      <input class="price-change-input" type="hidden" value="{{ $row->id }}"  name="variantid[]"   readonly>
                                    
                                 </div>
                                 <div class="form-field-list">
 
-                                    <label>Price</label>
 
-                                    <input class="price-change-input" type="text" value=""  name="variantprice[]">
+                                    <input class="price-change-input" type="text" value=""  placeholder="Price" name="variantprice[]">
 
                                 </div>
                             </div>

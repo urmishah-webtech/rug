@@ -196,6 +196,7 @@
                             <div class="uplod-main-demo">
     
                                 <input type="file" id="images" wire:model.debounce.lazy="image" multiple name="image" multiple="multiple"/>
+
     
                                 <div class="import-file">
     
@@ -225,6 +226,22 @@
                                                 <span class="fs-14">or drop files to upload</span>
     
                                             </label>
+
+                                            <div class="photo-upload-b__btn photo-upload-b__btn_preload" wire:loading wire:target="image">
+                                                <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                  viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                      <animateTransform 
+                                                         attributeName="transform" 
+                                                         attributeType="XML" 
+                                                         type="rotate"
+                                                         dur="1s" 
+                                                         from="0 50 50"
+                                                         to="360 50 50" 
+                                                         repeatCount="indefinite" />
+                                                  </path>
+                                                </svg>
+                                            </div>
     
                                         </ul>
     
@@ -257,7 +274,7 @@
                     <!-- end detail -->
           
                 @if(count($Productvariant) != 0)
-                <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
+                <!-- <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
 
 
 
@@ -320,7 +337,7 @@
                     </div>
         
 
-                </div>
+                </div> -->
                 <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table">
 
                     <div class="product-table-title">
@@ -578,7 +595,9 @@
                                             <?php 
                                              $stocksum += $row->stock; ?>
                                              @if($row->stock)
-                                            <p>Available at {{$row->stock}} Stock</p>
+                                            <!-- <p>Available at {{$row->stock}} Stock</p> -->
+                                            <p>@if($row->selling_price){{$symbol['currency']}}{{number_format($row->selling_price,2,".",",")}}
+                                            @endif</p>
                                             @endif
 
                                         </td>
@@ -955,7 +974,6 @@
                                             @if(!empty($value->lable) && $value->lable == $row->id) 
                                     <div class="row showvarient">        
                                         <div class="form-field-list">
-                                            <label>Name </label>
                                              <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
                                              <input class="price-change-input" type="hidden" wire:model="varientsarray.{{ $key }}.lable"   readonly>
                                            
@@ -963,7 +981,7 @@
                                         <div class="form-field-list">
 
                                             <label>Price</label>
-                                            <input class="price-change-input" type="number"  wire:model="varientsarray.{{ $key }}.price">
+                                            <input class="price-change-input" placeholder="Price" type="number"  wire:model="varientsarray.{{ $key }}.price">
                                                
                                         </div>
                                    </div>

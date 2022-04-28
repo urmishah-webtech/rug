@@ -216,7 +216,7 @@ class ProductCreate extends Component
                             }
                             if(!empty($arry))
                             {
-                                $insertquestion = (array) ($arry);
+                                $insertquestion = $arry;
                                 
                             }else{
                                  $insertquestion = '';
@@ -226,6 +226,8 @@ class ProductCreate extends Component
                   }
                 }
               }
+
+          //    dd($insertquestion);
 
             $varition_arrray_crunch = $request['varition_arrray'];
             $price_arr = $request['att_price'];
@@ -256,7 +258,6 @@ class ProductCreate extends Component
             
             $locationid = json_encode($arr);   
 
-            //dd($requestcustom_variant_check) ; 
 
             $product_detail_arr = [
 
@@ -329,6 +330,8 @@ class ProductCreate extends Component
                 'status' => $request['status']
 
             ];
+
+
 
                 if ($request['trackqtn']) {
 
