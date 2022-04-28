@@ -1542,9 +1542,9 @@
     
                                 <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
     
-                                <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')" >
+                                <input type="search" placeholder="Search for collections" class="buttoncustom" onclick="openOption('email_subscription_status')" >
     
-                                <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
+                                <div class="search-collections-checkbox filter_email_subscription_status dropdowncustomhide" style="list-style-type: none">
                           
                                 @foreach($Collection as $row)
                                     <label><input type="checkbox" name="option2a" wire:model.lazy="productCollection" value="{{$row->id}}">{{$row->title}}</label>  
@@ -4240,6 +4240,24 @@
             @this.set('product.descripation', event.editor.getData());
             
     });
+
+        // hide dropdown 
+    $(".buttoncustom").click(function(e){
+    
+    
+     e.stopPropagation();
+});
+
+
+
+$(".dropdowncustomhide").click(function(e){
+    e.stopPropagation();
+});
+
+$(document).click(function(){
+    $(".dropdowncustomhide").hide();
+});
+
     </script>
     </x-admin-layout>
     
