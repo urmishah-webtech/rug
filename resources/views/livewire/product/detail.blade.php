@@ -1377,15 +1377,17 @@
                                <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add({{$last_key}})">Add</button>
                            </div>
                        </div>
+
                        @foreach($product_array as $key => $row)
+
                            <div class="row mt-40">
                                <label>Title</label>
-                               <input type="text" wire:model="product_array.{{ $key }}.question" wire:ignore>
+                               <input type="text" wire:model="product_array.{{ $key }}.question">
                            </div>
                            <div class="form-group row">
                                <label>Description</label>
                                <div class="col-md-9">
-                                   <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"  wire:ignore></textarea>
+                                   <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"></textarea>
                                </div>
                            </div>
         
@@ -2786,12 +2788,13 @@
         $(document).ready(function(){
               //  var answer = $('#showvarient');
                 if($('.custom_variant_checked').is(':checked')){
-                    $('.card-cutome-arrtibute').slideDown(500);
+                    $('.card-cutome-arrtibute').slideToggle(500);
                 } if($('.custom_variant_checked').not(':checked')) {
-                    $('.card-cutome-arrtibute').slideUp(500);
+                    $('.card-cutome-arrtibute').slideToggle(500);
                 }
 
             });
+
     
         $(document).ready(function(){
             
@@ -2830,6 +2833,7 @@
             var val = $('.apply-selling-price').val();
 
             $('.att_price_selling_class').attr("value", val);
+
         });
     
        //  $('#description').ckeditor();
