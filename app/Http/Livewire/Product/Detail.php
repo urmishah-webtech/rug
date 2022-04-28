@@ -110,7 +110,7 @@ class Detail extends Component
         $this->product = Product::where('uuid',$this->uuid)->first();
         $this->product_array = (array) ($this->product['faq']);
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
-        $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
+        $this->Productvariant = ProductVariant::with('variantmedia')->where('product_id',$this->product['id'])->get();
         $this->tagsale = tagsale::get();
         $this->tags = Tag::All();
         $this->variantag = VariantTag::All();

@@ -398,8 +398,6 @@ class CartController extends Controller
                 $cart = Cart::where('product_id', $product->id)
                     ->where('session_id', $request->session_id)
                     ->where('cutomeid', '=', 1)->where('varient1', $request->varient1)->where('attribute1', $request->attribute1)->where('varient2',$request->varient2)->where('attribute2', $request->attribute2)->where('varient3',$request->varient3)->where('attribute3', $request->attribute3)->where('varient4', $request->varient4)->where('height', $request->height)->where('width', $request->width)->first(['id', 'stock','product_id']);
-
-
                   
                 //  $cart = session()->get('cart');
                 $product_detail = Product::find($product->id)
@@ -426,13 +424,12 @@ class CartController extends Controller
                         'varient4' => $request->varient4,
                         'height' => $request->height,
                         'width' => $request->width,
-                        'product_detail' => $product_detail,
-                        'media_product' => $media_product
+                       // 'product_detail' => $product_detail,
+                       // 'media_product' => $media_product
                     ]);
                     $cartcount = Cart::where('session_id', $request->session_id)->count();
                     return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount,'cart' => $cart,
-                    ]);
+                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount,'cart' => $cart, ]);
                 }
               //  dd($cart['product_id'])
                 else if ($cart['product_id'])
