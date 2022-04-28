@@ -230,10 +230,12 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <div class="tableFixHead">
                                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing customtableclass">
                                                 <tbody class="variants-option">
                                                 </tbody>
                                             </table>
+                                            </div>
                                             <!-- <hr>
                                             <div class="product-table-footer">
                                                 <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory</a>
@@ -828,9 +830,9 @@
 
                             <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
 
-                            <input type="search" placeholder="Search for collections" onclick="openOption('email_subscription_status')">
+                            <input type="search" placeholder="Search for collections" class="buttoncustom" onclick="openOption('email_subscription_status')">
 
-                            <div class="search-collections-checkbox filter_email_subscription_status" style="list-style-type: none">
+                            <div class="search-collections-checkbox filter_email_subscription_status dropdowncustomhide" style="list-style-type: none">
                             @foreach($Collection as $row) 
                             
                                 <label><input type="checkbox" name="productCollection" value="{{$row->id}}" >{{$row->title}}</label>
@@ -2619,6 +2621,25 @@ $(document).on("click", '.image-checkbox', function() {
            $('#master-save').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
         }
     });
+
+    // hide dropdown 
+    $(".buttoncustom").click(function(e){
+    
+    
+     e.stopPropagation();
+});
+
+
+
+$(".dropdowncustomhide").click(function(e){
+    e.stopPropagation();
+});
+
+$(document).click(function(){
+    $(".dropdowncustomhide").hide();
+});
+
+
 </script>
 
 </x-admin-layout>

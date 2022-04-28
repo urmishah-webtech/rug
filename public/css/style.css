@@ -3146,6 +3146,9 @@ label {
 .customtableclass input[type="checkbox"]{
     display: none;
 }
+.tableFixHead{
+    overflow: auto; height: 300px; 
+}
 .customtableclass td:first-child{
     width: 20px !important;
 }
@@ -3385,6 +3388,10 @@ label {
  .search-collections-checkbox label {
      padding: 8px 16px;
      margin-bottom: 0;
+}
+.dropdowncustomhide {
+    display:none;
+   
 }
  .product-media-item:first-child img {
      min-height: 279.09px;
