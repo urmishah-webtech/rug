@@ -980,7 +980,6 @@
                                         </div>
                                         <div class="form-field-list">
 
-                                            <label>Price</label>
                                             <input class="price-change-input" placeholder="Price" type="number"  wire:model="varientsarray.{{ $key }}.price">
                                                
                                         </div>
