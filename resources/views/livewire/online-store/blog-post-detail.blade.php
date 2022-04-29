@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         
-                        <div id="blog_video_up" class="avatar-upload" @if($edit_post->video)style="display:block" @else style="display:none" @endif>
+                        <div id="blog_video_up" class="avatar-upload" @if($edit_post->video)style="display:block" @else @endif>
                             <div class="avatar-edit">
                                 <input type="file" id="logoUpload_video" name="video" accept=".mp4">
                                 <img src="{{ asset('assets/images/upload-icon.svg') }}">

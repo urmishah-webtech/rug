@@ -305,7 +305,7 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/setting/legal', Livewire\Setting\Legal::class)->name('legal');
 
-            Route::get('/setting/shipping', Livewire\Setting\Shipping::class)->name('shipping');
+            Route::get('/settingold/shipping', Livewire\Setting\Shipping::class)->name('shipping');
 
             Route::get('/setting/profiles/profile-detail', Livewire\Setting\ProfileDetail::class)->name('profile-detail');
 
@@ -421,7 +421,7 @@ Route::middleware(['checkRole'])->group(function () {
 
             });
 
-            Route::get('admin/shipping', Livewire\Shipping\Shipping::class)->name('shipping-admin');
+            Route::get('setting/shipping', Livewire\Shipping\Shipping::class)->name('shipping-admin');
 
         });
 
