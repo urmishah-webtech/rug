@@ -66,7 +66,6 @@ class Detail extends Component
     public $product_array = [];
 
     
-    public $i = 1;
 
  
 
@@ -108,7 +107,12 @@ class Detail extends Component
         $this->uuid = $id;
         $this->editQuantitiesDetailsModal = false;
         $this->product = Product::where('uuid',$this->uuid)->first();
-        $this->product_array = (array) ($this->product['faq']);
+        $this->product_array = json_decode($this->product->faq, true);
+
+        if(empty($this->product_array) || count($this->product_array) <= 0) {
+            $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+
+        }
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->Productvariant = ProductVariant::with('variantmedia')->where('product_id',$this->product['id'])->get();
         $this->tagsale = tagsale::get();
@@ -168,9 +172,6 @@ class Detail extends Component
            $this->product['product_new'] =  json_decode($this->product['product_new']);
         }
 
-        if(!empty($this->product_array['faq'])) {
-           $this->product_array['faq'] =  (array) ($this->product_array['faq']);
-        }
 
         $this->getProductDetail();
         $this->productCollection = (array) json_decode($this->product->collection);
@@ -234,11 +235,17 @@ class Detail extends Component
     ];
 
 
-    public function add($i)
+    public function add()
     {
-        $i = $i + 1;
-        $this->i = $i;
-        array_push($this->product_array ,$i);
+        if(!empty($this->product_array) )
+        {
+            $i = array_key_last($this->product_array) +1;
+        } else {
+            $i = 1;
+        }
+
+        $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
+
     }
 
     public function remove($i)
@@ -630,7 +637,7 @@ class Detail extends Component
 
                     'vender'           => $this->product['vender'],
                     
-                    'faq'              => (array) ($this->product_array),
+                    'faq'              => json_encode($this->product_array, true),
                     
                     'status'           => $this->product['status'],
                     

@@ -644,7 +644,7 @@
                         <div class="col-md-6">
                             <div class="form-group change">
                                 
-                                <a class="btn btn-success add-more custom-addmorebtn">+ Add More</a>
+                                <a class="btn btn-success add-more custom-addmorebtn" wire:click.prevent="add()">+ Add More</a>
                                 
                             </div>
                         </div>
@@ -655,42 +655,32 @@
                         <div class="col-md-6 custom-flex-sign">
                             
                             
-                            {{-- plus minus sign --}}
 
-        {{-- <div class="panel-group" id="accordion">
-        
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        
-                        </a>
-                    </h4>
-        
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body"></div>
-                </div>
-            </div>
-        </div> --}}
-   
                         </div>
                     </div>
                    
-                   
+                    
                     <div id="tab_logic" class="after-add-more">
+                         @foreach($product_array as $key => $row)
                         <div class="row">
                             <label>Title</label>
-                            <input type="text" name="product_array[1][question]">
+                            <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]">
                         </div>
-                        <div wire:ignore class="form-group row">
+                        <div class="form-group row">
                             <label>Description</label>
                             <div class="col-md-9">
-                                <textarea name="product_array[1][answer]" class="form-control"  id="descripation"></textarea>
+                                <textarea value="{{$product_array[$key]['answer']}}" name="product_array[{{$key}}][answer]" class="form-control"></textarea>
                               
                             </div>
                         </div>
+                        @if(count($product_array) > 1)
+                         <div class="col-md-2">
+                               <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
+                           </div>
+                           @endif
+                           @endforeach
                     </div>
+                    
                     <div class="more-feilds"></div>
                 </div>
 
@@ -905,11 +895,11 @@
 
     </section>
 
-    <section class="full-width flex-wrap admin-body-width create-collection-footer">
+    <section class="full-width flex-wrap admin-body-width create-collection-footer" wire:ignore>
 
         <div class="page-bottom-btn">
 
-            <input type="submit" class="button" id="master-save" value="save" disabled="disabled">
+            <input type="submit" class="button" id="master-save" value="save" disabled="disabled" wire:ignore.self>
 
         </div>
 
@@ -1224,27 +1214,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-    $(".add-more").click(function(){ 
-        x = Math.random().toString(36).substr(2, 9);
-        var html = $("#tab_logic").html();
-        $(".more-feilds").append(`
-    <div class="remove-logic">
-    <div class="row">
-        <label>Title</label>
-        <input type="text" name="product_array[${x}][question]" value="">
-    </div>
-    <div wire:ignore class="form-group row">
-        <label>Description</label>
-        <div class="col-md-9">
-            <textarea name="product_array[${x}][answer]" class="form-control required" id="descripation"></textarea>
-          
-        </div>
-    </div>
-    <div class="col-md-2 mb-40">
-        <a class="btn btn-danger btn-sm custom-deleteebtn remove-detail" id="remove-detail"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</a>
-    </div>
-    </div>`);        
-    });
+
 
     $("body").on("click",".remove-detail",function(){ 
         $(this).parents(".remove-logic").remove();
@@ -1260,7 +1230,8 @@
              // $('.save-button').prop('disabled', true);
              $('form').keyup(function() {
                 if($(this).val() != '') {
-                   $('.save-button').prop('disabled', false);
+                      $('#master-save').removeAttr('disabled'); 
+                   // $('.save-button').prop('disabled', false);
                 }
              });
          });

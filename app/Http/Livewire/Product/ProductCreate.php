@@ -36,6 +36,9 @@ class ProductCreate extends Component
 
     public $image = [];
 
+
+    public $product_array = [];
+
     protected $rules = [
 
         'title' => ['required', 'string', 'max:255'],
@@ -69,6 +72,10 @@ class ProductCreate extends Component
         'seo_descripation' => ['required'],
 
         'seo_url' => ['required'],
+
+        'product_array.*.question' => '',
+
+        'product_array.*.answer' => '',
     ];
 
 
@@ -76,6 +83,8 @@ class ProductCreate extends Component
 
 
        $this->initial();
+      
+        $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
 
     }
 
@@ -101,6 +110,7 @@ class ProductCreate extends Component
 
     public function StoreVarient($flag)
     {
+
 
         if($flag == 'add-varient-type')
         {
@@ -149,6 +159,7 @@ class ProductCreate extends Component
 
     public function storeProduct(Request $request)
     {    
+        
         if(!empty($request['varition_arrray'])){
 
             if(!empty($request->att_price)){
@@ -197,37 +208,7 @@ class ProductCreate extends Component
           $i++;
         }      
 
-              foreach ($request as $key => $find_contant) {
-
-                foreach ($find_contant as $key_value => $result_content) {
-
-                    if($key_value == 'product_array')
-                    {
-                      foreach ($result_content as $content_key => $content_value) {
-
-                        foreach($content_value as $final_key =>$final_value){
-                            if($final_key == 'question')
-                            {
-                                $arry[$content_key]['question'] = $final_value;
-                            }
-                            if($final_key == 'answer')
-                            {
-                                $arry[$content_key]['answer'] = $final_value;
-                            }
-                            if(!empty($arry))
-                            {
-                                $insertquestion = $arry;
-                                
-                            }else{
-                                 $insertquestion = '';
-                            }
-                        }
-                      }
-                  }
-                }
-              }
-
-          //    dd($insertquestion);
+          
 
             $varition_arrray_crunch = $request['varition_arrray'];
             $price_arr = $request['att_price'];
@@ -257,7 +238,6 @@ class ProductCreate extends Component
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
             $locationid = json_encode($arr);   
-
 
             $product_detail_arr = [
 
@@ -301,7 +281,7 @@ class ProductCreate extends Component
 
                 'location' => $locationid,
                 
-                'faq' => $insertquestion,
+                'faq' => json_encode($request->product_array, true),
                 
                 'custom_variant' => $request->custom_variant_check,
                 
@@ -542,4 +522,24 @@ class ProductCreate extends Component
 
 
     }
+    public function add()
+    {
+        if(!empty($this->product_array) )
+        {
+            $i = array_key_last($this->product_array) +1;
+        } else {
+            $i = 1;
+        }
+
+        $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
+
+
+    }
+
+    public function remove($i)
+    {
+        unset($this->product_array[$i]);
+
+    }
+
 }

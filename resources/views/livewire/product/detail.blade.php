@@ -150,15 +150,7 @@
     
                     </div>
     
-                    <?php 
-    
-                
-    
-                    $last_key = count($product_array);
-               //     dd($last_key);
-                
-    
-                    ?>
+                 
                     
                 
     
@@ -1368,25 +1360,26 @@
                         </div>     
     
                     </div>
-    
+   
                     <div class="card">                
                         <div id="tab_logic" class="after-add-more">
                            <div class="col-md-2">
                             <h3>Product Tab descripation</h3>
-                               <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add({{$last_key}})">Add</button>
+                               <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add()">Add</button>
                            </div>
                        </div>
 
+                       <div>
                        @foreach($product_array as $key => $row)
 
                            <div class="row mt-40">
                                <label>Title</label>
-                               <input type="text" wire:model="product_array.{{ $key }}.question">
+                               <input type="text" wire:model="product_array.{{ $key }}.question" >
                            </div>
                            <div class="form-group row">
                                <label>Description</label>
                                <div class="col-md-9">
-                                   <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required" name="descripation" id="descripation"></textarea>
+                                   <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required"  ></textarea>
                                </div>
                            </div>
         
@@ -1394,6 +1387,7 @@
                                <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
                            </div>
                        @endforeach
+                   </div>
                        <div class="more-feilds"></div>
                    </div>
     
