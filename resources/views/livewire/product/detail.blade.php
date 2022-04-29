@@ -956,9 +956,9 @@
                             <div class="header-title">
                                 <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                             </div>
-                            <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant">Custome Price</label>
+                            <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="{{$product['custom_variant']}}" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant" @if($product['custom_variant']) checked="checked" @endif>Custome Price</label>
 
-                            <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore>
+                            <div class="card-cutome-arrtibute one-half-row-card" @if($product['custom_variant']) style="display: none;" @endif wire:ignore>
                              
                                 @foreach($variantag as $key2 => $row)
                                    @if($this->varientsarray)
@@ -2781,10 +2781,11 @@
 
         $(document).ready(function(){
               //  var answer = $('#showvarient');
+              console.log($('.custom_variant_checked').is(':checked'));
                 if($('.custom_variant_checked').is(':checked')){
                     $('.card-cutome-arrtibute').slideToggle(500);
-                } if($('.custom_variant_checked').not(':checked')) {
-                    $('.card-cutome-arrtibute').slideToggle(500);
+                } else  {
+                    $('.card-cutome-arrtibute').slideUp(500);
                 }
 
             });
