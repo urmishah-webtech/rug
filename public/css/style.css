@@ -3393,6 +3393,40 @@ label {
     display:none;
    
 }
+#multiple-file-preview{
+    position: relative;
+}
+.texaxcustom{
+    margin-top: 7px;
+    display: inline-block;
+}
+.customnewlabel{
+    margin-top: 0 !important;
+    margin-bottom: 3px !important;
+}
+#limarker ul{
+    list-style: none;
+}
+.customsavebtntexas{
+    background: linear-gradient(180deg, #6371c7, #5563c1) !important;
+    box-shadow: inset 0 1px 0 0 #6774c8, 0 1px 0 0 rgb(22 29 37 / 5%), 0 0 0 0 transparent;
+    
+    color: #fff !important;
+    border-radius: 0.3rem;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    float: right;
+    margin: 20px;
+}
+.customloader{
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    width: 40%;
+    height: 40%;
+    z-index: 10000000;
+}
  .product-media-item:first-child img {
      min-height: 279.09px;
 }
@@ -5491,7 +5525,7 @@ label {
      color: #8c9196;
 }
  .order-listing span.tag {
-     padding: 3px 8px;
+    padding: 3px 8px 7px 8px;
      line-height: 16px;
      font-size: 13px;
      display: inline-flex;
@@ -5511,6 +5545,7 @@ label {
 }
  .order-listing span.tag .grey-circle {
      background: #5c5f62;
+     margin-top: 5px;
 }
  .order-listing span.tag .border-circle {
      border-color: #202223;

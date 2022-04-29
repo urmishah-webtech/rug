@@ -34,7 +34,7 @@
 
                                     <div class="setting-details">
 
-                                        <label>General</label>
+                                        <label class="customnewlabel">General</label>
                                         <p>View & Update your store Detail</p>
 
                                     </div>
@@ -51,7 +51,7 @@
 
                                     <div class="setting-details">
 
-                                        <label>Shipping</label>
+                                        <label class="customnewlabel">Shipping</label>
                                         <p>View & Update your Shipping Detail</p>
 
                                     </div>
@@ -69,7 +69,7 @@
 
                                     <div class="setting-details">
 
-                                        <label>Taxes</label>
+                                        <label class="customnewlabel">Taxes</label>
                                         <p>Manage how your store charges taxes</p>
 
                                     </div>
