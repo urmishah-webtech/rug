@@ -33,6 +33,7 @@
                                 <div class="search-product-field">
                                     <input class="fs-13 placeholder_gray fw-4" wire:model="filter_slider" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Slider">
                                 </div>
+                                <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >Delete Selected</button>
                             </div>
                         </div>
                     </article>
@@ -46,6 +47,9 @@
                     <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing collections-sec">
                         <tbody>
                             <tr>
+                                 <th>
+                                    <div class="row all-select-checkbox"><label><input type="checkbox" wire:model="selectall" class="checked_all" name="customer_all"></label></div>
+                                </th>
                                 <th>S No.</th>
                                 <th>Image</th>
                                 <th>Title</th>
@@ -59,6 +63,9 @@
                             @if($slider)
                           	@foreach($slider as $reskey => $result)
                             <tr>
+                                 <td>
+                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectedslider"  wire:model="selecteslider" value="{{$result->id}}"></label></div>
+                                </td>
                                 <td>{{$reskey+1}}</td>
                                 <td class="product-table-item">
                                 	<img src="{{ asset('storage/'.$result['slider_image']) }}" />
@@ -79,6 +86,11 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+
+                     {!! $slider->links() !!}
+                   
+                    </div>
                 </div>
             </div>
         </div>

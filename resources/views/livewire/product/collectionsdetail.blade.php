@@ -11,7 +11,7 @@
                     </a>
                     <h4 class="mb-0 fw-5">{{$collection->title}}</h4>
                 </div>
-                <a class="button green-btn" href="http://185.160.67.108/estore/public/admin/customers/new">Save</a>
+              
             </div>
         </article>
     </section>
@@ -309,7 +309,7 @@
                  <div class="alert alert-success">{{ session('message') }}</div>
                 @endif
             </div>
-            <button wire:click.prevent="update('main-change', event.target.value)" class="button">Save</button>
+            <button wire:click.prevent="update('main-change', event.target.value)" class="button green-btn">Save</button>
         </div>
     </section>
 
