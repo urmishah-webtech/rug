@@ -3393,6 +3393,21 @@ label {
     display:none;
    
 }
+#multiple-file-preview{
+    position: relative;
+}
+.texaxcustom{
+    margin-top: 7px;
+    display: inline-block;
+}
+.customloader{
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    width: 40%;
+    height: 40%;
+    z-index: 10000000;
+}
  .product-media-item:first-child img {
      min-height: 279.09px;
 }

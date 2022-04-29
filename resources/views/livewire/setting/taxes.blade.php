@@ -24,7 +24,7 @@
                             </button>
                         </a>
                         <h4 class="mb-0 fw-5">Taxes</h4>
-                        <li><a class="link" onclick="document.getElementById('add-taxes').style.display='block'">Add country</a></li>
+                        <li><a class="link texaxcustom" onclick="document.getElementById('add-taxes').style.display='block'">Add country</a></li>
                     </div>
                 </div>
             </div>
