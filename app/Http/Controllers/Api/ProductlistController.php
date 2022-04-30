@@ -564,7 +564,7 @@ class ProductlistController extends Controller
 
         }
 
-
+ 
 
         if (!empty($Productvariant['variantmedia']))
         {
