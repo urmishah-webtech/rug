@@ -71,7 +71,7 @@
     </section>
     <section class="full-width flex-wrap admin-body-width create-collection-footer" wire:ignore>
         <div class="page-bottom-btn">
-             <button class="fw-6 button secondary" wire:ignore wire:click.prevent="StoreSlider('add-slider')">Save</button>
+             <button class="button green-btn" wire:ignore wire:click.prevent="StoreSlider('add-slider')">Save</button>
         </div>
     </section>
     

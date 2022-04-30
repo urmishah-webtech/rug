@@ -8332,9 +8332,15 @@ button.link.create-new-delivery-zone-btn {
     display: block;
     margin-top: 8px;
 }
-.pdpage-checkbox .one-bg.border-every-row td:first-child, .pdpage-checkbox .one-bg.border-every-row td:last-child {
+
+.pdpage-checkbox .one-bg.border-every-row td:first-child{
     vertical-align: top;
 }
+
+.pdpage-checkbox .one-bg.border-every-row td:last-child {
+    vertical-align: middle;
+}
+
 .pdpage-checkbox .one-bg.border-every-row td:last-child {
     min-width: 150px;
 }

@@ -29,6 +29,7 @@
                                 <div class="search-product-field" disabled="disabled">
                                     <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" wire:model="filter_pages" placeholder="Filter Page">
                                 </div>
+                                <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >Delete Selected</button>
                                 <!-- <div class="form-field" disabled="disabled">
                                     
                                     <div class="fs-14 fw-6 fullfillment-dropdown dropdown-field" disabled="disabled">
@@ -98,6 +99,9 @@
                         <tbody id="product-name">
                             <tr>
                                 <th>
+                                    <div class="row all-select-checkbox"><label><input type="checkbox" wire:model="selectall" class="checked_all" name="customer_all"></label></div>
+                                </th>
+                                <th>
                                   
                                 </th>
                                 <th class="fw-6">
@@ -140,6 +144,9 @@
                             @foreach($pages as $result)
                             <tr>
                                 <td>
+                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectepages"  wire:model="selectepages" value="{{$result->id}}"></label></div>
+                                </td>
+                                <td>
                                     <div class="row"></div>
                                 </td>
                                 <td>
@@ -162,6 +169,11 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+
+                     {!! $pages->links() !!}
+                   
+                    </div>
                 </div>
             </div>
         </div>

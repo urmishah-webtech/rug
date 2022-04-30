@@ -17,7 +17,7 @@
                  <!--    <a class="button link" href="{{ url('/admin/blogs') }}"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M16 2a2 2 0 0 1 4 0v1h-4V2zM8.379 1a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 14 6.622V17.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 17.5v-15A1.5 1.5 0 0 1 2.5 1h5.879zM4 5h4v2H4V5zm7 4v2H4V9h7zm-7 6v-2h5v2H4zM16 5h4v11l-2 4-2-4V5z"></path></svg> Manage blogs</a> -->
 
                    <!--  <a class="button link" href=""><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M13 10a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm5-8c-4.411 0-8 3.589-8 8 0 1.504.425 2.908 1.15 4.111l-1.069 2.495a1 1 0 0 0 1.314 1.313l2.494-1.069A7.939 7.939 0 0 0 10 18c4.411 0 8-3.589 8-8s-3.589-8-8-8z"></path></svg> Manage comments</a> -->
-                    <a class="button green-btn" href="{{ url('articles') }}">Add blog post</a>
+                    <a class="button green-btn" href="{{ url('blogs-new') }}">Add blog post</a>
                      
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         <div class="input-group">
                             <!-- Search Field -->
                             <div class="search-product-field">
-                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" id="search_products" placeholder="Filter orders" wire:model="filter_blog">
+                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_blog" id="search_blog" placeholder="Filter Blog" wire:model="filter_blog">
                             </div>
                             <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >Delete Selected</button>
                         </div> 
@@ -112,6 +112,7 @@
                                     <a href="{{ route('blog-detail', @$val->slug) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->title}}</a>
                                     <p class="mb-0 text-grey">Last edited: {{date('d M Y H:i:s', strtotime(@$val->updated_at))}}</p>
                                 </td>
+                                <td><p class="mb-0 text-grey">{!! \Illuminate\Support\Str::limit($val->description, 100) !!}</p></td>
                                 <td class="subscribed-label status-table-item">
                             </tr>
                             @endforeach

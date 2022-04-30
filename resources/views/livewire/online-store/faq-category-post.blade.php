@@ -1,3 +1,4 @@
+<div>
 <x-admin-layout>
     <section class="full-width flex-wrap admin-full-width create-page-header">
         <article class="full-width">
@@ -22,6 +23,19 @@
         <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 overflow-visible">
             
             <div class="card-section tab_content  active" id="all_customers" wire:ignore.self="">
+                <div class="order-form">
+                    <article class="full-width">
+                       <div class="columns" wire:ignore="">
+                        <div class="input-group">
+                            <!-- Search Field -->
+                            <div class="search-product-field">
+                                <input class="fs-13 placeholder_gray fw-4" type="search" name="search_faqcat" id="search_faqcat" placeholder="Filter Faqcat" wire:model="filter_faqcat">
+                            </div>
+                            <button class="secondary select-customer-edit" wire:click.prevent="deleteselected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" >Delete Selected</button>
+                        </div> 
+                        </div>
+                    </article>
+                </div>
                 <div class="table-loader">
                     <div class="loading-overlay" wire:loading.flex="">
                         <div class="page-loading"></div>
@@ -31,9 +45,9 @@
                         <tbody id="product-name">
                             <tr>
                                 <th>
-                                    <div class="row all-select-checkbox">
-                                        <!--<label><input type="checkbox" class="checked_all" name="customer_all"></label></div>-->
+                                    <div class="row all-select-checkbox"><label><input type="checkbox" wire:model="selectall" class="checked_all" name="customer_all"></label></div>
                                 </th>
+                                
                                 <th class="fw-6" colspan="2">
                                     <span class="all-customer-list">
                                     Showing {{@$category_count}} Category
@@ -44,7 +58,7 @@
                             @foreach($category as $val)
                             <tr>
                                 <td>
-                                    <!--<div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>-->
+                                    <div class="row"><label><input type="checkbox" class="checkbox" name="selectedfaqcat"  wire:model="selectefaqcat" value="{{$val->id}}"></label></div>
                                 </td>
                                 <td class="product-table-item">
                                     <a href="{{ route('FaqCategory_Detail', @$val->id) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->category}}</a>
@@ -55,12 +69,17 @@
                             @endisset
                         </tbody>
                     </table>
+                    <div class="pagination">
+
+                     {!! $category->links() !!}
+                   
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </x-admin-layout>
-
+</div>
 <!-- Rename theme modal -->
 <div id="rename-theme-modal" class="customer-modal-main">
     <div class="customer-modal-inner">

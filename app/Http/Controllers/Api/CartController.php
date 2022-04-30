@@ -6,7 +6,7 @@ use App\Models\ProductVariant;
 use App\Models\ProductMedia;
 use App\Models\Product;
 use App\Models\Cart;
-
+use App\Models\VariantMedia;
 use App\Models\Country;
 use App\Models\ShippingZone;
 use App\Models\ShippingZoneCountry;
@@ -271,6 +271,7 @@ class CartController extends Controller
         } else {
            $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
         }
+
         $image_path= env('IMAGE_PATH');
         if ($CartItem)
         {
@@ -280,7 +281,9 @@ class CartController extends Controller
             { 
                 if($result->cutomeid == 1){
                     if(!empty($result['product_variant'][0]['photo'])){ 
-                        $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
+
+                        $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
+                        $CartItem[$key]['image']= $image_path.$productimage;
                     }else{
                         $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                     }
@@ -288,7 +291,10 @@ class CartController extends Controller
                     $finalamount += $Totalamount;
                 }else{
                     if(!empty($result['product_variant'][0]['photo'])){ 
-                        $CartItem[$key]['image']= $image_path.$result['product_variant'][0]['photo'];
+
+                        $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
+
+                        $CartItem[$key]['image']= $image_path.$productimage;
                     }else{
                         $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                     }

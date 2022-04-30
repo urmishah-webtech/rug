@@ -276,6 +276,8 @@ Route::middleware(['checkRole'])->group(function () {
              Route::get('/setting/general', Livewire\Setting\GeneralSetting::class)->name('setting-general');
 
             Route::get('/setting/sender-email', Livewire\Setting\SenderEmail::class)->name('sender-email');
+          
+            Route::get('/setting/smtp-email', Livewire\Setting\SmtpEmail::class)->name('smtp-mail');
 
             Route::get('/email_templates/order_confirmation/edit', Livewire\Setting\OrderConfirmation::class)->name('order-confirmation');
 

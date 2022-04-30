@@ -1311,9 +1311,9 @@
     
                             <div class="ccd-search-engine-listing">
     
-                                <h4>{{$product->title}}</h4>
+                                <h4>{{$product->seo_title}}</h4>
                                 @if($product->seo_utl)
-                                <p><a href="{{ url('/product').'/'.$product->seo_utl }}">{{ url('/product').'/'.$product->seo_utl }}</a></p>
+                                <p><a href="{{ url('/product').'/'.$product->seo_utl }}">{{ $product->seo_utl }}</a></p>
                                 @endif
     
                                 <span>{{$product->seo_descripation}}</span>
@@ -1349,9 +1349,7 @@
                                 <label>URL and handle</label>
     
                                 <div class="url-input">
-    
-                                    <span>https://rug.webtech-evolution.com/</span>
-                                    <input type="hidden" name="urlpath" value="https://rug.webtech-evolution.com/">
+                                    <input type="hidden" name="urlpath">
                                     <input type="text" name="seo_utl" wire:model="product.seo_utl">
     
                                 </div>
