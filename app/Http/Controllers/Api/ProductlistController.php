@@ -491,9 +491,6 @@ class ProductlistController extends Controller
 
         $productimage = ProductMedia::Where('product_id', $request->product_id)
             ->first();
-
-        $productimage = ProductMedia::Where('product_id', $request->product_id)
-            ->first();
         $image_path =  env('IMAGE_PATH');
         if (!empty($productvariants) && count($productvariants) > 0)
         {
