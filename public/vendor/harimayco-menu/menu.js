@@ -123,10 +123,12 @@ function updateitem(id = 0) {
             }
         },
         success: function (response) {
+            $('.alert-menu').show();
         },
         complete: function () {
             if (id) {
                 $('#spincustomu2').hide();
+               
             }
         }
     });

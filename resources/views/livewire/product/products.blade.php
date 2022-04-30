@@ -107,19 +107,18 @@
                             </td>
                             <td class="product-img">
                                 
-                                @foreach($Productmediass as $row_img)
-                                 @if($row_img[0]['product_id'] == $row->id)
+
+                                
                                 <div class="pd-blank-img">
-                                    @if($row_img && isset($row_img[0]))
+                                    @if(!empty($row->productmediafirst) && !empty($row->productmediafirst->image))
                                     <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">
-                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}" />
+                                    <img src="{{ asset('storage/'.$row->productmediafirst->image) }}" />
 
                                     </a>
                                      @endif
                                 </div>
                                 
-                                @endif
-                                @endforeach
+                                
                             </td>
                             <td class="product-table-item">
                                 @if(user_permission('allproduct','update'))

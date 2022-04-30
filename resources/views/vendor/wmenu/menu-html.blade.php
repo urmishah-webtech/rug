@@ -22,6 +22,11 @@ $currentUrl = url()->current();
      </div>
 
      @endif
+     <div class="alert alert-success alert-menu" style="display: none;">
+
+        Sucessfully Saved!
+
+     </div>
 
   </div>
       

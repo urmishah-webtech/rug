@@ -47,6 +47,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductMedia::class, 'product_id', 'id');
     }
+    public function productmediafirst()
+    {
+        return $this->hasOne(ProductMedia::class, 'product_id', 'id');
+    }
 
     public function productDetail($value='')
     {

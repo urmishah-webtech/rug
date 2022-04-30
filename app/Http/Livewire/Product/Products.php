@@ -35,7 +35,7 @@ class Products extends Component
 {
     use WithFileUploads, WithPagination;
 
-    public $getproduct,$VariantStock, $productVariant ,$variationValue,$Productmediass,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,$user_id,
+    public $getproduct,$VariantStock, $productVariant ,$variationValue,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,$user_id,
 
         $filter_tabs, $active_tab, $sort_by, $export, $export_as, $selected_file;
 
@@ -158,8 +158,6 @@ class Products extends Component
     public function getProduct()
     {
         $this->filter = [];
-
-        $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
         
         $this->VariantStock = VariantStock::All();
         
@@ -169,6 +167,9 @@ class Products extends Component
 
             $query->where('title', 'LIKE', '%' . $filter_product . '%');
 
-            })->get();
+            })->with('productmediafirst')->get();
+
+
+
     } 
 }
