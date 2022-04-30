@@ -486,8 +486,12 @@ class ProductlistController extends Controller
     public function fetchPrice(Request $request)
     {
 
-        $productvariants = ProductVariant::Where('product_id', $request->product_id)
+        $productvariants = ProductVariant::with('variantmedia')->Where('product_id', $request->product_id)
             ->get();
+
+        $productimage = ProductMedia::Where('product_id', $request->product_id)
+            ->first();
+
         $productimage = ProductMedia::Where('product_id', $request->product_id)
             ->first();
         $image_path =  env('IMAGE_PATH');
@@ -551,6 +555,7 @@ class ProductlistController extends Controller
                     }
                 }
             }
+
             if (empty($productvariant))
             {
                 $productvariant = $productvariants[0];
@@ -559,15 +564,18 @@ class ProductlistController extends Controller
 
         }
 
-        if (!empty($Productvariant->photo))
+
+
+        if (!empty($Productvariant['variantmedia']))
         {
-            $image = $Productvariant->photo;
+            $image = $Productvariant['variantmedia'];
         }else{
+
             if(!isset($productimage)){
                 $image = 'image/defult-image.png';
                 }
                 else{
-                    $image =$productimage->image;
+                    $image = $image_path . $productimage->image;
                 }
          
         }
@@ -577,7 +585,7 @@ class ProductlistController extends Controller
             ->json(array(
             'variant' => $Productvariant,
             'price' => $price,
-            'image' => $image_path . $image
+            'image' => $image
         ));
     }
 	
