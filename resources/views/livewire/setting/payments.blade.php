@@ -42,7 +42,9 @@
                         </label>
                         <label>
                             <span class="fw-6">Currency</span>
-                            <input id="currency" class="block mt-1 w-full" type="text" wire:model="currency" />
+                            <select id="currency" class="block mt-1 w-full" wire:model="currency">
+                                <option value="EUR">EUR</option>
+                            </select>
                             @error('currency') <span class="text-danger">{{ $message }}</span>@enderror 
                         </label>
                         <label>

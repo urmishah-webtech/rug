@@ -9,7 +9,7 @@ class Payments extends Component
 {
 	// public $stripe_publishable_key;
     // public $stripe_secret_key;
-    public $mollie_api_key, $currency, $redirectUrl, $webhookUrl;
+    public $mollie_api_key, $currency = 'EUR', $redirectUrl, $webhookUrl;
 
 	public function mount()
     {

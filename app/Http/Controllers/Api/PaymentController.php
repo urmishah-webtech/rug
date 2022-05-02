@@ -46,17 +46,18 @@ class PaymentController extends Controller
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
+        $rate = !empty($taxes) ? $taxes->rate : 0;
 
         if (empty($get_zone_ids)) {
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
 
         $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
 
         if (!empty($get_zone)) {
-            return ['cost' => $get_zone->price, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
         }else{
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
         
     }
@@ -67,7 +68,6 @@ class PaymentController extends Controller
         if(empty($paymentSettings)) {
             return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
         }
-        dd($paymentSettings);
         $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
 
         if ($validator->fails())
@@ -85,6 +85,10 @@ class PaymentController extends Controller
 
 
         $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
+        if(!$shipping_cost_data['success']) {
+            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
+        }
+
 
         $netamount = 0;
         foreach($Cart as $res) {         
@@ -173,9 +177,8 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl,
-                    "webhookUrl"  => $paymentSettings->webhookUrl,
-            ]);
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
@@ -187,7 +190,7 @@ class PaymentController extends Controller
                
             $pay->save();
 
-            return $this->sendJson(['status' => 0, 'message' => $payment]);
+            return $this->sendJson(['status' => 1, 'message' => $payment]);
         }
 
         if ($payment_type == 0) {
@@ -387,6 +390,23 @@ class PaymentController extends Controller
         }
         $pay->save();
 
+    }
+
+    public function countryCheck(Request $request)
+    {
+        $validator = Validator::make($request->all() , ['country' => 'required']);
+
+        if ($validator->fails())
+        {
+            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
+        }
+
+        $taxes = tax::where('country_name',$request->country)->first();
+        if(empty($taxes)) {
+            return $this->sendJson(['status' => 0, 'message' => 'We don\'t ship to this Country' ]);
+        } else {
+            return $this->sendJson(['status' => 1, 'data' => $taxes ]);
+        }
     }
 }
 
