@@ -94,3 +94,4 @@ Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getColle
 Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
 Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
 Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit');
+Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
