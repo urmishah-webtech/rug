@@ -147,7 +147,7 @@ class ProductlistController extends Controller
             $product = Product::with('productmediaget')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
-                return $q->with('detail');
+                return $q->with('detail')->with('variantmedia');
             }
             ])
                 ->where('id', $id)->get();
@@ -224,6 +224,7 @@ class ProductlistController extends Controller
                     {
                         $data_result[$key]['detail'] = $result['detail'];
                     }
+                    $data_result[$key]['variantmedia'] = $result['variantmedia'];
 
                 }
 
