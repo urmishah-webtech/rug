@@ -22,7 +22,52 @@
         </article>
     </section>
     <section class="full-width flex-wrap admin-body-width setting-store-lang-sec">
-        <article class="full-width sp-alert-msg">
+        <article class="full-width sec-border">
+            <div class="columns one-third">
+                <div class="card card-transparent-bg">
+                    <div class="card-title">
+                        <h3 class="fs-16 fw-6 mb-0">Mollie Detail</h3>
+                    </div>
+                    <!-- <p class="mb-0 text-grey">After a customer's payment method is authorized, it needs to be captured so that the sale can be processed. Choose between
+                    <a class="arrow-with-link" href="#">automatic and manual capture <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14 13v1a1 1 0 0 1-1 1H6c-.575 0-1-.484-1-1V7a1 1 0 0 1 1-1h1c1.037 0 1.04 1.5 0 1.5-.178.005-.353 0-.5 0v6h6V13c0-1 1.5-1 1.5 0zm-3.75-7.25A.75.75 0 0 1 11 5h4v4a.75.75 0 0 1-1.5 0V7.56l-3.22 3.22a.75.75 0 1 1-1.06-1.06l3.22-3.22H11a.75.75 0 0 1-.75-.75z"></path></svg></a></p> --> 
+                </div>
+            </div>
+            <div class="columns two-thirds setting-order-card">
+                <div class="card">
+                    <div class="setting-single-col">
+                        <label>
+                            <span class="fw-6">Api key</span>
+                            <input id="mollie_api_key" class="block mt-1 w-full" type="text" wire:model="mollie_api_key" />
+                            @error('mollie_api_key') <span class="text-danger">{{ $message }}</span>@enderror 
+                        </label>
+                        <label>
+                            <span class="fw-6">Currency</span>
+                            <input id="currency" class="block mt-1 w-full" type="text" wire:model="currency" />
+                            @error('currency') <span class="text-danger">{{ $message }}</span>@enderror 
+                        </label>
+                        <label>
+                            <span class="fw-6">Redirect Url</span>
+                            <input id="redirectUrl" class="block mt-1 w-full" type="text" wire:model="redirectUrl" />
+                            @error('redirectUrl') <span class="text-danger">{{ $message }}</span>@enderror 
+                        </label>
+                        <label>
+                            <span class="fw-6">Webhook Url</span>
+                            <input id="webhookUrl" class="block mt-1 w-full" type="text" wire:model="webhookUrl" />
+                            @error('webhookUrl') <span class="text-danger">{{ $message }}</span>@enderror 
+                        </label>
+                       
+                    </div>
+
+                    <!-- <div class="setting-single-col">
+                         <label><span class="fw-6">Stripe Secret key</span>
+                                            <input id="stripe_secret_key" class="block mt-1 w-full" type="text" wire:model="stripe_secret_key" />
+                                            @error('stripe_secret_key') <span class="text-danger">{{ $message }}</span>@enderror
+                                        </label>
+                    </div> -->
+                </div>
+            </div>
+        </article>
+        <!-- <article class="full-width sp-alert-msg">
             <div class="payments-paypal-card">
                 <div class="alert-notice-msg">
                     <p class="fw-6 fs-16 mb-0"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10S15.514 0 10 0 0 4.486 0 10s4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg> Development stores can only process test payments</p>
@@ -155,7 +200,7 @@
                     </div>
                 </div>
             </div>
-        </article>
+        </article> -->
     </section>
     <section class="full-width flex-wrap admin-body-width create-collection-footer">
         <div class="page-bottom-btn">
@@ -165,7 +210,7 @@
 </x-admin-layout>
 
 <!--Set up manual payment method modal start-->
-<div id="manual-payment-method-modal" class="customer-modal-main">
+<!-- <div id="manual-payment-method-modal" class="customer-modal-main">
     <div class="customer-modal-inner">
         <input type="hidden" wire:model="customer.id" value="">
         <div class="customer-modal">
@@ -199,11 +244,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--Set up manual payment method modal end-->
 
 <!--Set up Bank Deposit modal start-->
-<div id="bank-deposit-method-modal" class="customer-modal-main">
+<!-- <div id="bank-deposit-method-modal" class="customer-modal-main">
     <div class="customer-modal-inner">
         <input type="hidden" wire:model="customer.id" value="">
         <div class="customer-modal">
@@ -233,11 +278,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--Set up Bank Deposit modal end-->
 
 <!--Set up Money Order modal start-->
-<div id="money-order-method-modal" class="customer-modal-main">
+<!-- <div id="money-order-method-modal" class="customer-modal-main">
     <div class="customer-modal-inner">
         <input type="hidden" wire:model="customer.id" value="">
         <div class="customer-modal">
@@ -267,11 +312,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--Set up Money Order modal end-->
 
 <!--Set up Money Order modal start-->
-<div id="cod-modal" class="customer-modal-main">
+<!-- <div id="cod-modal" class="customer-modal-main">
     <div class="customer-modal-inner">
         <input type="hidden" wire:model="customer.id" value="">
         <div class="customer-modal">
@@ -306,13 +351,13 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--Set up Money Order modal end-->
 
 
-<script>
+<!-- <script>
     $('.manual-payment-methods-btn .button-right').click(function(){
         $('.variants-option-dropdown').toggle();
     });
-</script>
+</script> -->
 </div>

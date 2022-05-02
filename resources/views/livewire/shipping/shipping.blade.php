@@ -324,6 +324,7 @@
                                 </select>
                                 <input type="checkbox" id="checkbox1" >Select All
                             </div>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -349,7 +350,6 @@
         });
 
         $("#checkbox1").click(function(){
-            console.log('ok')
             if($("#checkbox1").is(':checked') ){
                 $('#countriess').select2('destroy').find('option').prop('selected', 'selected').end().select2();
             }else{
@@ -360,15 +360,14 @@
     @livewireScripts
      <script>
 
-       
-
-        $(document).on('keypress', 'input,textarea', function(event) {
-            //event.preventDefault();
-            /* Act on the event */
-            setTimeout(function() {
+        document.addEventListener("livewire:load", function (event) {
+            window.livewire.hook('message.processed', () => {
                 $('#countriess').select2();
-            }, 1000);
+                $('#countriess').select2();
+            });
         });
+
+       
 
         $(document).ready(function () {
             $('#countries').select2();
@@ -376,15 +375,21 @@
                 var data = $(this).select2("val");
                 @this.set('zone.countries', data);
             });
+
+
+            
         });
+       
 
         function zoneEdit(id) {
-            @this.edit(id)
+            @this.edit(id);
             setTimeout(function() {
-                $('#countriess').select2();
-                $('#edit-shipping-modal').modal('show');
-            }, 500);
+                 $('#edit-shipping-modal').modal('show');
+            }, 1000);
+           
+
         }
+        
 
         function updateZone() {
             setTimeout(function() {

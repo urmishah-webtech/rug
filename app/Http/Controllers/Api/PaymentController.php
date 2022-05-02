@@ -20,6 +20,8 @@ use App\Models\tax;
 use App\Models\Country;
 use App\Models\ShippingZone;
 use App\Models\ShippingZoneCountry;
+use Illuminate\Support\Facades\DB;
+
 
 use App\Http\Controllers\Api\CartController;
 
@@ -61,6 +63,11 @@ class PaymentController extends Controller
 
     public function payment(Request $request)
     {
+        $paymentSettings = DB::table('payment_setting')->first();
+        if(empty($paymentSettings)) {
+            return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
+        }
+        dd($paymentSettings);
         $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
 
         if ($validator->fails())
@@ -162,12 +169,12 @@ class PaymentController extends Controller
         if($payment_type == 1){      
         
             $mollie = new \Mollie\Api\MollieApiClient();
-            $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
+            $mollie->setApiKey($paymentSettings->mollie_api_key);
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => "EUR", "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => "https://rug.webtech-evolution.com/thankyou/",
-                    "webhookUrl"  => "https://rug.webtech-evolution.com/public/api/webhook",
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl,
+                    "webhookUrl"  => $paymentSettings->webhookUrl,
             ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
@@ -272,7 +279,7 @@ class PaymentController extends Controller
     public function webhook(Request $request)
     {
         $mollie = new \Mollie\Api\MollieApiClient();
-        $mollie->setApiKey("test_MWdVxyQfjxrTBq6DwUAMF3NKCmh7yE");
+        $mollie->setApiKey($paymentSettings->mollie_api_key);
         $payment = $mollie
             ->payments
             ->get($request->id);
