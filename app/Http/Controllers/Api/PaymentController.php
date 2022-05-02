@@ -46,18 +46,20 @@ class PaymentController extends Controller
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
-        $rate = !empty($taxes) ? $taxes->rate : 0;
+        if(empty($taxes)) {
+            return ['message' => 'We don\'t ship to this Country', 'success' => false];
+        }
 
         if (empty($get_zone_ids)) {
-            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
         }
 
         $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
 
         if (!empty($get_zone)) {
-            return ['cost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
+            return ['cost' => $get_zone->price, 'taxes' => $taxes->rate, 'success' => true];
         }else{
-            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
         }
         
     }
@@ -85,6 +87,10 @@ class PaymentController extends Controller
 
 
         $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
+        if(!$shipping_cost_data['success']) {
+            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
+        }
+
 
         $netamount = 0;
         foreach($Cart as $res) {         
@@ -173,9 +179,8 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl,
-                    "webhookUrl"  => $paymentSettings->webhookUrl,
-            ]);
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
