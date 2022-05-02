@@ -88,3 +88,5 @@ Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace
 Route::get('thankyou/{id}', 'App\Http\Controllers\Api\PaymentController@get_thankyou'); 
 
 Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getCollection'); 
+
+Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@countryCheck'); 

@@ -46,20 +46,18 @@ class PaymentController extends Controller
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
-        if(empty($taxes)) {
-            return ['message' => 'We don\'t ship to this Country', 'success' => false];
-        }
+        $rate = !empty($taxes) ? $taxes->rate : 0;
 
         if (empty($get_zone_ids)) {
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
 
         $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
 
         if (!empty($get_zone)) {
-            return ['cost' => $get_zone->price, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
         }else{
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
         
     }
@@ -392,6 +390,23 @@ class PaymentController extends Controller
         }
         $pay->save();
 
+    }
+
+    public function countryCheck(Request $request)
+    {
+        $validator = Validator::make($request->all() , ['country' => 'required']);
+
+        if ($validator->fails())
+        {
+            return $this->sendJson(['status' => 0, 'message' => $validator->errors() ]);
+        }
+
+        $taxes = tax::where('country_name',$request->country)->first();
+        if(empty($taxes)) {
+            return $this->sendJson(['status' => 0, 'message' => 'We don\'t ship to this Country' ]);
+        } else {
+            return $this->sendJson(['status' => 1, 'data' => $taxes ]);
+        }
     }
 }
 
