@@ -565,7 +565,7 @@ class ProductlistController extends Controller
 
         if (!empty($Productvariant['variantmedia']))
         {
-            $image = $Productvariant['variantmedia'];
+            $image = $image_path . $Productvariant['variantmedia'];
         }else{
 
             if(!isset($productimage)){
@@ -582,7 +582,8 @@ class ProductlistController extends Controller
             ->json(array(
             'variant' => $Productvariant,
             'price' => $price,
-            'image' => $image
+            'image' => $image,
+            'image_path' => $image_path
         ));
     }
 	
