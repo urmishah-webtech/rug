@@ -7,19 +7,22 @@ use Illuminate\Support\Facades\DB;
 
 class Payments extends Component
 {
-	public $stripe_publishable_key;
-    public $stripe_secret_key;
+	// public $stripe_publishable_key;
+    // public $stripe_secret_key;
+    public $mollie_api_key, $currency, $redirectUrl, $webhookUrl;
 
 	public function mount()
     {
-    	$this->stripe_publishable_key = '';
-       	$this->stripe_secret_key = '';
+    	// $this->stripe_publishable_key = '';
+       	// $this->stripe_secret_key = '';
 
-       	$data = DB::table('stripe_key_detail')->first();
+       	$data = DB::table('payment_setting')->first();
 
        	if(!empty($data)) {
-       		$this->stripe_publishable_key = $data->stripe_publishable_key;
-       		$this->stripe_secret_key = $data->stripe_secret_key;
+       		$this->mollie_api_key = $data->mollie_api_key;
+       		$this->currency = $data->currency;
+       		$this->redirectUrl = $data->redirectUrl;
+       		$this->webhookUrl = $data->webhookUrl;
 
        	}
        	
@@ -34,28 +37,39 @@ class Payments extends Component
     {
 
     	$this->validate([
-            'stripe_publishable_key' => 'required',
-            'stripe_secret_key' => 'required',
+            // 'stripe_publishable_key' => 'required',
+            // 'stripe_secret_key' => 'required',
+            'mollie_api_key' => 'required',
+            'currency' => 'required',
+            'redirectUrl' => 'required',
+            'webhookUrl' => 'required',
         ]);
 
 
-    	$data = DB::table('stripe_key_detail')->first();
+    	$data = DB::table('payment_setting')->first();
     	if(empty($data)) {
-    		DB::table('stripe_key_detail')->insert([
-	    		'stripe_publishable_key' => $this->stripe_publishable_key,
-	    		'stripe_secret_key' => $this->stripe_secret_key,
+    		$created = DB::table('payment_setting')->insert([
+	    		'mollie_api_key' => $this->mollie_api_key,
+            	'currency' => $this->currency,
+            	'redirectUrl' => $this->redirectUrl,
+            	'webhookUrl' => $this->webhookUrl,
 	    		'created_at' => now(),
 	    		'updated_at' => now()
 	    	]);
     	} else {
-	    	DB::table('stripe_key_detail')->update([
-	    		'stripe_publishable_key' => $this->stripe_publishable_key,
-	    		'stripe_secret_key' => $this->stripe_secret_key,
+	    	$created = DB::table('payment_setting')->update([
+	    		'mollie_api_key' => $this->mollie_api_key,
+            	'currency' => $this->currency,
+            	'redirectUrl' => $this->redirectUrl,
+            	'webhookUrl' => $this->webhookUrl,
 	    		'updated_at' => now()
 	    	], ['created_at' => $data->created_at]);
 	    }
-
-	    session()->flash('message', 'Data Saved');
+	    if($created) {
+			session()->flash('message', 'Data Saved');
+	    } else {
+	    	session()->flash('message', 'Something Went Wrong! Try Again...');
+	    }
 
     }
 }
