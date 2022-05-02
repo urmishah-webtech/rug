@@ -1,6 +1,39 @@
 <div>
     <x-admin-layout>
         <style type="text/css">
+        .modal-header{
+            background: #007ace;
+        }
+        .modal-header h2{
+            color: #ffff;
+        }
+        .modal-close-btn svg{
+            color: #ffff;
+        }
+        .modal-footer .buttonsavecustom{
+            background: #007ace;
+        }
+        .modal-body .row{
+            margin-left: 0px;
+    margin-bottom: 0px;
+        }
+        .rightselectall{
+            margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    float: right;
+    display: flex;
+    justify-content: end;
+        }
+        .select2-results{
+            display: none;
+        }
+        .select2-container{
+            max-width: 100%;
+    overflow-x: auto;
+        }
+        .column, .columns{
+            margin-left: 1%;
+        }
             .bootstrap-tagsinput .tag {
                 margin-right: 2px;
                 color: #d64949;
@@ -217,12 +250,12 @@
                             <div class="form-group mb-2">
                                <label >Description</label>
                                <div class="col-md-9">
-                                   <textarea  rows="8" wire:model="zone.description" class="form-control required"  wire:ignore></textarea>
+                                   <textarea  rows="5" wire:model="zone.description" class="form-control required"  wire:ignore></textarea>
                                </div>
                             </div>
 
-                            <div class="d-flex">
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="column four">
                                     <div class="form-group mb-2">
                                        <label >Start</label>
                                        <div class="col-md-9">
@@ -230,7 +263,7 @@
                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="column four">
                                     <div class="form-group mb-2">
                                        <label >End</label>
                                        <div class="col-md-9">
@@ -238,27 +271,34 @@
                                        </div>
                                     </div>
                                 </div>
+                                <div class="column four">
+                                    <div class="form-group mb-2">
+                                        <label>Price</label>
+                                        <input type="number" min="0" wire:model="zone.price" wire:ignore>
+                                     </div>
+                                </div>
                             </div>
 
-                           <div class="form-group mb-2">
-                               <label>Price</label>
-                               <input type="number" min="0" wire:model="zone.price" wire:ignore>
-                            </div>
+                           
 
                             <div class="form-group mb-2" wire:ignore>
-                                <label class="pb-1">Select Countries</label>
+                                <div class="row">
+                                    <div class="column six">
+                                <label class="">Select Countries</label></div>
+                                <div class="column six rightselectall"> <input type="checkbox" id="checkbox" >Select All</div>
+                                </div>
                                 <select name="countries" id="countries" class="form-control js-select2" multiple="multiple">
                                     <?php foreach ($countries_list as $key => $value): ?>
                                         <option value="{{$value->code}}" data-badge="{{$value->code}}">{{$value->name}}</option>
                                     <?php endforeach ?>
                                 </select>
-                                <input type="checkbox" id="checkbox" >Select All
+                                
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <a class="button secondary" data-dismiss="modal">Cancel</a>
-                        <a class="button green-btn" wire:click.prevent="addShipping()">Save</a>
+                        <a class="button  buttonsavecustom" wire:click.prevent="addShipping()">Save</a>
                     </div>
                 </div>
             </div>
