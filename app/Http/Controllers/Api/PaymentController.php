@@ -192,7 +192,7 @@ class PaymentController extends Controller
                
             $pay->save();
 
-            return $this->sendJson(['status' => 0, 'message' => $payment]);
+            return $this->sendJson(['status' => 1, 'message' => $payment]);
         }
 
         if ($payment_type == 0) {
