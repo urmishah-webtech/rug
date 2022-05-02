@@ -87,4 +87,10 @@ Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');
 Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
 Route::get('thankyou/{id}', 'App\Http\Controllers\Api\PaymentController@get_thankyou'); 
 
+/*COLLECTION*/
 Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getCollection'); 
+
+/*USER DETAIL*/
+Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
+Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
+Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit');
