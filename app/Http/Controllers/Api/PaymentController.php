@@ -46,17 +46,18 @@ class PaymentController extends Controller
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
+        $rate = !empty($taxes) ? $taxes->rate : 0;
 
         if (empty($get_zone_ids)) {
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
 
         $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$amount)->where('end','>=',$amount)->orderBy('price', 'DESC')->get()->first();
 
         if (!empty($get_zone)) {
-            return ['cost' => $get_zone->price, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
         }else{
-            return ['cost' => 0, 'taxes' => $taxes->rate, 'success' => true];
+            return ['cost' => 0, 'taxes' => $rate, 'success' => true];
         }
         
     }
@@ -67,7 +68,6 @@ class PaymentController extends Controller
         if(empty($paymentSettings)) {
             return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
         }
-        dd($paymentSettings);
         $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
 
         if ($validator->fails())
