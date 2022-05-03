@@ -187,13 +187,13 @@ class ProductlistController extends Controller
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
-                $product_arra['variantmedia'] = $val['variantmedia'];
                 $data_color = [];
                 $data_size = [];
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
                 $data_result = [];
+
                 foreach ($val['variants'] as $key => $result)
                 {
 
@@ -359,7 +359,7 @@ class ProductlistController extends Controller
                 $tassels_arry[] = $tassels;
                 $tassels_arry[] = $tasselsverient;
 
-                // $data_result = json_encode($data_result);
+                $data_result['variantmedia'] = $val['variantmedia'];
                 return response(['data' => $data_result, 'attribute1' => $color_arry, 'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry], 200);
             }
         }
