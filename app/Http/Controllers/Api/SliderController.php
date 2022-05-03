@@ -588,6 +588,9 @@ class SliderController extends Controller
 				}
 				$data_result[$key1] = $insert_stock;
 			}
+            echo "<pre>";
+            print_r($data_result);
+            die();
 			return response($data_result , 200);
 		}
 	}

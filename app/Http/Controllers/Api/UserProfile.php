@@ -14,6 +14,7 @@ use App\Models\CustomerAddress;
 
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
 
 class UserProfile extends Component
 {
@@ -38,6 +39,27 @@ class UserProfile extends Component
         ]);
 
         return response()->json(['message' => 'Record Updated!!', 'success' => true ]);
+    }
+
+    public function PasswordUpdate(Request $request)
+    {
+        $UserDetail = User::where('id', $request->user_id)->first();
+
+        if(Hash::check($request->currpassword, $UserDetail->password))
+        {
+            if($request->newpassword == $request->repassword){
+
+                $hashedPassword = Hash::make($request->newpassword);
+                User::where('id',$request->user_id)->update(['password' => $hashedPassword]);
+                
+                return response()->json(['message' => 'Record Updated!!', 'success' => true ]);
+            }else{
+                return response()->json(['message' => 'Not Same Password !!', 'fail' => false ]);
+            }
+                
+        }else{
+            return response()->json(['message' => 'Old Password Not Match !!', 'fail' => false ]);
+        }
     }
 
     public function getOrder($userid)
