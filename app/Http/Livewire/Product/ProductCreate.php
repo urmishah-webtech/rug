@@ -83,8 +83,15 @@ class ProductCreate extends Component
 
 
        $this->initial();
-      
-        $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+
+       $old_product_array = request()->old('product_array');
+       if(isset($old_product_array) && !empty($old_product_array)) {
+        $this->product_array = $old_product_array;
+       } else {
+            $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+       }
+
+        
 
     }
 
@@ -163,7 +170,7 @@ class ProductCreate extends Component
         if(!empty($request['varition_arrray'])){
 
             if(!empty($request->att_price)){
-                $request->validate([
+               $validator = Validator::make($request->all(),[
                     'title'     =>  'required',
                     'att_price.*'     =>  'required',
                 ],
@@ -175,7 +182,7 @@ class ProductCreate extends Component
 
             session()->flash('messagevarient', 'Enter your Variant Price!');
         }else{
-            $request->validate([
+            $validator = Validator::make($request->all(),[
                 'title'     =>  'required',
                 'price_main'     =>  'required',
             ],
@@ -185,6 +192,11 @@ class ProductCreate extends Component
             ]);
         }
 
+        if ($validator->fails()) {
+            return redirect('/admin/products/new')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $variantprice = $request->variantprice;
         $variantid = $request->variantid;
@@ -539,7 +551,6 @@ class ProductCreate extends Component
     public function remove($i)
     {
         unset($this->product_array[$i]);
-
     }
 
 }
