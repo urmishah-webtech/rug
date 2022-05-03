@@ -161,168 +161,143 @@ class VariantDetail extends Component
     public function changevariant($flag, $params = null)
     {
 
-            if(!empty($this->productDetail)) {
+        if(!empty($this->productDetail)) {
 
-                foreach ($this->productDetail as $key => $detail) {
+            foreach ($this->productDetail as $key => $detail) {
 
-                    $data = [
-                        'title'=> $detail['title'],
-                        'description' =>$detail['description'],
-                    ];
-                    
-                    if(isset($detail['id']) && !isset($detail['product_id'])) {
-                        ProductDetail::where('id', $detail['id'])->update($data);
-                    } else {
-                        $data['product_id'] = $this->product->id;
-                        $data['variant_id'] = $this->Productvariant_first->id;
-                        ProductDetail::create($data);
+                $data = [
+                    'title'=> $detail['title'],
+                    'description' =>$detail['description'],
+                ];
+                
+                if(isset($detail['id']) && !isset($detail['product_id'])) {
+                    ProductDetail::where('id', $detail['id'])->update($data);
+                } else {
+                    $data['product_id'] = $this->product->id;
+                    $data['variant_id'] = $this->Productvariant_first->id;
+                    ProductDetail::create($data);
 
-                    }
                 }
             }
+        }
 
 
-            if ($this->Productvariant_first['outofstock'] == '0') {
+        if ($this->Productvariant_first['outofstock'] == '0') {
 
-                $outofstock_first = '1';
+            $outofstock_first = '1';
 
-            } 
+        } 
 
-            else {
+        else {
 
-                $outofstock_first = '0';
+            $outofstock_first = '0';
 
-            }
+        }
 
-            if ($this->Productvariant_first['trackqtn'] == '0') {
+        if ($this->Productvariant_first['trackqtn'] == '0') {
 
-                $trackqtn_first = '1';
+            $trackqtn_first = '1';
 
-            } 
+        } 
 
-            else {
+        else {
 
-                $trackqtn_first = '0';
+            $trackqtn_first = '0';
 
-            }
-            if ($this->image) {
-                foreach ($this->image as $photo) {
-                    
-                    // $file_extension = $photo->extension();
-                    $path_url = $photo->storePublicly('media','public');
-        
-                   $mediaimg = VariantMedia::create([
-                        'product_id' => $this->product->id,
-                        'variant_id' => $this->Productvariant_first['id'],
-                        'image' => $path_url,
-                    ]);
-                }
-
-                if($mediaimg){
-
-                    $this->VariantMedia = VariantMedia::where(['variant_id'=>$this->Productvariant_first['id'], 'product_id' => $this->product->id])->get();
-                }
-            }
-
-
-
-            // if($this->photo)
-            // {
-
-            //     $filename =  $this->photo->storePublicly('variant','public');
-            //     ProductVariant::where('id', $flag)->update(
-
-            //         [
-                        
-            //             'photo'            => $filename,
-
-            //         ]
-
-            //     );
-            // }
-
-            if($this->variantStock)
-            {
-                foreach ($this->variantStock as $key => $stockedit) {
-                $stockid = $this->variantStock[$key]['id'];
-                $variationstock = VariantStock::query()->findOrFail($stockid);
-
-                    if ($stockid) {
-                       $variationstock->update([
-                           'stock' => $this->variantStock[$key]['stock']
-
-                        ]);
-                    } 
-                }
-            }
-
-            ProductVariant::where('id', $flag)->update(
-
-                [
-
-                    'attribute1'            => $this->Productvariant_first['attribute1'],
-
-                    'attribute2'            => $this->Productvariant_first['attribute2'],
-                   
-                    'attribute3'            => $this->Productvariant_first['attribute3'],
-
-                    'attribute4'            => $this->Productvariant_first['attribute4'],
-                    
-                    'attribute5'            => $this->Productvariant_first['attribute5'],
-                    
-                    'attribute6'            => $this->Productvariant_first['attribute6'],
-                    
-                    'attribute7'            => $this->Productvariant_first['attribute7'],
-                    
-                    'attribute8'            => $this->Productvariant_first['attribute8'],
-                    
-                    'attribute9'            => $this->Productvariant_first['attribute9'],
-                    
-                    'attribute10'            => $this->Productvariant_first['attribute10'],
-                    
-                    'stock'            => $this->Productvariant_first['stock'],
-
-                    'price'            => $this->Productvariant_first['price'],
-
-                    'cost'             => $this->Productvariant_first['cost'],
-                    
-                    'selling_price'    => $this->Productvariant_first['selling_price'],
-
-                    'margin'           => $this->Productvariant_first['margin'],
-
-                    'profit'           => $this->Productvariant_first['profit'],
-
-                    'sku'              => $this->Productvariant_first['sku'],
-                    
-                    'weight'           => $this->Productvariant_first['weight'],
-                    
-                    'weight_lable'     => $this->Productvariant_first['weight_lable'],
-                    
-                    'country'          => $this->Productvariant_first['country'],
-                    
-                    'hscode'           => $this->Productvariant_first['hscode'],
-
-                    'barcode'          => $this->Productvariant_first['barcode'],
-                    
-                    'outofstock'       => $outofstock_first,
-                    
-                    'trackqtn'         => $trackqtn_first
-
-                ]
-
-            );
-
-            
-                 return redirect(route('variant-detail', $flag));
-
-        
-
-            session()->flash('message', 'Users Updated Successfully.');
+        }
+        if ($this->image) {
+            foreach ($this->image as $photo) {
+                
+                // $file_extension = $photo->extension();
+                $path_url = $photo->storePublicly('media','public');
     
-   
+               $mediaimg = VariantMedia::create([
+                    'product_id' => $this->product->id,
+                    'variant_id' => $this->Productvariant_first['id'],
+                    'image' => $path_url,
+                ]);
+            }
 
+            if($mediaimg){
+
+                $this->VariantMedia = VariantMedia::where(['variant_id'=>$this->Productvariant_first['id'], 'product_id' => $this->product->id])->get();
+            }
+        }
+
+        if($this->variantStock)
+        {
+            foreach ($this->variantStock as $key => $stockedit) {
+            $stockid = $this->variantStock[$key]['id'];
+            $variationstock = VariantStock::query()->findOrFail($stockid);
+
+                if ($stockid) {
+                   $variationstock->update([
+                       'stock' => $this->variantStock[$key]['stock']
+
+                    ]);
+                } 
+            }
+        }
+
+        ProductVariant::where('id', $flag)->update(
+
+            [
+
+                'attribute1'            => $this->Productvariant_first['attribute1'],
+
+                'attribute2'            => $this->Productvariant_first['attribute2'],
+               
+                'attribute3'            => $this->Productvariant_first['attribute3'],
+
+                'attribute4'            => $this->Productvariant_first['attribute4'],
+                
+                'attribute5'            => $this->Productvariant_first['attribute5'],
+                
+                'attribute6'            => $this->Productvariant_first['attribute6'],
+                
+                'attribute7'            => $this->Productvariant_first['attribute7'],
+                
+                'attribute8'            => $this->Productvariant_first['attribute8'],
+                
+                'attribute9'            => $this->Productvariant_first['attribute9'],
+                
+                'attribute10'            => $this->Productvariant_first['attribute10'],
+                
+                'stock'            => $this->Productvariant_first['stock'],
+
+                'price'            => $this->Productvariant_first['price'],
+
+                'cost'             => $this->Productvariant_first['cost'],
+                
+                'selling_price'    => $this->Productvariant_first['selling_price'],
+
+                'margin'           => $this->Productvariant_first['margin'],
+
+                'profit'           => $this->Productvariant_first['profit'],
+
+                'sku'              => $this->Productvariant_first['sku'],
+                
+                'weight'           => $this->Productvariant_first['weight'],
+                
+                'weight_lable'     => $this->Productvariant_first['weight_lable'],
+                
+                'country'          => $this->Productvariant_first['country'],
+                
+                'hscode'           => $this->Productvariant_first['hscode'],
+
+                'barcode'          => $this->Productvariant_first['barcode'],
+                
+                'outofstock'       => $outofstock_first,
+                
+                'trackqtn'         => $trackqtn_first
+
+            ]
+
+        );
+
+        session()->flash('message', 'Variant Updated Successfully.');
     }
-  public function getProductDetail()
+    public function getProductDetail()
     {
         $detailData = ProductDetail::where('product_id', $this->product->id)->where('variant_id', $this->Productvariant_first->id)->select('title', 'description','id')->get()->toArray();
         

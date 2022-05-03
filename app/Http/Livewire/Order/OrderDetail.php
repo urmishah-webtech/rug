@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderDetail extends Component
 {
-    public $order,$OrderItem,$Taxes,$messagetext,$commentget;
+    public $order,$OrderItem,$Taxes,$messagetext,$commentget,$allorder;
 
     protected $rules = [
         'order.paymentstatus' => 'required',
@@ -29,6 +29,8 @@ class OrderDetail extends Component
     public function mount($id) {
 
        $this->order = Orders::with('user')->Where('id', $id)->first();
+      
+       $this->allorder = Orders::where('user_id',$this->order['user'][0]['id'])->get();
 
        $this->commentget = ProductComment::where('order_id',$this->order['id'])->orderBy('id', 'DESC')->get()->groupBy(function($data) {
             return $data->updated_at->format('Y-m-d');

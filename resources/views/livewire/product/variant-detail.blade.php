@@ -507,6 +507,19 @@
             </div>
         </article>
     </section>
+    <div wire:key="alert">
+
+         @if (session()->has('message'))
+
+         <div class="alert alert-success">
+
+            {{ session('message') }}
+
+         </div>
+
+         @endif
+
+      </div>
     <section class="full-width flex-wrap admin-body-width" wire:ignore>
         <div class="page-bottom-btn">
             <button class="warning" wire:click.prevent="deletevariant({{$Productvariant_first->id}})">Delete variant</button>
