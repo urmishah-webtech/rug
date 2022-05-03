@@ -135,7 +135,7 @@
                         </li>
 
                         @if($gst == 0)
-                        <li>
+                        <li> 
                             <span>Tax</span>
                             <span>IGST {{$gst}}%</span>
                             <span>{{$symbol['currency']}}{{number_format($gst_include,2,'.',',')}}</span>
