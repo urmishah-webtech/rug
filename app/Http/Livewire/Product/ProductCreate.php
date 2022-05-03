@@ -539,10 +539,10 @@ class ProductCreate extends Component
     public function add()
     {
       
-        $i = $this->product_last_key +1;
+        $this->product_last_key = $this->product_last_key +1;
         
 
-        $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
+        $this->product_array[$this->product_last_key]['question'] = $this->product_array[$this->product_last_key]['answer'] = '';
 
 
     }
