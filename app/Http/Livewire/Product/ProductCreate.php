@@ -32,7 +32,7 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [], $product_new = [];
+    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [], $product_new = [], $product_last_key = 0;
 
     public $image = [];
 
@@ -90,6 +90,7 @@ class ProductCreate extends Component
        } else {
             $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
        }
+       $this->product_last_key = array_key_last($this->product_array);
 
         
 
@@ -106,6 +107,7 @@ class ProductCreate extends Component
 
     public function render()
     {
+        $this->product_last_key = array_key_last($this->product_array);
         return view('livewire.product.product-create');
     }
 
@@ -536,12 +538,9 @@ class ProductCreate extends Component
     }
     public function add()
     {
-        if(!empty($this->product_array) )
-        {
-            $i = array_key_last($this->product_array) +1;
-        } else {
-            $i = 1;
-        }
+      
+        $i = $this->product_last_key +1;
+        
 
         $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
 
