@@ -144,10 +144,10 @@ class ProductlistController extends Controller
         if (Product::where('id', $id)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
-            $product = Product::with('productmediaget')->with('favoriteget')
+            $product = Product::with('productmediaget')->with('variantmedia')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
-                return $q->with('detail')->with('variantmedia');
+                return $q->with('detail');
             }
             ])
                 ->where('id', $id)->get();
@@ -187,7 +187,7 @@ class ProductlistController extends Controller
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
-
+                $product_arra['variantmedia'] = $val['variantmedia'];
                 $data_color = [];
                 $data_size = [];
                 $data_color_main = [];
@@ -224,7 +224,7 @@ class ProductlistController extends Controller
                     {
                         $data_result[$key]['detail'] = $result['detail'];
                     }
-                    $data_result[$key]['variantmedia'] = $result['variantmedia'];
+                    // $data_result[$key]['variantmedia'] = $result['variantmedia'];
 
                 }
 

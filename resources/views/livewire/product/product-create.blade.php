@@ -645,6 +645,8 @@
                     <div id="tab_logic" class="after-add-more">
 
                          @foreach($product_array as $key => $row)
+                         
+                         <div @if($product_last_key == $key) id="hidden_tab" style="display: none;" @endif>
                         <div class="row">
                             <label>Title</label>
                             <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]" wire:model="product_array.{{$key}}.question">
@@ -667,6 +669,7 @@
 
                       
                            @endif
+                       </div>
                         
                            @endforeach
                     </div>
@@ -675,7 +678,7 @@
                          <div class="col-md-6">
                             <div class="form-group change">
                                 
-                                <a class="btn btn-success add-more custom-addmorebtn" wire:click.prevent="add()">+ Add More</a>
+                                <a class="btn btn-success add-more custom-addmorebtn">+ Add More</a>
                                 
                             </div>
                         </div>
@@ -898,7 +901,7 @@
         <div class="page-bottom-btn">
 
             <input type="submit" class="button" id="master-save" value="save" disabled="disabled" wire:ignore.self>
-            <div class="loading-overlay" wire:loading.flex wire:target="add, remove">
+            <div class="loading-overlay" wire:loading.flex wire:target="remove">
                     <div class="page-loading"></div>
                 </div>
 
@@ -1372,6 +1375,10 @@ function updateAllChecked() {
 
 <script type="text/javascript">
 //First Name Validation 
+  $('.add-more').on('click', function() {
+        $('#hidden_tab').show();
+        @this.add(); 
+    });
 
 
 $(document).ready(function () {

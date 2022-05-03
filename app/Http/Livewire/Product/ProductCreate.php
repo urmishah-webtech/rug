@@ -89,6 +89,7 @@ class ProductCreate extends Component
         $this->product_array = $old_product_array;
        } else {
             $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+             $this->product_array[2]['question'] = $this->product_array[2]['answer'] = '';
        }
        $this->product_last_key = array_key_last($this->product_array);
 
@@ -107,7 +108,6 @@ class ProductCreate extends Component
 
     public function render()
     {
-        $this->product_last_key = array_key_last($this->product_array);
         return view('livewire.product.product-create');
     }
 
