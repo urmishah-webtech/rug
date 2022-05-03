@@ -167,7 +167,7 @@ class Products extends Component
 
             $query->where('title', 'LIKE', '%' . $filter_product . '%');
 
-            })->with('productmediafirst')->get();
+            })->with('productmediafirst')->orderBy('id', 'DESC')->get();
 
 
 

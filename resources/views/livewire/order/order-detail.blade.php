@@ -133,11 +133,20 @@
                             <span>{{$Stock_sum}} item</span>
                             <span>{{$symbol['currency']}}{{number_format($withoutgstaount,2,'.',',')}}</span>
                         </li>
+
+                        @if($gst == 0)
                         <li>
                             <span>Tax</span>
                             <span>IGST {{$gst}}%</span>
                             <span>{{$symbol['currency']}}{{number_format($gst_include,2,'.',',')}}</span>
                         </li>
+                        @else
+                        <li>
+                            <span>No tax applicable</span>
+                            <span>{{$symbol['currency']}}0.00</span>
+                           
+                        </li>
+                        @endif
 
                         <li>
                             <span>Subtotal(including GST)</span>
@@ -257,7 +266,7 @@
                         </div>
                         <div class="custom-flex">
                         <p>@if($order['user']){{$order['user'][0]['first_name']}}@endif</p>
-                        <p>9 orders</p>
+                        <p>@if($allorder) <?php echo count($allorder); ?> @endif orders</p>
                     </div>
                     </div>
                     @endif

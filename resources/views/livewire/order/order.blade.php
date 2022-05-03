@@ -61,26 +61,26 @@
                             <th>Delivery method</th>
                         </tr>
                         @if($order)
+                        @php $i=10001; @endphp
                         @foreach($order as $row)
+                      
                         <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">
                             <tr>
                             <td class="sticky-col">
                                 <div class="row"><label><input type="checkbox" wire:model="selecteorder" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
                             @if(user_permission('orderlist','update'))
-                            <td class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$row->id}}</a></td>
+                            <td class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$i}}</a></td>
                             @else
                             <td class="fw-6 sticky-col">#{{$row->id}}</td>
-                            @endif
-                           
-                            
+                            @endif                       
                             <td>
                                {{$row->updated_at}}
                             </td>
                             <td>
                                
                                <a class="tc-black fw-6" href="{{ route('customers') }}"> 
-                                    <button class="link">@if($row['user']){{$row['first_name']}}@endif 
+                                    <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif 
                                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
                                     </button>
                                 </a>
@@ -107,6 +107,7 @@
                                 Standard
                             </td>
                         </tr></a>
+                        @php $i++; @endphp
                         @endforeach
                         @endif
                     </tbody>

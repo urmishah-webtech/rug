@@ -96,6 +96,7 @@
                             <th>Image</th>
                             <th>Product</th>
                             <th>Status</th>
+                            <th>Date</th>
                             <th>Total Variants</th>
                             <th>Price</th>
                         </tr>
@@ -134,6 +135,9 @@
                                 @if($row->status == 'invited')
                                 <p class="tag red order-filed invitedclass">Draft</p>
                                 @endif
+                            </td>
+                            <td>
+                                {{$row->updated_at}}
                             </td>
                             <td class="inventory-table-item">
                                 <?php $sum = 0; ?>
