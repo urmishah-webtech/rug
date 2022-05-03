@@ -75,7 +75,7 @@
             <div class="columns two-thirds">
                  @error('title') <span class="text-danger">{{ $message }}</span>@enderror  
                  @error('price_main') <span class="text-danger">{{ $message }}</span>@enderror
-                <div class="card">
+                <div class="card" wire:ignore>
 
                      <label>Title <span class="text-danger">*</span></label>
 
@@ -90,7 +90,7 @@
 
                             <div class="product-dec-textbox">
 
-                                 <textarea class="form-control tinymce-editor {{ $errors->has('descripation') ? 'parsley-error' : '' }}" rows="5" placeholder="Please Enter descripation" name="descripation" id="descripation" wire:ignore.self>{{ old('descripation') }}</textarea>
+                                 <textarea  value="{{ old('descripation') }}" class="form-control tinymce-editor {{ $errors->has('descripation') ? 'parsley-error' : '' }}" rows="5" placeholder="Please Enter descripation" name="descripation" id="descripation" wire:ignore>{{ old('descripation') }}</textarea>
 
                                  @error('descripation') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -105,7 +105,7 @@
                 
               
 
-                <div class="card product-media-card">
+                <div class="card product-media-card" wire:ignore>
                     <div class="card-header upload-media-header">
                         <h3 class="fs-16 fw-6 m-0">Media</h3>
                         <button class="link add-media-url-btn">Add media from URL <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
+                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible" wire:ignore>
                     <div class="card-header">
                         <div class="header-title">
                              @error('att_price.*') <span class="text-danger">{{ $message }}</span>@enderror
@@ -207,9 +207,7 @@
 
                                 <div class="card-section tab_content  active" id="all_customers">
                                     <div class="table-loader">
-                                        <div class="loading-overlay" wire:loading.flex="">
-                                            <div class="page-loading"></div>
-                                        </div>
+                                      
                                         <div class="product-table-details">
                                             <div class="product-table-checkbox">
                                                 <div class="product-all-check">
@@ -249,7 +247,7 @@
                     </div>
                 </div>
 
-                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
+                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible" wire:ignore> 
                     <div class="row-items">
                         <div class="header-title">
                             <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
@@ -286,7 +284,7 @@
                     </div>
                 </div> 
 
-                <div class="card variant-pricing-card">
+                <div class="card variant-pricing-card" wire:ignore>
 
                     <div class="row-items">
 
@@ -582,7 +580,7 @@
 
                 </div> -->
                 
-                <div class="card search-engine-listing-card">
+                <div class="card search-engine-listing-card" wire:ignore>
 
                     <div class="card-header">
 
@@ -640,8 +638,41 @@
                 <div class="card">
                     <div class="row">
                         <h3>Product Tab descripation</h3>
-                        <div class="col-md-6"></div>
-                        <div class="col-md-6">
+                       
+                    </div>
+
+
+                    <div id="tab_logic" class="after-add-more">
+
+                         @foreach($product_array as $key => $row)
+                        <div class="row">
+                            <label>Title</label>
+                            <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]" wire:model="product_array.{{$key}}.question">
+                        </div>
+                        <div class="form-group row">
+                            <label>Description</label>
+                            <div class="col-md-9">
+                                <textarea value="{{$product_array[$key]['answer']}}" name="product_array[{{$key}}][answer]" wire:model="product_array.{{$key}}.answer" class="form-control">{{$product_array[$key]['answer']}}</textarea>
+                              
+                            </div>
+                        </div>
+                        @if(count($product_array) > 1)
+                         <div class="form-group row">
+                            
+                            <div class="col-md-9">
+                                <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
+                              
+                            </div>
+                        </div>
+
+                      
+                           @endif
+                        
+                           @endforeach
+                    </div>
+                    
+                    <div class="more-feilds">
+                         <div class="col-md-6">
                             <div class="form-group change">
                                 
                                 <a class="btn btn-success add-more custom-addmorebtn" wire:click.prevent="add()">+ Add More</a>
@@ -649,44 +680,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-6 custom-flex-sign">
-                            
-                            
-
-                        </div>
-                    </div>
-                   
-                    
-                    <div id="tab_logic" class="after-add-more">
-                         @foreach($product_array as $key => $row)
-                        <div class="row">
-                            <label>Title</label>
-                            <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]">
-                        </div>
-                        <div class="form-group row">
-                            <label>Description</label>
-                            <div class="col-md-9">
-                                <textarea value="{{$product_array[$key]['answer']}}" name="product_array[{{$key}}][answer]" class="form-control"></textarea>
-                              
-                            </div>
-                        </div>
-                        @if(count($product_array) > 1)
-                         <div class="col-md-2">
-                               <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
-                           </div>
-                           @endif
-                           @endforeach
-                    </div>
-                    
-                    <div class="more-feilds"></div>
                 </div>
 
             </div>
 
-            <div class="columns one-third right-details">
+            <div class="columns one-third right-details" wire:ignore>
 
                 <div class="card cgcp-prd-status-card">
 
@@ -900,6 +898,9 @@
         <div class="page-bottom-btn">
 
             <input type="submit" class="button" id="master-save" value="save" disabled="disabled" wire:ignore.self>
+            <div class="loading-overlay" wire:loading.flex wire:target="add, remove">
+                    <div class="page-loading"></div>
+                </div>
 
         </div>
 
