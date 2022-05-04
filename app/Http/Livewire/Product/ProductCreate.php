@@ -87,6 +87,7 @@ class ProductCreate extends Component
        $old_product_array = request()->old('product_array');
        if(isset($old_product_array) && !empty($old_product_array)) {
         $this->product_array = $old_product_array;
+        
        } else {
             $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
              $this->product_array[2]['question'] = $this->product_array[2]['answer'] = '';
@@ -195,6 +196,7 @@ class ProductCreate extends Component
         }
 
         if ($validator->fails()) {
+
             return redirect('/admin/products/new')
                         ->withErrors($validator)
                         ->withInput();
@@ -252,6 +254,8 @@ class ProductCreate extends Component
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
             $locationid = json_encode($arr);   
+             array_pop($request->product_array);
+
 
             $product_detail_arr = [
 

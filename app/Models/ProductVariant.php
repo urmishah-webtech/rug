@@ -39,5 +39,9 @@ class ProductVariant extends Model
     {
         return $this->hasMany(VariantMedia::class, 'variant_id', 'id');
     }
+    public function variantmediafirst()
+    {
+        return $this->hasOne(VariantMedia::class, 'variant_id', 'id');
+    }
 
 }

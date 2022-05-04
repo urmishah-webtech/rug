@@ -283,7 +283,12 @@ class CartController extends Controller
                     if(!empty($result['product_variant'][0]['photo'])){ 
 
                         $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
-                        $CartItem[$key]['image']= $image_path.$productimage;
+                        
+                        if(empty($productimage)) {
+                            $productimage = ProductMedia::where('product_id', $result['product_id'])->first();
+                        }
+
+                        $CartItem[$key]['image']= $image_path.$productimage->image;
                     }else{
                         $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                     }
@@ -294,7 +299,12 @@ class CartController extends Controller
 
                         $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
 
-                        $CartItem[$key]['image']= $image_path.$productimage;
+                        if(empty($productimage)) {
+                            $productimage = ProductMedia::where('product_id', $result['product_id'])->first();
+                        }
+
+                        $CartItem[$key]['image']= $image_path.$productimage->image;
+
                     }else{
                         $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
                     }
