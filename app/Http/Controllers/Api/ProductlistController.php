@@ -228,6 +228,8 @@ class ProductlistController extends Controller
 
                 }
 
+                $result_attributes = [];
+
                 $color = [];
                 $colorvarient = [];
 
@@ -265,6 +267,8 @@ class ProductlistController extends Controller
                     $color_arry[] = '';
                     $color_arry[] = '';
                 }
+                $result_attributes[$val->variants[0]['varient1']] = $color_arry;
+
 
                 $othercolor = [];
                 $othercolorvarient = [];
@@ -296,6 +300,7 @@ class ProductlistController extends Controller
 
                 $other_color_arry[] = $othercolor;
                 $other_color_arry[] = $othercolorvarient;
+                $result_attributes[$val->variants[0]['varient2']] = $other_color_arry;
 
                 $size = [];
                 $sizevarient = [];
@@ -328,6 +333,7 @@ class ProductlistController extends Controller
 
                 $size_arry[] = $size;
                 $size_arry[] = $sizevarient;
+                $result_attributes[$val->variants[0]['varient3']] = $size_arry;
 
 
                 $tassels = [];
@@ -358,9 +364,19 @@ class ProductlistController extends Controller
                 }
                 $tassels_arry[] = $tassels;
                 $tassels_arry[] = $tasselsverient;
+                $result_attributes[$val->variants[0]['varient4']] = $tassels_arry;
+
+
+                $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
+                $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
+                $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
+                $result_attr4 = !empty($result_attributes[41])? $result_attributes[41] : null;
 
                 $data_result['variantmedia'] = $val['variantmedia'];
-                return response(['data' => $data_result, 'attribute1' => $color_arry, 'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry], 200);
+                
+                
+               
+                 return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4], 200);
             }
         }
         else
@@ -493,12 +509,25 @@ class ProductlistController extends Controller
         $productimage = ProductMedia::Where('product_id', $request->product_id)
             ->get();
         $image_path =  env('IMAGE_PATH');
+        
+
         $price = 0;
+        $Productvariant= null;
         if (!empty($productvariants) && count($productvariants) > 0)
         {
 
             foreach ($productvariants as $variant)
             {
+                $variant->attribute1 = trim($variant->attribute1);
+                $variant->attribute2 = trim($variant->attribute2);
+                $variant->attribute3 = trim($variant->attribute3);
+                $variant->attribute4 = trim($variant->attribute4);
+
+                $request->text1 = trim($request->text1);
+                $request->text2 = trim($request->text2);
+                $request->text3 = trim($request->text3);
+                $request->text4 = trim($request->text4);
+                
                 if (($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3) && ($variant->attribute4 == $request->text4))
                 {
                     $productvariant = $variant;
@@ -510,6 +539,16 @@ class ProductlistController extends Controller
 
                 foreach ($productvariants as $variant)
                 {
+                    $variant->attribute1 = trim($variant->attribute1);
+                    $variant->attribute2 = trim($variant->attribute2);
+                    $variant->attribute3 = trim($variant->attribute3);
+                    $variant->attribute4 = trim($variant->attribute4);
+
+                    $request->text1 = trim($request->text1);
+                    $request->text2 = trim($request->text2);
+                    $request->text3 = trim($request->text3);
+                    $request->text4 = trim($request->text4);
+
                     if ($variant->attribute1 == $request->text1 && $variant->attribute2 == $request->text2)
                     {
                         $productvariant = $variant;
@@ -547,6 +586,16 @@ class ProductlistController extends Controller
             {
                 foreach ($productvariants as $variant)
                 {
+                    $variant->attribute1 = trim($variant->attribute1);
+                    $variant->attribute2 = trim($variant->attribute2);
+                    $variant->attribute3 = trim($variant->attribute3);
+                    $variant->attribute4 = trim($variant->attribute4);
+
+                    $request->text1 = trim($request->text1);
+                    $request->text2 = trim($request->text2);
+                    $request->text3 = trim($request->text3);
+                    $request->text4 = trim($request->text4);
+
                     if (($variant->attribute1 == $request->text1) || ($variant->attribute2 == $request->text2) || ($variant->attribute3 == $request->text3) || ($variant->attribute4 == $request->text4))
                     {
                         $productvariant = $variant;
@@ -554,6 +603,7 @@ class ProductlistController extends Controller
                     }
                 }
             }
+
 
             if (empty($productvariant))
             {
@@ -567,8 +617,8 @@ class ProductlistController extends Controller
                     $Productvariant['variantmedia'] = $productimage;
                 }
                 else{
-                        $image = 'image/defult-image.png';
-                        $Productvariant['variantmedia'][] = $image;
+                    $image = 'image/defult-image.png';
+                    $Productvariant['variantmedia'][] = $image;
                 }
              
             }
