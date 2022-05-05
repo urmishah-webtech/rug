@@ -265,13 +265,17 @@ class ProductFilterController extends Controller
 	            })->when($tassels, function ($q) use ($tassels) {
 	              $q->whereIn('attribute4', $tassels);
 	            })->when($price, function ($q) use ($price) {
-	              $q->where('price','<=', $price);
+	              $q->where('price','<', $price);
 	            });
 		     	}])->where(function ($query) use ($array) {
-				   foreach ($array as $id) {
-				       $query->orWhereJsonContains('collection', $id);
-				   }
-				})->where('price','<=', $request->price)->orderBy('updated_at', 'desc')->get();
+
+		     		if($array){
+					   foreach ($array as $id) {
+					       $query->orWhereJsonContains('collection', $id);
+
+					   }
+					}
+				})->orderBy('updated_at', 'desc')->get();
 
 
         // })->when($request->anouthercolor, function ($query, $attribute2) {
