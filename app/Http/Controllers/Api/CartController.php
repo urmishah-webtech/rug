@@ -279,8 +279,6 @@ class CartController extends Controller
             $i=0;
             foreach ($CartItem as $key => $result)
             { 
-                if($result->cutomeid == 1){
-                    if(!empty($result['product_variant'][0]['photo'])){ 
 
                         $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
                         
@@ -289,28 +287,10 @@ class CartController extends Controller
                         }
 
                         $CartItem[$key]['image']= $image_path.$productimage->image;
-                    }else{
-                        $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
-                    }
+                   
                     $Totalamount = ($result->stock * $result->price);
                     $finalamount += $Totalamount;
-                }else{
-                    if(!empty($result['product_variant'][0]['photo'])){ 
-
-                        $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
-
-                        if(empty($productimage)) {
-                            $productimage = ProductMedia::where('product_id', $result['product_id'])->first();
-                        }
-
-                        $CartItem[$key]['image']= $image_path.$productimage->image;
-
-                    }else{
-                        $CartItem[$key]['image']= $image_path.$result['media_product'][0]['image'];
-                    }
-                    $Totalamount = ($result->stock * $result->price);
-                    $finalamount += $Totalamount;
-                }
+                
             }
             $cartStock = $CartItem->sum('stock');
             $cartCount = count($CartItem);
