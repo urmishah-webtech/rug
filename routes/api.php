@@ -97,3 +97,8 @@ Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
 Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
 Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit'); 
 Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
+
+/*FILTER PRODUCT*/
+Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
+
+Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
