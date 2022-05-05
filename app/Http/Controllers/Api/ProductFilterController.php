@@ -258,7 +258,7 @@ class ProductFilterController extends Controller
         
             $query->when($color, function ($q) use ($color) {
                  $q->whereIn('attribute1',$color);
-	            })->when($anouthercolor, function ($q) use ($anouthercolor) {
+	            })->when($anouthercolor, function ($q) use ($anouthercolor) { 
 	              $q->whereIn('attribute2', $anouthercolor);
 	            })->when($size, function ($q) use ($size) {
 	              $q->whereIn('attribute3', $size);
