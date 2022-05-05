@@ -246,17 +246,32 @@ class ProductFilterController extends Controller
 
 	public function getGetFilter(Request $request){
 
-		$color = $request->color;
+		//$color = $request->color;
+		$array = $request->collection;
 		$product = Product::with(['variants' => function ($query ) use ($request){
 
 			$color = $request->color;
+			$anouthercolor = $request->anouthercolor;
 			$size = $request->size; 
+			$tassels = $request->tassels; 
+			$price = $request->price; 
+        
             $query->when($color, function ($q) use ($color) {
                  $q->whereIn('attribute1',$color);
+	            })->when($anouthercolor, function ($q) use ($anouthercolor) {
+	              $q->whereIn('attribute2', $anouthercolor);
 	            })->when($size, function ($q) use ($size) {
-	                 $q->whereIn('attribute3', $size);
+	              $q->whereIn('attribute3', $size);
+	            })->when($tassels, function ($q) use ($tassels) {
+	              $q->whereIn('attribute4', $tassels);
+	            })->when($price, function ($q) use ($price) {
+	              $q->where('price','<=', $price);
 	            });
-         	}])->orderBy('updated_at', 'desc')->get();
+		     	}])->where(function ($query) use ($array) {
+				   foreach ($array as $id) {
+				       $query->orWhereJsonContains('collection', $id);
+				   }
+				})->where('price','<=', $request->price)->orderBy('updated_at', 'desc')->get();
 
 
         // })->when($request->anouthercolor, function ($query, $attribute2) {
