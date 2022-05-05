@@ -253,8 +253,9 @@ class ProductCreate extends Component
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
             $locationid = json_encode($arr);
+            
             $product_array = $request->product_array;  
-            array_pop($product_array);
+             array_pop($product_array);
 
 
             $product_detail_arr = [
