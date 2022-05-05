@@ -172,7 +172,6 @@ class ProductCreate extends Component
         
         if(!empty($request['varition_arrray'])){
 
-            if(!empty($request->att_price)){
                $validator = Validator::make($request->all(),[
                     'title'     =>  'required',
                     'att_price.*'     =>  'required',
@@ -181,7 +180,7 @@ class ProductCreate extends Component
                     "title.required"          =>  "Enter your Title!",
                     "att_price.*.required"      =>  "Enter your Variant Price!",
                 ]);
-            }
+            
 
             session()->flash('messagevarient', 'Enter your Variant Price!');
         }else{
