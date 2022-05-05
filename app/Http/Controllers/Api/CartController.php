@@ -280,10 +280,10 @@ class CartController extends Controller
             foreach ($CartItem as $key => $result)
             { 
 
-                        $productimage = VariantMedia::Where('product_id',$result['product_variant'][0]['product_id'])->Where('variant_id',$result['product_variant'][0]['id'])->first();
+                        $productimage = VariantMedia::Where('product_id',$result->product_id)->Where('variant_id',$result->varientid)->first();
                         
                         if(empty($productimage)) {
-                            $productimage = ProductMedia::where('product_id', $result['product_id'])->first();
+                            $productimage = ProductMedia::where('product_id', $result->product_id)->first();
                         }
 
                         $CartItem[$key]['image']= $image_path.$productimage->image;
