@@ -219,7 +219,7 @@ class VariantDetail extends Component
             }
 
             if($mediaimg){
-
+                $this->image = [];
                 $this->VariantMedia = VariantMedia::where(['variant_id'=>$this->Productvariant_first['id'], 'product_id' => $this->product->id])->get();
             }
         }

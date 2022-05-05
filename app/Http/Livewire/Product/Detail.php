@@ -752,6 +752,7 @@ class Detail extends Component
 
             if($mediaimg){
 
+                $this->image = [];
                 $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
             }
         }
