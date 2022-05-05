@@ -61,7 +61,7 @@
                             <th>Delivery method</th>
                         </tr>
                         @if($order)
-                        @php $i=10001; @endphp
+                        @php $i=1001; @endphp
                         @foreach($order as $row)
                       
                         <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">
