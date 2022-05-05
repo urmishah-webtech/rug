@@ -190,6 +190,9 @@ class PaymentController extends Controller
                
             $pay->save();
 
+            Cart::where('user_id',$user_detail['id'])->delete();
+
+
             return $this->sendJson(['status' => 1, 'message' => $payment]);
         }
 
@@ -230,7 +233,6 @@ class PaymentController extends Controller
                     }     
                 }
             }
-
 
                 Cart::where('user_id',$user_detail['id'])->delete();
             
