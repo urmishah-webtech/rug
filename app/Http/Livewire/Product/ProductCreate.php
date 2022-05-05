@@ -196,7 +196,7 @@ class ProductCreate extends Component
 
         if ($validator->fails()) {
 
-            return redirect('/admin/products/new')
+            return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -252,8 +252,9 @@ class ProductCreate extends Component
 
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
-            $locationid = json_encode($arr);   
-             array_pop($request->product_array);
+            $locationid = json_encode($arr);
+            $product_array = $request->product_array;  
+            array_pop($product_array);
 
 
             $product_detail_arr = [
@@ -298,7 +299,7 @@ class ProductCreate extends Component
 
                 'location' => $locationid,
                 
-                'faq' => json_encode($request->product_array, true),
+                'faq' => json_encode($product_array, true),
                 
                 'custom_variant' => $request->custom_variant_check,
                 
