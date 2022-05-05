@@ -609,7 +609,8 @@ class ProductlistController extends Controller
             {
                 $productvariant = $productvariants[0];
             }
-            $Productvariant = $productvariant;
+            $Productvariant = $productvariant->toArray();
+
             if (empty($Productvariant['variantmedia']))
             {
          
@@ -623,11 +624,10 @@ class ProductlistController extends Controller
              
             }
 
-            $price = number_format($Productvariant->price, 2, '.', ',');
+            $price = number_format($Productvariant['price'], 2, '.', ',');
 
         } 
 
- 
 
         
         return response()

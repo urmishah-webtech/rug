@@ -262,7 +262,7 @@ class ProductFilterController extends Controller
 	              $q->whereIn('attribute2', $anouthercolor);
 	            })->when($size, function ($q) use ($size) {
 	              $q->whereIn('attribute3', $size);
-	            })->when($tassels, function ($q) use ($tassels) {
+	            })->when($tassels, function ($q) use ($tassels) { 
 	              $q->whereIn('attribute4', $tassels);
 	            })->when($price, function ($q) use ($price) {
 	              $q->where('price','<', $price);
