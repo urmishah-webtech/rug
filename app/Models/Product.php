@@ -56,6 +56,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductDetail::class, 'product_id', 'id')->whereNULL('variant_id');
     }
+    public function variantmedia()
+    {
+        return $this->hasMany(ProductMedia::class, 'product_id', 'id');
+    }
 
     
 }

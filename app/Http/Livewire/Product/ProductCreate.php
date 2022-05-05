@@ -32,7 +32,7 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [], $product_new = [];
+    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [], $product_new = [], $product_last_key = 0;
 
     public $image = [];
 
@@ -83,8 +83,18 @@ class ProductCreate extends Component
 
 
        $this->initial();
-      
-        $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+
+       $old_product_array = request()->old('product_array');
+       if(isset($old_product_array) && !empty($old_product_array)) {
+        $this->product_array = $old_product_array;
+        
+       } else {
+            $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+             $this->product_array[2]['question'] = $this->product_array[2]['answer'] = '';
+       }
+       $this->product_last_key = array_key_last($this->product_array);
+
+        
 
     }
 
@@ -163,7 +173,7 @@ class ProductCreate extends Component
         if(!empty($request['varition_arrray'])){
 
             if(!empty($request->att_price)){
-                $request->validate([
+               $validator = Validator::make($request->all(),[
                     'title'     =>  'required',
                     'att_price.*'     =>  'required',
                 ],
@@ -175,7 +185,7 @@ class ProductCreate extends Component
 
             session()->flash('messagevarient', 'Enter your Variant Price!');
         }else{
-            $request->validate([
+            $validator = Validator::make($request->all(),[
                 'title'     =>  'required',
                 'price_main'     =>  'required',
             ],
@@ -185,6 +195,12 @@ class ProductCreate extends Component
             ]);
         }
 
+        if ($validator->fails()) {
+
+            return redirect('/admin/products/new')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $variantprice = $request->variantprice;
         $variantid = $request->variantid;
@@ -238,6 +254,8 @@ class ProductCreate extends Component
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
             
             $locationid = json_encode($arr);   
+             array_pop($request->product_array);
+
 
             $product_detail_arr = [
 
@@ -524,14 +542,11 @@ class ProductCreate extends Component
     }
     public function add()
     {
-        if(!empty($this->product_array) )
-        {
-            $i = array_key_last($this->product_array) +1;
-        } else {
-            $i = 1;
-        }
+      
+        $this->product_last_key = $this->product_last_key +1;
+        
 
-        $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
+        $this->product_array[$this->product_last_key]['question'] = $this->product_array[$this->product_last_key]['answer'] = '';
 
 
     }
@@ -539,7 +554,6 @@ class ProductCreate extends Component
     public function remove($i)
     {
         unset($this->product_array[$i]);
-
     }
 
 }

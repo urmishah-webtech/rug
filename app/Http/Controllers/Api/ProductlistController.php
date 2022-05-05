@@ -144,10 +144,10 @@ class ProductlistController extends Controller
         if (Product::where('id', $id)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
-            $product = Product::with('productmediaget')->with('favoriteget')
+            $product = Product::with('productmediaget')->with('variantmedia')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
-                return $q->with('detail')->with('variantmedia');
+                return $q->with('detail');
             }
             ])
                 ->where('id', $id)->get();
@@ -187,13 +187,13 @@ class ProductlistController extends Controller
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
-
                 $data_color = [];
                 $data_size = [];
                 $data_color_main = [];
                 $insert_stock = [];
                 $arrayvarit = [];
                 $data_result = [];
+
                 foreach ($val['variants'] as $key => $result)
                 {
 
@@ -224,7 +224,7 @@ class ProductlistController extends Controller
                     {
                         $data_result[$key]['detail'] = $result['detail'];
                     }
-                    $data_result[$key]['variantmedia'] = $result['variantmedia'];
+                    // $data_result[$key]['variantmedia'] = $result['variantmedia'];
 
                 }
 
@@ -359,7 +359,7 @@ class ProductlistController extends Controller
                 $tassels_arry[] = $tassels;
                 $tassels_arry[] = $tasselsverient;
 
-                // $data_result = json_encode($data_result);
+                $data_result['variantmedia'] = $val['variantmedia'];
                 return response(['data' => $data_result, 'attribute1' => $color_arry, 'attribute2' => $other_color_arry, 'attribute3' => $size_arry, 'attribute4' => $tassels_arry], 200);
             }
         }
@@ -491,8 +491,9 @@ class ProductlistController extends Controller
             ->get();
 
         $productimage = ProductMedia::Where('product_id', $request->product_id)
-            ->first();
+            ->get();
         $image_path =  env('IMAGE_PATH');
+        $price = 0;
         if (!empty($productvariants) && count($productvariants) > 0)
         {
 
@@ -559,31 +560,30 @@ class ProductlistController extends Controller
                 $productvariant = $productvariants[0];
             }
             $Productvariant = $productvariant;
+            if (empty($Productvariant['variantmedia']))
+            {
+         
+                if(!empty($productimage)){
+                    $Productvariant['variantmedia'] = $productimage;
+                }
+                else{
+                        $image = 'image/defult-image.png';
+                        $Productvariant['variantmedia'][] = $image;
+                }
+             
+            }
 
-        }
+            $price = number_format($Productvariant->price, 2, '.', ',');
+
+        } 
 
  
 
-        if (!empty($Productvariant['variantmedia']))
-        {
-            $image = $image_path . $Productvariant['variantmedia'];
-        }else{
-
-            if(!isset($productimage)){
-                $image = 'image/defult-image.png';
-                }
-                else{
-                    $image = $image_path . $productimage->image;
-                }
-         
-        }
-
-        $price = number_format($Productvariant->price, 2, '.', ',');
+        
         return response()
             ->json(array(
             'variant' => $Productvariant,
             'price' => $price,
-            'image' => $image,
             'image_path' => $image_path
         ));
     }

@@ -64,6 +64,7 @@ class Detail extends Component
 
     public $productDetail, $existDetailCount = 0;
     public $product_array = [];
+    public $product_last_key = 0;
 
     
 
@@ -111,8 +112,16 @@ class Detail extends Component
 
         if(empty($this->product_array) || count($this->product_array) <= 0) {
             $this->product_array[1]['question'] = $this->product_array[1]['answer'] = '';
+            $this->product_array[2]['question'] = $this->product_array[2]['answer'] = '';
 
+        } else {
+            array_push($this->product_array, [
+                'question'=>'',
+                'answer' => ''
+            ]);
         }
+        $this->product_last_key = array_key_last($this->product_array);
+
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->Productvariant = ProductVariant::with('variantmedia')->where('product_id',$this->product['id'])->get();
         $this->tagsale = tagsale::get();
@@ -237,14 +246,10 @@ class Detail extends Component
 
     public function add()
     {
-        if(!empty($this->product_array) )
-        {
-            $i = array_key_last($this->product_array) +1;
-        } else {
-            $i = 1;
-        }
-
-        $this->product_array[$i]['question'] = $this->product_array[$i]['answer'] = '';
+        
+        $this->product_last_key = $this->product_last_key +1;
+        
+        $this->product_array[$this->product_last_key]['question'] = $this->product_array[$this->product_last_key]['answer'] = '';
 
     }
 
@@ -618,6 +623,8 @@ class Detail extends Component
 
         $product_price = (!empty($this->product['price'])) ? $this->product['price'] : '' ;
         $product_selling = (!empty($this->product['compare_price'])) ? $this->product['compare_price'] : '' ;
+
+         array_pop($this->product_array);
 
         Product::where('id', $this->product['id'])->update(
 

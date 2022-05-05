@@ -394,7 +394,7 @@
 
                         <div class="table-loader">
 
-                            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
+                            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, save, remove">
 
                                 <div class="page-loading"></div>
 
@@ -1364,14 +1364,12 @@
                         <div id="tab_logic" class="after-add-more">
                            <div class="col-md-2">
                             <h3>Product Tab descripation</h3>
-                               <button class="btn text-white btn-info btn-sm custom-addmorebtn" wire:click.prevent="add()">Add</button>
                            </div>
-                       </div>
+                       
 
-                       <div>
                        @foreach($product_array as $key => $row)
-
-                           <div class="row mt-40">
+                          <div @if($product_last_key == $key) id="hidden_tab" style="display: none;" @endif  >
+                           <div class="row">
                                <label>Title</label>
                                <input type="text" wire:model="product_array.{{ $key }}.question" >
                            </div>
@@ -1381,13 +1379,22 @@
                                    <textarea wire:model="product_array.{{ $key }}.answer" class="form-control required"  ></textarea>
                                </div>
                            </div>
-        
+                            <div class="form-group row">
                            <div class="col-md-2">
                                <button class="btn btn-danger btn-sm custom-deleteebtn" wire:click.prevent="remove({{$key}})"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Remove</button>
                            </div>
+                            </div>
+                        </div>
                        @endforeach
-                   </div>
-                       <div class="more-feilds"></div>
+                        </div>
+                       <div class="more-feilds">
+                          <div class="col-md-6">
+                            <div class="form-group change">
+                            <a class="btn btn-success add-more custom-addmorebtn">+ Add More</a>
+                            </div>
+                        </div>
+                     
+                       </div>
                    </div>
     
     
@@ -1397,7 +1404,7 @@
     
                 </div>
     
-                <div class="columns one-third right-details">
+                <div class="columns one-third right-details" wire:ignore>
     
                     <div class="card">
     
@@ -1696,7 +1703,7 @@
                     @endif
                 </div>
                 <input type="button" class="button save-button" wire:click="updateDetail" value="Save">
-                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount">
+                <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, remove">
                     <div class="page-loading"></div>
                 </div>
     
@@ -2763,7 +2770,8 @@
     </section>
     
     <!-- END -->
-    <script>
+    <script type="text/javascript">
+    
 
         $('#custom_variant').on('change', function(){
            this.value = this.checked ? 1 : 0;
@@ -2833,7 +2841,14 @@
     
     </script>
     <script type="text/javascript">
-    
+
+        $('.add-more').on('click', function() {
+            console.log('add btn click');
+            $('#hidden_tab').show();
+            @this.add(); 
+
+        
+         });
     $(document).ready(function () {
          var arr_list_items = [];
         var rowIdx = 1;

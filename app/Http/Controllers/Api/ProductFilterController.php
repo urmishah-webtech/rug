@@ -250,7 +250,7 @@ class ProductFilterController extends Controller
 		$product = Product::with(['variants' => function ($query ) use ($request){
 
 			$color = $request->color;
-			$size = $request->size;
+			$size = $request->size; 
             $query->when($color, function ($q) use ($color) {
                  $q->whereIn('attribute1',$color);
 	            })->when($size, function ($q) use ($size) {
