@@ -580,7 +580,7 @@
 
                 </div> -->
                 
-                <div class="card search-engine-listing-card" wire:ignore>
+                <div class="card search-engine-listing-card" wire:ignore.self>
 
                     <div class="card-header">
 
@@ -594,7 +594,7 @@
 
                     </div>
 
-                    <div class="card-middle">
+                    <div class="card-middle" wire:ignore.self>
 
                         <div class="row">
 
@@ -1214,6 +1214,13 @@
 
 
 <!--script start-->
+ @error('seo_url') 
+<script type="text/javascript">
+    $('.search-engine-listing-card .card-middle').show();
+</script>
+
+ @enderror
+
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -1906,7 +1913,7 @@ $(document).ready(function () {
            $(".profit-data-input").attr("data-input", $('#profit-input-mian-value').val());
            $(".margin-data-input").attr("data-input", $('#margin-input-mian-value').val());
            $(".price-view-class").html($('.price-change-input').val());
-           $(".att_price_class").attr("value", $('.price-change-input').val());
+           // $(".att_price_class").attr("value", $('.price-change-input').val());
            $(".cost-data-input-new").attr("value", $('.change-value-main-cost').val());
            $(".att_price_selling_class").attr("value", $('.change-value-main-stock').val());
            $(".margin-data-input").attr("value", $('#margin-input-mian-value').val());

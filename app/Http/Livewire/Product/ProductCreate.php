@@ -169,16 +169,19 @@ class ProductCreate extends Component
 
     public function storeProduct(Request $request)
     {    
+
         
         if(!empty($request['varition_arrray'])){
 
                $validator = Validator::make($request->all(),[
                     'title'     =>  'required',
                     'att_price.*'     =>  'required',
+                    'seo_url' => 'unique:product,seo_utl'
                 ],
                 [
                     "title.required"          =>  "Enter your Title!",
                     "att_price.*.required"      =>  "Enter your Variant Price!",
+                    "seo_url.unique" => "This value has already been taken. Put different."
                 ]);
             
 
@@ -187,10 +190,12 @@ class ProductCreate extends Component
             $validator = Validator::make($request->all(),[
                 'title'     =>  'required',
                 'price_main'     =>  'required',
+                'seo_url' => 'unique:product,seo_utl'
             ],
             [
                 "title.required"          =>  "Enter your Title!",
                 "price_main.required"     =>  "Enter your Price!",
+                "seo_url.unique" => "This value has already been taken. Put different."
             ]);
         }
 

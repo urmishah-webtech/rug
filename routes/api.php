@@ -21,7 +21,7 @@ Route::middleware('auth:api')->group(function(){
 });
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
 Route::get('products/{slug}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
-Route::get('product-variant/{id}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
+Route::get('product-variant/{slug}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
 Route::get('related-product/{id}', 'App\Http\Controllers\Api\ProductlistController@get_related_Products');
 Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetchPrice');
 Route::get('featureproduct', 'App\Http\Controllers\Api\SliderController@FeatureProduct');
