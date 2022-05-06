@@ -155,7 +155,7 @@ class Details extends Component
     public function render()
     {
 
-        $this->initial();
+       
         return view('livewire.customer.details');
 
     }
@@ -600,200 +600,54 @@ class Details extends Component
 
             if (!empty($params)) {
 
-
-
-
-
-
-
                 CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $params]);
 
-
-
                 session()->flash('message', 'Users Updated Successfully.');
-
-
-
-            
-
-
-
             }
-
-
-
-
-
-
-
         }
-
-
-
         if($flag == 'tag-change')
-
-
-
         {
-
-
-
             if (!empty($params)) {
-
-
 
                 $params = ucfirst(trim($params));
 
-
-
-
-
-
-
                 $customer_tags = explode(',', $this->customerData['detail']['tags']);
 
-
-
-
-
-
-
                 if(!in_array($params, $customer_tags)) 
-
-
-
                 {
-
-
-
-
-
-
-
                     $tags = empty($this->customerData['detail']['tags']) ? $params : $this->customerData['detail']['tags'].','.$params;
-
-
 
                     CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $tags]);
 
-
-
                     $exist = Tag::where('label',  $params)->first();
 
-
-
                     if (empty($exist)) {
-
-
-
                         Tag::insert(['label'=>$params]);
-
-
-
                     }
-
-
-
                 }
 
-
-
-                
-
-
-
                 session()->flash('message', 'Users Updated Successfully.');
-
-
-
-            
-
-
-
             }
-
-
-
-
-
-
-
         }
-
-
-
         if($flag == 'remove-tag')
-
-
-
         {
-
-
-
             if (!empty($params)) {
-
-
-
-
-
-
 
                 $customer_tags = explode(',', $this->customerData['detail']['tags']);
 
-
-
                 if (($key = array_search($params, $customer_tags)) !== false) {
 
-
-
                     unset($customer_tags[$key]);
-
-
-
                 }
-
-
-
                 $customer_tags = implode(',', $customer_tags);
-
-
 
                 CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $customer_tags]);
 
-
-
-               
-
-
-
                 session()->flash('message', 'Users Updated Successfully.');
-
-
-
-            
-
-
-
             }
-
-
-
-
-
-
-
         }
 
-
-
         $this->initial();
-
-
-
-
-
-
-
     }
 
 
