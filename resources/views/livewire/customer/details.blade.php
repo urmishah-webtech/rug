@@ -481,15 +481,15 @@
 
 
 
-                     <div class="row add-note-textarea comment-box mb-0" wire:ignore>
+                     <div class="row add-note-textarea comment-box mb-0" id="customadd-note-textarea" wire:ignore>
 
-                        <textarea wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
+                        <textarea class="customcomment-textarea" wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
 
                        <!--  @if($errors->has('messagetext'))
                             <span class="text-danger">{{ $errors->first('messagetext') }}</span>
                         @endif -->
 
-                        <div class="comment-button">
+                        <div class="comment-button customcomment-button">
 
 
 
