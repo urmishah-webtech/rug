@@ -63,78 +63,47 @@ class ProductlistController extends Controller
         return response($data, 200);
     }
 
-    public function getIndividualProduct($id)
+    public function getIndividualProduct($slug)
     {
 
         $symbol = CurrencySymbol();
-        if (Product::where('id', $id)->exists())
-        {
-            $product = Product::with('productmediaget')->with('favoriteget')
+        $product = Product::select('id','title', 'descripation', 'collection', 'faq', 'price')->with('productmediafirst')->with('favoriteget')
                 ->with('variants')->with('productDetail')
-                ->where('id', $id)->get();
+                ->where('seo_utl', $slug)->first();
 
-            $product_arra = array();
-            $image_path =  env('IMAGE_PATH');
-
-            foreach ($product as $key => $val)
-            {
-                $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
-                    ->where('product.id', $val->id)
-                    ->whereNotNull('product_variants.price')
-                    ->get();
-                $price_array = array();
-
-                foreach ($price_data as $keynm => $value)
-                {
-                    $price_array[$keynm] = $value->price;
-                }
-
-                if (!empty($price_array))
-                {
-                    $min = min($price_array);
-                    $max = max($price_array);
-                }
-                elseif(!empty($product->price))
-                {
-                    $min = $product->price;
-                    $max = $product->price;
-                }else{
-                     $min = '';
-                    $max = '';
-                }
-                $product_arra['id'] = $val['id'];
-                $product_arra['title'] = $val['title'];
-                $product_arra['collection'] = json_decode($val['collection']);
-                $product_arra['productfaq'] =  array_values((array)json_decode($val['faq']));
-                $product_arra['description'] = $val['descripation'];
-                if (isset($val['productmediaget'][$key]))
-                {
-                    $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
-                }
-                else
-                {
-                    $product_arra['image'] = url('/') . '/image/defult-image.png';
-                }
-
-                if (!empty($price_array)){
-                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
-                }else{
-                     $product_arra['price_range'] = $symbol['currency'] . $val->price;
-                }
-               
-                $product_arra['detail'] =  (!empty($val->productDetail)) ? $val->productDetail->toArray() : [];
-
-
-            }
-
-
-            // $data_result = json_encode($data_result);
-            return response($product_arra, 200);
-        }
-        else
-        {
+        if(empty($product)) {
             return response()->json(["message" => "Product not found"], 404);
         }
+
+        $productResponse['id'] = $product->id;
+        $productResponse['title'] = $product->title;
+        $productResponse['descripation'] = $product->descripation;
+        $productResponse['collection'] = json_decode($product->collection);
+        $productResponse['productfaq'] = array_values((array)json_decode($product->faq));
+        $productResponse['detail'] =  (!empty($product->productDetail)) ? $product->productDetail->toArray() : [];
+        
+        if (!empty($product->productmediafirst) && !empty($product->productmediafirst->image)) {
+            $image_path =  env('IMAGE_PATH');
+            $productResponse['image'] = $image_path . $product->productmediafirst->image;
+        }
+        else {
+            $productResponse['image'] = url('/') . '/image/defult-image.png';
+        }
+
+        $productResponse['price_range'] = '';
+        $variantsPrice = $product->variants->pluck('price')->toArray();
+
+        if (!empty($variantsPrice)){
+            
+            $productResponse['price_range'] = $symbol['currency'] . min($variantsPrice) . '-' . $symbol['currency'] . max($variantsPrice);
+        
+        } elseif(!empty($product->price)){
+            
+            $productResponse['price_range'] = $symbol['currency'] . $product->price;
+        } 
+
+        return response($productResponse, 200);
+
     }
 
     public function getIndividualProduct_variant($id)
