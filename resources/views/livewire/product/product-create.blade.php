@@ -228,7 +228,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="tableFixHead">
+                                            <div class="tableFixHead1">
                                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing customtableclass">
                                                 <tbody class="variants-option">
                                                 </tbody>
@@ -734,9 +734,9 @@
 
                                 <option value="">-- Select Option --</option>
 
-                                <option value="1">New</option>
+                                <option value="4">Hot sale</option>
 
-                                <option value="2">Sale</option>
+                                <option value="5">New</option>
 
                             </select>                     
 

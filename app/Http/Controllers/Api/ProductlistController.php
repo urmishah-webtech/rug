@@ -50,6 +50,7 @@ class ProductlistController extends Controller
             $data[$i]['id'] = $val->id;
             $data[$i]['title'] = $val->title;
             $data[$i]['description'] = $val->descripation;
+            $data[$i]['url'] = $val->seo_utl;
             $data[$i]['image'] = $image_path . $product_image->image;
             if (!empty($price_array)){
             $data[$i]['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
