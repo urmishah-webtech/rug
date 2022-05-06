@@ -96,7 +96,8 @@
                             </button>
     
                         </a>
-    
+
+
                         <h4 class="mb-0 fw-5">{{$product->title}}</h4>
     
                     </div>
@@ -1299,7 +1300,7 @@
     
                     
     
-                    <div class="card search-engine-listing-card" wire:ignore>
+                    <div class="card search-engine-listing-card" wire:ignore.self>
     
                         <div class="card-header">
     
@@ -1322,7 +1323,7 @@
     
                         </div>
     
-                        <div class="card-middle">
+                        <div class="card-middle" wire:ignore.self>
     
                             <div class="row">
     
@@ -1351,8 +1352,10 @@
                                 <div class="url-input">
                                     <input type="hidden" name="urlpath">
                                     <input type="text" name="seo_utl" wire:model="product.seo_utl">
-    
+                                   
+
                                 </div>
+                                @error('product.seo_utl')  <span class="text-danger">This value has already been taken. Put different.</span> @enderror
     
                             </div>
     
@@ -2770,13 +2773,18 @@
     </section>
     
     <!-- END -->
+
+
+
+
     <script type="text/javascript">
-    
+        
 
         $('#custom_variant').on('change', function(){
            this.value = this.checked ? 1 : 0;
         });
         $(document).ready(function() {
+
              // $('.save-button').prop('disabled', true);
              $('form').keyup(function() {
                 if($(this).val() != '') {

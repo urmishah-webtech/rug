@@ -580,7 +580,7 @@
 
                 </div> -->
                 
-                <div class="card search-engine-listing-card" wire:ignore>
+                <div class="card search-engine-listing-card" wire:ignore.self>
 
                     <div class="card-header">
 
@@ -594,7 +594,7 @@
 
                     </div>
 
-                    <div class="card-middle">
+                    <div class="card-middle" wire:ignore.self>
 
                         <div class="row">
 
@@ -1214,6 +1214,13 @@
 
 
 <!--script start-->
+ @error('seo_url') 
+<script type="text/javascript">
+    $('.search-engine-listing-card .card-middle').show();
+</script>
+
+ @enderror
+
 
 <script type="text/javascript">
     $(document).ready(function() {

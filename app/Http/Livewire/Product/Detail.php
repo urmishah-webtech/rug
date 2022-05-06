@@ -196,8 +196,8 @@ class Detail extends Component
         'product.descripation' => 'required',
         'product.seo_title' => '',
         'product.seo_descripation' => '',
-        'product.seo_utl' => '',
-        'product.product_type' => 'required',
+        'product.seo_utl' => 'unique:product,seo_utl',
+        'product.product_type' => '',
         'product.vender' => '',
         'product.status' => '',
         'product.price' => 'required',
@@ -242,6 +242,7 @@ class Detail extends Component
         'att_price' => [],
 
     ];
+
 
 
     public function add()
@@ -585,6 +586,7 @@ class Detail extends Component
 
     public function updateDetail()
     {  
+        $this->validate($this->rules);
     	date_default_timezone_set('Asia/Kolkata');
 
        if ($this->product['custom_variant'] == 1) {
