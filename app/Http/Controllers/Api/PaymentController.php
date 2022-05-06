@@ -161,7 +161,7 @@ class PaymentController extends Controller
                         
                         'total' => $totalamout,
 
-                        'cutomeid' => $res->cutomeid
+                        'customeid' => $res->cutomeid
 
                     ];
                     $insert_order_item[] = $order_item_arr;
