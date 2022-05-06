@@ -59,12 +59,17 @@ class CartController extends Controller
             }
             else
             {
+                $product = Product::where('seo_utl', $request->product_id)->first();
+
+                if(empty($product)) {
+                    return response()->json(["message" => "Product not found"], 404);
+                }
+
                 $cart = Cart::where('product_id', $variant->product_id)
                     ->where('varientid', $variantID)->where('session_id', '!=', null)
                     ->first(['stock', 'id', 'varientid']);
-                $product_detail = Product::find($request->product_id)
-                    ->toArray();
-                $media_product = ProductMedia::where('product_id', $request->product_id)
+                $product_detail = $product->toArray();
+                $media_product = ProductMedia::where('product_id', $product->id)
                     ->get()
                     ->toArray();
                 // if cart is empty then this the first product
@@ -72,7 +77,7 @@ class CartController extends Controller
                 {
                     $cart = Cart::create([
                     // 'type' => 'variant',
-                    'product_id' => $request->product_id,
+                    'product_id' => $product->id,
                     'varientid' => $variantID,
                     'price' => $price,
                     'stock' => $request->stock,
@@ -101,7 +106,7 @@ class CartController extends Controller
                 {
                     $cart['varientid'] = Cart::create([
                     'type' => 'variant',
-                    'product_id' => $request->product_id,
+                    'product_id' => $product->id,
                     'varientid' => $variantID,
                     'price' => $price,
                     'stock' => $request->stock,
@@ -118,8 +123,12 @@ class CartController extends Controller
         }
         else
         {
-            $product = Product::with('variants')->where('id', $request->product_id)
-                ->first();
+            $product = Product::with('variants')->where('seo_utl', $request->product_id)->first();
+
+            if(empty($product)) {
+                return response()->json(["message" => "Product not found"], 404);
+            }
+
             if ($product->compare_selling_price)
             {
                 $price = $product['compare_selling_price'];
