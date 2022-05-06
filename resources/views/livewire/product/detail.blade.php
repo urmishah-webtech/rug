@@ -2157,7 +2157,7 @@
     
                             <span class="dollar-input">
     
-                                <input class="att_price_class" type="text" wire:model.debounce.lazy="Productvariant.{{ $key }}.price" wire:ignore>
+                                <input class="att_price_class" type="text" wire:model.defer="Productvariant.{{ $key }}.price" wire:ignore>
     
        
     
@@ -2245,7 +2245,7 @@
     
                             <span class="dollar-input">
     
-                                <input type="text" wire:model.debounce.lazy="Productvariant.{{ $key }}.selling_price" wire:ignore>
+                                <input type="text" wire:model.defer="Productvariant.{{ $key }}.selling_price" wire:ignore>
     
        
     
@@ -2592,7 +2592,7 @@
     
                                     @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif </label>
     
-                            <input type="text"  wire:model.debounce.lazy="Productvariant.{{ $key }}.stock">         
+                            <input type="text"  wire:model.defer="Productvariant.{{ $key }}.stock">         
     
                         </div>
     

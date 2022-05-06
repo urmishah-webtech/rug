@@ -1913,7 +1913,7 @@ $(document).ready(function () {
            $(".profit-data-input").attr("data-input", $('#profit-input-mian-value').val());
            $(".margin-data-input").attr("data-input", $('#margin-input-mian-value').val());
            $(".price-view-class").html($('.price-change-input').val());
-           $(".att_price_class").attr("value", $('.price-change-input').val());
+           // $(".att_price_class").attr("value", $('.price-change-input').val());
            $(".cost-data-input-new").attr("value", $('.change-value-main-cost').val());
            $(".att_price_selling_class").attr("value", $('.change-value-main-stock').val());
            $(".margin-data-input").attr("value", $('#margin-input-mian-value').val());
