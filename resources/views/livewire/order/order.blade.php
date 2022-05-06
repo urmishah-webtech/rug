@@ -70,7 +70,7 @@
                                 <div class="row"><label><input type="checkbox" wire:model="selecteorder" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
                             @if(user_permission('orderlist','update'))
-                            <td class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$i}}</a></td>
+                            <td class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$row->id}}</a></td>
                             @else
                             <td class="fw-6 sticky-col">#{{$row->id}}</td>
                             @endif                       

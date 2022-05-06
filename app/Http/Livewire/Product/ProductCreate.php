@@ -240,7 +240,7 @@ class ProductCreate extends Component
             $variations_arr = [];
             $arr = [];
             $productCollection_arrray = [];
-            $product_new_arrray = [];
+       
 
             if(!empty($request['productCollection'])){
 
@@ -534,11 +534,7 @@ class ProductCreate extends Component
 
             session()->flash('message', 'Customer created.');
 
-            return redirect(route('products'));
-
-
-        session()->flash('message', 'Try Again.');
-
+            return redirect(route('product-detail', $this->product['uuid']));
 
     }
     public function add()
