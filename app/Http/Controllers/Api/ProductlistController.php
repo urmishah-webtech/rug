@@ -101,11 +101,10 @@ class ProductlistController extends Controller
                      $min = '';
                     $max = '';
                 }
-                //dump($key);
                 $product_arra['id'] = $val['id'];
                 $product_arra['title'] = $val['title'];
                 $product_arra['collection'] = json_decode($val['collection']);
-                $product_arra['productfaq'] =  json_decode($val['faq']);
+                $product_arra['productfaq'] =  array_values((array)json_decode($val['faq']));
                 $product_arra['description'] = $val['descripation'];
                 if (isset($val['productmediaget'][$key]))
                 {
