@@ -106,11 +106,11 @@ class ProductlistController extends Controller
 
     }
 
-    public function getIndividualProduct_variant($id)
+    public function getIndividualProduct_variant($slug)
     {
 
         $symbol = CurrencySymbol();
-        if (Product::where('id', $id)->exists())
+        if (Product::where('seo_utl', $slug)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
             $product = Product::with('productmediaget')->with('variantmedia')->with('favoriteget')
@@ -119,7 +119,7 @@ class ProductlistController extends Controller
                 return $q->with('detail');
             }
             ])
-                ->where('id', $id)->get();
+                ->where('seo_utl', $slug)->get();
 
             $product_arra = array();
             $image_path =  env('IMAGE_PATH');
