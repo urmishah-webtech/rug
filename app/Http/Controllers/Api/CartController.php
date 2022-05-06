@@ -352,7 +352,10 @@ class CartController extends Controller
     }
 
     public function CustomeCartSave(Request $request){
-        $product = Product::where('id', $request->product_id)->first();
+        $product = Product::where('seo_utl', $request->product_id)->first();
+        if(empty($product)) {
+                return response()->json(["message" => "Product not found"], 404);
+        }
         $price = $request->price;
 
             
