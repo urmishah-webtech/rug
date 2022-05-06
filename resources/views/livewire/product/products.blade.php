@@ -137,7 +137,8 @@
                                 @endif
                             </td>
                             <td>
-                                {{$row->updated_at}}
+                                {{ $row->updated_at->format('d-m-Y'); }}
+                               
                             </td>
                             <td class="inventory-table-item">
                                 <?php $sum = 0; ?>
