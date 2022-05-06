@@ -472,10 +472,16 @@ class ProductlistController extends Controller
     public function fetchPrice(Request $request)
     {
 
-        $productvariants = ProductVariant::with('variantmedia')->Where('product_id', $request->product_id)
+        $product = Product::select('id')->where('seo_utl', $request->product_id)->first();
+
+        if(empty($product)) {
+            return response()->json(["message" => "Product not found"], 404);
+        }
+
+        $productvariants = ProductVariant::with('variantmedia')->Where('product_id', $product->id)
             ->get();
 
-        $productimage = ProductMedia::Where('product_id', $request->product_id)
+        $productimage = ProductMedia::Where('product_id', $product->id)
             ->get();
         $image_path =  env('IMAGE_PATH');
         
