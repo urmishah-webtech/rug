@@ -79,7 +79,7 @@
                                     <p>{{$result->buttne_text}}</p>
                                 </td>
                                 <td class="ta-right">
-                                	<p>{{$result->created_at}}</p>
+                                	<p>{{ $result->created_at->format('d-m-Y'); }}</p>
                                 </td>
                             </tr>
                             @endforeach

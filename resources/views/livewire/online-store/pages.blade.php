@@ -161,7 +161,7 @@
                                    
                                 </td>
                                 <td class="ta-right">
-                                    <span class="text-grey pr-3">{{$result->created_at}}</span>
+                                    <span class="text-grey pr-3">{{ $result->created_at->format('d-m-Y'); }}</span>
                                 </td>
                             </tr>
                             @php $i++; @endphp

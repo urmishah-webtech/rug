@@ -75,7 +75,7 @@
                             <td class="fw-6 sticky-col">#{{$row->id}}</td>
                             @endif                       
                             <td>
-                               {{$row->updated_at}}
+                              {{ $row->updated_at->format('d-m-Y'); }}
                             </td>
                             <td>
                                
