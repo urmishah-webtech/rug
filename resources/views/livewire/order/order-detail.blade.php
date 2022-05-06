@@ -308,7 +308,7 @@
                         </div>
                         @if($order->b_first_name)
                         <p><span>{{$order->b_first_name}} <br> {{$order->b_company}} <br> {{$order->b_address}} <br> {{$order->b_city}}<br> {{$order->b_country}}<br> {{$order->b_pincode}}<br> {{$order->b_mobile}}</span> <a href="#"></a></p>
-                        @else
+                        @else 
                         <p>No Record Avilable</p>
                         @endif
                     </div>
