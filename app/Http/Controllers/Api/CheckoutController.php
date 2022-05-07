@@ -25,11 +25,8 @@ class CheckoutController extends Controller
     }
     public function SaveShipping(Request $request)
     {
-    	$getshipping = CustomerAddress::where('user_id',$request->user_id)->first();
-
-    	if(!empty($getshipping)){
-    		$addshipping = CustomerAddress::where('user_id',$request->user_id)->update([ 
-                'user_id' => $request->user_id,
+    	$addshipping = CustomerAddress::create([	
+    			'user_id' => $request->user_id,
 				'first_name'=> $request->first_name,
 				'last_name' => $request->last_name,
 				'address' => $request->address,
@@ -38,22 +35,9 @@ class CheckoutController extends Controller
 				'state' => $request->state,
 				'postal_code' => $request->postal_code,
 				'email' => $request->email,
-				'mobile_no' => $request->mobile_no
-            ]);
-    	}else{
-    		$addshipping = CustomerAddress::create([	
-				'user_id' => $request->user_id,
-				'first_name'=> $request->first_name,
-				'last_name' => $request->last_name,
-				'address' => $request->address,
-				'city' => $request->city,
-				'country' => $request->country,
-				'state' => $request->state,
-				'postal_code' => $request->postal_code,
-				'email' => $request->email,
-				'mobile_no' => $request->mobile_no
+				'mobile_no' => $request->mobile_no,
+				'address_type' => $request->address_type
 			]);
-    	}
     	
         $data = CustomerAddress::where('user_id',$request->user_id)->first();
     	return response()->json([

@@ -23,7 +23,7 @@ class CreateCustomerAddressTable extends Migration
             $table->string('country');
             $table->string('postal_code');
             $table->enum('address_type', ['shipping_address', 'billing_address'])->default('shipping_address');
-            $table->enum('is_billing_address', ['yes', 'no'])->default('yes')->nullable();
+            $table->enum('is_billing_address', ['yes', 'no'])->default('no')->nullable();
             $table->timestamps();
         });
     }
