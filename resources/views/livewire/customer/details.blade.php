@@ -307,7 +307,7 @@
 
 
 
-                              <p>From Draft Orders</p>
+                             <!--  <p>From Draft Orders</p> -->
 
 
 
@@ -441,7 +441,7 @@
 
 
 
-                              <button class="button green-btn">Create order</button>
+                             <!--  <button class="button green-btn">Create order</button> -->
 
 
 
@@ -481,15 +481,15 @@
 
 
 
-                     <div class="row add-note-textarea comment-box mb-0" wire:ignore>
+                     <div class="row add-note-textarea comment-box mb-0" id="customadd-note-textarea" wire:ignore>
 
-                        <textarea wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
+                        <textarea class="customcomment-textarea" wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
 
                        <!--  @if($errors->has('messagetext'))
                             <span class="text-danger">{{ $errors->first('messagetext') }}</span>
                         @endif -->
 
-                        <div class="comment-button">
+                        <div class="comment-button customcomment-button">
 
 
 
@@ -774,7 +774,7 @@
 
                      </div>
 
-                     <div class="card-footer">
+                     <!-- <div class="card-footer">
 
 
 
@@ -814,7 +814,7 @@
 
 
 
-                     </div>
+                     </div> -->
 
 
 
@@ -842,7 +842,7 @@
 
 
 
-                     @if(isset($customerData['detail']['agreed_to_receive_marketing_mails']))
+                     @if($customerData['detail']['agreed_to_receive_marketing_mails'] == 'no')
 
 
 
@@ -962,7 +962,7 @@
                   </div>
 
 
-
+<!-- 
                   <div class="card privacy-card card-grey-bg">
 
 
@@ -1011,7 +1011,7 @@
 
 
 
-                  </div>
+                  </div> -->
 
 
 
@@ -1444,8 +1444,6 @@
 
                   <div class="modal-body">
 
-
-
                      @foreach($customerData['address'] as $address)
 
 
@@ -1487,15 +1485,14 @@
 
                         </div>
 
+
+                        @else
+                        <p>No Record Avilable</p>
                         @endif
 
                      </div>
 
-
-
                      @endforeach
-
-
 
                   </div>
 
@@ -1667,41 +1664,12 @@
 
 
                   <div class="modal-body">
-
-
-
-                      
-
-
-
-                        <input type="hidden" name="id" wire:key="customerData.id"/>
-
-
-
-                        <div class="row">
-
-
-
-                           <div class="form-field-list">
-
-
-
-                              <textarea  wire:model="customerData.detail.note"  wire:ignore placeholder="Add a note" onkeydown="enableSaveBtn('save-note-btn')"></textarea>
-
-
-
-                           </div>
-
-
-
-                        </div>
-
-
-
-                   
-
-
-
+                    <input type="hidden" name="id" wire:key="customerData.id"/>
+                    <div class="row">
+                       <div class="form-field-list">
+                          <textarea  wire:model="customerData.detail.note"  placeholder="Add a note" onkeydown="enableSaveBtn('save-note-btn')"></textarea>
+                       </div>
+                    </div>
                   </div>
 
 
@@ -2862,7 +2830,7 @@
 
 
 
-                     <label class="checkbox-note"><input type="checkbox" name="EditEmailMarketingStatus" wire:model="customerData.detail.agreed_to_receive_marketing_mails">Customer agreed to receive marketing emails.</label>
+                     <label class="checkbox-note"><input type="checkbox"  name="EditEmailMarketingStatus" wire:model="customerData.detail.agreed_to_receive_marketing_mails">Customer agreed to receive marketing emails.</label>
 
 
 

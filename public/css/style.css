@@ -2287,6 +2287,7 @@ label {
 }
  .add-note-textarea {
      position:relative;
+     padding: 0;
 }
  .order-tracking .add-note-textarea::before {
      content: "";
@@ -2335,7 +2336,7 @@ label {
 }
  .comment-box p {
      margin: 0;
-     padding: 8px 0;
+     padding: 10px 12px;
      text-align: right;
      color: #6d7175;
 }
@@ -9339,4 +9340,19 @@ table.marketing-table .order-filed, table.marketing-table .order-filed {
      background-size: 14px 14px;
      top: 6px;
 }
- 
+
+.customcomment-button{
+    padding: 0px 12px;
+}
+ .customcomment-textarea{
+    border-bottom: 0.1rem solid #c9cccf !important;
+    margin-bottom: 10px;
+ }
+
+
+ #customadd-note-textarea textarea {
+
+    padding: 15px 12px;
+    height: 50px;
+   
+}
