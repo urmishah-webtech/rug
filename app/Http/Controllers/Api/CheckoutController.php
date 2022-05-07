@@ -46,4 +46,25 @@ class CheckoutController extends Controller
             'dataget' => $data,
             ]);
     }
+    public function updateAddress(Request $request, $id)
+    {
+    	$addshipping = CustomerAddress::where('id',$id)->update([	
+				'first_name'=> $request->first_name,
+				'last_name' => $request->last_name,
+				'address' => $request->address,
+				'city' => $request->city,
+				'country' => $request->country,
+				'state' => $request->state,
+				'postal_code' => $request->postal_code,
+				'email' => $request->email,
+				'mobile_no' => $request->mobile_no,
+			]);
+    	
+        $data = CustomerAddress::where('user_id',$request->user_id)->first();
+    	return response()->json([
+		    'success' => true, 
+		    'data'    => $addshipping,
+            'dataget' => $data,
+            ]);
+    }
 }
