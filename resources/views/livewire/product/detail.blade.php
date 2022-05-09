@@ -123,25 +123,9 @@
                
                <div class="card product-media-card"  wire:ignore>
                   
-                  <div class="card-header upload-media-header">
-                     
-                     <h3 class="fs-16 fw-6 m-0">Media</h3>
-                     
-                     <button class="link add-media-url-btn">Add media from URL <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-                  
-                     <ul class="add-media-dropdown">
-                        
-                        <li><button class="link">Edit options</button></li>
-                        
-                        <li><button class="link">Reorder variants</button></li>
-                        
-                     </ul>
-                  
-                  </div>
-               
                   <div class="media-delete-option">
                      
-                     <label class="all-select-media"><input type="checkbox" name="option2a" id="select-all"><span class="count-image"></span> Media </label>
+                     <label class="all-select-media"><input type="checkbox" name="option2a" id="select-all" wire:model="select_all_images"><span class="count-image"></span> Media  <span class="text-danger">*</span> </label>
                      
                      <a wire:click.prevent="deleteimage()" class="link warning delete-media">Delete media</a>
                      
@@ -164,7 +148,7 @@
                                     
                                  <li class="ui-state-default image-avalible remove-image" data-order=0 data-id="'+file.lastModified+'">
                                        <div class="file-upload-overlay">
-                                          <input type="checkbox" name="removeimage" wire:model="removeimage" value="{{$row->id}}" class="image-checkbox">
+                                          <input type="checkbox" name="productimage" wire:model="productimage" value="{{$row}}" class="image-checkbox">
                                        </div>
                                        <img src="{{ asset('storage/'.$row->image) }}" style="width:100%;" /> 
                                        <div class="order-number">0</div>
@@ -434,11 +418,7 @@
                                                    <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                                    <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
                                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit stock</a></li>
-                                                   <!-- <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit barcodes</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('edit-hs-codes-modal').style.display='block'">Edit HS codes</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('edit-country-codes-modal').style.display='block'">Edit country/region of origin</a></li> -->
+                                                 
                                                 </ul>
                                              </div>
                                           </div>
@@ -476,24 +456,7 @@
                                                 </div>
                                              </div>
                                           </div>
-                                          <!--Edit SKUs modal-->
-                                          <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal">
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit SKUs</h2>
-                                                      <span onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body  attribute-sku-value">
-                                                      
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button secondary">Cancel</a>
-                                                      <a onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="button green-btn">Done</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
+                                         
                                           
                                           <!--Edit barcodes modal-->
                                           <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal">
@@ -515,124 +478,13 @@
                                           </div>
                                           
                                           
-                                          <!--Edit HS codes modal-->
-                                          <div id="edit-hs-codes-modal" class="customer-modal-main variants-edit-option-modal">
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit HS codes</h2>
-                                                      <span onclick="document.getElementById('edit-hs-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                      <div class="row side-elements align-item-bt">
-                                                         <div class="form-field-list">
-                                                            <label>HS (Harmonized System) code</label>
-                                                            <input type="search" id="apply-hscode" value="" placeholder="Search or enter a HS code">
-                                                         </div>
-                                                         <a class="button fw-6" id="apply-hscode-submit">Apply to all</a>
-                                                      </div>
-                                                      <p class="ta-left mb-0">Manually enter codes that are longer than 6 numbers.</p>
-                                                      <div class="attribute-hscode-value">
-                                                         
-                                                      </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <a class="button secondary">Cancel</a>
-                                                      <a class="button green-btn">Done</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
+                                       
                                           
-                                          <!--Edit country codes of origin modal-->
-                                          <div id="edit-country-codes-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit country codes of origin</h2>
-                                                      <span onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                      <div class="row side-elements align-item-bt">
-                                                         <div class="form-field-list">
-                                                            <label>Country/Region of origin</label>
-                                                            <select id="apply-country">
-                                                               <option value="">Select country/region</option>
-                                                               <option value="1">Afghanistan</option>
-                                                               <option value="2">india</option>
-                                                               <option value="3">Greenland</option>
-                                                            </select>
-                                                         </div>
-                                                         <a class="button fw-6" id="apply-country-submit">Apply to all</a>
-                                                      </div>
-                                                      <p class="ta-left mb-0">In most cases, where the product is manufactured.</p>
-                                                      <div class="attribute-country-value">
-                                                         
-                                                      </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button secondary">Cancel</a>
-                                                      <a onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="button green-btn">Done</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
+                                    
                                           
                                           
                                           <!--Edit quantities modal-->
-                                          <div id="edit-quantities-modal" class="customer-modal-main">
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit quantities</h2>
-                                                      <span onclick="document.getElementById('edit-quantities-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                      <div class="first-modal">
-                                                         <p class="mb-0">Choose a location where you want to edit quantities.</p>
-                                                         <div>
-                                                            
-                                                            @foreach($location as $local_row)
-                                                            <a class="link location_name" id="{{$local_row->id}}" data-toggle="modal" data-target="#edit-quantities-details-modal-{{$local_row->id}}" data-dismiss="modal">{{$local_row->name}} <span><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></span></a>
-                                                            
-                                                            
-                                                            <!--Edit quantities modal-->
-                                                            <div id="edit-quantities-details-modal-{{$local_row->id}}" class="customer-modal-main ">
-                                                               <div class="customer-modal-inner">
-                                                                  <div class="customer-modal">
-                                                                     <div class="modal-header">
-                                                                        <h2>Edit quantities</h2>
-                                                                        <span  data-dismiss="modal" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                                     </div>
-                                                                     <div class="modal-body">
-                                                                        
-                                                                        <p class="mb-0">Editing quantities at <span class="fw-6">{{$local_row->name}}</span></p>
-                                                                        <input type="hidden" name="variantsid[]" value="{{$local_row->id}}">
-                                                                        <div class="attribute-stock-value" id="location_{{$local_row->id}}">
-                                                                        </div>
-                                                                        
-                                                                     </div>
-                                                                     <div class="modal-footer">
-                                                                        <button class="button secondary"  data-dismiss="modal">Cancel</button>
-                                                                        <button class="button secondary green-btn"  data-dismiss="modal">Done</button>
-                                                                     </div>
-                                                                  </div>
-                                                               </div>
-                                                            </div>
-                                                            @endforeach
-                                                         </div>
-                                                      </div>
-                                                      <div class="second-modal">
-                                                         <p>Inventory can’t be edited because no variants are stocked at <span class="fw-6">Armada.</span></p>
-                                                         <p>Inventory can’t be edited at <span class="fw-6">H-28, Sector 63 </span>because no variants have quantity tracking turned on.</p>
-                                                      </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <button class="button secondary" data-dismiss="modal">Cancel</button>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
+                                          
                                           <div class="row pl-3 pt-3">
                                              <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
                                                 <input type="submit" class="button" name="submit" id="master-save" value="save">
@@ -662,8 +514,8 @@
                      <div class="header-title">
                         <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                      </div>
-                     <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="{{$product['custom_variant']}}" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant" @if($product['custom_variant']) checked="checked" @endif>Custome Price</label>
-                     <div class="card-cutome-arrtibute one-half-row-card" @if($product['custom_variant']) style="display: none;" @endif wire:ignore>
+                     <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="{{$product->custom_variant}}" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant" @if($product->custom_variant) checked="checked" @endif>Custome Price</label>
+                     <div class="card-cutome-arrtibute one-half-row-card">
                         
                         @foreach($variantag as $key2 => $row)
                         @if($this->varientsarray)
@@ -939,10 +791,11 @@
                         <div class="search-collections-checkbox filter_email_subscription_status dropdowncustomhide" style="list-style-type: none">
                            
                            @foreach($Collection as $key=>$row)
-                           <label><input type="checkbox" name="option2a" wire:model.lazy="productCollection" value="{{$key}}">{{$row[0]['title']}}</label>
+                           <label><input type="checkbox" name="option2a" wire:model.lazy="product.collection" value="{{$key}}">{{$row[0]['title']}}</label>
                            @endforeach
                         </div>
-                        @if(!empty($product->collection)&&  count($product->collection) > 0)
+
+                        @if(!empty($product->collection) &&  count($product->collection) > 0)
                         @foreach($product->collection as $checking)
                         @if(isset($Collection[$checking]))
                         <label> {{$Collection[$checking][0]['title']}} </label>
@@ -1282,77 +1135,8 @@
             </div>
          </div>
       </div>
-      <!--Edit quantities modal-->
-      <div>
-         <div  wire:ignore wire:key="edit-quantities-modal" id="edit-quantities-modal" wire:key="edit-quantities-modal" class="customer-modal-main">
-            <div class="customer-modal-inner">
-               <div class="customer-modal">
-                  <div class="modal-header">
-                     <h2>Edit quantities</h2>
-                     <span onclick="document.getElementById('edit-quantities-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                  </div>
-                  <div class="modal-body">
-                     <div class="first-modal">
-                        <p class="mb-0">Choose a location where you want to edit quantities.</p>
-                        <div>
-                           @foreach($location as $local_row)
-                           <a class="link" wire:key="{{$local_row['id']}}"   id="{{$local_row->id}}" wire:click="EditAddress({{ $local_row['id'] }})" >{{$local_row->name}} <span><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 16a.999.999 0 0 1-.707-1.707L11.586 10 7.293 5.707a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-5 5A.997.997 0 0 1 8 16z"></path></svg></span></a>
-                           @endforeach
-                        </div>
-                     </div>
-                     <div class="second-modal">
-                        <p>Inventory can’t be edited because no variants are stocked at <span class="fw-6">Armada.</span></p>
-                        <p>Inventory can’t be edited at <span class="fw-6">H-28, Sector 63 </span>because no variants have quantity tracking turned on.</p>
-                     </div>
-                  </div>
-                  <div class="modal-footer">
-                     <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--Edit quantities modal-->
-      <div>
-         @if($editQuantitiesDetailsModal)
-         <div   wire:ignore wire:key="{{$LocationId->id}}"  id="edit-quantities-details-modal"  style="display: block !important;"  class="customer-modal-main ">
-            <div class="customer-modal-inner">
-               <div class="customer-modal">
-                  <div class="modal-header">
-                     <h2>Edit quantities</h2>
-                     <span wire:ignore wire:key="close_{{$LocationId->id}}" wire:click="closeModel('edit-quantities-details-modal')" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                  </div>
-                  <div class="modal-body">
-                     <p class="mb-0">Editing quantities at <span class="fw-6">@if(!empty($LocationId)) {{$LocationId->name}} @endif</span></p>
-                     @if($variantStock)
-                     @foreach($variantStock as $key => $variantrow)
-                     @if($variantrow->location_id == $LocationId->id)
-                     <div class="vep-list bd_none">
-                        <label> @if($variantrow->product_variant->attribute1 != ""){{$variantrow->product_variant->attribute1}} @endif
-                           @if($variantrow->product_variant->attribute2 != "")/{{$variantrow->product_variant->attribute2}} @endif
-                           @if($variantrow->product_variant->attribute3 != "")/{{$variantrow->product_variant->attribute3}} @endif
-                           @if($variantrow->product_variant->attribute4 != "")/{{$variantrow->product_variant->attribute4}} @endif
-                           @if($variantrow->product_variant->attribute5 != "")/{{$variantrow->product_variant->attribute5}} @endif
-                           @if($variantrow->product_variant->attribute6 != "")/{{$variantrow->product_variant->attribute6}} @endif
-                           @if($variantrow->product_variant->attribute7 != "")/{{$variantrow->product_variant->attribute7}} @endif
-                           @if($variantrow->product_variant->attribute8 != "")/{{$variantrow->product_variant->attribute8}} @endif
-                           @if($variantrow->product_variant->attribute9 != "")/{{$variantrow->product_variant->attribute9}} @endif
-                        @if($variantrow->product_variant->attribute10 != "")/{{$variantrow->product_variant->attribute10}} @endif</label>
-                        <input type="number" wire:key="{{ $key }}" wire:model.lazy="variantStock.{{ $key }}.stock" class="att_stock_class" wire:ignore>
-                     </div>
-                     @endif
-                     @endforeach
-                     @endif
-                  </div>
-                  <div class="modal-footer">
-                     <button class="button secondary"  wire:click="closeModel('edit-quantities-details-modal')" data-dismiss="modal">Cancel</button>
-                     <button class="button secondary green-btn"  wire:click="closeModel('edit-quantities-details-modal')" >Done</button>
-                  </div>
-               </div>
-            </div>
-         </div>
-         @endif
-      </div>
+    
+    
       <!--Edit option values modal-->
       <div id="edit-option-values-modal" class="customer-modal-main">
          <div class="customer-modal-inner">
@@ -1390,38 +1174,7 @@
             </div>
          </div>
       </div>
-      <!--Edit SKUs modal-->
-      <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal" wire:ignore>
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit SKUs</h2>
-                  <span onclick="document.getElementById('variants-edit-skus-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  @foreach ($product->variants as $key => $variantrow)
-                  <div class="vep-list">
-                     <label> @if($variantrow->attribute1 != ""){{$variantrow->attribute1}} @endif
-                        @if($variantrow->attribute2 != "")/{{$variantrow->attribute2}} @endif
-                        @if($variantrow->attribute3 != "")/{{$variantrow->attribute3}} @endif
-                        @if($variantrow->attribute4 != "")/{{$variantrow->attribute4}} @endif
-                        @if($variantrow->attribute5 != "")/{{$variantrow->attribute5}} @endif
-                        @if($variantrow->attribute6 != "")/{{$variantrow->attribute6}} @endif
-                        @if($variantrow->attribute7 != "")/{{$variantrow->attribute7}} @endif
-                        @if($variantrow->attribute8 != "")/{{$variantrow->attribute8}} @endif
-                        @if($variantrow->attribute9 != "")/{{$variantrow->attribute9}} @endif
-                     @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif </label>
-                     <input type="text"  wire:model.debounce.lazy="Productvariant.{{ $key }}.sku">
-                  </div>
-                  @endforeach
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn" onclick="document.getElementById('variants-edit-skus-modal').style.display='none'">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
+     
       <!--Edit barcodes modal-->
       <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal" wire:ignore>
          <div class="customer-modal-inner">
@@ -1454,78 +1207,7 @@
             </div>
          </div>
       </div>
-      <!--Edit HS codes modal-->
-      <div id="edit-hs-codes-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit HS codes</h2>
-                  <span onclick="document.getElementById('edit-hs-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <div class="row side-elements align-item-bt">
-                     <div class="form-field-list">
-                        <label>HS (Harmonized System) code</label>
-                        <input type="search" placeholder="Search or enter a HS code">
-                     </div>
-                     <button class="button fw-6">Apply to all</button>
-                  </div>
-                  <p class="ta-left mb-0">Manually enter codes that are longer than 6 numbers.</p>
-                  @foreach ($product->variants as $key => $variantrow)
-                  <div class="vep-list">
-                     <label> @if($variantrow->attribute1 != ""){{$variantrow->attribute1}} @endif
-                        @if($variantrow->attribute2 != "")/{{$variantrow->attribute2}} @endif
-                        @if($variantrow->attribute3 != "")/{{$variantrow->attribute3}} @endif
-                        @if($variantrow->attribute4 != "")/{{$variantrow->attribute4}} @endif
-                        @if($variantrow->attribute5 != "")/{{$variantrow->attribute5}} @endif
-                        @if($variantrow->attribute6 != "")/{{$variantrow->attribute6}} @endif
-                        @if($variantrow->attribute7 != "")/{{$variantrow->attribute7}} @endif
-                        @if($variantrow->attribute8 != "")/{{$variantrow->attribute8}} @endif
-                        @if($variantrow->attribute9 != "")/{{$variantrow->attribute9}} @endif
-                     @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif </label>
-                     <input type="text"  wire:model.debounce.lazy="product.variants.{{ $key }}.hscode">
-                  </div>
-                  @endforeach
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn" onclick="document.getElementById('edit-hs-codes-modal').style.display='none'">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--Edit country codes of origin modal-->
-      <div id="edit-country-codes-modal" class="customer-modal-main variants-edit-option-modal">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit country codes of origin</h2>
-                  <span onclick="document.getElementById('edit-country-codes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <div class="row side-elements align-item-bt">
-                     <div class="form-field-list">
-                        <label>Country/Region of origin</label>
-                        <select id="apply-country">
-                           <option value="">Select country/region</option>
-                           <option value="1">Afghanistan</option>
-                           <option value="2">india</option>
-                           <option value="3">Greenland</option>
-                        </select>
-                     </div>
-                     <a class="button fw-6" id="apply-country-submit">Apply to all</a>
-                  </div>
-                  <p class="ta-left mb-0">In most cases, where the product is manufactured.</p>
-                  <div class="attribute-country-value">
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
+   
       @endif
       <!-- END -->
 
@@ -1539,150 +1221,308 @@
          $('#custom_variant').on('change', function(){
          this.value = this.checked ? 1 : 0;
          });
-         $(document).ready(function() {
-         // $('.save-button').prop('disabled', true);
-         $('form').keyup(function() {
-         if($(this).val() != '') {
-         $('.save-button').prop('disabled', false);
-         }
-         });
-         });
-         $(document).ready(function(){
-         //  var answer = $('#showvarient');
-         console.log($('.custom_variant_checked').is(':checked'));
-         if($('.custom_variant_checked').is(':checked')){
-         $('.card-cutome-arrtibute').slideToggle(500);
-         } else  {
-         $('.card-cutome-arrtibute').slideUp(500);
-         }
-         });
 
-         $(document).ready(function(){
-
-         if ($(".CustomVariant_checkox" ).is(':checked')) {
-         $('.CustomVariant_wrap').addClass("CustomVariant_active");
-         }else{
-         $('.CustomVariant_wrap').removeClass("CustomVariant_active");
-         }
-         $( ".click-varients-type" ).click(function() {
-         window.livewire.emit('UpdateVarient', 'add-varient-type');
-         $('.main-variant-card .card-middle-varient').toggle("slide");
-
-         });
-
-         $( ".edit-website-Attribute" ).click(function() {
-
-         $('.main-variant-attribute .card-middle-arrtibute').toggle("slide");
-
-         });
-
-         $( ".CustomVariant_checkox" ).click(function() {
-
-         if ($(".CustomVariant_checkox" ).is(':checked')) {
-         $('.CustomVariant_wrap').addClass("CustomVariant_active");
-         }else{
-         $('.CustomVariant_wrap').removeClass("CustomVariant_active");
-         }
-
-         });
-
-
-         });
          $(document).on("click", '#apply-price-selling-submit', function() {
-         var val = $('.apply-selling-price').val();
-         $('.att_price_selling_class').attr("value", val);
+            var val = $('.apply-selling-price').val();
+            $('.att_price_selling_class').attr("value", val);
          });
+        
+         $(document).ready(function(){
+            $( ".edit-update-Attribute" ).click(function() {
+            $('.card-cutome-arrtibute').slideToggle(500);
+            });
+
+            $('#update-all-tags').click(function() {
+
+
+
+            document.getElementsByClassName('selected_tags')[0].innerHTML = '';
+
+
+
+            var exist_tags = $('#tags').val().split(',');
+
+
+
+            var exist = '';
+
+
+
+            console.log( exist_tags);
+
+
+
+
+
+
+
+            for (var i = 0; i < exist_tags.length; i++) {
+
+
+
+            if(exist_tags[i] != '') {
+
+
+
+            if(i == 0) {
+
+
+
+            exist = exist_tags[i];
+
+
+
+
+
+
+
+            } else {
+
+
+
+            exist = exist_tags[i]+','+exist;
+
+
+
+
+
+
+
+            }
+
+
+
+            $('.selected_tags').append('<span class="tag grey fs-13">'+exist_tags[i]+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
+
+
+
+            }
+
+
+
+            }
+
+
+
+            $('#customer_tags').first().val(exist);
+
+
+
+
+
+
+
+            });
+
+
+
+            $(document).on('click','.tag_added',function(){
+
+
+
+            console.log('tag-added');
+
+
+
+            var exist =  $('#customer_tags').first().val();
+
+
+
+
+
+
+
+            $('#customer_tags').first().val(exist+','+this.innerText);
+
+
+
+
+
+
+
+            $('.selected_tags').append('<span class="tag grey fs-13">'+this.innerText+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
+
+
+
+            $(this).hide();
+
+
+
+            });
+            $('.product-edite-variants a').click(function() {
+
+            $('.edite-variants-dropdown').slideToggle();
+
+            $('.all-location-dropdown').hide();
+
+            $('.variants-option-dropdown').hide();
+
+            $('.add-media-dropdown').hide();
+
+            });
+
+            $('.product-all-location button').click(function() {
+
+            $('.all-location-dropdown').slideToggle();
+
+            $('.edite-variants-dropdown').hide();
+
+            $('.variants-option-dropdown').hide();
+
+            $('.add-media-dropdown').hide();
+
+            });
+
+            $('.variants-option-btn').click(function() {
+
+            $('.variants-option-dropdown').slideToggle();
+
+            $('.edite-variants-dropdown').hide();
+
+            $('.all-location-dropdown').hide();
+
+            $('.add-media-dropdown').hide();
+
+            });
+
+            $('.add-media-url-btn').click(function() {
+
+            $('.add-media-dropdown').slideToggle();
+
+            $('.edite-variants-dropdown').hide();
+
+            $('.all-location-dropdown').hide();
+
+            $('.variants-option-dropdown').hide();
+
+            });
+
+            console.log($('.custom_variant_checked').is(':checked'));
+            if($('.custom_variant_checked').is(':checked')){
+               $('.card-cutome-arrtibute').slideToggle(500);
+            } else  {
+               $('.card-cutome-arrtibute').slideUp(500);
+            }
+
+            $('form').keyup(function() {
+               if($(this).val() != '') {
+               $('.save-button').prop('disabled', false);
+               }
+            });
+
+            if ($(".CustomVariant_checkox" ).is(':checked')) {
+               $('.CustomVariant_wrap').addClass("CustomVariant_active");
+            }else{
+               $('.CustomVariant_wrap').removeClass("CustomVariant_active");
+            }
+
+            $( ".click-varients-type" ).click(function() {
+               window.livewire.emit('UpdateVarient', 'add-varient-type');
+               $('.main-variant-card .card-middle-varient').toggle("slide");
+
+            });
+
+            $( ".edit-website-Attribute" ).click(function() {
+
+               $('.main-variant-attribute .card-middle-arrtibute').toggle("slide");
+
+            });
+
+            $( ".CustomVariant_checkox" ).click(function() {
+
+               if ($(".CustomVariant_checkox" ).is(':checked')) {
+                  $('.CustomVariant_wrap').addClass("CustomVariant_active");
+               }else{
+                  $('.CustomVariant_wrap').removeClass("CustomVariant_active");
+               }
+
+            });
 
 
          
-         $(document).ready(function () {
-         var arr_list_items = [];
-         var rowIdx = 1;
-         var flag = 1;
-         $(document.body).on('click','.addBtn', function() {
+            var arr_list_items = [];
+            var rowIdx = 1;
+            var flag = 1;
+            $(document.body).on('click','.addBtn', function() {
 
-         var attrinbute = $('.varition-type-value').val();
-         var variants_tag = $('.variant-tags-error').val();
+               var attrinbute = $('.varition-type-value').val();
+               var variants_tag = $('.variant-tags-error').val();
 
-         x = Math.random().toString(36).substr(2, 9);
-
-
-         console.log(x)
-         if(flag < 4) {
-         if(attrinbute == "" && variants_tag == "")
-         {
-
-         if(attrinbute == "")
-         {
-
-         $('.varition-type-value').css('border-color', 'red');
-
-         }
-
-         if(variants_tag == "")
-         {
-         $('.variant-tags-error').css('border-color', 'red');
-         }
-         }
-         else
-         {
-         if(attrinbute != "")
-         {
-
-         $('.varition-type-value').css('border-color', 'green');
-         }
-
-         $(".varition-append").append(`
-
-         <div id="R${++rowIdx}">
-         <label class="form-label fs-14 fw-6">Option ${rowIdx}</label>
-
-         <div class="row">
-         <select name="size[]" class="varition-type-value" id="varition_type_${rowIdx}">
-         <option value="">-- Select Option --</option>
-         <?php foreach($variantag as $row) { ?>
-         ` +  ($.inArray(`<?php echo $row->id; ?>`, arr_list_items) == -1 ? '<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>': '') +`
-         <?php  } ?>
+               x = Math.random().toString(36).substr(2, 9);
 
 
-         </select>
+               if(flag < 4) {
+                  if(attrinbute == "" && variants_tag == "")
+                  {
 
-         <input type="text" class="varition_tags variant-tags-error" id="varition_tags_${rowIdx}" value="" name="option" data-role="tagsinput" placeholder="Separate options with a comma">
+                     if(attrinbute == "")
+                     {
 
-         </div>
-         <div class="row variant_fixed_price">
-         <input type="number" value="" name="variant_custom_price[]" class="variant-tags-error" id="custom_price_tags_${rowIdx}" placeholder="Variant Price">
-         </div>
-         </div>
-         </div>
+                        $('.varition-type-value').css('border-color', 'red');
+
+                     }
+
+                     if(variants_tag == "")
+                     {
+                        $('.variant-tags-error').css('border-color', 'red');
+                     }
+                  }
+                  else
+                  {
+                     if(attrinbute != "")
+                     {
+
+                        $('.varition-type-value').css('border-color', 'green');
+                     }
+
+                     $(".varition-append").append(`
+
+                     <div id="R${++rowIdx}">
+                     <label class="form-label fs-14 fw-6">Option ${rowIdx}</label>
+
+                     <div class="row">
+                     <select name="size[]" class="varition-type-value" id="varition_type_${rowIdx}">
+                     <option value="">-- Select Option --</option>
+                     <?php foreach($variantag as $row) { ?>
+                     ` +  ($.inArray(`<?php echo $row->id; ?>`, arr_list_items) == -1 ? '<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>': '') +`
+                     <?php  } ?>
 
 
-         `);
+                     </select>
 
-         //$('#varition_type_'+rowIdx).find('option:selected').remove().end();
+                     <input type="text" class="varition_tags variant-tags-error" id="varition_tags_${rowIdx}" value="" name="option" data-role="tagsinput" placeholder="Separate options with a comma">
 
-         $('.varition_tags').tagsinput({
-         allowDuplicates: true
-         });
+                     </div>
+                     <div class="row variant_fixed_price">
+                     <input type="number" value="" name="variant_custom_price[]" class="variant-tags-error" id="custom_price_tags_${rowIdx}" placeholder="Variant Price">
+                     </div>
+                     </div>
+                     </div>
 
-         flag++;
 
-         if(flag == 4) {
+                     `);
 
-         $('.addBtn').css('display', 'none');
 
-         }
-         }
-         }
+                     $('.varition_tags').tagsinput({
+                        allowDuplicates: true
+                     });
 
-         });
+                     flag++;
 
-         $(document).on("change", '.varition-type-value', function() {
-         var selecetval = $(this).val();
-         arr_list_items.push(selecetval);
+                     if(flag == 4) {
+                        $('.addBtn').css('display', 'none');
+                     }
 
-         console.log(arr_list_items);
-         });
+                  }
+               }
+
+            });
+
+            $(document).on("change", '.varition-type-value', function() {
+               var selecetval = $(this).val();
+               arr_list_items.push(selecetval);
+
+            });
 
 
          });
@@ -1690,102 +1530,102 @@
 
          $(document).on("change", '.varition_tags', function() {
 
-         var mainid = $(this).attr('id');
+            var mainid = $(this).attr('id');
 
-         var id_type1 = $('#varition_type_1').val();
-         var id_type2 = $('#varition_type_2').val();
-         var id_type3 = $('#varition_type_3').val();
-         var id_type4 = $('#varition_type_4').val();
-         var id_type5 = $('#varition_type_5').val();
-         var id_type6 = $('#varition_type_6').val();
-         var id_type7 = $('#varition_type_7').val();
-         var id_type8 = $('#varition_type_8').val();
-         var id_type9 = $('#varition_type_9').val();
-         var id_type10 = $('#varition_type_10').val();
+            var id_type1 = $('#varition_type_1').val();
+            var id_type2 = $('#varition_type_2').val();
+            var id_type3 = $('#varition_type_3').val();
+            var id_type4 = $('#varition_type_4').val();
+            var id_type5 = $('#varition_type_5').val();
+            var id_type6 = $('#varition_type_6').val();
+            var id_type7 = $('#varition_type_7').val();
+            var id_type8 = $('#varition_type_8').val();
+            var id_type9 = $('#varition_type_9').val();
+            var id_type10 = $('#varition_type_10').val();
 
-         var id1 = $('#varition_tags_1').val();
-         var id2 = $('#varition_tags_2').val();
-         var id3 = $('#varition_tags_3').val();
-         var id4 = $('#varition_tags_4').val();
-         var id5 = $('#varition_tags_5').val();
-         var id6 = $('#varition_tags_6').val();
-         var id7 = $('#varition_tags_7').val();
-         var id8 = $('#varition_tags_8').val();
-         var id9 = $('#varition_tags_9').val();
-         var id10 = $('#varition_tags_10').val();
-
-
-
-         if(id1 != null && id1.length > 0) {
-         var arr11 = id1.split(',');
-         var arrlegth1 =  id1.length;
-         var arr1 = arr11;
-         }
-
-         if(id2 != null && id2.length > 0) {
-         var arr22 = id2.split(',');
-         var arrlegth2 =  id2.length;
-         var arr2 = arr22;
-         }
-
-         if(id3 != null && id3.length > 0) {
-         var arr33 = id3.split(',');
-         var arrlegth3 =  id3.length;
-         var arr3 = arr33;
-         }
-
-         if(id4 != null && id4.length > 0) {
-         var arr44 = id4.split(',');
-         var arrlegth4 =  id4.length;
-         var arr4 = arr44;
-         }
-
-         if(id5 != null && id5.length > 0) {
-         var arr55 = id5.split(',');
-         var arrlegth5 =  id5.length;
-         var arr5 = arr55;
-         }
-
-         if(id6 != null && id6.length > 0) {
-         var arr66 = id6.split(',');
-         var arrlegth6 =  id6.length;
-         var arr6 = arr66;
-         }
-
-         if(id7 != null && id7.length > 0) {
-         var arr77 = id7.split(',');
-         var arrlegth7 =  id7.length;
-         var arr7 = arr77;
-         }
-
-         if(id8 != null && id8.length > 0) {
-         var arr88 = id8.split(',');
-         var arrlegth8 =  id8.length;
-         var arr8 = arr88;
-         }
-
-         if(id9 != null && id9.length > 0) {
-         var arr99 = id9.split(',');
-         var arrlegth9 =  id9.length;
-         var arr9 = arr99;
-         }
+            var id1 = $('#varition_tags_1').val();
+            var id2 = $('#varition_tags_2').val();
+            var id3 = $('#varition_tags_3').val();
+            var id4 = $('#varition_tags_4').val();
+            var id5 = $('#varition_tags_5').val();
+            var id6 = $('#varition_tags_6').val();
+            var id7 = $('#varition_tags_7').val();
+            var id8 = $('#varition_tags_8').val();
+            var id9 = $('#varition_tags_9').val();
+            var id10 = $('#varition_tags_10').val();
 
 
-         if(id10 != null && id10.length > 0) {
-         var arr1010 = id10.split(',');
-         var arrlegth10 =  id10.length;
-         var arr10 = arr1010;
-         }
+
+            if(id1 != null && id1.length > 0) {
+            var arr11 = id1.split(',');
+            var arrlegth1 =  id1.length;
+            var arr1 = arr11;
+            }
+
+            if(id2 != null && id2.length > 0) {
+            var arr22 = id2.split(',');
+            var arrlegth2 =  id2.length;
+            var arr2 = arr22;
+            }
+
+            if(id3 != null && id3.length > 0) {
+            var arr33 = id3.split(',');
+            var arrlegth3 =  id3.length;
+            var arr3 = arr33;
+            }
+
+            if(id4 != null && id4.length > 0) {
+            var arr44 = id4.split(',');
+            var arrlegth4 =  id4.length;
+            var arr4 = arr44;
+            }
+
+            if(id5 != null && id5.length > 0) {
+            var arr55 = id5.split(',');
+            var arrlegth5 =  id5.length;
+            var arr5 = arr55;
+            }
+
+            if(id6 != null && id6.length > 0) {
+            var arr66 = id6.split(',');
+            var arrlegth6 =  id6.length;
+            var arr6 = arr66;
+            }
+
+            if(id7 != null && id7.length > 0) {
+            var arr77 = id7.split(',');
+            var arrlegth7 =  id7.length;
+            var arr7 = arr77;
+            }
+
+            if(id8 != null && id8.length > 0) {
+            var arr88 = id8.split(',');
+            var arrlegth8 =  id8.length;
+            var arr8 = arr88;
+            }
+
+            if(id9 != null && id9.length > 0) {
+            var arr99 = id9.split(',');
+            var arrlegth9 =  id9.length;
+            var arr9 = arr99;
+            }
 
 
-         var get_html = '';
-         var get_price_html = '';
-         var get_selling_price_html = '';
-         var get_sku_html = '';
-         var get_barcode_html = '';
-         var get_hscode_html = '';
-         var get_country_html = '';
-         var get_stock_html = '';
+            if(id10 != null && id10.length > 0) {
+            var arr1010 = id10.split(',');
+            var arrlegth10 =  id10.length;
+            var arr10 = arr1010;
+            }
+
+
+            var get_html = '';
+            var get_price_html = '';
+            var get_selling_price_html = '';
+            var get_sku_html = '';
+            var get_barcode_html = '';
+            var get_hscode_html = '';
+            var get_country_html = '';
+            var get_stock_html = '';
 
          if(id1 != null && id1.length > 0)
          {
@@ -2106,67 +1946,67 @@
 
          $(document).on("change", '.att_stock_qtn_class', function() {
 
-         var id_value = $(this).attr('id');
+            var id_value = $(this).attr('id');
 
-         var id1 = $('#'+id_value).val();
+            var id1 = $('#'+id_value).val();
 
-         $("#"+id_value).attr("value", id1);
+            $("#"+id_value).attr("value", id1);
 
 
          });
 
          $(document).on("click", '#apply-country-submit', function() {
 
-         var val = $('#apply-country').val();
+            var val = $('#apply-country').val();
 
-         $('.att_country_class').each(function(){
-         $(this).val(val);
-         });
+            $('.att_country_class').each(function(){
+            $(this).val(val);
+            });
 
          });
 
 
          $(document).on("click", '#apply-price-submit', function() {
-         var val = $('.apply-price').val();
+            var val = $('.apply-price').val();
 
-         $('.att_price_class').attr("value", val);
+            $('.att_price_class').attr("value", val);
          });
 
 
          $(document).on("change", '.att_price_class', function() {
 
-         var id_value = $(this).attr('id');
-         var dataid = $(this).data('id');
+            var id_value = $(this).attr('id');
+            var dataid = $(this).data('id');
 
-         var id1 = $('#'+id_value).val();
+            var id1 = $('#'+id_value).val();
 
-         $("#"+id_value).attr("value", id1);
+            $("#"+id_value).attr("value", id1);
 
-         $("#price-view-"+dataid).html(id1);
+            $("#price-view-"+dataid).html(id1);
          });
 
          $(document).on("change", '.att_sku_class', function() {
 
-         var id_value = $(this).attr('id');
+            var id_value = $(this).attr('id');
 
-         var id1 = $('#'+id_value).val();
+            var id1 = $('#'+id_value).val();
 
-         $('#'+id_value).attr("value", id1);
+            $('#'+id_value).attr("value", id1);
 
          });
 
          $(document).on("click", '#apply-hscode-submit', function() {
-         var val = $('#apply-hscode').val();
-         $('.att_hscode_class').attr("value", val);
+            var val = $('#apply-hscode').val();
+            $('.att_hscode_class').attr("value", val);
          });
 
          $(document).on("change", '.att_hscode_class', function() {
 
-         var id_value = $(this).attr('id');
+            var id_value = $(this).attr('id');
 
-         var id1 = $('#'+id_value).val();
+            var id1 = $('#'+id_value).val();
 
-         $("#"+id_value).attr("value", id1);
+            $("#"+id_value).attr("value", id1);
 
 
          });
@@ -2174,28 +2014,27 @@
 
 
          $(document).on("click", '.modal-footer .button.green-btn', function() {
-         var thisid = $(this).data("recordid");
-         //$(".varition_popup_main."+thisid).data("input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-         $(".product-table-item ."+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-         $("#cost-data-input-"+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
-         $("#sku-data-input-"+thisid).attr("data-input", $('#sku-input').val());
-         $("#barcode-data-input-"+thisid).attr("data-input", $('#barcode-input').val());
-         $("#hscode-data-input-"+thisid).attr("data-input", $('#hscode-input').val());
-         $("#profit-data-input-"+thisid).attr("data-input", $('.Profit-get-value').val());
-         $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
-         $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-         $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-         $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
-         $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
-         $("#child-popup-stock-qtn-"+thisid).attr("value", $('#barcode-input').val());
-         $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
-         $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
-         $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());
+            var thisid = $(this).data("recordid");
+            $(".product-table-item ."+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+            $("#cost-data-input-"+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
+            $("#sku-data-input-"+thisid).attr("data-input", $('#sku-input').val());
+            $("#barcode-data-input-"+thisid).attr("data-input", $('#barcode-input').val());
+            $("#hscode-data-input-"+thisid).attr("data-input", $('#hscode-input').val());
+            $("#profit-data-input-"+thisid).attr("data-input", $('.Profit-get-value').val());
+            $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
+            $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+            $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
+            $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
+            $("#child-popup-stock-qtn-"+thisid).attr("value", $('#barcode-input').val());
+            $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
+            $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
+            $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());
 
 
-         //$(".product-table-item ."+thisid).attr("data-input", "Hello");
+            //$(".product-table-item ."+thisid).attr("data-input", "Hello");
 
-         $('.openpopup').modal('hide');
+            $('.openpopup').modal('hide');
 
 
          });
@@ -2546,59 +2385,6 @@
 
 
 
-         $(document).ready(function() {
-
-         $('.product-edite-variants a').click(function() {
-
-         $('.edite-variants-dropdown').slideToggle();
-
-         $('.all-location-dropdown').hide();
-
-         $('.variants-option-dropdown').hide();
-
-         $('.add-media-dropdown').hide();
-
-         });
-
-         $('.product-all-location button').click(function() {
-
-         $('.all-location-dropdown').slideToggle();
-
-         $('.edite-variants-dropdown').hide();
-
-         $('.variants-option-dropdown').hide();
-
-         $('.add-media-dropdown').hide();
-
-         });
-
-         $('.variants-option-btn').click(function() {
-
-         $('.variants-option-dropdown').slideToggle();
-
-         $('.edite-variants-dropdown').hide();
-
-         $('.all-location-dropdown').hide();
-
-         $('.add-media-dropdown').hide();
-
-         });
-
-         $('.add-media-url-btn').click(function() {
-
-         $('.add-media-dropdown').slideToggle();
-
-         $('.edite-variants-dropdown').hide();
-
-         $('.all-location-dropdown').hide();
-
-         $('.variants-option-dropdown').hide();
-
-         });
-
-         });
-
-
 
 
          $(function() {
@@ -2670,27 +2456,27 @@
 
          $(document).on("change", '.image-checkbox', function() {
 
-         var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
+            var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
 
-         if(countCheckedCheckboxes > 0)
+            if(countCheckedCheckboxes > 0)
 
-         {
+            {
 
-         $('#select-all').prop("checked", true);
+            $('#select-all').prop("checked", true);
 
-         $('.count-image').text(countCheckedCheckboxes);
+            $('.count-image').text(countCheckedCheckboxes);
 
-         }
+            }
 
-         else
+            else
 
-         {
+            {
 
-         $('#select-all').removeAttr('checked');
+            $('#select-all').removeAttr('checked');
 
-         $('.count-image').text('');
+            $('.count-image').text('');
 
-         }
+            }
 
          });
 
@@ -2747,9 +2533,7 @@
          }
 
 
-         $(document).ready(function() {
-         console.log('adasdas' + $('.ui-state-default').length);
-         });
+         
          $(document).on('DOMNodeRemoved', function(e) {
          if($(e.target).hasClass('ui-state-default')) {
          if($('.ui-state-default').length <= 1) {
@@ -2766,129 +2550,7 @@
 
 
 
-         $(document).ready(function () {
-
-         $('#update-all-tags').click(function() {
-
-
-
-         document.getElementsByClassName('selected_tags')[0].innerHTML = '';
-
-
-
-         var exist_tags = $('#tags').val().split(',');
-
-
-
-         var exist = '';
-
-
-
-         console.log( exist_tags);
-
-
-
-
-
-
-
-         for (var i = 0; i < exist_tags.length; i++) {
-
-
-
-         if(exist_tags[i] != '') {
-
-
-
-         if(i == 0) {
-
-
-
-         exist = exist_tags[i];
-
-
-
-
-
-
-
-         } else {
-
-
-
-         exist = exist_tags[i]+','+exist;
-
-
-
-
-
-
-
-         }
-
-
-
-         $('.selected_tags').append('<span class="tag grey fs-13">'+exist_tags[i]+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
-
-
-
-         }
-
-
-
-         }
-
-
-
-         $('#customer_tags').first().val(exist);
-
-
-
-
-
-
-
-         });
-
-
-
-         $(document).on('click','.tag_added',function(){
-
-
-
-         console.log('tag-added');
-
-
-
-         var exist =  $('#customer_tags').first().val();
-
-
-
-
-
-
-
-         $('#customer_tags').first().val(exist+','+this.innerText);
-
-
-
-
-
-
-
-         $('.selected_tags').append('<span class="tag grey fs-13">'+this.innerText+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
-
-
-
-         $(this).hide();
-
-
-
-         });
-
-
-
-         });
+      
 
          function removeElem(elem) {
 
@@ -2955,11 +2617,7 @@
 
          }
 
-         $(document).ready(function(){
-         $( ".edit-update-Attribute" ).click(function() {
-         $('.card-cutome-arrtibute').slideToggle(500);
-         });
-         });
+      
 
 
 

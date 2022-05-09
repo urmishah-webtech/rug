@@ -21,18 +21,19 @@ class Detail extends Component {
 
     use WithFileUploads;
     public $answer, $question;
-    public $product, $variantag, $tagsale, $Country, $uuid, $Productmedia, $Productvariant, $tags, $location, $variantStock, $variantStock_clone, $descripation, $LocationId, $editQuantitiesDetailsModal, $varition_name, $location_edit, $Collection, $fullStock, $urlpath, $productCollection = [];
+    public $product, $variantag, $tagsale, $Country, $uuid, $Productmedia, $Productvariant, $tags, $location, $variantStock, $variantStock_clone, $descripation, $LocationId, $editQuantitiesDetailsModal, $varition_name, $Collection, $fullStock, $urlpath, $productCollection = [];
     public $image = [], $selectedlocation = [], $stock = [], $locationarray;
     public $att_price = [], $varition_arrray = [];
     public $imgvariant, $varientsarray;
     public $filesvariant = [];
-    public $removeimage = [];
+    public $productimage = [];
     public $variantname = [];
     public $variantid = [];
     public $photo_variant, $file;
     public $productDetail, $existDetailCount = 0;
     public $faq = [];
     public $product_last_key = 0;
+    public $select_all_images = false;
 
     protected $listeners = ['UpdateVarient'];
 
@@ -42,7 +43,7 @@ class Detail extends Component {
         'product.descripation' => 'required', 
         'product.seo_title' => '', 
         'product.seo_descripation' => '', 
-        'product.seo_utl' => ['required', 'unique:product,seo_utl'], 
+        'product.seo_utl' => 'required', 
         'product.product_type' => '', 
         'product.vender' => '', 
         'product.status' => '', 
@@ -70,6 +71,7 @@ class Detail extends Component {
         'product.product_new' => '', 
         'product.featured' => '', 
         'product.custom_variant' => '', 
+        'product.collection' => '', 
         'product.cv_width_height_price' => '', 
         'product.variants.*.selling_price' => '', 
         'product.variants.*.price' => 'required', 
@@ -121,7 +123,6 @@ class Detail extends Component {
         $this->product->location = (array)json_decode($this->product->location);
         $this->product->cv_option_price = (array)json_decode($this->product->cv_option_price);
         $this->product->collection = (array)json_decode($this->product->collection);
-
         $this->product->custom_variant = ($this->product->custom_variant == 1) ? true : false;
         $this->product->featured = ($this->product->featured == 1) ? true : false;
 
@@ -131,22 +132,22 @@ class Detail extends Component {
     }
 
     public function render() {
-        if ($this->filesvariant) {
-            foreach ($this->filesvariant as $photo) {
-                // $file_extension = $photo->extension();
-                $path_url = $photo->storePublicly('media', 'public');
-                $productinsert = ProductMedia::create(['product_id' => $this->product['id'], 'image' => $path_url, ]);
-            }
-            if ($productinsert) {
-                $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
-            }
-        }
-        if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
-            $this->product['product_new'] = json_decode($this->product['product_new']);
-        }
-        if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
-            $this->product['product_new'] = json_decode($this->product['product_new']);
-        }
+        // if ($this->filesvariant) {
+        //     foreach ($this->filesvariant as $photo) {
+        //         // $file_extension = $photo->extension();
+        //         $path_url = $photo->storePublicly('media', 'public');
+        //         $productinsert = ProductMedia::create(['product_id' => $this->product['id'], 'image' => $path_url, ]);
+        //     }
+        //     if ($productinsert) {
+        //         $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
+        //     }
+        // }
+        // if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
+        //     $this->product['product_new'] = json_decode($this->product['product_new']);
+        // }
+        // if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
+        //     $this->product['product_new'] = json_decode($this->product['product_new']);
+        // }
         return view('livewire.product.detail');
     }
      
@@ -156,7 +157,127 @@ class Detail extends Component {
     }
     public function remove($i) {
         unset($this->faq[$i]);
+
     }
+    public function updateDetail() {
+
+        $this->product->seo_utl = str_replace(' ', '-', $this->product->seo_utl);
+        $this->rules["product.seo_utl"] = ['required','unique:product,seo_utl,'.$this->product->id];
+        $validatedData = $this->validate($this->rules);
+        
+        array_pop($this->faq);
+
+        $validatedData['product']['faq'] = json_encode($this->faq, true);
+        $validatedData['product']['location'] =  json_encode($this->product->location);
+        $validatedData['product']['product_new'] = json_encode($this->product->product_new);
+        $validatedData['product']['collection'] = json_encode($this->product->collection); 
+        $validatedData['product']['cv_option_price'] = json_encode($this->product->cv_option_price); 
+
+        $validatedData['variants'] = $validatedData['product']['variants'];
+        unset($validatedData['product']['variants']);
+
+       
+        // date_default_timezone_set('Asia/Kolkata');
+    
+        $updated = Product::where('id', $this->product->id)->update($validatedData['product']);
+        if ($this->image) {
+            foreach ($this->image as $photo) {
+                $path_url = $photo->storePublicly('media', 'public');
+                $mediaimg = ProductMedia::create(['product_id' => $this->product['id'], 'image' => $path_url]);
+            }
+            if ($mediaimg) {
+                $this->image = [];
+                $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
+            }
+        }
+        $this->getProduct();
+
+        // $i = 0;
+        // foreach ($this->varientsarray as $key => $value) {
+        //     if ($this->varientsarray[$key] != "") {
+        //         $price = $this->varientsarray[$i]['price'];
+        //         $varientcheckid = $this->varientsarray[$i]['lable'];
+        //         $custom_variant_Save_arry[] = array('price' => $price, 'lable' => $varientcheckid,);
+        //         $i++;
+        //     }
+        // }
+       
+      
+        // if ($this->variantStock) {
+        //     foreach ($this->variantStock as $stock) {
+        //         VariantStock::where('id', $stock->id)->update(['stock' => $stock->stock]);
+        //     }
+        // }
+        
+        // foreach ($this->Productvariant as $key => $value) {
+        //     $id = $this->Productvariant[$key]['id'];
+        //     $variationValue = ProductVariant::query()->findOrFail($id);
+        //     if ($id) {
+        //         $product_variant_price = (!empty($this->Productvariant[$key]['price'])) ? $this->Productvariant[$key]['price'] : 'NULL';
+        //         $variationValue->update(['price' => $product_variant_price, 'selling_price' => $this->Productvariant[$key]['selling_price'], 'sku' => $this->Productvariant[$key]['sku'], 'barcode' => $this->Productvariant[$key]['barcode'], 'hscode' => $this->Productvariant[$key]['hscode'], 'stock' => $this->Productvariant[$key]['stock']]);
+        //     }
+        // }
+        // if (!empty($this->productDetail)) {
+        //     foreach ($this->productDetail as $detail) {
+        //         $data = ['title' => $detail['title'], 'description' => $detail['description'], ];
+        //         if (isset($detail['id'])) {
+        //             ProductDetail::where('id', $detail['id'])->update($data);
+        //         } else {
+        //             $data['product_id'] = $this->product['id'];
+        //             ProductDetail::create($data);
+        //         }
+        //     }
+        // }
+        // $this->product = Product::where('uuid', $this->uuid)->first();
+        session()->flash('message', 'Product Updated Successfully.');
+    }
+
+    public function deleteproduct($deleteid)
+    {
+        $medias = ProductMedia::where('product_id',$deleteid)->get();
+        foreach ($medias as $media) {
+            if (file_exists("app/public/{$media->image}")) {
+                $image_path = storage_path("app/public/{$media->image}");
+                $unlinked = unlink($image_path);
+                if ($unlinked) {
+                    ProductMedia::where('id', $media->id)->delete();
+                }
+            }
+        }
+        Product::where('id', $deleteid)->delete();
+        CollectionProduct::where('product_id', $deleteid)->delete();
+        ProductVariant::where('product_id', $deleteid)->delete();
+        VariantStock::where('product_id', $deleteid)->delete();
+        return redirect(route('products'));
+    }
+
+    public function deleteimage() {
+        if($this->select_all_images) {
+            $images = $this->product->productmediaget;
+        } else {
+            $images = $this->productimage;
+        }
+        foreach ($images as $media) {
+            $media= json_decode($media);
+            if (file_exists(storage_path("app/public/{$media->image}"))) {
+                $image_path = storage_path("app/public/{$media->image}");
+                $unlinked = unlink($image_path);
+                if ($unlinked) {
+                    ProductMedia::where('id', $media->id)->delete();
+                }
+            }
+        }
+        session()->flash('message', 'Deleted Record Successfully.');
+    }
+
+
+
+
+
+
+
+
+
 
     public function UpdateVarient($flag) {
         $arr = [];
@@ -175,26 +296,9 @@ class Detail extends Component {
         }
         
     }
-    public function deleteimage() {
-        foreach ($this->removeimage as $key => $result) {
-            //   dd($this->removeimage);
-            $unlinkimg = ProductMedia::where('id', $result)->first();
-            $deleteimg = "";
-            if (storage_path("app/public/{$unlinkimg->image}")) {
-                $image_path = storage_path("app/public/{$unlinkimg->image}");
-                $deleteimg = unlink($image_path);
-            }
-            if ($unlinkimg) {
-                $unlinkimg = ProductMedia::where('id', $result)->delete();
-            }
-        }
-        return redirect()->back();
-        $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
-        session()->flash('message', 'Deleted Record Successfully.');
-    }
+    
     public function EditAddress($locid) {
         $this->LocationId = Location::where('id', $locid)->first();
-        $this->location_edit = $locid;
         $this->editQuantitiesDetailsModal = true;
     }
     public function tags($flag, $params = null) {
@@ -236,217 +340,8 @@ class Detail extends Component {
         $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
         session()->flash('message', 'Image Updated Successfully.');
     }
-    public function storeProductvarient(Request $request) {
-        $varition_arrray_crunch = $request['varition_arrray'];
-        $varition_name = $request['varition_name'];
-        $heightwidthprice = $request['heightwidthprice'];
-        // $varition_name_two = array_unique($request['varition_name']["two"]);
-        $price_arr = $request['att_price'];
-        $size = $request['size'];
-        $variant_custom_price = $request['variant_custom_price'];
-        $price_selling_arr = $request['att_price_selling'];
-        $stock_single_arr = $request['att_stock_qtn'];
-        $custom_variant = $request['custom_variant'];
-        /*        $cost_arr = $request['att_cost'];
-        $sku_arr = $request['att_sku'];
-        $barcode_arr = $request['att_barcode'];
-        $hscode_arr = $request['att_hscode'];
-        $country_arr = $request['att_country'];*/
-        $margin_arr = $request['margin_arry'];
-        $profit_arr = $request['profit_arry'];
-        $variations_arr = [];
-        $arr = [];
-        $productCollection_arrray = [];
-        $product_new_arrray = [];
-        $priceincrement = 0;
-        foreach ($variant_custom_price as $price) {
-            $priceincrement+= $price;
-        }
-        $i = 0;
-        foreach ($varition_name as $key => $value) {
-            $price = $variant_custom_price[$i];
-            $sizearry = $size[$i];
-            $custom_variant_Save_arry[] = array('varientname' => array_unique($varition_name[$key]), 'price' => $price, 'lable' => $sizearry,);
-            $i++;
-        }
-        //   dd($custom_variant_Save_arry);
-        //dd($request['product_id_request'],$custom_variant);
-        $save = Product::where('id', $request['product_id_request'])->update(['custom_variant' => $custom_variant, 'cv_option_price' => $custom_variant_Save_arry, 'cv_width_height_price' => $heightwidthprice, ]);
-        if ($varition_arrray_crunch) {
-            foreach ($varition_arrray_crunch as $key => $value) {
-                $explode_array = explode("/", $value);
-                //   dd($explode_array);
-                
-            }
-        }
-        if ($varition_arrray_crunch) {
-            foreach ($varition_arrray_crunch as $key => $value) {
-                $explode_array = explode("/", $value);
-                $variations = [];
-                $variations['product_id'] = $request['product_id'];
-                $variations['price'] = $price_arr[$key];
-                $variations['selling_price'] = $price_selling_arr[$key];
-                $variations['stock'] = $stock_single_arr[$key];
-                /*$variations['cost'] = $cost_arr[$key];
-                $variations['sku'] = $sku_arr[$key];
-                $variations['barcode'] = $barcode_arr[$key];
-                $variations['hscode'] = $hscode_arr[$key];
-                $variations['country'] = $country_arr[$key];*/
-                $variations['margin'] = $margin_arr[$key];
-                $variations['profit'] = $profit_arr[$key];
-                // dd($explode_array);
-                if (!empty($explode_array[0])) {
-                    $variations['varient1'] = (int)$explode_array[0];
-                    $variations['attribute1'] = $explode_array[1];
-                }
-                if (!empty($explode_array[2])) {
-                    $variations['varient2'] = (int)$explode_array[2];
-                    $variations['attribute2'] = $explode_array[3];
-                }
-                if (!empty($explode_array[4])) {
-                    $variations['varient3'] = (int)$explode_array[4];
-                    $variations['attribute3'] = $explode_array[5];
-                }
-                if (!empty($explode_array[6])) {
-                    $variations['varient4'] = (int)$explode_array[7];
-                    $variations['attribute4'] = $explode_array[6];
-                }
-                if (!empty($explode_array[8])) {
-                    $variations['varient5'] = (int)$explode_array[9];
-                    $variations['attribute5'] = $explode_array[8];
-                }
-                if (!empty($explode_array[10])) {
-                    $variations['varient6'] = (int)$explode_array[11];
-                    $variations['attribute6'] = $explode_array[10];
-                }
-                if (!empty($explode_array[12])) {
-                    $variations['varient7'] = (int)$explode_array[13];
-                    $variations['attribute7'] = $explode_array[12];
-                }
-                if (!empty($explode_array[14])) {
-                    $variations['varient8'] = (int)$explode_array[15];
-                    $variations['attribute8'] = $explode_array[14];
-                }
-                if (!empty($explode_array[16])) {
-                    $variations['varient8'] = (int)$explode_array[17];
-                    $variations['attribute8'] = $explode_array[16];
-                }
-                if (!empty($explode_array[18])) {
-                    $variations['varient8'] = (int)$explode_array[19];
-                    $variations['attribute8'] = $explode_array[18];
-                }
-                $variations['updated_at'] = now();
-                //  $variations_arr[] = $variations;
-                $product_variant = ProductVariant::create($variations);
-                $insert_stock = [];
-                // dd($request->att_stock);
-                if ($request->att_stock) {
-                    foreach ($request->att_stock as $key1 => $stock) {
-                        if (!empty($stock[$key])) {
-                            $stock_arr = ['product_id' => $this->product['id'], 'variant_main_id' => $product_variant->id, 'location_id' => $key1, 'stock' => $stock[$key]];
-                            $insert_stock[] = $stock_arr;
-                        }
-                    }
-                    VariantStock::insert($insert_stock);
-                }
-                // dd($insert_stock);
-                
-            }
-        }
-        return redirect()->back();
-    }
-    public function updateDetail() {
 
-        $validatedData = $this->validate($this->rules);
-
-        array_pop($this->faq);
-
-        $validatedData['product']['seo_utl']= str_replace(' ', '-', $validatedData['product']['seo_utl']);
-        $validatedData['faq'] = json_encode($validatedData['faq'], true);
-        $validatedData['product']['location'] =  json_encode($this->product->location);
-        $validatedData['product']['product_new'] = json_encode($this->product['product_new']);
-
-        $validatedData['variants'] = $validatedData['product']['variants'];
-        unset($validatedData['product']['variants']);
-        dd($validatedData);
-        date_default_timezone_set('Asia/Kolkata');
-    
-        $updated = Product::where('id', $this->product->id)->update($validatedData['product']);
-        dd($updated);
-        $i = 0;
-        foreach ($this->varientsarray as $key => $value) {
-            if ($this->varientsarray[$key] != "") {
-                $price = $this->varientsarray[$i]['price'];
-                $varientcheckid = $this->varientsarray[$i]['lable'];
-                $custom_variant_Save_arry[] = array('price' => $price, 'lable' => $varientcheckid,);
-                $i++;
-            }
-        }
-        if (!empty($custom_variant_Save_arry)) {
-            Product::where('id', $this->product['id'])->update(['cv_option_price' => json_encode($custom_variant_Save_arry) ]);
-        }
-        if ($this->productCollection) {
-            Product::where('id', $this->product['id'])->update(['collection' => json_encode($this->productCollection) ]);
-        }
-        if ($this->variantStock) {
-            foreach ($this->variantStock as $stock) {
-                VariantStock::where('id', $stock->id)->update(['stock' => $stock->stock]);
-            }
-        }
-        if ($this->image) {
-            foreach ($this->image as $photo) {
-                // $file_extension = $photo->extension();
-                $path_url = $photo->storePublicly('media', 'public');
-                $mediaimg = ProductMedia::create(['product_id' => $this->product['id'], 'image' => $path_url, ]);
-            }
-            if ($mediaimg) {
-                $this->image = [];
-                $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
-            }
-        }
-        foreach ($this->Productvariant as $key => $value) {
-            $id = $this->Productvariant[$key]['id'];
-            $variationValue = ProductVariant::query()->findOrFail($id);
-            if ($id) {
-                $product_variant_price = (!empty($this->Productvariant[$key]['price'])) ? $this->Productvariant[$key]['price'] : 'NULL';
-                $variationValue->update(['price' => $product_variant_price, 'selling_price' => $this->Productvariant[$key]['selling_price'], 'sku' => $this->Productvariant[$key]['sku'], 'barcode' => $this->Productvariant[$key]['barcode'], 'hscode' => $this->Productvariant[$key]['hscode'], 'stock' => $this->Productvariant[$key]['stock']]);
-            }
-        }
-        if (!empty($this->productDetail)) {
-            foreach ($this->productDetail as $detail) {
-                $data = ['title' => $detail['title'], 'description' => $detail['description'], ];
-                if (isset($detail['id'])) {
-                    ProductDetail::where('id', $detail['id'])->update($data);
-                } else {
-                    $data['product_id'] = $this->product['id'];
-                    ProductDetail::create($data);
-                }
-            }
-        }
-        $this->getProductDetail();
-        $this->product = Product::where('uuid', $this->uuid)->first();
-        $this->collectionarray = $this->productCollection;
-        session()->flash('message', 'Product Updated Successfully.');
-    }
-
-    public function deleteproduct($deleteid)
-    {
-        $medias = ProductMedia::where('product_id',$deleteid)->get();
-        foreach ($medias as $media) {
-            if (file_exists("app/public/{$media->image}")) {
-                $image_path = storage_path("app/public/{$media->image}");
-                $unlinked = unlink($image_path);
-                if ($unlinked) {
-                    ProductMedia::where('id', $media->id)->delete();
-                }
-            }
-        }
-        Product::where('id', $deleteid)->delete();
-        CollectionProduct::where('product_id', $deleteid)->delete();
-        ProductVariant::where('product_id', $deleteid)->delete();
-        VariantStock::where('product_id', $deleteid)->delete();
-        return redirect(route('products'));
-    }
+  
     public function openModel($model_name) {
         if ($model_name == 'edit-quantities-details-modal') $this->editQuantitiesDetailsModal = true;
     }
