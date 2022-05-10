@@ -212,7 +212,7 @@
                
                   <div class="card-section tab_content  active" id="all_customers">
                      <div class="table-loader">
-                        <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, save, remove">
+                        <div class="loading-overlay" wire:loading.flex wire:target="tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, save, remove">
                            <div class="page-loading"></div>
                         </div>
                         <div class="product-table-details">
@@ -226,7 +226,7 @@
                                  <ul class="edite-variants-dropdown">
                                     <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                     <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
+                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stocks</a></li>
                                    
                                  </ul>
                               </div>
@@ -244,21 +244,21 @@
                                           <!--<input type="file" accept="image/*" id="{{$row->id}}" class="loadFile">-->
                                           <div class="pd-blank-img">
                                              @if(empty($row['variantmedia'][0]['image']))
-                                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M19 2.5A1.5 1.5 0 0 0 17.5 1h-15A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19H10v-2H3.497c-.41 0-.64-.46-.4-.79l3.553-4.051c.19-.21.52-.21.72-.01L9 14l3.06-4.781a.5.5 0 0 1 .84.02l.72 1.251A5.98 5.98 0 0 1 16 10h3V2.5zm-11.5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12.207 10.793A1 1 0 0 0 19 15h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 0 0 .707-1.707z"></path></svg>
+                                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true" onclick="document.getElementById('update-variant-image-modal-{{$row->id}}').style.display='block'"><path d="M19 2.5A1.5 1.5 0 0 0 17.5 1h-15A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19H10v-2H3.497c-.41 0-.64-.46-.4-.79l3.553-4.051c.19-.21.52-.21.72-.01L9 14l3.06-4.781a.5.5 0 0 1 .84.02l.72 1.251A5.98 5.98 0 0 1 16 10h3V2.5zm-11.5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12.207 10.793A1 1 0 0 0 19 15h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 0 0 .707-1.707z"></path></svg>
                                              @else
                                              <img src="{{ asset('storage/'.$row['variantmedia'][0]['image']) }}" />
                                              @endif
                                           </div>
                                           <img id="output-{{$row->id}}" />
                                        </div>
-                                       <div id="update-variant-image-modal-{{$row->id}}" class="customer-modal-main" wire:ignore>
+                                       <div id="update-variant-image-modal-{{$row->id}}" class="customer-modal-main" >
                                           
                                           <div class="customer-modal-inner">
                                              <div class="customer-modal">
                                                 <div class="modal-header">
                                                    <h2>Select variant image</h2>
                                                    <span data-dismiss="modal" class="modal-close-btn">
-                                                      <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                      <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true" onclick="document.getElementById('update-variant-image-modal-{{$row->id}}').style.display='none'">
                                                       <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
                                                       </svg>
                                                    </span>
@@ -283,8 +283,10 @@
                                                                   @if(!$product->productmediaget->isEmpty())
                                                                   @foreach($product->productmediaget as $rowimg)
                                                                   <li>
-                                                                     <input value="{{$rowimg->id}}"  wire:model.debounce.lazy="imgvariant" name="product"  type="radio">
+                                                                     <label>
+                                                                     <input value="{{$rowimg}}"  wire:model.defer="imgvariant" name="product"  type="radio">
                                                                      <img src="{{ asset('storage/'.$rowimg->image) }}">
+                                                                  </label>
                                                                   </li>
                                                                   @endforeach
                                                                   @endif
@@ -395,7 +397,7 @@
                               <div class="custom_variant_hw"></div>
                            </div>
                            
-                           <div class="card-footer add-product-footer">
+                           <div class="card-footer add-product-footer" style="display: none;">
                               <div class=" ml-0 product-tab-table">
                                  <div class="product-table-title">
                                     <h3>Variants</h3>
@@ -410,14 +412,14 @@
                                           <div class="product-table-checkbox">
                                              <div class="product-all-check">
                                                 <!-- <input type="checkbox" name="option6a"> -->
-                                                <label class="fw-6">Showing 3 variants</label>
+                                                <label class="fw-6">Showing <span id="total_variants_added"></span> variants</label>
                                              </div>
                                              <div class="product-edite-variants">
                                                 <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
                                                 <ul class="edite-variants-dropdown">
                                                    <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                                    <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit stock</a></li>
+                                                   <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit stocked</a></li>
                                                  
                                                 </ul>
                                              </div>
@@ -458,12 +460,12 @@
                                           </div>
                                          
                                           
-                                          <!--Edit barcodes modal-->
+                                          <!--Edit quantities modal-->
                                           <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal">
                                              <div class="customer-modal-inner">
                                                 <div class="customer-modal">
                                                    <div class="modal-header">
-                                                      <h2>Edit Stock</h2>
+                                                      <h2>Edit Stockes</h2>
                                                       <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                                                    </div>
                                                    <div class="modal-body attribute-barcode-value">
@@ -478,12 +480,6 @@
                                           </div>
                                           
                                           
-                                       
-                                          
-                                    
-                                          
-                                          
-                                          <!--Edit quantities modal-->
                                           
                                           <div class="row pl-3 pt-3">
                                              <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
@@ -494,11 +490,7 @@
                                           </div>
                                           
                                           
-                                          <!-- <hr>
-                                          <div class="product-table-footer">
-                                             <a href="javascript:;" data-toggle="modal" data-target="#variants-preview-list-modal">Total inventory at all stock</a>
-                                             <p>15 available</p>
-                                          </div> -->
+                                        
                                        </div>
                                     </div>
                                  </div>
@@ -804,34 +796,15 @@
                         @endif
                      </div>
                   </div>
-                  <datalist id="tagss">
-                     @foreach($tags as $tag)
-                     <option class="tag_added" value="{{$tag->label}}"></option>
-                     @endforeach
-                  </datalist>
-                  <button class="button green-btn" id="tag-creation-btn" data-dismiss="modal" value="" style="display:none;" wire:click.prevent="tags('tag-change', $event.target.value)">Save</button><br><br>
-                  @if(!empty($product['tags']))
-                  <?php $customerTags = explode(',', $product['tags']); ?>
-                  <div class="customer-detail-select-tags">
-                        @foreach($customerTags as $detail_tag)
-                        <span class="tag grey fs-13">
-                           {{$detail_tag}}
-                           <button type="button"  wire:click="tags('remove-tag', '{{$detail_tag}}')">
-                              <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path>
-                              </svg>
-                           </button>
-                        </span>
-                        @endforeach
-                  </div>
-                  @endif
+                
                </div>
 
-               <div class="card card-pd-0 pd-variants-card main-variant-card" wire:ignore>
+               <div class="card card-pd-0 pd-variants-card main-variant-card" >
                   <div class="card-header">
                      <div class="header-title">
                         <h4 class="fs-16 mb-0 fw-6">Featured</h4>
                      </div>
-                     <label><input type="checkbox" name="featured" wire:model="product.featured" wire:ignore class="click-varients-type">Assign this product as Featured</label>
+                     <label><input type="checkbox" name="featured" wire:model="product.featured" wire:ignore.self class="click-varients-type">Assign this product as Featured</label>
                   </div>
                </div>
 
@@ -855,7 +828,7 @@
                @endif
             </div>
             <input type="button" class="button save-button" wire:click="updateDetail" value="Save">
-            <div class="loading-overlay" wire:loading.flex wire:target="UpdateVarient,EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, remove">
+            <div class="loading-overlay" wire:loading.flex wire:target="EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, remove">
                <div class="page-loading"></div>
             </div>
          </div>
@@ -1023,31 +996,8 @@
             </div>
          </div>
       </div>
-      <!--Edit location modal-->
-      <div id="variant-edit-locations-modal" class="customer-modal-main" wire:ignore>
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit locations</h2>
-                  <span onclick="document.getElementById('variant-edit-locations-modal').style.display='none'" class="modal-close-btn">
-                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                     <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-                     </svg>
-                  </span>
-               </div>
-               <div class="modal-body">
-                  <p>Select locations that stock the selected variants.</p>
-                  @foreach($location as $row)
-                  <label><input type="checkbox" wire:model.lazy="selectedlocation" value="{{$row->id}}">{{$row->name}}</label>
-                  @endforeach
-               </div>
-               <div class="modal-footer">
-                  <a class="button secondary" data-dismiss="modal">Cancel</a>
-                  <a class="button green-btn" wire:click.prevent="UpdateVarient('update-location')">Done</a>
-               </div>
-            </div>
-         </div>
-      </div>
+    
+     
       <!--Edit prices modal-->
       @if(!$product->variants->isEmpty())
       <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
@@ -1180,7 +1130,7 @@
          <div class="customer-modal-inner">
             <div class="customer-modal">
                <div class="modal-header">
-                  <h2>Edit Stock</h2>
+                  <h2>Edit Stocko</h2>
                   <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                </div>
                <div class="modal-body">
@@ -1228,6 +1178,9 @@
          });
         
          $(document).ready(function(){
+
+
+            
             $( ".edit-update-Attribute" ).click(function() {
             $('.card-cutome-arrtibute').slideToggle(500);
             });
@@ -1416,11 +1369,8 @@
                $('.CustomVariant_wrap').removeClass("CustomVariant_active");
             }
 
-            $( ".click-varients-type" ).click(function() {
-               window.livewire.emit('UpdateVarient', 'add-varient-type');
-               $('.main-variant-card .card-middle-varient').toggle("slide");
+        
 
-            });
 
             $( ".edit-website-Attribute" ).click(function() {
 
@@ -1529,6 +1479,15 @@
 
 
          $(document).on("change", '.varition_tags', function() {
+
+            if($('.bootstrap-tagsinput .tag').length > 0){
+               $('#total_variants_added').text($('.recorditem').length);
+                $('.add-product-footer').show();
+            } else {
+               $('.add-product-footer').hide();
+            }
+
+            
 
             var mainid = $(this).attr('id');
 
@@ -2031,12 +1990,6 @@
             $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
             $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());
 
-
-            //$(".product-table-item ."+thisid).attr("data-input", "Hello");
-
-            $('.openpopup').modal('hide');
-
-
          });
 
          $(document).on("click", '.varition_popup_main', function() {
@@ -2060,116 +2013,8 @@
          var profitinput = $('#profit-data-input-'+id_value).attr('data-input');
 
 
-         $('.variant-identity').html(`<div class="modal fade customer-modal-main openpopup" id=`+id_value+` tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="customer-modal-inner">
-         <div class="customer-modal">
+        
 
-         <div class="modal-header" data-recordid=`+id_value+`>
-         <h2>Edit `+id_value+`</h2>
-         <span  data-dismiss="modal" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-         </div>
-         <div class="modal-body ta-left">
-         <div class="variants-preview-list p-3 bd_none">
-         <label>
-         <input type="checkbox" name="option2a" checked="checked">Charge tax on this variant
-         </label>
-         </div>
-         <div class="variants-preview-list p-3">
-         <div class="variant-pricing-card">
-         <div class="row">
-         <div class="form-field-list">
-         <label>Price</label>
-         <input type="text" value="`+inputvalue+`" id="main-popup-price`+id_value+`" class="change-value-main-price" placeholder="0.00">
-         <label for="input">{{$symbol['currency']}}</label>
-         </div>
-         </div>
-         <div class="row variant-price-option">
-         <div class="form-field-list cost-input">
-         <label>Cost per item</label>
-         <input type="text" name="cost" value="`+costinput+`" id="main-popup-cost-`+id_value+`" class="change-value-main-cost" placeholder="0,00">
-         <label for="input">{{$symbol['currency']}}</label>
-         <p>Customers won’t see this</p>
-         </div>
-         <div class="form-field-list">
-         <span>Margin</span>
-         <span class="margin-value`+id_value+`">`+margininput+`</span>
-         <input type="hidden" name="margin[]" value="`+margininput+`" class="margin-get-value" id="margin-value-input`+id_value+`">
-         </div>
-         <div class="form-field-list">
-         <span>Profit</span>
-         <span class="Profit-value`+id_value+`">`+profitinput+`</span>
-         <input type="hidden" name="Profit[]" value="`+profitinput+`" class="Profit-get-value" id="Profit-value-input`+id_value+`">
-         </div>
-         </div>
-         </div>
-         </div>
-         <div class="variants-preview-list p-3">
-         <h3 class="fw-6 fs-12 mb-2">INVENTORY</h3>
-         <div class="row">
-         <div class="form-field-list">
-         <label>SKU (Stock Keeping Unit)</label>
-         <input type="text" value="`+skuinput+`" id="sku-input">
-         </div>
-         <div class="form-field-list">
-         <label>Barcode (ISBN, UPC, GTIN, etc.)</label>
-         <input type="text" value="`+barcodeinput+`" id="barcode-input">
-
-         </div>
-         </div>
-         </div>
-         <div class="variants-preview-list bd_none">
-         <div class="variant-inventory-card">
-         <div class="row-items">
-         <div class="header-title">
-         <h3 class="fw-6 mb-0 fs-12 tt-u">QUANTITY</h3>
-         <button class="link" onclick="document.getElementById('variant-edit-locations-modal').style.display='block'">Edit locations</button>
-         </div>
-         <table>
-         <thead>
-         <tr>
-         <th class="fw-6 pl-0">Location name</th>
-         <th class="ta-right pr-0 fw-6">Available</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr>
-         <td class="pl-0">Armada</td>
-         <td class="pr-0"><input type="number" value="0"></td>
-         </tr>
-         <tr>
-         <td class="pl-0">H-28, Sector 63</td>
-         <td class="pr-0"><input type="number" value="0"></td>
-         </tr>
-         </tbody>
-         </table>
-
-         </div>
-         </div>
-         </div>
-         <div class="variants-preview-list bd_none">
-         <div class="row-items variant-shipping-info">
-         <h3 class="fs-12 fw-6 mb-8">CUSTOMS INFORMATION</h3>
-         <div>
-         <label>HS (Harmonized System) code</label>
-         <input type="search" value="`+hscodeinput+`" id="hscode-input" placeholder="Search or enter a HS code">
-         <p class="mb-0">Manually enter codes that are longer than 6 numbers.</p>
-         </div>
-         </div>
-         </div>
-         <div class="variants-preview-list bd_none">
-         <div class="p-3">
-         <p class="mb-0 one-line-text"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10S15.514 0 10 0 0 4.486 0 10s4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg> Once you save the product, you’ll be able to edit more variant details.</p>
-         </div>
-         </div>
-         </div>
-         <div class="modal-footer">
-         <a class="button secondary"  data-dismiss="modal">Cancel</a>
-         <a class="button green-btn"  data-recordid=`+id_value+`>Done</a>
-         </div></div>
-         </div>
-         </div> `);
-
-         $('.openpopup').modal('show');
 
 
 

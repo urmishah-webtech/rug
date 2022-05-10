@@ -3,6 +3,7 @@ namespace App\Http\Livewire\Product;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\ProductMedia;
+use App\Models\VariantMedia;
 use App\Models\ProductVariant;
 use App\Models\CollectionProduct;
 use App\Models\Tag;
@@ -21,7 +22,7 @@ class Detail extends Component {
 
     use WithFileUploads;
     public $answer, $question;
-    public $product, $variantag, $tagsale, $Country, $uuid, $Productmedia, $Productvariant, $tags, $location, $variantStock, $variantStock_clone, $descripation, $LocationId, $editQuantitiesDetailsModal, $varition_name, $Collection, $fullStock, $urlpath, $productCollection = [];
+    public $product, $variantag, $tagsale, $Country, $uuid, $Productmedia, $Productvariant, $location, $variantStock, $variantStock_clone, $descripation, $LocationId, $editQuantitiesDetailsModal, $varition_name, $Collection, $fullStock, $urlpath, $productCollection = [];
     public $image = [], $selectedlocation = [], $stock = [], $locationarray;
     public $att_price = [], $varition_arrray = [];
     public $imgvariant, $varientsarray;
@@ -34,8 +35,6 @@ class Detail extends Component {
     public $faq = [];
     public $product_last_key = 0;
     public $select_all_images = false;
-
-    protected $listeners = ['UpdateVarient'];
 
     protected $rules = [
         'urlpath' => '', 
@@ -95,7 +94,6 @@ class Detail extends Component {
 
         $this->editQuantitiesDetailsModal = false;
         $this->tagsale = tagsale::get();
-        $this->tags = Tag::All();
         $this->variantag = VariantTag::All();
         $this->Collection = Collection::select('title', 'id')->get()->groupBy('id')->toArray();
         $this->location = Location::All();
@@ -121,7 +119,6 @@ class Detail extends Component {
         $this->product_last_key = array_key_last($this->faq);
 
         $this->product->location = (array)json_decode($this->product->location);
-        $this->product->cv_option_price = (array)json_decode($this->product->cv_option_price);
         $this->product->collection = (array)json_decode($this->product->collection);
         $this->product->custom_variant = ($this->product->custom_variant == 1) ? true : false;
         $this->product->featured = ($this->product->featured == 1) ? true : false;
@@ -142,12 +139,7 @@ class Detail extends Component {
         //         $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
         //     }
         // }
-        // if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
-        //     $this->product['product_new'] = json_decode($this->product['product_new']);
-        // }
-        // if (!empty($this->product['product_new']) && gettype($this->product['product_new']) == 'string') {
-        //     $this->product['product_new'] = json_decode($this->product['product_new']);
-        // }
+       
         return view('livewire.product.detail');
     }
      
@@ -171,7 +163,6 @@ class Detail extends Component {
         $validatedData['product']['location'] =  json_encode($this->product->location);
         $validatedData['product']['product_new'] = json_encode($this->product->product_new);
         $validatedData['product']['collection'] = json_encode($this->product->collection); 
-        $validatedData['product']['cv_option_price'] = json_encode($this->product->cv_option_price); 
 
         $validatedData['variants'] = $validatedData['product']['variants'];
         unset($validatedData['product']['variants']);
@@ -190,7 +181,12 @@ class Detail extends Component {
                 $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
             }
         }
+        foreach ($this->product->variants as $key => $variant) {
+            $variant->save();
+        }
+
         $this->getProduct();
+
 
         // $i = 0;
         // foreach ($this->varientsarray as $key => $value) {
@@ -270,93 +266,19 @@ class Detail extends Component {
         session()->flash('message', 'Deleted Record Successfully.');
     }
 
-
-
-
-
-
-
-
-
-
-    public function UpdateVarient($flag) {
-        $arr = [];
-        if ($flag == 'update-location') {
-            foreach ($this->selectedlocation as $row) {
-                $arr[$row] = '';
-            }
-            $locationid = json_encode($arr);
-            Product::where('id', $this->product['id'])->update(['location' => $locationid]);
-        }
-        if ($flag == 'add-varient-type') {
-            $this->validate(['varition_name' => 'required']);
-            VariantTag::insert(['name' => $this->varition_name]);
-            session()->flash('message', 'variant Created Successfully.');
-            
-        }
-        
-    }
-    
-    public function EditAddress($locid) {
-        $this->LocationId = Location::where('id', $locid)->first();
-        $this->editQuantitiesDetailsModal = true;
-    }
-    public function tags($flag, $params = null) {
-        if ($flag == 'tag-change') {
-            if (!empty($params)) {
-                $params = ucfirst(trim($params));
-                $customer_tags = explode(',', $this->product['tags']);
-                if (!in_array($params, $customer_tags)) {
-                    $tags = empty($this->product['tags']) ? $params : $this->product['tags'] . ',' . $params;
-                    Product::where('id', $this->product['id'])->update(['tags' => $tags]);
-                    $exist = Tag::where('label', $params)->first();
-                    if (empty($exist)) {
-                        Tag::insert(['label' => $params]);
-                    }
-                }
-                session()->flash('message', 'product Updated Successfully.');
-            }
-        }
-        if ($flag == 'remove-tag') {
-            if (!empty($params)) {
-                $customer_tags = explode(',', $this->product['tags']);
-                if (($key = array_search($params, $customer_tags)) !== false) {
-                    unset($customer_tags[$key]);
-                }
-                $customer_tags = implode(',', $customer_tags);
-                Product::where('id', $this->product['id'])->update(['tags' => $customer_tags]);
-                session()->flash('message', 'Users Updated Successfully.');
-            }
-        }
-    }
     public function variantimgsubmit($variantid) {
-        if ($this->imgvariant != '') {
-            $getimg = ProductMedia::where('id', $this->imgvariant)->first();
-            if ($getimg->image) {
-                $variantimgsave = ProductVariant::where('id', $variantid)->update(['photo' => $getimg->image]);
-            }
+        $imagevariant = json_decode($this->imgvariant);
+        if (!empty($imagevariant)) {
+            $variantimgsave = VariantMedia::create([
+                'product_id' => $imagevariant->product_id,
+                'variant_id' =>$variantid,
+                'image' => $imagevariant->image
+            ]);
+            $this->getProduct();
+            $this->imgvariant = '';
+            session()->flash('message', 'Image Updated Successfully.');
+
         }
-        $this->Productvariant = ProductVariant::where('product_id', $this->product['id'])->get();
-        $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
-        session()->flash('message', 'Image Updated Successfully.');
     }
 
-  
-    public function openModel($model_name) {
-        if ($model_name == 'edit-quantities-details-modal') $this->editQuantitiesDetailsModal = true;
-    }
-    public function closeModel($model_name) {
-        if ($model_name == 'edit-quantities-details-modal') $this->editQuantitiesDetailsModal = false;
-    }
-  
-    public function addProductDetailSection() {
-        $this->productDetail[] = ['title' => '', 'description' => ''];
-    }
-    public function removeProductDetailSection($index) {
-        if (isset($this->productDetail[$index]['id'])) {
-            ProductDetail::where('id', $this->productDetail[$index]['id'])->delete();
-        }
-        unset($this->productDetail[$index]);
-        $this->productDetail = array_values($this->productDetail);
-    }
 }
