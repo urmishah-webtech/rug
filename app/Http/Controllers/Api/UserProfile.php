@@ -23,8 +23,12 @@ class UserProfile extends Component
     {
         $User = User::where('id',$userid)->get();
         $CustomerAddress = CustomerAddress::where('user_id',$userid)->get();
+        $billing_address = CustomerAddress::where('user_id',$userid)->where('address_type', 'billing_address')->count();
+        $shipping_address = CustomerAddress::where('user_id',$userid)->where('address_type', 'shipping_address')->count();
 
-        return response()->json(['message' => 'success', 'user' => $User, 'customeraddress' => $CustomerAddress, 'success' => true ]);
+
+
+        return response()->json(['message' => 'success', 'user' => $User, 'customeraddress' => $CustomerAddress, 'success' => true, 'billingaddress'=> $billing_address , 'shippingaddress'=> $shipping_address]);
     }
 
     public function ProfileEdit(Request $request)
