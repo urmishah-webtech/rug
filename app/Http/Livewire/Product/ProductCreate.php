@@ -253,6 +253,8 @@ class ProductCreate extends Component
             }
             if(!empty($request['product_new'])){
             $product_new_arrray = $request['product_new'];
+            }else{
+              $product_new_arrray = '';
             }
 
             $urllink = (!empty($request['seo_url'])) ? $request['seo_url'] : $request['title'] ;
