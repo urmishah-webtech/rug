@@ -67,4 +67,14 @@ class CheckoutController extends Controller
             'dataget' => $data,
             ]);
     }
+
+    public function deleteShipping($id)
+    {
+    	$deleted = CustomerAddress::where('id', $id)->delete();
+    	return response()->json([
+		    'success' => true, 
+		    'message'=> 'deleted sucessfully.',
+		    'data'    => $deleted,
+            ]);
+    }
 }

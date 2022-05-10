@@ -81,6 +81,7 @@ Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutContr
 Route::any('shipping-cost', 'App\Http\Controllers\Api\CartController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
 Route::post('update-address/{id}', 'App\Http\Controllers\Api\CheckoutController@updateAddress');
+Route::get('delete-address/{id}', 'App\Http\Controllers\Api\CheckoutController@deleteShipping');
 
 
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
