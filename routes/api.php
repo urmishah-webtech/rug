@@ -80,7 +80,6 @@ Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartPro
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
 Route::any('shipping-cost', 'App\Http\Controllers\Api\CartController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
-Route::get('delete-shipping/{id}', 'App\Http\Controllers\Api\CheckoutController@deleteShipping');
 
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
 Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
