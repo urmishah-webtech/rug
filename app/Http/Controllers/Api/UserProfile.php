@@ -89,7 +89,7 @@ class UserProfile extends Component
     {
         $order = Orders::with(['order_items' => function($x) {
             return $x->with('variant_product');
-        }])->where('user_id',$userid)->find(8);
+        }])->where('user_id',$userid)->where('id', 8)->get();
 
         return response()->json(['order' => $order, 'success' => true ]);
     }
