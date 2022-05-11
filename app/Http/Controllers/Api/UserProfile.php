@@ -33,12 +33,31 @@ class UserProfile extends Component
 
     public function ProfileEdit(Request $request)
     {
-        User::where('id',$request->userid)->update([
+        $UserDetail = User::where('id', $request->userid)->first();
 
+        $hashedPassword = $UserDetail->password;
+        if(!empty($request->currpassword) && !empty($request->newpassword) && !empty($request->repassword)) {
+            if(Hash::check($request->currpassword, $UserDetail->password))
+            {
+                if($request->newpassword == $request->repassword){
+
+                    $hashedPassword = Hash::make($request->newpassword);
+                    
+                }else{
+                    return response()->json(['message' => 'Not Same Password !!', 'fail' => false ]);
+                }
+                    
+            }else{
+                return response()->json(['message' => 'Old Password Not Match !!', 'fail' => false ]);
+            }
+        }
+
+        User::where('id',$request->userid)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'mobile_number' => $request->mobile_number,
+            'password' => $hashedPassword
 
         ]);
 
