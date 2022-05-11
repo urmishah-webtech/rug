@@ -100,6 +100,8 @@ Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
 Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
 Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit'); 
 Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
+Route::post('password-forgot', 'App\Http\Controllers\Api\UserProfile@sendPasswordResetLink');
+Route::post('reset-password', 'App\Http\Controllers\Api\UserProfile@storeNewPassword');
 
 /*FILTER PRODUCT*/
 Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
