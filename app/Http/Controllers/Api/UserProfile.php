@@ -68,10 +68,10 @@ class UserProfile extends Component
 
     public function getOrder($userid)
     {
-        $Order = Orders::where('user_id',$userid)->get();
-        $OrderItem = order_item::where('user_id',$userid)->get();
-        $showItem = order_item::with('order_product')->with('media_product')->where('user_id',$userid)->get();
+        $order = Orders::with(['order_items' => function($x) {
+            return $x->with('variant_product');
+        }])->where('user_id',$userid)->get();
 
-        return response()->json(['message' => 'success', 'order' => $Order, 'showItem' => $showItem, 'orderItem' => $OrderItem, 'success' => true ]);
+        return response()->json(['order' => $order, 'success' => true ]);
     }
 }

@@ -11,6 +11,15 @@ class Orders extends Model
 
     protected $guarded =[];
 
+    public function order_items()
+    {
+        return $this->hasMany(order_item::class, 'order_id', 'id');
+    }
+
+
+
+
+
     public function user()
     {
         return $this->hasMany(User::class, 'id', 'user_id');
@@ -19,6 +28,8 @@ class Orders extends Model
     {
         return $this->hasMany(order_item::class, 'user_id', 'user_id');
     }
+
+
 
     
 }
