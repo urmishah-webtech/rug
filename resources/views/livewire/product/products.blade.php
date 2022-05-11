@@ -104,7 +104,7 @@
                         <span>@foreach($product as $row)
                         <tr>
                             <td class="sticky-col">
-                                <div class="row"><label><input type="checkbox" wire:model="selectedproducts" value="{{$row->id}}" name="option6a"></label></div>
+                                <div class="row"><label><input type="checkbox" wire:model.defer="selectedproducts" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
                             <td class="product-img">
                                 

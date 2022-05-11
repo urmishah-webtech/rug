@@ -111,13 +111,15 @@
                   <div class="row">
                      <label>Title <span class="text-danger">*</span></label>
                      <input type="text" name="title" wire:model.defer="product.title">
+                     @error('product.title') <span class="text-danger">{{ $message }}</span>@enderror
                   </div>
-                  <div wire:ignore class="form-group row">
+                  <div  class="form-group row" >
                      <label>Description <span class="text-danger">*</span></label>
-                     <div class="col-md-9">
-                        <textarea wire:model.defer="product.descripation" class="form-control required" name="descripation" id="descripation"></textarea>
-                        
+                     <div class="col-md-9" wire:ignore>
+                        <textarea wire:model.defer="product.descripation" class="form-control required" name="descripation" id="descripation"  ></textarea>
                      </div>
+                     @error('product.descripation') <span class="text-danger">{{ $message }}</span>@enderror
+
                   </div>
                </div>
                
@@ -196,17 +198,11 @@
           
             
                @if(!$product->variants->isEmpty())
-            
                <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table">
                   <div class="product-table-title">
                      <h3>Variants</h3>
                      <span>
                         <a href="{{ route('variant-new', $product->uuid) }}" class="link">Add variant</a>
-                        <!--  <button class="link variants-option-btn">More options <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button> -->
-                        <ul class="variants-option-dropdown">
-                           <li><button class="link" onclick="document.getElementById('edit-options-modal').style.display='block'">Edit options</button></li>
-                           <li><button class="link" onclick="document.getElementById('reorder-variants-modal').style.display='block'">Reorder variants</button></li>
-                        </ul>
                      </span>
                   </div>
                
@@ -226,14 +222,13 @@
                                  <ul class="edite-variants-dropdown">
                                     <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
                                     <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stocks</a></li>
+                                    <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit Stock</a></li>
                                    
                                  </ul>
                               </div>
                            </div>
                            <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing custom-table-height">
                               <tbody>
-                                 <?php $stocksum = 0;  ?>
                                  @foreach($product->variants as $key => $row)
                                  <tr>
                                     <td>
@@ -265,16 +260,6 @@
                                                 </div>
                                                 <div class="modal-body ta-left">
                                                    <div class="card product-media-card">
-                                                      <div class="card-header upload-media-header">
-                                                         <h3 class="fs-16 fw-6 m-0">Media</h3>
-                                                            <button class="link add-media-url-btn">Add media from URL 
-                                                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                                            </button>
-                                                         <ul class="add-media-dropdown">
-                                                            <li><button class="link">Edit options</button></li>
-                                                            <li><button class="link">Reorder variants</button></li>
-                                                         </ul>
-                                                      </div>
                                                       <p class="mb-0 grey-color">You can only choose images as variant media</p>
                                                       <div class="card-middle">
                                                          <div class="upload-img-modal">
@@ -298,8 +283,6 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                    <div class="footer-btn-group">
-                                                      <!-- <button class="button secondary" data-dismiss="modal">calcel</button>
-                                                      <button class="button secondary">Add image</button> -->
                                                       <button class="button green-btn" data-dismiss="modal" wire:click.prevent="variantimgsubmit({{$row->id}})">Done</button>
                                                    </div>
                                                 </div>
@@ -325,14 +308,10 @@
                                     <td class="vendor-table-item">
                                        <p>@if($row->price){{$symbol['currency']}}{{number_format($row->price,2,".",",")}}
                                        @endif</p>
-                                       <?php $location_count = count($location); ?>
-                                       <?php
-                                       $stocksum += $row->stock; ?>
-                                       @if($row->stock)
-                                       <!-- <p>Available at {{$row->stock}} Stock</p> -->
+
                                        <p>@if($row->selling_price){{$symbol['currency']}}{{number_format($row->selling_price,2,".",",")}}
                                        @endif</p>
-                                       @endif
+                                       
                                     </td>
                                  </tr>
                                  @endforeach
@@ -343,184 +322,33 @@
                      </div>
                   </div>
                </div>
-
-               @else
-
-               <div class="card card-pd-0 pd-variants-card main-variant-attribute" wire:ignore>
-                  
-                  <div class="card-header">
-                     
-                     <div class="header-title">
-                        
-                        <h4 class="fs-16 mb-0 fw-6">Variants</h4>
-                        
-                     </div>
-                     
-                     <label><input type="checkbox" name="option2a" class="edit-website-Attribute">This product has multiple options, like different sizes or colors</label>
-                     
-                     
-                  </div>
-                  <form action="{{ route('products-varient-store') }}" method="POST" enctype="multipart/form-data" autocomplete="" lete="off">
-                     @csrf
-                     <div class="card-middle-arrtibute CustomVariant_wrap" style="display: none;">
-                           @csrf
-                           <input type="hidden" name="product_id_request" value="{{$product->id}}">
-                           <div class="card-middle">
-                              <!--   <label><input type="checkbox" name="custom_variant" id="custom_variant" value="" class="CustomVariant_checkox">Custom Variant</label> -->
-                              <div class="varition-append">
-                                 
-                                 <label class="form-label fs-14 fw-6">Option 1</label>
-                                 
-                                 <div class="row">
-                                    
-                                    <select name="size[]" class="varition-type-value" id="varition_type_1">
-                                       <option value="">-- Select Option --</option>
-                                       @foreach($variantag as $row)
-                                       <option value="{{$row->id}}">{{$row->name}}</option>
-                                       @endforeach
-                                    </select>
-                                    
-                                    <input type="text" value="" name="option" class="varition_tags variant-tags-error" id="varition_tags_1" data-role="tagsinput"  placeholder="Separate options with a comma">
-                                    
-                                 </div>
-                                 
-                                 <div class="row variant_fixed_price">
-                                    <input type="number" value="" name="variant_custom_price[]" class="variant-tags-error" id="custom_price_tags_1" placeholder="Variant Price">
-                                 </div>
-                              </div>
-                              
-                              <div class="row pd-variants-card-btn">
-                                 
-                                 <a class="fw-6 button secondary addBtn">Add another option</a>
-                                 
-                              </div>
-                              <div class="custom_variant_hw"></div>
-                           </div>
-                           
-                           <div class="card-footer add-product-footer" style="display: none;">
-                              <div class=" ml-0 product-tab-table">
-                                 <div class="product-table-title">
-                                    <h3>Variants</h3>
-                                 </div>
-                                
-                                 <div class="card-section tab_content  active" id="all_customers">
-                                    <div class="table-loader">
-                                       <div class="loading-overlay" wire:loading.flex="">
-                                          <div class="page-loading"></div>
-                                       </div>
-                                       <div class="product-table-details">
-                                          <div class="product-table-checkbox">
-                                             <div class="product-all-check">
-                                                <!-- <input type="checkbox" name="option6a"> -->
-                                                <label class="fw-6">Showing <span id="total_variants_added"></span> variants</label>
-                                             </div>
-                                             <div class="product-edite-variants">
-                                                <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
-                                                <ul class="edite-variants-dropdown">
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
-                                                   <li><a class="link" onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='block'">Edit stocked</a></li>
-                                                 
-                                                </ul>
-                                             </div>
-                                          </div>
-                                          
-                                          
-                                          <input type="hidden" name="product_id" value="{{$product->id}}">
-                                          <!-- Price Modal -->
-                                          <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal">
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit prices</h2>
-                                                      <span onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                      <div class="row side-elements align-item-bt">
-                                                         <div class="form-field-list">
-                                                            <label>Apply a price to all variants</label>
-                                                            <span class="dollar-input">
-                                                               <input type="text" id="apply-price" class="apply-price" value="" placeholder="0,00">
-                                                            </span>
-                                                         </div>
-                                                         <a class="button fw-6" id="apply-price-submit" class="apply-price-submit">Apply to all</a>
-                                                      </div>
-                                                      
-                                                      <div class="attribute-prices">
-                                                         
-                                                      </div>
-                                                      
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
-                                                      <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-prices-modal').style.display='none'"  data-recordid="">Done</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                         
-                                          
-                                          <!--Edit quantities modal-->
-                                          <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal">
-                                             <div class="customer-modal-inner">
-                                                <div class="customer-modal">
-                                                   <div class="modal-header">
-                                                      <h2>Edit Stockes</h2>
-                                                      <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-                                                   </div>
-                                                   <div class="modal-body attribute-barcode-value">
-                                                      
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                      <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button secondary">Cancel</a>
-                                                      <a onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="button green-btn">Done</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          
-                                          
-                                          
-                                          <div class="row pl-3 pt-3">
-                                             <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
-                                                <input type="submit" class="button" name="submit" id="master-save" value="save">
-                                                <tbody class="variants-option">
-                                                </tbody>
-                                             </table>
-                                          </div>
-                                          
-                                          
-                                        
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                     </div>
-                  </form>
-               </div>
-
                @endif
+
                <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible">
                   <div class="row-items question">
                      <div class="header-title">
                         <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                      </div>
-                     <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="{{$product->custom_variant}}" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant" @if($product->custom_variant) checked="checked" @endif>Custome Price</label>
-                     <div class="card-cutome-arrtibute one-half-row-card">
+                     <label>
+                        <input type="checkbox" name="custom_variant_check" id="custom_variant" class="edit-update-Attribute custom_variant_checked" wire:model.defer="product.custom_variant">
+                        Custom Price
+                     </label>
+
+                     
+                     <div @if(!$product->custom_variant) style='display:none' @endif class="card-cutome-arrtibute one-half-row-card" wire:ignore >
                         
-                        @foreach($variantag as $key2 => $row)
-                        @if($this->varientsarray)
-                        @foreach ($this->varientsarray as $key => $value)
-                        @if(!empty($value->lable) && $value->lable == $row->id)
+                        @if(!empty($product->cv_option_price))
+                        @foreach ($product->cv_option_price as $key => $item)
+                        @if(isset($item->lable))
                         <div class="row showvarient">
                            <div class="form-field-list">
-                              <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
-                              <input class="price-change-input" type="hidden" wire:model="varientsarray.{{ $key }}.lable"   readonly>
+                              <input class="price-change-input" type="text" value="{{$variantag[ $item->lable ] }}"  name="variantname" readonly wire:ignore>
+                              
+                              <input class="price-change-input" type="hidden" wire:model="product.cv_option_price.{{ $key }}.lable" wire:ignore readonly>
                               
                            </div>
                            <div class="form-field-list">
-                              <input class="price-change-input" placeholder="Price" type="number"  wire:model="varientsarray.{{ $key }}.price">
+                              <input class="price-change-input" placeholder="Price" type="number"  wire:model.defer="product.cv_option_price.{{ $key }}.price">
                               
                            </div>
                         </div>
@@ -528,13 +356,13 @@
                         @endif
                         @endforeach
                         @endif
-                        @endforeach
                  
                      </div>
+                    
                   </div>
                </div>
 
-               <div class="card variant-pricing-card" wire:ignore>
+               <div class="card variant-pricing-card" >
                   <div class="row-items">
                      
                      <div class="header-title">
@@ -547,37 +375,24 @@
                         
                         <div class="form-field-list">
                            
-                           <label>Price</label>
+                           <label>Price <span class="text-danger">*</span></label>
                            
-                           <input type="text" name="price_main" id="price-change-input" class="price-change-input" wire:model="product.price" wire:ignore placeholder="0,00">
+                           <input type="text" name="price_main" id="price-change-input" class="price-change-input" wire:model.defer="product.price"  placeholder="0,00">
                            
                            <label for="input">{{$symbol['currency']}}</label>
                            
-                           @error('price') <span class="text-danger">{{ $message }}</span>@enderror
+                           @error('product.price') <span class="text-danger">{{ $message }}</span>@enderror
                            
                         </div>
                         
-                        <!--  <div class="form-field-list">
-                           
-                           <label>Compare at price</label>
-                           
-                           <input type="text" name="compare_price" wire:model="product.compare_price" wire:ignore placeholder="0,00">
-                           
-                           <label for="input">US{{$symbol['currency']}}</label>
-                           
-                           @error('compare_price') <span class="text-danger">{{ $message }}</span>@enderror
-                           
-                        </div> -->
                         
                         <div class="form-field-list">
                            
                            <label>Selling price</label>
                            
-                           <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
+                           <input type="text" name="compare_selling_price" wire:model.defer="product.compare_selling_price" placeholder="0,00">
                            
                            <label for="input">{{$symbol['currency']}}</label>
-                           
-                           @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
                            
                         </div>
                         
@@ -589,10 +404,7 @@
                            
                            <label>Stock</label>
                            
-                           <input type="text" name="compare_selling_price" wire:model="product.stock" wire:ignore>
-                           
-                           
-                           @error('Stock') <span class="text-danger">{{ $message }}</span>@enderror
+                           <input type="text" name="compare_selling_price" wire:model.defer="product.stock">
                            
                         </div>
                         
@@ -1168,22 +980,17 @@
             @this.add();
          });
 
-         $('#custom_variant').on('change', function(){
-         this.value = this.checked ? 1 : 0;
-         });
-
          $(document).on("click", '#apply-price-selling-submit', function() {
             var val = $('.apply-selling-price').val();
             $('.att_price_selling_class').attr("value", val);
          });
+
+         $( ".edit-update-Attribute" ).click(function() {
+               $('.card-cutome-arrtibute').slideToggle(500);
+            });
+
         
          $(document).ready(function(){
-
-
-            
-            $( ".edit-update-Attribute" ).click(function() {
-            $('.card-cutome-arrtibute').slideToggle(500);
-            });
 
             $('#update-all-tags').click(function() {
 
@@ -1328,8 +1135,6 @@
 
             $('.variants-option-btn').click(function() {
 
-            $('.variants-option-dropdown').slideToggle();
-
             $('.edite-variants-dropdown').hide();
 
             $('.all-location-dropdown').hide();
@@ -1346,16 +1151,10 @@
 
             $('.all-location-dropdown').hide();
 
-            $('.variants-option-dropdown').hide();
 
             });
 
-            console.log($('.custom_variant_checked').is(':checked'));
-            if($('.custom_variant_checked').is(':checked')){
-               $('.card-cutome-arrtibute').slideToggle(500);
-            } else  {
-               $('.card-cutome-arrtibute').slideUp(500);
-            }
+           
 
             $('form').keyup(function() {
                if($(this).val() != '') {
@@ -1393,80 +1192,6 @@
             var arr_list_items = [];
             var rowIdx = 1;
             var flag = 1;
-            $(document.body).on('click','.addBtn', function() {
-
-               var attrinbute = $('.varition-type-value').val();
-               var variants_tag = $('.variant-tags-error').val();
-
-               x = Math.random().toString(36).substr(2, 9);
-
-
-               if(flag < 4) {
-                  if(attrinbute == "" && variants_tag == "")
-                  {
-
-                     if(attrinbute == "")
-                     {
-
-                        $('.varition-type-value').css('border-color', 'red');
-
-                     }
-
-                     if(variants_tag == "")
-                     {
-                        $('.variant-tags-error').css('border-color', 'red');
-                     }
-                  }
-                  else
-                  {
-                     if(attrinbute != "")
-                     {
-
-                        $('.varition-type-value').css('border-color', 'green');
-                     }
-
-                     $(".varition-append").append(`
-
-                     <div id="R${++rowIdx}">
-                     <label class="form-label fs-14 fw-6">Option ${rowIdx}</label>
-
-                     <div class="row">
-                     <select name="size[]" class="varition-type-value" id="varition_type_${rowIdx}">
-                     <option value="">-- Select Option --</option>
-                     <?php foreach($variantag as $row) { ?>
-                     ` +  ($.inArray(`<?php echo $row->id; ?>`, arr_list_items) == -1 ? '<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>': '') +`
-                     <?php  } ?>
-
-
-                     </select>
-
-                     <input type="text" class="varition_tags variant-tags-error" id="varition_tags_${rowIdx}" value="" name="option" data-role="tagsinput" placeholder="Separate options with a comma">
-
-                     </div>
-                     <div class="row variant_fixed_price">
-                     <input type="number" value="" name="variant_custom_price[]" class="variant-tags-error" id="custom_price_tags_${rowIdx}" placeholder="Variant Price">
-                     </div>
-                     </div>
-                     </div>
-
-
-                     `);
-
-
-                     $('.varition_tags').tagsinput({
-                        allowDuplicates: true
-                     });
-
-                     flag++;
-
-                     if(flag == 4) {
-                        $('.addBtn').css('display', 'none');
-                     }
-
-                  }
-               }
-
-            });
 
             $(document).on("change", '.varition-type-value', function() {
                var selecetval = $(this).val();

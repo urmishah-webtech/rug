@@ -82,10 +82,11 @@ class Detail extends Component {
         'product.variants.*.photo' => [], 
         'faq.*.question' => '',
         'faq.*.answer' => '', 
-        'varientsarray.*.price' => '', 
-        'varientsarray.*.lable' => '',
+        'product.cv_option_price.*.price' => '', 
+        'product.cv_option_price.*.lable' => '',
         'att_price' => [], 
     ];
+
 
     public function mount($id) {
 
@@ -94,12 +95,12 @@ class Detail extends Component {
 
         $this->editQuantitiesDetailsModal = false;
         $this->tagsale = tagsale::get();
-        $this->variantag = VariantTag::All();
         $this->Collection = Collection::select('title', 'id')->get()->groupBy('id')->toArray();
         $this->location = Location::All();
         $this->Country = Country::All();
         $this->fullStock = VariantStock::All();
-        
+        $variantag = VariantTag::all()->toArray();
+        $this->variantag = array_combine(array_column($variantag, 'id'), array_column($variantag, 'name'));
     }
 
     public function getProduct()
@@ -120,12 +121,16 @@ class Detail extends Component {
 
         $this->product->location = (array)json_decode($this->product->location);
         $this->product->collection = (array)json_decode($this->product->collection);
+        $this->product->cv_option_price = (array) json_decode($this->product->cv_option_price);
+
         $this->product->custom_variant = ($this->product->custom_variant == 1) ? true : false;
         $this->product->featured = ($this->product->featured == 1) ? true : false;
 
         if (!empty($this->product['product_new'])) {
             $this->product->product_new = json_decode($this->product->product_new);
         }
+
+
     }
 
     public function render() {
@@ -156,19 +161,20 @@ class Detail extends Component {
         $this->product->seo_utl = str_replace(' ', '-', $this->product->seo_utl);
         $this->rules["product.seo_utl"] = ['required','unique:product,seo_utl,'.$this->product->id];
         $validatedData = $this->validate($this->rules);
-        
+
         array_pop($this->faq);
 
         $validatedData['product']['faq'] = json_encode($this->faq, true);
         $validatedData['product']['location'] =  json_encode($this->product->location);
         $validatedData['product']['product_new'] = json_encode($this->product->product_new);
         $validatedData['product']['collection'] = json_encode($this->product->collection); 
+        $validatedData['product']['cv_option_price'] = json_encode($this->product->cv_option_price); 
+
+        $validatedData['product']['custom_variant'] = ($this->product->custom_variant) ? 1 : 0;
 
         $validatedData['variants'] = $validatedData['product']['variants'];
         unset($validatedData['product']['variants']);
 
-       
-        // date_default_timezone_set('Asia/Kolkata');
     
         $updated = Product::where('id', $this->product->id)->update($validatedData['product']);
         if ($this->image) {
@@ -183,20 +189,9 @@ class Detail extends Component {
         }
         foreach ($this->product->variants as $key => $variant) {
             $variant->save();
-        }
+        }        
 
         $this->getProduct();
-
-
-        // $i = 0;
-        // foreach ($this->varientsarray as $key => $value) {
-        //     if ($this->varientsarray[$key] != "") {
-        //         $price = $this->varientsarray[$i]['price'];
-        //         $varientcheckid = $this->varientsarray[$i]['lable'];
-        //         $custom_variant_Save_arry[] = array('price' => $price, 'lable' => $varientcheckid,);
-        //         $i++;
-        //     }
-        // }
        
       
         // if ($this->variantStock) {
