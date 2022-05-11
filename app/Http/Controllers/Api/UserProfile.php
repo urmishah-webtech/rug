@@ -44,11 +44,11 @@ class UserProfile extends Component
                     $hashedPassword = Hash::make($request->newpassword);
                     
                 }else{
-                    return response()->json(['message' => 'Not Same Password !!', 'fail' => false ]);
+                    return response()->json(['message' => 'Not Same Password !!', 'success' => false, 'status' => 401 ]);
                 }
                     
             }else{
-                return response()->json(['message' => 'Old Password Not Match !!', 'fail' => false ]);
+                return response()->json(['message' => 'Old Password Not Match !!', 'success' => false, 'status' => 401 ]);
             }
         }
 
@@ -61,7 +61,7 @@ class UserProfile extends Component
 
         ]);
 
-        return response()->json(['message' => 'Record Updated!!', 'success' => true ]);
+        return response()->json(['message' => 'Record Updated!!', 'success' => true, 'status' => 200 ]);
     }
 
     public function PasswordUpdate(Request $request)
@@ -88,7 +88,7 @@ class UserProfile extends Component
     public function getOrder($userid)
     {
         $order = Orders::with(['order_items' => function($x) {
-            return $x->with('variant_product')
+            return $x->with('variant_product');
         }])->where('user_id',$userid)->get();
 
         return response()->json(['order' => $order, 'success' => true ]);
