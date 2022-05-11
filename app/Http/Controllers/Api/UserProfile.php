@@ -312,7 +312,7 @@ class UserProfile extends Component
     public function getOrder($userid)
     {
         $order = Orders::with(['order_items' => function($x) {
-            return $x->with('variant_product');
+            return $x->with('variant_product')->with('product');
         }])->where('user_id',$userid)->get();
 
         return response()->json(['order' => $order, 'success' => true ]);
