@@ -1,19 +1,17 @@
 <?php
+
 namespace App\Http\Livewire\Product;
+
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\ProductMedia;
 use App\Models\VariantMedia;
 use App\Models\ProductVariant;
 use App\Models\CollectionProduct;
-use App\Models\Tag;
-use App\Models\Country;
 use App\Models\VariantStock;
 use App\Models\Collection;
-use App\Models\Location;
 use App\Models\VariantTag;
 use App\Models\tagsale;
-use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -21,23 +19,13 @@ use Illuminate\Support\Facades\Storage;
 class Detail extends Component {
 
     use WithFileUploads;
-    public $answer, $question;
-    public $product, $variantag, $tagsale, $Country, $uuid, $Productmedia, $Productvariant, $location, $variantStock, $variantStock_clone, $descripation, $LocationId, $editQuantitiesDetailsModal, $varition_name, $Collection, $fullStock, $urlpath, $productCollection = [];
-    public $image = [], $selectedlocation = [], $stock = [], $locationarray;
-    public $att_price = [], $varition_arrray = [];
-    public $imgvariant, $varientsarray;
-    public $filesvariant = [];
-    public $productimage = [];
-    public $variantname = [];
-    public $variantid = [];
-    public $photo_variant, $file;
-    public $productDetail, $existDetailCount = 0;
-    public $faq = [];
+    public $product, $tagsale, $uuid, $Productmedia, $Collection, $imgvariant;
+    public $image = [], $filesvariant = [], $productimage = [], $faq = [];
     public $product_last_key = 0;
-    public $select_all_images = false;
+    public $select_all_images = false, $update_price = false, $update_selling_price  = false;
+    public $price_all, $selling_price_all;
 
     protected $rules = [
-        'urlpath' => '', 
         'product.title' => 'required', 
         'product.descripation' => 'required', 
         'product.seo_title' => '', 
@@ -54,7 +42,6 @@ class Detail extends Component {
         'product.profit' => '', 
         'product.selling_price' => '', 
         'product.compare_selling_price' => '', 
-        'LocationId.name' => '', 
         'product.weight' => '', 
         'product.weight_lable' => '', 
         'product.shipping_weight' => '', 
@@ -73,18 +60,22 @@ class Detail extends Component {
         'product.collection' => '', 
         'product.cv_width_height_price' => '', 
         'product.variants.*.selling_price' => '', 
-        'product.variants.*.price' => 'required', 
+        'product.variants.*.price' => '', 
         'product.variants.*.sku' => '', 
         'product.variants.*.barcode' => '', 
         'product.variants.*.hscode' => '', 
         'product.variants.*.stock' => '', 
-        'variantStock.*.stock' => '', 
         'product.variants.*.photo' => [], 
         'faq.*.question' => '',
         'faq.*.answer' => '', 
         'product.cv_option_price.*.price' => '', 
         'product.cv_option_price.*.lable' => '',
-        'att_price' => [], 
+    ];
+
+    
+    protected $messages = [
+        'product.seo_utl.unique' => 'This value has already been taken. Put different.',
+        'product.seo_utl.required' => 'This field is required.',
     ];
 
 
@@ -93,12 +84,8 @@ class Detail extends Component {
         $this->uuid = $id;
         $this->getProduct();
 
-        $this->editQuantitiesDetailsModal = false;
         $this->tagsale = tagsale::get();
         $this->Collection = Collection::select('title', 'id')->get()->groupBy('id')->toArray();
-        $this->location = Location::All();
-        $this->Country = Country::All();
-        $this->fullStock = VariantStock::All();
         $variantag = VariantTag::all()->toArray();
         $this->variantag = array_combine(array_column($variantag, 'id'), array_column($variantag, 'name'));
     }
@@ -168,14 +155,26 @@ class Detail extends Component {
         $validatedData['product']['location'] =  json_encode($this->product->location);
         $validatedData['product']['product_new'] = json_encode($this->product->product_new);
         $validatedData['product']['collection'] = json_encode($this->product->collection); 
-        $validatedData['product']['cv_option_price'] = json_encode($this->product->cv_option_price); 
 
         $validatedData['product']['custom_variant'] = ($this->product->custom_variant) ? 1 : 0;
+
+        if(!$this->product->custom_variant && !empty($validatedData['product']['cv_option_price'])) {
+             foreach ($validatedData['product']['cv_option_price'] as $key => $value) {
+
+                 $validatedData['product']['cv_option_price'][$key]['price'] = '';
+
+             }
+
+        } 
+        $validatedData['product']['cv_option_price'] = json_encode($validatedData['product']['cv_option_price']);
+
+        
 
         $validatedData['variants'] = $validatedData['product']['variants'];
         unset($validatedData['product']['variants']);
 
-    
+        
+
         $updated = Product::where('id', $this->product->id)->update($validatedData['product']);
         if ($this->image) {
             foreach ($this->image as $photo) {
@@ -188,38 +187,17 @@ class Detail extends Component {
             }
         }
         foreach ($this->product->variants as $key => $variant) {
+            if($this->update_price) {
+                $variant->price = $this->price_all;
+            }
+            if($this->update_selling_price) {
+                $variant->selling_price = $this->selling_price_all;
+            }
             $variant->save();
         }        
 
         $this->getProduct();
-       
-      
-        // if ($this->variantStock) {
-        //     foreach ($this->variantStock as $stock) {
-        //         VariantStock::where('id', $stock->id)->update(['stock' => $stock->stock]);
-        //     }
-        // }
-        
-        // foreach ($this->Productvariant as $key => $value) {
-        //     $id = $this->Productvariant[$key]['id'];
-        //     $variationValue = ProductVariant::query()->findOrFail($id);
-        //     if ($id) {
-        //         $product_variant_price = (!empty($this->Productvariant[$key]['price'])) ? $this->Productvariant[$key]['price'] : 'NULL';
-        //         $variationValue->update(['price' => $product_variant_price, 'selling_price' => $this->Productvariant[$key]['selling_price'], 'sku' => $this->Productvariant[$key]['sku'], 'barcode' => $this->Productvariant[$key]['barcode'], 'hscode' => $this->Productvariant[$key]['hscode'], 'stock' => $this->Productvariant[$key]['stock']]);
-        //     }
-        // }
-        // if (!empty($this->productDetail)) {
-        //     foreach ($this->productDetail as $detail) {
-        //         $data = ['title' => $detail['title'], 'description' => $detail['description'], ];
-        //         if (isset($detail['id'])) {
-        //             ProductDetail::where('id', $detail['id'])->update($data);
-        //         } else {
-        //             $data['product_id'] = $this->product['id'];
-        //             ProductDetail::create($data);
-        //         }
-        //     }
-        // }
-        // $this->product = Product::where('uuid', $this->uuid)->first();
+         
         session()->flash('message', 'Product Updated Successfully.');
     }
 
@@ -274,6 +252,10 @@ class Detail extends Component {
             session()->flash('message', 'Image Updated Successfully.');
 
         }
+    }
+    public function applyAll($variable_name)
+    {
+        $this->{$variable_name} = true;
     }
 
 }

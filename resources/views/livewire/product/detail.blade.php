@@ -200,7 +200,8 @@
                @if(!$product->variants->isEmpty())
                <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table">
                   <div class="product-table-title">
-                     <h3>Variants</h3>
+
+                     <h3>Variants <span class="text-danger">*</span></h3>
                      <span>
                         <a href="{{ route('variant-new', $product->uuid) }}" class="link">Add variant</a>
                      </span>
@@ -208,7 +209,7 @@
                
                   <div class="card-section tab_content  active" id="all_customers">
                      <div class="table-loader">
-                        <div class="loading-overlay" wire:loading.flex wire:target="tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, save, remove">
+                        <div class="loading-overlay" wire:loading.flex wire:target="variantimgsubmit">
                            <div class="page-loading"></div>
                         </div>
                         <div class="product-table-details">
@@ -236,7 +237,6 @@
                                     </td>
                                     <td class="product-img">
                                        <div class="product-variants-ulpload-img" data-toggle="modal">
-                                          <!--<input type="file" accept="image/*" id="{{$row->id}}" class="loadFile">-->
                                           <div class="pd-blank-img">
                                              @if(empty($row['variantmedia'][0]['image']))
                                              <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true" onclick="document.getElementById('update-variant-image-modal-{{$row->id}}').style.display='block'"><path d="M19 2.5A1.5 1.5 0 0 0 17.5 1h-15A1.5 1.5 0 0 0 1 2.5v15A1.5 1.5 0 0 0 2.5 19H10v-2H3.497c-.41 0-.64-.46-.4-.79l3.553-4.051c.19-.21.52-.21.72-.01L9 14l3.06-4.781a.5.5 0 0 1 .84.02l.72 1.251A5.98 5.98 0 0 1 16 10h3V2.5zm-11.5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12.207 10.793A1 1 0 0 0 19 15h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 0 0 .707-1.707z"></path></svg>
@@ -335,7 +335,7 @@
                      </label>
 
                      
-                     <div @if(!$product->custom_variant) style='display:none' @endif class="card-cutome-arrtibute one-half-row-card" wire:ignore >
+                     <div @if(!$product->custom_variant) style='display:none' @endif class="card-cutome-arrtibute one-half-row-card" wire:ignore.self >
                         
                         @if(!empty($product->cv_option_price))
                         @foreach ($product->cv_option_price as $key => $item)
@@ -413,7 +413,7 @@
                   </div>
              
                </div>
-               <div class="card variant-pricing-card" wire:ignore>
+               <div class="card variant-pricing-card">
                   <div class="row-items">
                      <div class="header-title">
                         <h3 class="fs-16 fw-6 mb-0">Shipping Parcel</h3>
@@ -421,25 +421,21 @@
                      <div class="row" style="margin-bottom:10px">
                         <div class="form-field-list">
                            <label>Shipping Weight (kg)</label>
-                           <input type="text" name="shipping_weight" wire:model="product.shipping_weight" wire:ignore >
-                           @error('shipping_weight') <span class="text-danger">{{ $message }}</span>@enderror
+                           <input type="text" name="shipping_weight" wire:model.defer="product.shipping_weight">
                         </div>
                         <div class="form-field-list">
                            <label>Width (cm)</label>
-                           <input type="text" name="width" wire:model="product.width" wire:ignore >
-                           @error('width') <span class="text-danger">{{ $message }}</span>@enderror
+                           <input type="text" name="width" wire:model.defer="product.width">
                         </div>
                      </div>
                      <div class="row">
                         <div class="form-field-list">
                            <label>Height (cm)</label>
-                           <input type="text" name="height" wire:model="product.height" wire:ignore >
-                           @error('height') <span class="text-danger">{{ $message }}</span>@enderror
+                           <input type="text" name="height" wire:model.defer="product.height">
                         </div>
                         <div class="form-field-list">
                            <label>Depth (cm)</label>
-                           <input type="text" name="depth" wire:model="product.depth" wire:ignore>
-                           @error('depth') <span class="text-danger">{{ $message }}</span>@enderror
+                           <input type="text" name="depth" wire:model.defer="product.depth">
                         </div>
                      </div>
                   </div>
@@ -473,7 +469,7 @@
                         
                         <label>Page title</label>
                         
-                        <input type="text" name="seo_title" wire:model="product.seo_title">
+                        <input type="text" name="seo_title" wire:model.defer="product.seo_title">
                         
                         <p>0 of 70 characters used</p>
                         
@@ -483,7 +479,7 @@
                         
                         <label>Description</label>
                         
-                        <textarea name="seo_descripation" wire:model="product.seo_descripation"></textarea>
+                        <textarea name="seo_descripation" wire:model.defer="product.seo_descripation"></textarea>
                         
                         <p>0 of 320 characters used</p>
                         
@@ -494,11 +490,10 @@
                         <label>URL and handle</label>
                         
                         <div class="url-input">
-                           <input type="hidden" name="urlpath">
-                           <input type="text" name="seo_utl" wire:model="product.seo_utl">
+                           <input type="text" name="seo_utl" wire:model.defer="product.seo_utl">
                            
                         </div>
-                        @error('product.seo_utl')  <span class="text-danger">This value has already been taken. Put different.</span> @enderror
+                        @error('product.seo_utl')  <span class="text-danger">{{ $message }}</span> @enderror
                         
                      </div>
                      
@@ -510,6 +505,7 @@
                      <div class="col-md-2">
                         <h3>Product Tab descripation</h3>
                      </div>
+
                      
                      @foreach($faq as $key => $row)
                      <div @if($product_last_key == $key) id="hidden_tab" style="display: none;" @endif  >
@@ -530,6 +526,7 @@
                         </div>
                      </div>
                      @endforeach
+
                   </div>
                   <div class="more-feilds">
                      <div class="col-md-6">
@@ -539,11 +536,12 @@
                      </div>
                      
                   </div>
+
                </div>
 
             </div>
 
-            <div class="columns one-third right-details" wire:ignore>
+            <div class="columns one-third right-details">
                <div class="card">
                   <div class="card-header">
                      
@@ -555,7 +553,7 @@
                      
                      <p class="mb-0">
                         
-                        <select  name="status" wire:model="product.status">
+                        <select  name="status" wire:model.defer="product.status">
                            
                            <option value="active" @if($product->status == 'active') selected @endif>Active</option>
                            
@@ -575,7 +573,7 @@
                      </div>
                      
                      <p class="mb-0">
-                        <select  name="status" wire:model="product.product_new" multiple>
+                        <select  name="status" wire:model.defer="product.product_new" multiple>
                            
                            <option value="">-- Select Option --</option>
                            @foreach($tagsale as $res)
@@ -589,13 +587,13 @@
                </div>
                <div class="card tag-card card-grey-bg organization-card">
                   <div class="card-middle">
-                     <div class="row sidebar-collection-checkbox" wire:ignore>
+                     <div class="row sidebar-collection-checkbox">
                         <label class="fs-12  fw-6 mb-0">COLLECTIONS</label>
                         <input type="search" placeholder="Search for collections" class="buttoncustom" onclick="openOption('email_subscription_status')" >
                         <div class="search-collections-checkbox filter_email_subscription_status dropdowncustomhide" style="list-style-type: none">
                            
                            @foreach($Collection as $key=>$row)
-                           <label><input type="checkbox" name="option2a" wire:model.lazy="product.collection" value="{{$key}}">{{$row[0]['title']}}</label>
+                           <label><input type="checkbox" name="option2a" wire:model.defer="product.collection" value="{{$key}}">{{$row[0]['title']}}</label>
                            @endforeach
                         </div>
 
@@ -616,7 +614,7 @@
                      <div class="header-title">
                         <h4 class="fs-16 mb-0 fw-6">Featured</h4>
                      </div>
-                     <label><input type="checkbox" name="featured" wire:model="product.featured" wire:ignore.self class="click-varients-type">Assign this product as Featured</label>
+                     <label><input type="checkbox" name="featured" wire:model.defer="product.featured" class="click-varients-type">Assign this product as Featured</label>
                   </div>
                </div>
 
@@ -640,7 +638,7 @@
                @endif
             </div>
             <input type="button" class="button save-button" wire:click="updateDetail" value="Save">
-            <div class="loading-overlay" wire:loading.flex wire:target="EditAddress,tags,variantimgsubmit, updateDetail, deleteproduct, openModel, closeModel, filesvariant,mount, remove">
+            <div class="loading-overlay" wire:loading.flex wire:target="updateDetail, deleteproduct, remove, deleteimage">
                <div class="page-loading"></div>
             </div>
          </div>
@@ -675,143 +673,8 @@
             </div>
          </div>
       </div>
-      <!--Sales channels and apps-->
-      <div id="sales-channels-apps-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Sales channels and apps</h2>
-                  <span onclick="document.getElementById('sales-channels-apps-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <p><button class="link">Select all</button> 0 of 2 selected</p>
-                  <label><input type="checkbox" name="online_store" @if($product->online_store == true) checked @endif>Online Store</label>
-                  <label><input type="checkbox" name="point_of_sale" @if($product->point_of_sale == true) checked @endif>Point of Sale</label>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--/Sales channels and apps-->
-      <!--Edit options-->
-      <div id="edit-options-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit options</h2>
-                  <span onclick="document.getElementById('edit-options-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <p>
-                     <input type="text" value="Color">
-                     <span class="tag grey">Blue <button class="link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button></span>
-                     <span class="tag grey">Red <button class="link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button></span>
-                     <span class="tag grey">white <button class="link"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button></span>
-                  </p>
-                  <div class="row">
-                     <p>
-                        <input type="text" value="Size">
-                        <input type="text" placeholder="Default Size">
-                     </p>
-                     <p><button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M8 3.994C8 2.893 8.895 2 10 2s2 .893 2 1.994h4c.552 0 1 .446 1 .997a1 1 0 0 1-1 .997H4c-.552 0-1-.447-1-.997s.448-.997 1-.997h4zM5 14.508V8h2v6.508a.5.5 0 0 0 .5.498H9V8h2v7.006h1.5a.5.5 0 0 0 .5-.498V8h2v6.508A2.496 2.496 0 0 1 12.5 17h-5C6.12 17 5 15.884 5 14.508z"></path></svg></button></p>
-                  </div>
-                  <p>
-                     <button class="button secondary another-option-btn">Add another option</button>
-                  </p>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--/Edit options-->
-      <!--/Reorder variants-->
-      <div id="reorder-variants-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Reorder variants and options</h2>
-                  <span onclick="document.getElementById('reorder-variants-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <p>Reorder variants or options to change how they appear on your store</p>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Save</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--/Reorder variants-->
-      <!--/duplicate-product-modal-->
-      <div id="duplicate-product-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Duplicate product</h2>
-                  <span onclick="document.getElementById('duplicate-product-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <div class="manage-address-list">
-                     <div class="row">
-                        <div class="form-field-list">
-                           <label>Title</label>
-                           <input type="text" value="Copy of MEN'S ADIDAS ORIGINALS SUPERSTAR SHOES">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="manage-address-list duplicate-product-checkbox">
-                     <p>Select details to copy. All other details except 3D models and videos will be copied from the original product and any variants.</p>
-                     <div class="row">
-                        <label><input type="checkbox" name="option2a" checked="checked">Images</label>
-                        <label><input type="checkbox" name="option2a">SKUs</label>
-                        <label><input type="checkbox" name="option2a" disabled="disabled">Barcodes</label>
-                        <label><input type="checkbox" name="option2a">Inventory quantities</label>
-                     </div>
-                  </div>
-                  <div class="manage-address-list">
-                     <label>Product status</label>
-                     <div class="row">
-                        <label><input type="radio" name="option1a" checked="checked">Set as draft</label>
-                        <label><input type="radio" name="option1a">Set as active</label>
-                     </div>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Duplicate product</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!--Unsaved changes modal-->
-      <div id="unsaved-changes-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Unsaved changes</h2>
-                  <span onclick="document.getElementById('unsaved-changes-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <p class="mb-0">If you leave this page, any unsaved changes will be lost.</p>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button warning">Leave page</button>
-               </div>
-            </div>
-         </div>
-      </div>
-    
-     
-      <!--Edit prices modal-->
-      @if(!$product->variants->isEmpty())
+
+       @if(!$product->variants->isEmpty())
       <div id="variants-edit-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
          <div class="customer-modal-inner">
             <div class="customer-modal">
@@ -824,10 +687,10 @@
                      <div class="form-field-list">
                         <label>Apply a price to all variants</label>
                         <span class="dollar-input">
-                           <input type="text" id="apply-price" class="apply-price" name="price" placeholder="0,00">
+                           <input type="text" id="apply-price" wire:model.defer="price_all" class="apply-price" name="price" placeholder="0,00">
                         </span>
                      </div>
-                     <button class="button fw-6" id="apply-price-submit">Apply to all</button>
+                     <button class="button fw-6" wire:click='applyAll("update_price")' id="apply-price-submit">Apply to all</button>
                   </div>
                   @foreach ($product->variants as $key => $variantrow)
                   <div class="vep-list bd_none">
@@ -842,7 +705,7 @@
                         @if($variantrow->attribute9 != "")/{{$variantrow->attribute9}} @endif
                      @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif</label>
                      <span class="dollar-input">
-                        <input class="att_price_class" type="text" wire:model.defer="Productvariant.{{ $key }}.price" wire:ignore>
+                        <input class="att_price_class" type="text" wire:model.defer="product.variants.{{ $key }}.price" >
                      </span>
                   </div>
                   @endforeach
@@ -854,6 +717,7 @@
             </div>
          </div>
       </div>
+      
       <!-- Edit Selling Price -->
       <div id="variants-edit-selling-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
          <div class="customer-modal-inner">
@@ -867,10 +731,10 @@
                      <div class="form-field-list">
                         <label>Apply a selling price to all variants</label>
                         <span class="dollar-input">
-                           <input type="text" name="selling_price" placeholder="0,00">
+                           <input type="text" wire:model.defer="selling_price_all" name="selling_price" placeholder="0,00" class="apply-selling-price">
                         </span>
                      </div>
-                     <button class="button fw-6">Apply to all</button>
+                     <button class="button fw-6" wire:click='applyAll("update_selling_price")' id="apply-selling-price-submit" >Apply to all</button>
                   </div>
                   @foreach ($product->variants as $key => $variantrow)
                   <div class="vep-list bd_none">
@@ -885,7 +749,7 @@
                         @if($variantrow->attribute9 != "")/{{$variantrow->attribute9}} @endif
                      @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif</label>
                      <span class="dollar-input">
-                        <input type="text" wire:model.defer="product.variants.{{ $key }}.selling_price" wire:ignore>
+                        <input type="text"  class="att_selling_price_class" wire:model.defer="product.variants.{{ $key }}.selling_price" >
                      </span>
                   </div>
                   @endforeach
@@ -897,47 +761,8 @@
             </div>
          </div>
       </div>
-    
-    
-      <!--Edit option values modal-->
-      <div id="edit-option-values-modal" class="customer-modal-main">
-         <div class="customer-modal-inner">
-            <div class="customer-modal">
-               <div class="modal-header">
-                  <h2>Edit option values</h2>
-                  <span onclick="document.getElementById('edit-option-values-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
-               </div>
-               <div class="modal-body">
-                  <div class="row p-3">
-                     <label class="fs-12 fw-6">{{$symbol['currency']}}10.00</label>
-                     <label>Denominations</label>
-                     <input type="text" value="{{$symbol['currency']}}10.00">
-                  </div>
-                  <div class="row p-3">
-                     <label class="fs-12 fw-6">{{$symbol['currency']}}25.00</label>
-                     <label>Denominations</label>
-                     <input type="text" value="{{$symbol['currency']}}25.00">
-                  </div>
-                  <div class="row p-3">
-                     <label class="fs-12 fw-6">{{$symbol['currency']}}50.00</label>
-                     <label>Denominations</label>
-                     <input type="text" value="{{$symbol['currency']}}50.00">
-                  </div>
-                  <div class="row p-3">
-                     <label class="fs-12 fw-6">{{$symbol['currency']}}100.00</label>
-                     <label>Denominations</label>
-                     <input type="text" value="{{$symbol['currency']}}100.00">
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button class="button secondary" data-dismiss="modal">Cancel</button>
-                  <button class="button green-btn">Done</button>
-               </div>
-            </div>
-         </div>
-      </div>
-     
-      <!--Edit barcodes modal-->
+      
+      <!--Edit stock modal-->
       <div id="variants-edit-stock-qtn-modal" class="customer-modal-main skus-barcodes-modal" wire:ignore>
          <div class="customer-modal-inner">
             <div class="customer-modal">
@@ -971,1246 +796,195 @@
       </div>
    
       @endif
-      <!-- END -->
 
-      <script type="text/javascript">
 
-         $('.add-more').on('click', function() {
+      <!--end Models------------------------------->
+
+
+
+    
+     
+      <!--script------------------------------->
+
+
+    <script type="text/javascript">
+
+        $(document).on('DOMNodeRemoved', function(e) {
+            if ($(e.target).hasClass('ui-state-default')) {
+                if ($('.ui-state-default').length <= 1) {
+                    $(e.target).parent().removeClass('import-file-big');
+                }
+            }
+        });
+
+        $(document).on('DOMNodeInserted', function(e) {
+            if ($(e.target).hasClass('ui-state-default')) {
+                // $('#save').prop('disabled', false);
+                $(e.target).parent().addClass('import-file-big');
+            }
+        });
+
+        // product detail
+        $('.add-more').on('click', function() {
             $('#hidden_tab').show();
             @this.add();
-         });
+        });
 
-         $(document).on("click", '#apply-price-selling-submit', function() {
-            var val = $('.apply-selling-price').val();
-            $('.att_price_selling_class').attr("value", val);
-         });
+        // custom
+        $(".edit-update-Attribute").click(function() {
+            $('.card-cutome-arrtibute').slideToggle(500);
+        });
 
-         $( ".edit-update-Attribute" ).click(function() {
-               $('.card-cutome-arrtibute').slideToggle(500);
-            });
+        // seo
+        $(".edit-website-seo-btn").click(function() {
 
-        
-         $(document).ready(function(){
+            $('.search-engine-listing-card .card-middle').toggle();
 
-            $('#update-all-tags').click(function() {
+        });
 
 
+        // media
+        $(document).on("click", '#select-all', function() {
 
-            document.getElementsByClassName('selected_tags')[0].innerHTML = '';
+            $('.image-checkbox').prop('checked', this.checked);
 
+        })
 
-
-            var exist_tags = $('#tags').val().split(',');
-
-
-
-            var exist = '';
-
-
-
-            console.log( exist_tags);
-
-
-
-
-
-
-
-            for (var i = 0; i < exist_tags.length; i++) {
-
-
-
-            if(exist_tags[i] != '') {
-
-
-
-            if(i == 0) {
-
-
-
-            exist = exist_tags[i];
-
-
-
-
-
-
-
-            } else {
-
-
-
-            exist = exist_tags[i]+','+exist;
-
-
-
-
-
-
-
-            }
-
-
-
-            $('.selected_tags').append('<span class="tag grey fs-13">'+exist_tags[i]+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
-
-
-
-            }
-
-
-
-            }
-
-
-
-            $('#customer_tags').first().val(exist);
-
-
-
-
-
-
-
-            });
-
-
-
-            $(document).on('click','.tag_added',function(){
-
-
-
-            console.log('tag-added');
-
-
-
-            var exist =  $('#customer_tags').first().val();
-
-
-
-
-
-
-
-            $('#customer_tags').first().val(exist+','+this.innerText);
-
-
-
-
-
-
-
-            $('.selected_tags').append('<span class="tag grey fs-13">'+this.innerText+' <button type="button" onclick="removeElem(this)"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button> </span>');
-
-
-
-            $(this).hide();
-
-
-
-            });
-            $('.product-edite-variants a').click(function() {
-
-            $('.edite-variants-dropdown').slideToggle();
-
-            $('.all-location-dropdown').hide();
-
-            $('.variants-option-dropdown').hide();
-
-            $('.add-media-dropdown').hide();
-
-            });
-
-            $('.product-all-location button').click(function() {
-
-            $('.all-location-dropdown').slideToggle();
-
-            $('.edite-variants-dropdown').hide();
-
-            $('.variants-option-dropdown').hide();
-
-            $('.add-media-dropdown').hide();
-
-            });
-
-            $('.variants-option-btn').click(function() {
-
-            $('.edite-variants-dropdown').hide();
-
-            $('.all-location-dropdown').hide();
-
-            $('.add-media-dropdown').hide();
-
-            });
-
-            $('.add-media-url-btn').click(function() {
-
-            $('.add-media-dropdown').slideToggle();
-
-            $('.edite-variants-dropdown').hide();
-
-            $('.all-location-dropdown').hide();
-
-
-            });
-
+        $(document).on("change", '.image-checkbox', function() {
+            var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
            
+            if (countCheckedCheckboxes > 0)
+            {
+                $('#select-all').prop("checked", true);
+                $('.count-image').text(countCheckedCheckboxes);
 
-            $('form').keyup(function() {
-               if($(this).val() != '') {
-               $('.save-button').prop('disabled', false);
-               }
-            });
-
-            if ($(".CustomVariant_checkox" ).is(':checked')) {
-               $('.CustomVariant_wrap').addClass("CustomVariant_active");
-            }else{
-               $('.CustomVariant_wrap').removeClass("CustomVariant_active");
+            } else
+            {
+                $('#select-all').removeAttr('checked');
+                $('.count-image').text('');
             }
 
-        
+        });
 
 
-            $( ".edit-website-Attribute" ).click(function() {
-
-               $('.main-variant-attribute .card-middle-arrtibute').toggle("slide");
-
-            });
-
-            $( ".CustomVariant_checkox" ).click(function() {
-
-               if ($(".CustomVariant_checkox" ).is(':checked')) {
-                  $('.CustomVariant_wrap').addClass("CustomVariant_active");
-               }else{
-                  $('.CustomVariant_wrap').removeClass("CustomVariant_active");
-               }
-
-            });
-
-
-         
-            var arr_list_items = [];
-            var rowIdx = 1;
-            var flag = 1;
-
-            $(document).on("change", '.varition-type-value', function() {
-               var selecetval = $(this).val();
-               arr_list_items.push(selecetval);
-
-            });
-
-
-         });
-
-
-         $(document).on("change", '.varition_tags', function() {
-
-            if($('.bootstrap-tagsinput .tag').length > 0){
-               $('#total_variants_added').text($('.recorditem').length);
-                $('.add-product-footer').show();
-            } else {
-               $('.add-product-footer').hide();
-            }
-
-            
-
-            var mainid = $(this).attr('id');
-
-            var id_type1 = $('#varition_type_1').val();
-            var id_type2 = $('#varition_type_2').val();
-            var id_type3 = $('#varition_type_3').val();
-            var id_type4 = $('#varition_type_4').val();
-            var id_type5 = $('#varition_type_5').val();
-            var id_type6 = $('#varition_type_6').val();
-            var id_type7 = $('#varition_type_7').val();
-            var id_type8 = $('#varition_type_8').val();
-            var id_type9 = $('#varition_type_9').val();
-            var id_type10 = $('#varition_type_10').val();
-
-            var id1 = $('#varition_tags_1').val();
-            var id2 = $('#varition_tags_2').val();
-            var id3 = $('#varition_tags_3').val();
-            var id4 = $('#varition_tags_4').val();
-            var id5 = $('#varition_tags_5').val();
-            var id6 = $('#varition_tags_6').val();
-            var id7 = $('#varition_tags_7').val();
-            var id8 = $('#varition_tags_8').val();
-            var id9 = $('#varition_tags_9').val();
-            var id10 = $('#varition_tags_10').val();
-
-
-
-            if(id1 != null && id1.length > 0) {
-            var arr11 = id1.split(',');
-            var arrlegth1 =  id1.length;
-            var arr1 = arr11;
-            }
-
-            if(id2 != null && id2.length > 0) {
-            var arr22 = id2.split(',');
-            var arrlegth2 =  id2.length;
-            var arr2 = arr22;
-            }
-
-            if(id3 != null && id3.length > 0) {
-            var arr33 = id3.split(',');
-            var arrlegth3 =  id3.length;
-            var arr3 = arr33;
-            }
-
-            if(id4 != null && id4.length > 0) {
-            var arr44 = id4.split(',');
-            var arrlegth4 =  id4.length;
-            var arr4 = arr44;
-            }
-
-            if(id5 != null && id5.length > 0) {
-            var arr55 = id5.split(',');
-            var arrlegth5 =  id5.length;
-            var arr5 = arr55;
-            }
-
-            if(id6 != null && id6.length > 0) {
-            var arr66 = id6.split(',');
-            var arrlegth6 =  id6.length;
-            var arr6 = arr66;
-            }
-
-            if(id7 != null && id7.length > 0) {
-            var arr77 = id7.split(',');
-            var arrlegth7 =  id7.length;
-            var arr7 = arr77;
-            }
-
-            if(id8 != null && id8.length > 0) {
-            var arr88 = id8.split(',');
-            var arrlegth8 =  id8.length;
-            var arr8 = arr88;
-            }
-
-            if(id9 != null && id9.length > 0) {
-            var arr99 = id9.split(',');
-            var arrlegth9 =  id9.length;
-            var arr9 = arr99;
-            }
-
-
-            if(id10 != null && id10.length > 0) {
-            var arr1010 = id10.split(',');
-            var arrlegth10 =  id10.length;
-            var arr10 = arr1010;
-            }
-
-
-            var get_html = '';
-            var get_price_html = '';
-            var get_selling_price_html = '';
-            var get_sku_html = '';
-            var get_barcode_html = '';
-            var get_hscode_html = '';
-            var get_country_html = '';
-            var get_stock_html = '';
-
-         if(id1 != null && id1.length > 0)
-         {
-         arr1.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name1 = el;
-
-         if(id2 != null && id2.length > 0) {
-
-         arr2.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name2 = el;
-
-         if(id3 != null && id3.length > 0) {
-
-         arr3.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name3 = el;
-
-         if(id4 != null && id4.length > 0) {
-
-         arr4.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name4 = el;
-
-         if(id5 != null && id5.length > 0) {
-
-         arr5.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name5 = el;
-
-         if(id6 != null && id6.length > 0) {
-
-         arr6.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name6 = el;
-
-         if(id7 != null && id7.length > 0) {
-
-         arr7.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name7 = el;
-
-         if(id8 != null && id8.length > 0) {
-
-         arr8.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name8 = el;
-
-         if (id9 != null && id9.length > 0) {
-
-         arr9.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name9 = el;
-
-         if (id10 != null && id10.length > 0) {
-
-         arr10.forEach(function(el) {
-         var uniq_id = Math.random().toString(36).substr(2, 9);
-         var arr_name10 = el;
-
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_name[six][]" class="varition_name" value="'+arr_name6+'"><input type="hidden" name="varition_name[seven][]" class="varition_name" value="'+arr_name7+'"><input type="hidden" name="varition_name[eight][]" class="varition_name" value="'+arr_name8+'"><input type="hidden" name="varition_name[nine][]" class="varition_name" value="'+arr_name9+'"><input type="hidden" name="varition_name[ten][]" class="varition_name" value="'+arr_name10+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type3 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'/' + arr_name10 + '/' + id_type10 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '/' + arr_name10 +'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-
-         });
-         }
-         else {
-
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_name[six][]" class="varition_name" value="'+arr_name6+'"><input type="hidden" name="varition_name[seven][]" class="varition_name" value="'+arr_name7+'"><input type="hidden" name="varition_name[eight][]" class="varition_name" value="'+arr_name8+'"><input type="hidden" name="varition_name[nine][]" class="varition_name" value="'+arr_name9+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type3 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '/' + arr_name9 + '/' + id_type9 +'"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '/' + arr_name9 +'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else {
-
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_name[six][]" class="varition_name" value="'+arr_name6+'"><input type="hidden" name="varition_name[seven][]" class="varition_name" value="'+arr_name7+'"><input type="hidden" name="varition_name[eight][]" class="varition_name" value="'+arr_name8+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="' + id_type1 + '/' + arr_name1 + '/' + id_type2 + '/' + arr_name2 + '/' + id_type3 + '/' + arr_name3 + '/' + arr_name4 + '/' + id_type4 + '/' + arr_name5 + '/' + id_type5 + '/' + arr_name6 + '/' + id_type6 + '/' + arr_name7 + '/' + id_type7 + '/' + arr_name8 + '/' + id_type8 + '"><tr id=' + uniq_id + ' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input ' + uniq_id + '" data-toggle="modal" id=' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + ' data-id=' + uniq_id + '  data-input="">' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-' + uniq_id + '" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-' + uniq_id + '" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-' + uniq_id + '" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-' + uniq_id + '"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-' + uniq_id + '" data-id="' + uniq_id + '" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-sku-' + uniq_id + '" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-' + uniq_id + '" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-stock-qtn-' + uniq_id + '" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><input type="text" id="child-popup-hscode-' + uniq_id + '" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>' + arr_name1 + '/' + arr_name2 + '/' + arr_name3 + '/' + arr_name4 + '/' + arr_name5 + '/' + arr_name6 + '/' + arr_name7 + '/' + arr_name8 + '</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-' + uniq_id + '" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else
-         {
-
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_name[six][]" class="varition_name" value="'+arr_name6+'"><input type="hidden" name="varition_name[seven][]" class="varition_name" value="'+arr_name7+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type3+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'/'+arr_name7+'/'+id_type7+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'/'+arr_name7+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else
-         {
-
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_name[six][]" class="varition_name" value="'+arr_name6+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type3+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'/'+arr_name6+'/'+id_type6+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'/'+arr_name6+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else
-         {
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_name[five][]" class="varition_name" value="'+arr_name5+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type3+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'/'+arr_name5+'/'+id_type5+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'/'+arr_name5+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else
-         {
-         get_html += '<input type="hidden" name="varition_name[first][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[two][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[three][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_name[four][]" class="varition_name" value="'+arr_name4+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type3+'/'+arr_name3+'/'+arr_name4+'/'+id_type4+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'/'+arr_name4+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-         });
-         }
-         else
-         {
-         get_html += '<input type="hidden" name="varition_name[0][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[1][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_name[3][]" class="varition_name" value="'+arr_name3+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'/'+id_type3+'/'+arr_name3+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+'/'+arr_name3+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-
-
-         });
-         }
-         else
-         {
-         get_html += '<input type="hidden" name="varition_name[0][]" class="varition_name" value="'+arr_name1+'"><input type="hidden" name="varition_name[1][]" class="varition_name_two" value="'+arr_name2+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'/'+id_type2+'/'+arr_name2+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+'/'+arr_name2+' data-id='+uniq_id+'  data-input="">'+arr_name1+'/'+arr_name2+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p class="price-view-class" id="price-view-'+uniq_id+'"></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option value="1">Select country/region</option><option value="2">Afghanistan</option><option value="3"><option>Greenland</option></select></div></div><br>';
-         }
-         });
-         }
-         else
-         {
-         get_html += '<input type="hidden" name="varition_name[0][]" class="varition_tags" value="'+arr_name1+'"><input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>{{$symbol["currency"]}}</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p></td></tr><br>';
-
-         get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
-
-         get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
-
-         get_barcode_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-stock-qtn-'+uniq_id+'" class="att_stock_qtn_class" name="att_stock_qtn[]"></div><br>';
-
-         get_hscode_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><input type="text" id="child-popup-hscode-'+uniq_id+'" class="att_hscode_class" name="att_hscode[]"></div><br>';
-
-         get_country_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><div><label>Country/Region of origin</label><select id="att_country_class child-popup-country-'+uniq_id+'" class="att_country_class" name="att_country[]"><option>Select country/region</option><option value="1">Afghanistan</option><option value="2">India<option value="3">Greenland</option></select></div></div><br>';
-
-         get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
-         }
-
-         });
-         }
-
-
-
-         $('.variants-option').html(`   `+get_html+`  `);
-
-         $('.attribute-prices').html(`
-         `+get_price_html+`
-
-         `);
-
-         $('.attribute-sku-value').html(`
-         `+get_sku_html+`
-
-         `);
-
-         $('.attribute-barcode-value').html(`
-         `+get_barcode_html+`
-
-         `);
-
-         $('.attribute-hscode-value').html(`
-         `+get_hscode_html+`
-
-         `);
-
-         $('.attribute-country-value').html(`
-         `+get_country_html+`
-
-         `);
-         $('.attribute-stock-value').html(`
-         `+get_stock_html+`
-
-         `);
-
-         /* ALL POPBOX GET PRICE-COST-MARGIN-PROFIT */
-         $(".product-table-item").attr("data-input", $('.price-change-input').val());
-         $(".price-main-popup-input").attr("data-input", $('.price-change-input').val());
-         $(".cost-data-input-new").attr("data-input", $('.change-value-main-cost').val());
-         $(".profit-data-input").attr("data-input", $('#profit-input-mian-value').val());
-         $(".margin-data-input").attr("data-input", $('#margin-input-mian-value').val());
-         $(".price-view-class").html($('.price-change-input').val());
-         $(".att_price_class").attr("value", $('.price-change-input').val());
-         $(".cost-data-input-new").attr("value", $('.change-value-main-cost').val());
-         $(".margin-data-input").attr("value", $('#margin-input-mian-value').val());
-         $(".profit-data-input").attr("value", $('#profit-input-mian-value').val());
-
-         });
-
-         $(document).on("change", '.att_stock_qtn_class', function() {
+        $(document).on("click", '.image-checkbox', function() {
 
             var id_value = $(this).attr('id');
-
-            var id1 = $('#'+id_value).val();
-
-            $("#"+id_value).attr("value", id1);
-
-
-         });
-
-         $(document).on("click", '#apply-country-submit', function() {
-
-            var val = $('#apply-country').val();
-
-            $('.att_country_class').each(function(){
-            $(this).val(val);
-            });
-
-         });
-
-
-         $(document).on("click", '#apply-price-submit', function() {
-            var val = $('.apply-price').val();
-
-            $('.att_price_class').attr("value", val);
-         });
-
-
-         $(document).on("change", '.att_price_class', function() {
-
-            var id_value = $(this).attr('id');
-            var dataid = $(this).data('id');
-
-            var id1 = $('#'+id_value).val();
-
-            $("#"+id_value).attr("value", id1);
-
-            $("#price-view-"+dataid).html(id1);
-         });
-
-         $(document).on("change", '.att_sku_class', function() {
-
-            var id_value = $(this).attr('id');
-
-            var id1 = $('#'+id_value).val();
-
-            $('#'+id_value).attr("value", id1);
-
-         });
-
-         $(document).on("click", '#apply-hscode-submit', function() {
-            var val = $('#apply-hscode').val();
-            $('.att_hscode_class').attr("value", val);
-         });
-
-         $(document).on("change", '.att_hscode_class', function() {
-
-            var id_value = $(this).attr('id');
-
-            var id1 = $('#'+id_value).val();
-
-            $("#"+id_value).attr("value", id1);
-
-
-         });
-
-
-
-         $(document).on("click", '.modal-footer .button.green-btn', function() {
-            var thisid = $(this).data("recordid");
-            $(".product-table-item ."+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-            $("#cost-data-input-"+thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
-            $("#sku-data-input-"+thisid).attr("data-input", $('#sku-input').val());
-            $("#barcode-data-input-"+thisid).attr("data-input", $('#barcode-input').val());
-            $("#hscode-data-input-"+thisid).attr("data-input", $('#hscode-input').val());
-            $("#profit-data-input-"+thisid).attr("data-input", $('.Profit-get-value').val());
-            $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
-            $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
-            $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
-            $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
-            $("#child-popup-stock-qtn-"+thisid).attr("value", $('#barcode-input').val());
-            $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
-            $("#margin-data-input-"+thisid).attr("value", $('.margin-get-value').val());
-            $("#profit-data-input-"+thisid).attr("value", $('.Profit-get-value').val());
-
-         });
-
-         $(document).on("click", '.varition_popup_main', function() {
-
-
-
-         var id_value = $(this).data('id');
-
-         var inputvalue = $(this).attr('data-input');
-
-         var costinput = $('#cost-data-input-'+id_value).attr('data-input');
-
-         var skuinput = $('#sku-data-input-'+id_value).attr('data-input');
-
-         var barcodeinput = $('#barcode-data-input-'+id_value).attr('data-input');
-
-         var hscodeinput = $('#hscode-data-input-'+id_value).attr('data-input');
-
-         var margininput = $('#margin-data-input-'+id_value).attr('data-input');
-
-         var profitinput = $('#profit-data-input-'+id_value).attr('data-input');
-
-
-        
-
-
-
-
-         $(document).on("keyup", ".change-value-main-price", function () {
-
-         var price = $(this).val();
-         var cost = $('#main-popup-cost-'+id_value).val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-         $(".Profit-value"+id_value).text('$'+profit.toFixed(2));
-         $("#Profit-value-input"+id_value).val(profit.toFixed(2));
-         $(".margin-value"+id_value).text(+grossMargin.toFixed(2)+'%');
-         $("#margin-value-input"+id_value).val(grossMargin.toFixed(2));
-         }
-
-         });
-
-         $(document).on("keyup", ".change-value-main-cost", function () {
-
-         var price = $('#main-popup-price'+id_value).val();
-         var cost = $(this).val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-         $(".Profit-value"+id_value).text('$'+profit.toFixed(2));
-         $("#Profit-value-input"+id_value).val(profit.toFixed(2));
-         $(".margin-value"+id_value).text(+grossMargin.toFixed(2)+'%');
-         $("#margin-value-input"+id_value).val(grossMargin.toFixed(2));
-         }
-
-         });
-
-         });
-
-
-
-
-
-         $(document).on("keyup", ".price-change-input", function () {
-
-         var price = $('#price-change-input').val();
-         var cost = $('#cost-change-input').val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-         $(".profit-value-main").text('$'+profit.toFixed(2));
-         $("#profit-input-mian-value").val(profit.toFixed(2));
-         $(".margin-value-main").text(+grossMargin.toFixed(2)+'%');
-         $("#margin-input-mian-value").val(grossMargin.toFixed(2));
-
-         $(".product-table-item").attr("data-input", price);
-         $(".price-main-popup-input").attr("data-input", price);
-         $(".cost-data-input-new").attr("data-input", cost);
-         $(".profit-data-input").attr("data-input", profit.toFixed(2));
-         $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
-         $(".price-view-class").html(price);
-         $(".att_price_class").attr("value", price);
-         $(".cost-data-input-new").attr("value", cost);
-         $(".margin-data-input").attr("value", grossMargin.toFixed(2));
-         $(".profit-data-input").attr("value", profit.toFixed(2));
-
-
-         }
-
-         });
-
-         $(document).on("keyup", ".cost-change-input", function () {
-
-         var price = $('#price-change-input').val();
-         var cost = $('#cost-change-input').val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-
-         $(".profit-value-main").text('$'+profit.toFixed(2));
-         $("#profit-input-mian-value").val(profit.toFixed(2));
-         $(".margin-value-main").text(+grossMargin.toFixed(2)+'%');
-         $("#margin-input-mian-value").val(grossMargin.toFixed(2));
-
-         $(".product-table-item").attr("data-input", price);
-         $(".price-main-popup-input").attr("data-input", price);
-         $(".cost-data-input-new").attr("data-input", cost);
-         $(".profit-data-input").attr("data-input", profit.toFixed(2));
-         $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
-         $(".price-view-class").html(price);
-         $(".att_price_class").attr("value", price);
-         $(".cost-data-input-new").attr("value", cost);
-         $(".margin-data-input").attr("value", grossMargin.toFixed(2));
-         $(".profit-data-input").attr("value", profit.toFixed(2));
-         }
-
-         });
-
-
-
-
-         $(document).on("keyup", ".price-change-input", function () {
-
-         var price = $('#price-change-input').val();
-         var cost = $('#cost-change-input').val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-         $(".profit-value-main").text('$'+profit.toFixed(2));
-         $("#profit-input-mian-value").val(profit.toFixed(2));
-         $(".margin-value-main").text(+grossMargin.toFixed(2)+'%');
-         $("#margin-input-mian-value").val(grossMargin.toFixed(2));
-
-         $(".product-table-item").attr("data-input", price);
-         $(".price-main-popup-input").attr("data-input", price);
-         $(".cost-data-input-new").attr("data-input", cost);
-         $(".profit-data-input").attr("data-input", profit.toFixed(2));
-         $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
-         $(".price-view-class").html(price);
-         $(".att_price_class").attr("value", price);
-         $(".cost-data-input-new").attr("value", cost);
-         $(".margin-data-input").attr("value", grossMargin.toFixed(2));
-         $(".profit-data-input").attr("value", profit.toFixed(2));
-
-
-         }
-
-         });
-
-         $(document).on("keyup", ".cost-change-input", function () {
-
-         var price = $('#price-change-input').val();
-         var cost = $('#cost-change-input').val();
-
-         if (price > 0 && cost > 0) {
-
-         var profit      = price - cost;
-         var grossProfit = profit / cost * 100;
-         var grossMargin = 100 * (price - cost) / price;
-
-
-         $(".profit-value-main").text('$'+profit.toFixed(2));
-         $("#profit-input-mian-value").val(profit.toFixed(2));
-         $(".margin-value-main").text(+grossMargin.toFixed(2)+'%');
-         $("#margin-input-mian-value").val(grossMargin.toFixed(2));
-
-         $(".product-table-item").attr("data-input", price);
-         $(".price-main-popup-input").attr("data-input", price);
-         $(".cost-data-input-new").attr("data-input", cost);
-         $(".profit-data-input").attr("data-input", profit.toFixed(2));
-         $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
-         $(".price-view-class").html(price);
-         $(".att_price_class").attr("value", price);
-         $(".cost-data-input-new").attr("value", cost);
-         $(".margin-data-input").attr("value", grossMargin.toFixed(2));
-         $(".profit-data-input").attr("value", profit.toFixed(2));
-         }
-
-         });
-
-
-         $(document).on("click", '#apply-country-submit', function() {
-
-
-
-         var val = $('#apply-country').val();
-
-
-
-         $('.att_country_class').each(function(){
-
-         $(this).val(val);
-
-         });
-
-
-
-         });
-
-
-
-
-
-         $('.sales-channel-btn').on('click', function() {
-
-         $('.sales-channels-apps').toggleClass('channels-dropdown-open');
-
-         });
-
-
-
-         $( ".edit-website-seo-btn" ).click(function() {
-
-         $('.search-engine-listing-card .card-middle').toggle();
-
-         });
-
-
-
-
-
-         $(function() {
-         $('#images').change(function(e) {
-         var files = e.target.files;
-         for(var i = 0; i <= files.length; i++) {
-         // when i == files.length reorder and break
-         if(i == files.length) {
-         // need timeout to reorder beacuse prepend is not done
-         setTimeout(function() {
-         reorderImages();
-         }, 100);
-         break;
-         }
-         var file = files[i];
-         var reader = new FileReader();
-         reader.onload = (function(file) {
-         return function(event) {
-         $('#sortable').prepend('<li class="ui-state-default remove-image" data-id="' + file.lastModified + '"><img src="' + event.target.result + '" style="width:100%;" /> <div class="order-number">0</div></li>');
-         $('#sortable').find('li').eq(0).insertAfter('#sortable>li:last');
-         };
-         })(file);
-         reader.readAsDataURL(file);
-         } // end for;
-         });
-         //$('#sortable').sortable();
-         // $('#sortable').disableSelection();
-         //sortable events
-         $('#sortable').on('sortbeforestop', function(event) {
-         reorderImages();
-         });
-
-         function reorderImages() {
-         // get the items
-         var images = $('#sortable li');
-         var i = 0,
-         nrOrder = 0;
-         for(i; i < images.length; i++) {
-         var image = $(images[i]);
-         if(image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder')) {
-         image.attr('data-order', nrOrder);
-         var orderNumberBox = image.find('.order-number');
-         orderNumberBox.html(nrOrder + 1);
-         nrOrder++;
-         } // end if;
-         } // end for;
-         }
-         });
-
-         $(document).on("click", '.delete-media', function() {
-
-         $('.remove-image').has('input:checkbox:checked').remove();
-
-         var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
-
-         $('.count-image').text('');
-
-
-         });
-
-
-         $(document).on("click", '#select-all', function() {
-
-
-
-         $('.image-checkbox').prop('checked', this.checked);
-
-         })
-
-         $(document).on("change", '.image-checkbox', function() {
+            if ($('#' + id_value).is(":checked")) {
+                var inputValue = $('#' + id_value).attr("checked", 'checked');
+            } else
+            {
+                var inputValue = $('#' + id_value).removeAttr('checked');
+            }
+        });
+
+        $(document).on("click", '.delete-media', function() {
+
+            $('.remove-image').has('input:checkbox:checked').remove();
 
             var countCheckedCheckboxes = $('.image-checkbox').filter(':checked').length;
 
-            if(countCheckedCheckboxes > 0)
-
-            {
-
-            $('#select-all').prop("checked", true);
-
-            $('.count-image').text(countCheckedCheckboxes);
-
-            }
-
-            else
-
-            {
-
-            $('#select-all').removeAttr('checked');
-
             $('.count-image').text('');
 
+
+        });
+
+        $(function() {
+            $('#images').change(function(e) {
+                var files = e.target.files;
+                for (var i = 0; i <= files.length; i++) {
+                    // when i == files.length reorder and break
+                    if (i == files.length) {
+                        // need timeout to reorder beacuse prepend is not done
+                        setTimeout(function() {
+                            reorderImages();
+                        }, 100);
+                        break;
+                    }
+                    var file = files[i];
+                    var reader = new FileReader();
+                    reader.onload = (function(file) {
+                        return function(event) {
+                            $('#sortable').prepend('<li class="ui-state-default remove-image" data-id="' + file.lastModified + '"><img src="' + event.target.result + '" style="width:100%;" /> <div class="order-number">0</div></li>');
+                            $('#sortable').find('li').eq(0).insertAfter('#sortable>li:last');
+                        };
+                    })(file);
+                    reader.readAsDataURL(file);
+                } // end for;
+            });
+            //sortable events
+            $('#sortable').on('sortbeforestop', function(event) {
+                reorderImages();
+            });
+
+            function reorderImages() {
+                // get the items
+                var images = $('#sortable li');
+                var i = 0,
+                    nrOrder = 0;
+                for (i; i < images.length; i++) {
+                    var image = $(images[i]);
+                    if (image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder')) {
+                        image.attr('data-order', nrOrder);
+                        var orderNumberBox = image.find('.order-number');
+                        orderNumberBox.html(nrOrder + 1);
+                        nrOrder++;
+                    } // end if;
+                } // end for;
+            }
+        });
+
+        // variants
+        $('.product-edite-variants a').click(function() {
+            
+            $('.edite-variants-dropdown').slideToggle();
+        
+        });
+
+        $(document).on("click", '#apply-price-submit', function() {
+            var val = $('.apply-price').val();
+
+            $('.att_price_class').val(val);
+        });
+         $(document).on("click", '#apply-selling-price-submit', function() {
+            var val = $('.apply-selling-price').val();
+
+            $('.att_selling_price_class').val(val);
+        });
+
+
+        $(document).on("click", '.modal-footer .button.green-btn', function() {
+            var thisid = $(this).data("recordid");
+            $(".product-table-item ." + thisid).attr("data-input", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+
+        });
+
+        // collection
+        function openOption(id) {
+
+            $(".filter_" + id).toggle();
+
+            if (id != 'save' && id != 'more_filters') {
+                $('#' + id + ' .close').toggle();
+                $('#' + id + ' .open').toggle();
             }
 
-         });
-
-
-         $(document).on("click", '.image-checkbox', function() {
-
-         var id_value = $(this).attr('id');
-
-         if ($('#'+id_value).is(":checked")){
-
-
-
-         var inputValue = $('#'+id_value).attr("checked",'checked');
-
-
-
-         }
-
-         else
-
-         {
-
-         var inputValue = $('#'+id_value).removeAttr('checked');
-
-         }
-
-
-
-         });
-
-
-
-         function openOption(id) {
-
-
-
-         $(".filter_" + id).toggle();
-
-
-
-         if (id != 'save' && id != 'more_filters') {
-
-         $('#' + id + ' .close').toggle();
-
-         $('#' + id + ' .open').toggle();
-
-         }
-
-         if (id == 'more_filters') {
-
-         $('.filter_more_filters .tag').removeClass('open');
-
-         }
-         }
-
-
-         
-         $(document).on('DOMNodeRemoved', function(e) {
-         if($(e.target).hasClass('ui-state-default')) {
-         if($('.ui-state-default').length <= 1) {
-         $(e.target).parent().removeClass('import-file-big');
-         }
-         }
-         });
-         $(document).on('DOMNodeInserted', function(e) {
-         if($(e.target).hasClass('ui-state-default')) {
-         // $('#save').prop('disabled', false);
-         $(e.target).parent().addClass('import-file-big');
-         }
-         });
-
-
-
-      
-
-         function removeElem(elem) {
-
-         var removedtag = elem.closest('.tag').innerText;
-         var tag_arr = $('#customer_tags').val().split(',');
-
-         tag_arr.splice(tag_arr.indexOf(removedtag), 1);
-
-         var filtered = tag_arr.filter(function ( el) {
-
-         if(el != '') {
-
-         return el;
-
-         }
-
-         });
-
-
-
-         $('#customer_tags').val(filtered.join());
-
-
-
-         elem.closest('.tag').remove();
-
-
-
-         var arr = $('.tag_added').map((i, e) => e.value == removedtag).first();
-
-         $('.select-tag-list').append('<button class="secondary tag_added" value="'+ removedtag +'">'+removedtag+'</button>&nbsp;');
-         }
-
-         function enableSaveBtn(class_name) {
-
-         $('.'+class_name).addClass('green-btn').prop('disabled', false);
-
-         }
-
-         function enableTagSaveBtn(val) {
-
-
-
-         var elem = $('#tag-creation-btn');
-
-
-
-         if(val != '') {
-
-
-
-         elem.show();
-
-
-
-         elem.val(val);
-
-
-         } else {
-
-         elem.hide();
-
-         }
-
-         }
-
-      
-
-
-
-         // CKEDITOR.replace('desc');
-         const editor = CKEDITOR.replace('descripation');
-         editor.on('change', function (event) {
-         // console.log(event.editor.getData())
-         @this.set('product.descripation', event.editor.getData());
-
-         });
-         // hide dropdown
-         $(".buttoncustom").click(function(e){
-
-
-         e.stopPropagation();
-         });
-         $(".dropdowncustomhide").click(function(e){
-         e.stopPropagation();
-         });
-         $(document).click(function(){
-         $(".dropdowncustomhide").hide();
-         });
+            if (id == 'more_filters') {
+                $('.filter_more_filters .tag').removeClass('open');
+            }
+        }
+
+        // description : CKEDITOR.replace('desc');
+        const editor = CKEDITOR.replace('descripation');
+        editor.on('change', function(event) {
+            @this.set('product.descripation', event.editor.getData());
+
+        });
+        
       </script>
+
+     <!--end script------------------------------->
+
       @livewireScripts
 
    </x-admin-layout>
