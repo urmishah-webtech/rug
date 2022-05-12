@@ -59,6 +59,7 @@
                             <th>Payment</th>
                             <th>Items</th>
                             <th>Delivery method</th>
+                            <th>Print</th>
                         </tr>
                         @if($order)
                         @php $i=1001; @endphp
@@ -105,7 +106,8 @@
                             </td>
                             <td>
                                 Standard
-                            </td>
+                            </td> 
+                            <td><a href="{{ route('generate-pdf-billing', $row->id) }}">Billing Print</a>  <a href="{{ route('product-invoice', $row->id) }}">Product Print</a></td>
                         </tr></a>
                         @php $i++; @endphp
                         @endforeach
