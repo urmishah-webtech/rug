@@ -80,7 +80,6 @@ class Detail extends Component {
 
 
     public function mount($id) {
-
         $this->uuid = $id;
         $this->getProduct();
 
@@ -121,17 +120,6 @@ class Detail extends Component {
     }
 
     public function render() {
-        // if ($this->filesvariant) {
-        //     foreach ($this->filesvariant as $photo) {
-        //         // $file_extension = $photo->extension();
-        //         $path_url = $photo->storePublicly('media', 'public');
-        //         $productinsert = ProductMedia::create(['product_id' => $this->product['id'], 'image' => $path_url, ]);
-        //     }
-        //     if ($productinsert) {
-        //         $this->Productmedia = ProductMedia::where('product_id', $this->product['id'])->get();
-        //     }
-        // }
-       
         return view('livewire.product.detail');
     }
      

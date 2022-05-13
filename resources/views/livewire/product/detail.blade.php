@@ -804,7 +804,7 @@
 
     
      
-      <!--script------------------------------->
+    <!--script------------------------------->
 
 
     <script type="text/javascript">
@@ -946,7 +946,8 @@
 
             $('.att_price_class').val(val);
         });
-         $(document).on("click", '#apply-selling-price-submit', function() {
+         
+        $(document).on("click", '#apply-selling-price-submit', function() {
             var val = $('.apply-selling-price').val();
 
             $('.att_selling_price_class').val(val);
@@ -981,7 +982,7 @@
 
         });
         
-      </script>
+    </script>
 
      <!--end script------------------------------->
 

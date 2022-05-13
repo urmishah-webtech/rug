@@ -8,8 +8,6 @@ use App\Models\Product;
 
 use App\Models\ProductMedia;
 
-use App\Models\VariantStock;
-
 use App\Models\ProductVariant;
 
 use Carbon\Carbon;
@@ -35,7 +33,7 @@ class Products extends Component
 {
     use WithFileUploads, WithPagination;
 
-    public $getproduct,$VariantStock, $productVariant ,$variationValue,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,$user_id,
+    public $products, $productVariant ,$variationValue,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,$user_id,
 
         $filter_tabs, $active_tab, $sort_by, $export, $export_as, $selected_file;
 
@@ -49,8 +47,6 @@ class Products extends Component
 
     public function mount()
     {
-        $this->selectedproducts = collect();
-        $this->user_id = Auth::user()->role;
         $this->getProduct();
     }
 
@@ -61,44 +57,39 @@ class Products extends Component
         $this->bulkDisabled = count($this->selectedproducts) < 1;
         $filter_clone = $this->filter;
 
-        
-
         if ($filter_clone != $this->filter) {
-
            $this->resetPage();
-
         }
 
         return view('livewire.product.products', ['product'=> $this->Productpaginate]);
     } 
 
-    public function getProductpaginateProperty(){
-        $this->getProduct();
-         $items = $this->getproduct->forPage($this->page, $this->perPage);
+    public function getProduct()
+    {
+        $this->products = Product::when($this->filter_product, function ($query, $filter_product) {
+            $query->where('title', 'LIKE', '%' . $filter_product . '%');
+        })->with('productmediafirst')->with('variants')->withCount('variants')->orderBy('id', 'DESC')->get();
 
-        return  new LengthAwarePaginator($items, $this->getproduct->count(), $this->perPage, $this->page);
-      
+    } 
+
+    public function getProductpaginateProperty(){
+
+        $this->getProduct();
+        $items = $this->products->forPage($this->page, $this->perPage);
+        return  new LengthAwarePaginator($items, $this->products->count(), $this->perPage, $this->page);
     }
 
     public function deleteselected(){
 
-        Product::where('id',$this->selectedproducts)->delete();
-
-       // CollectionProduct::where('product_id',$this->selectedproducts)->delete();
-
+        Product::whereIn('id',$this->selectedproducts)->delete();
         ProductMedia::where('product_id',$this->selectedproducts)->delete();
-
         ProductVariant::where('product_id',$this->selectedproducts)->delete();
-        
-        VariantStock::where('product_id',$this->selectedproducts)->delete();
-
         
         $this->selectedproducts = [];
         $this->selectall = false;
     }
 
     public function updatedSelectAll($value){
-
         if($value){
             $this->selectedproducts = $this->Productpaginate->pluck('id')->toArray();
         
@@ -106,70 +97,5 @@ class Products extends Component
             $this->selectedproducts = [];
         }
     }
-
-    public function updatedselectedproducts(){
-         $this->selectall = false;
-    }
-
-    public function isselectedproducts($product_id){
-        return in_array($product_id, $this->selectedproducts);
-    }
-
-    public function store($flag = "")
-    {
-           
-        if($flag == 'active'){
-      
-            foreach ($this->selectedproducts as $key => $value) {
-     
-                Product::where('id', $value)->update(['status' => 'active']);
-                    
-            }
-        }
-        if($flag == 'draft'){
-      
-            foreach ($this->selectedproducts as $key => $value) {
-     
-                Product::where('id', $value)->update(['status' => 'invited']);
-                    
-            }
-        }
-        if($flag == 'archive'){
-      
-            foreach ($this->selectedproducts as $key => $value) {
-     
-                Product::where('id', $value)->update(['status' => 'disabled']);
-                    
-            }
-        }
-        if($flag == 'delete'){
-      
-            foreach ($this->selectedproducts as $key => $value) {
-     
-                Product::where('id', $value)->delete();
-                    
-            }
-        }
-
-        $this->updateMode = false;               
-         $this->getProduct();
-    }
-
-    public function getProduct()
-    {
-        $this->filter = [];
-        
-        $this->VariantStock = VariantStock::All();
-        
-        $this->productVariant = ProductVariant::All();
-        
-        $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
-
-            $query->where('title', 'LIKE', '%' . $filter_product . '%');
-
-            })->with('productmediafirst')->orderBy('id', 'DESC')->get();
-
-
-
-    } 
+ 
 }
