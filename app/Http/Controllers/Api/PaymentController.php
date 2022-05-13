@@ -101,40 +101,76 @@ class PaymentController extends Controller
 
         $includeshipping = $netamount + $shipping_cost_data['cost'];
 
+        if(!empty($request->account_type) && $request->account_type == '1'){
+            $Order_insert = orders::insert($order_arr = [
 
-        $Order_insert = orders::insert($order_arr = [
+                'user_id' => $user_detail['id'],
 
-            'user_id' => $user_detail['id'],
+                'transactionid' => '',
 
-            'transactionid' => '',
+                'email' => $user_detail['email'],
 
-            'email' => $user_detail['email'],
+                'netamout' => $netamount,
 
-            'netamout' => $netamount,
+                'shipping_cost' => $shipping_cost_data['cost'],
 
-            'shipping_cost' => $shipping_cost_data['cost'],
+                'paymentstatus' => 'pending',
 
-            'paymentstatus' => 'pending',
+                'first_name' => $shipping['first_name'],
 
-            'first_name' => $shipping['first_name'],
+                'last_name' => $shipping['last_name'],
 
-            'last_name' => $shipping['last_name'],
+                'address' => $shipping['address'],
 
-            'address' => $shipping['address'],
+                'state' => $shipping['state'], 
 
-            'state' => $shipping['state'], 
+                'city' => $shipping['city'], 
 
-            'city' => $shipping['city'], 
+                'country' => $shipping['country'], 
 
-            'country' => $shipping['country'], 
+                'pincode' => $shipping['postal_code'], 
 
-            'pincode' => $shipping['postal_code'], 
+                'mobile' => $shipping['mobile_no'],
+                
+                'payment_type' => $payment_type,
+               
+                'account_type' => '1',
+        }else{
+            $Order_insert = orders::insert($order_arr = [
 
-            'mobile' => $shipping['mobile_no'],
-            
-            'payment_type' => $payment_type,
+                'user_id' => $user_detail['id'],
 
-        ]);
+                'transactionid' => '',
+
+                'email' => $user_detail['email'],
+
+                'netamout' => $netamount,
+
+                'shipping_cost' => $shipping_cost_data['cost'],
+
+                'paymentstatus' => 'pending',
+
+                'first_name' => $shipping['first_name'],
+
+                'last_name' => $shipping['last_name'],
+
+                'address' => $shipping['address'],
+
+                'state' => $shipping['state'], 
+
+                'city' => $shipping['city'], 
+
+                'country' => $shipping['country'], 
+
+                'pincode' => $shipping['postal_code'], 
+
+                'mobile' => $shipping['mobile_no'],
+                
+                'payment_type' => $payment_type,
+               
+                'account_type' => '2',
+            ]);
+        }
 
 
         if($Order_insert){
