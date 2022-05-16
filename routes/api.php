@@ -107,4 +107,4 @@ Route::get('order-detail/{id}', 'App\Http\Controllers\Api\UserProfile@OrderDetai
 Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
 
 Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
-Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave');
+Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave'); 
