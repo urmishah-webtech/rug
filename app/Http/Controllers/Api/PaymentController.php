@@ -21,8 +21,6 @@ use App\Models\Country;
 use App\Models\ShippingZone;
 use App\Models\ShippingZoneCountry;
 use Illuminate\Support\Facades\DB;
-
-
 use App\Http\Controllers\Api\CartController;
 
 class PaymentController extends Controller
@@ -97,7 +95,6 @@ class PaymentController extends Controller
                 $netamount += $totalamout;
             }               
         }
-
 
         $includeshipping = $netamount + $shipping_cost_data['cost'];
 
@@ -279,7 +276,7 @@ class PaymentController extends Controller
         }   
     }
 
-     public function get_thankyou($userid){
+    public function get_thankyou($userid){
 
         $ordercheck = Orders::where('user_id',$userid)->count();
         $user_detail = User::where('id', $userid)->first();

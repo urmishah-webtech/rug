@@ -15,11 +15,7 @@ class Orders extends Model
     {
         return $this->hasMany(order_item::class, 'order_id', 'id');
     }
-
-
-
-
-
+    
     public function user()
     {
         return $this->hasMany(User::class, 'id', 'user_id');
