@@ -325,7 +325,7 @@ class UserProfile extends Component
         $ordercheck = Orders::where('user_id',$userid)->count();
         $user_detail = User::where('id', $userid)->first();
         if($ordercheck != 0){
-            $order = Orders::with('order_item')->where('user_id',$userid)->orderBy('id', 'DESC')->get();
+            $order = Orders::with('order_items')->where('user_id',$userid)->orderBy('id', 'DESC')->get();
             
             $order_item = order_item::with('order')->with('media_product')->with(['variant_product' => function($q) {
                 return $q->with('variantmediafirst');
