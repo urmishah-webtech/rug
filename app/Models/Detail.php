@@ -2,7 +2,7 @@
 
 
 
-namespace App\Http\Livewire\Customer;
+namespace app\Http\Livewire\Customer;
 
 
 
