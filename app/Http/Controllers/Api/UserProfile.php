@@ -325,7 +325,7 @@ class UserProfile extends Component
         $ordercheck = Orders::where('user_id',$userid)->count();
         $user_detail = User::where('id', $userid)->first();
         if($ordercheck != 0){
-          //  $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->get();
+            $order = Orders::with('order_item')->where('user_id',$userid)->orderBy('id', 'DESC')->get();
             
             $order_item = order_item::with('order')->with('media_product')->with(['variant_product' => function($q) {
                 return $q->with('variantmediafirst');
@@ -351,19 +351,8 @@ class UserProfile extends Component
                 $finalamount += $Totalamount;
                 
             }
-
-
-
-            //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
-            //$user['to'] = $order['email'];
-
-             // Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
-             //        $message->to($user['to']);
-             //        $message->subject('Rug Order Mail!!!');
-             //    });
             
-            
-            return response()->json(['status' => 0,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
+            return response()->json(['status' => 0,'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
 
         }else
         {
