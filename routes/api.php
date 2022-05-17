@@ -102,7 +102,7 @@ Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpda
 Route::post('password-forgot', 'App\Http\Controllers\Api\UserProfile@sendPasswordResetLink');
 Route::post('reset-password', 'App\Http\Controllers\Api\UserProfile@storeNewPassword');
 Route::get('order-detail/{id}', 'App\Http\Controllers\Api\UserProfile@OrderDetail');
-Route::get('get-order/{id}', 'App\Http\Controllers\Api\UserProfile@get_order');
+Route::get('get-order/{id}', 'App\Http\Controllers\Api\PaymentController@get_order');
 
 
 /*FILTER PRODUCT*/
