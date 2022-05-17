@@ -454,5 +454,42 @@ class PaymentController extends Controller
             return $this->sendJson(['status' => 1, 'data' => $taxes ]);
         }
     }
+
+    public function get_order($id){
+
+        $order = Orders::find($id);
+        if(empty($order)) {
+            return $this->sendJson(['status' => 0, 'message' => 'Not avalible Order' ]);
+        }
+
+        $order_item = order_item::with('media_product')->with(['variant_product' => function($q) {
+                return $q->with('variantmediafirst');
+            }])->with('order_product')->where('order_id',$id)->orderBy('id', 'DESC')->get();
+
+        $image_path= env('IMAGE_PATH');
+
+        $finalamount = 0;
+        $i=0;
+                
+               
+        foreach ($order_item as $key => $result)
+        {
+            if(!$result->variant_product->isEmpty() && isset($result->variant_product[0]) && !empty($result->variant_product[0]->variantmediafirst) && !empty($result->variant_product[0]->variantmediafirst->image)) {
+                    $order_item[$key]['image'] = $image_path.$result->variant_product[0]->variantmediafirst->image;
+            } else {
+                    $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
+            }
+               
+            $order_item[$key]['title'] = $result['order_product'][0]['title'];
+            $Totalamount = ($result->stock * $result->price);
+            $finalamount += $Totalamount;
+                
+            }
+            
+         
+        return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'product_amount'=>$finalamount]);
+
+        
+    }
 }
 
