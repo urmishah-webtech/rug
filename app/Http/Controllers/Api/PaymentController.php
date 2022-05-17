@@ -132,6 +132,7 @@ class PaymentController extends Controller
                 'payment_type' => $payment_type,
                
                 'account_type' => '1',
+            ]);
         }else{
             $Order_insert = orders::insert($order_arr = [
 
