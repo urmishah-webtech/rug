@@ -55,7 +55,6 @@ class GuestCheckout extends Component
 
         $request->validate([
 
-            'token' => 'required',
 
             'g_email' => 'required|email',
 
