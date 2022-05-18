@@ -26,7 +26,7 @@ class CheckoutController extends Controller
     public function SaveShipping(Request $request)
     {
     	$addshipping = CustomerAddress::create([	
-    			'user_id' => $request->user_id,
+    			'user_id' => (isset($request->user_id) && !empty($request->user_id))? $request->user_id : '',
 				'first_name'=> $request->first_name,
 				'last_name' => $request->last_name,
 				'address' => $request->address,
@@ -36,7 +36,8 @@ class CheckoutController extends Controller
 				'postal_code' => $request->postal_code,
 				'email' => $request->email,
 				'mobile_no' => $request->mobile_no,
-				'address_type' => $request->address_type
+				'address_type' => $request->address_type,
+				'session_id' => (isset($request->session_id) && !empty($request->session_id))? $request->session_id : '',
 			]);
     	
         $data = CustomerAddress::where('user_id',$request->user_id)->first();

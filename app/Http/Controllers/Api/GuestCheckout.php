@@ -57,13 +57,13 @@ class GuestCheckout extends Component
 
             'token' => 'required',
 
-            'email' => 'required|email',
+            'g_email' => 'required|email',
 
             'password' =>  ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'],
 
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->g_email)->first();
 
 
 
@@ -73,10 +73,10 @@ class GuestCheckout extends Component
         }
 
         $user = User::create([
-        'first_name' => $request->first_name,
-        'last_name' => $request->last_name,
-        'email' => $request->email,
-        'mobile_number' => $request->mobile_number,
+        'first_name' => $request->g_first_name,
+        'last_name' => $request->g_last_name,
+        'email' => $request->g_email,
+        'mobile_number' => $request->g_mobile_number,
         'password' => Hash::make($request->password),
         'account_type' => '1'
         ]);
