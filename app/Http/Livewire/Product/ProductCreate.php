@@ -10,13 +10,7 @@ use App\Models\VariantTag;
 
 use App\Models\ProductMedia;
 
-use App\Models\VariantStock;
-
-use App\Models\Tag;
-
 use App\Models\Collection;
-
-use App\Models\Country;
 
 use App\Models\ProductVariant;
 
@@ -30,10 +24,9 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$Collection, $productCollection = [], $product_new = [], $product_last_key = 0;
+    public $title,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$Collection, $productCollection = [], $product_new = [], $product_last_key = 0;
 
     public $image = [];
-
 
     public $product_array = [];
 
@@ -43,44 +36,29 @@ class ProductCreate extends Component
         'descripation' => ['required'],
         'image' => ['required'],
         'varition_arrray' => ['required'],
-
         'status' => '',
-
         'price' => ['required'],
-
         'compare_price' => [],
-
         'cost' => [],
-
         'weight' => [],
-
         'weight_lable' => [],
-
         'hscode' => [],
-
         'country' => [],
-
         'varition_name' => [],
-       
         'productCollection' => [],
-        
         'product_new' => [],
-
         'seo_title' => ['required'],
-
         'seo_descripation' => ['required'],
-
         'seo_url' => ['required', 'unique:product,seo_utl'],
-
         'product_array.*.question' => '',
-
         'product_array.*.answer' => '',
     ];
 
 
     public function mount() {
 
-       $this->initial();
+       $this->variantag = VariantTag::All();
+        $this->Collection = Collection::All();
 
        $old_product_array = request()->old('product_array');
        if(isset($old_product_array) && !empty($old_product_array)) {
@@ -92,12 +70,6 @@ class ProductCreate extends Component
        }
        $this->product_last_key = array_key_last($this->product_array);
 
-    }
-
-    public function initial()
-    {
-        $this->variantag = VariantTag::All();
-        $this->Collection = Collection::All();
     }
 
 
@@ -281,13 +253,8 @@ class ProductCreate extends Component
     }
     public function add()
     {
-      
         $this->product_last_key = $this->product_last_key +1;
-        
-
         $this->product_array[$this->product_last_key]['question'] = $this->product_array[$this->product_last_key]['answer'] = '';
-
-
     }
 
     public function remove($i)
