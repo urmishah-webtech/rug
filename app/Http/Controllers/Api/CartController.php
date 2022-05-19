@@ -16,6 +16,7 @@ class CartController extends Controller
     public function CartSave(Request $request)
     {
         $variantID = $request->variation;
+       
         $variant = ProductVariant::select(['product_id', 'price'])->find($variantID);
         if (!empty($variant))
         {
@@ -29,6 +30,7 @@ class CartController extends Controller
             }
             if (!empty($request->user_id))
             {
+              
                 $user_id = $request->user_id;
                 $exist = Cart::where('product_id', $variant->product_id)
                     ->where('varientid', $variantID)->where('user_id', $user_id)->first(['stock', 'id']);
@@ -65,7 +67,7 @@ class CartController extends Controller
                     return response()->json(["message" => "Product not found"], 404);
                 }
 
-                $cart = Cart::where('product_id', $variant->product_id)
+                $cart = Cart::where('product_id', $variant->product_id)->where('session_id',$request->session_id)
                     ->where('varientid', $variantID)->where('session_id', '!=', null)
                     ->first(['stock', 'id', 'varientid']);
                 $product_detail = $product->toArray();
