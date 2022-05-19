@@ -331,7 +331,7 @@
                      </div>
                      <label>
                         <input type="checkbox" name="custom_variant_check" id="custom_variant" class="edit-update-Attribute custom_variant_checked" wire:model.defer="product.custom_variant">
-                        Custom Price
+                        Custome Price
                      </label>
 
                      
@@ -404,7 +404,7 @@
                            
                            <label>Stock</label>
                            
-                           <input type="text" name="compare_selling_price" wire:model.defer="product.stock">
+                           <input type="text" name="stock" wire:model.defer="product.stock">
                            
                         </div>
                         
@@ -490,6 +490,7 @@
                         <label>URL and handle</label>
                         
                         <div class="url-input">
+                           <span>https://rug.webtech-evolution.com/</span>
                            <input type="text" name="seo_utl" wire:model.defer="product.seo_utl">
                            
                         </div>
