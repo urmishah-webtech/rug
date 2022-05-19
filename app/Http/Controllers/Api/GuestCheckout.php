@@ -55,7 +55,6 @@ class GuestCheckout extends Component
 
         $request->validate([
 
-
             'g_email' => 'required|email',
 
             'password' =>  ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'],
@@ -68,7 +67,7 @@ class GuestCheckout extends Component
 
         if($user) {
 
-            return response()->json(['message' => 'Email already not exist!', 'success' => false]);
+            return response()->json(['message' => 'Email already exist!', 'success' => false]);
         }
 
         $user = User::create([
@@ -77,11 +76,11 @@ class GuestCheckout extends Component
         'email' => $request->g_email,
         'mobile_number' => $request->g_mobile_number,
         'password' => Hash::make($request->password),
-        'account_type' => '1'
+        'account_type' => '1',
+        'session_id' => $request->session_id
         ]);
 
-        $UserDetail = User::where('id', $request->userid)->first();
 
-       return response()->json(['message' => 'Record Created!!', 'success' => true ]);
+       return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
     }
 }
