@@ -78,9 +78,9 @@ class PaymentController extends Controller
         if($request->account_type==1){
             $user_detail = User::where('session_id', $request['user_id'])->first();
 
-            $Cart = Cart::where('user_id',$user_detail['session_id'])->get();
+            $Cart = Cart::where('session_id',$user_detail['session_id'])->get();
       
-            $shipping = CustomerAddress::where('user_id', $user_detail['session_id'])->first();
+            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->first();
     
         }
         else{
