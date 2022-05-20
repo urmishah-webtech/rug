@@ -75,11 +75,24 @@ class PaymentController extends Controller
 
         $payment_type = $request->payment_type;
         
-        $user_detail = User::where('id', $request['user_id'])->first();
+        if($request->account_type==1){
+            $user_detail = User::where('id', $request['session_id'])->first();
 
-        $Cart = Cart::where('user_id',$user_detail['id'])->get();
-  
-        $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+            $Cart = Cart::where('user_id',$user_detail['session_id'])->get();
+      
+            $shipping = CustomerAddress::where('user_id', $user_detail['session_id'])->first();
+    
+        }
+        else{
+
+            $user_detail = User::where('id', $request['user_id'])->first();
+
+            $Cart = Cart::where('user_id',$user_detail['id'])->get();
+      
+            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+
+        }
+     
 
 
         $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
@@ -99,9 +112,10 @@ class PaymentController extends Controller
         $includeshipping = $netamount + $shipping_cost_data['cost'];
 
         if(!empty($request->account_type) && $request->account_type == '1'){
+
             $Order_insert = orders::insert($order_arr = [
 
-                'user_id' => $user_detail['id'],
+                'session_id' => $user_detail['session_id'],
 
                 'transactionid' => '',
 
@@ -134,6 +148,7 @@ class PaymentController extends Controller
                 'account_type' => '1',
             ]);
         }else{
+
             $Order_insert = orders::insert($order_arr = [
 
                 'user_id' => $user_detail['id'],
@@ -173,7 +188,14 @@ class PaymentController extends Controller
 
         if($Order_insert){
             // Insert Record Order Item
-            $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
+            if($request->account_type==1){
+                $lastorderid = Orders::where('user_id',$user_detail['session_id'])->orderBy('id', 'DESC')->first();
+
+            }
+            else{
+                $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
+
+            }
 
             $insert_order_item =[];
             foreach($Cart as $res) {         
@@ -225,20 +247,36 @@ class PaymentController extends Controller
             $pay->status = $payment->status;
                
             $pay->save();
-
-            Cart::where('user_id',$user_detail['id'])->delete();
+            
+            if($request->account_type == 1)
+            {
+                Cart::where('session_id',$user_detail['session_id'])->delete();
+            }
+            else{
+                Cart::where('user_id',$user_detail['id'])->delete();
+            
+            }
 
 
             return $this->sendJson(['status' => 1, 'message' => $payment]);
         }
 
         if ($payment_type == 0) {
-
+            if($request->account_type == 1)
+            {
+            $Cart = Cart::where('session_id',$request['user_id'])->get();
+            }
+            else{
             $Cart = Cart::where('user_id',$request['user_id'])->get();
-
+            }
             $pay = new Payment();
             $pay->payment_id = 'Cash On Delivery';
-            $pay->user_id = $request['user_id'];
+            if($request->account_type == 1){
+                $pay->session_id = $request['user_id'];
+            }
+            else{
+                $pay->user_id = $request['user_id'];
+            }
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
@@ -270,7 +308,14 @@ class PaymentController extends Controller
                 }
             }
 
+            if($request->account_type == 1)
+            {
+                Cart::where('session_id',$user_detail['session_id'])->delete();
+            }
+            else{
                 Cart::where('user_id',$user_detail['id'])->delete();
+            
+            }
             
 
             return $this->sendJson(['status' => 0, 'message' => 'cash on delivery place successed']);

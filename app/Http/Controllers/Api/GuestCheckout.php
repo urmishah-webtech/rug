@@ -52,35 +52,59 @@ class GuestCheckout extends Component
 {
     public function GuestUserSave(Request $request)
     {
+        if($request->account_type==1){
+            $request->validate([
+                'g_email' => 'required|email',
+                'g_first_name' => 'required',
+                'g_last_name' => 'required',
+                'g_mobile_number' => 'required',
+                'password' =>  ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'],
+            ]);
 
-        $request->validate([
+            $user = User::where('email', $request->g_email)->first();
+            if($user) {
+                return response()->json(['message' => 'Email already exist!', 'success' => false]);
+            }
+    
+            $user = User::create([
+                'first_name' => $request->g_first_name,
+                'last_name' => $request->g_last_name,
+                'email' => $request->g_email,
+                'mobile_number' => $request->g_mobile_number,
+                'password' => Hash::make($request->password),
+                'account_type' => '2',
+                'session_id' => $request->session_id
+            ]);
 
-            'g_email' => 'required|email',
+            return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
 
-            'password' =>  ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'],
-
-        ]);
-
-        $user = User::where('email', $request->g_email)->first();
-
-
-
-        if($user) {
-
-            return response()->json(['message' => 'Email already exist!', 'success' => false]);
+        
         }
-
-        $user = User::create([
-        'first_name' => $request->g_first_name,
-        'last_name' => $request->g_last_name,
-        'email' => $request->g_email,
-        'mobile_number' => $request->g_mobile_number,
-        'password' => Hash::make($request->password),
-        'account_type' => '1',
-        'session_id' => $request->session_id
-        ]);
-
-
-       return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
+        else{
+            if($request->account_type==1){
+                $request->validate([
+                    'g_email' => 'required|email',
+                    'g_first_name' => 'required',
+                    'g_last_name' => 'required',
+                    'g_mobile_number' => 'required',
+                ]);
+    
+              
+        
+                $user = User::create([
+                    'first_name' => $request->g_first_name,
+                    'last_name' => $request->g_last_name,
+                    'email' => $request->g_email,
+                    'mobile_number' => $request->g_mobile_number,
+                    'account_type' => 1,
+                    'session_id' => $request->session_id
+                ]);
+    
+                return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
+    
+            }
+        }
+       
     }
+
 }
