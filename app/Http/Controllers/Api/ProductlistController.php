@@ -335,14 +335,14 @@ class ProductlistController extends Controller
                 $tassels_arry[] = $tasselsverient;
                 $result_attributes[$val->variants[0]['varient4']] = $tassels_arry;
 
-                // $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
-                // $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
-                // $result_attr3 = $result_attributes[38];
-                // $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
-                $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
-                $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
-                $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
-                $result_attr4 = !empty($result_attributes[41])? $result_attributes[41] : null;
+                $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
+                $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
+                $result_attr3 = $result_attributes[38];
+                $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
+                // $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
+                // $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
+                // $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
+                // $result_attr4 = !empty($result_attributes[41])? $result_attributes[41] : null;
 
                 $data_result['variantmedia'] = $val['variantmedia'];
                 
@@ -482,7 +482,7 @@ class ProductlistController extends Controller
         }
 
         $productvariants = ProductVariant::with('variantmedia')->where('product_id', $product->id)
-            ->get()->toArray();
+            ->get();
       
         $productimage = ProductMedia::Where('product_id', $product->id)
             ->get();
