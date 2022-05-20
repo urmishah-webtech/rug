@@ -73,7 +73,7 @@ class GuestCheckout extends Component
                 'mobile_number' => $request->g_mobile_number,
                 'password' => Hash::make($request->password),
                 'account_type' => '2',
-                'session_id' => $request->session_id
+                // 'session_id' => $request->session_id
             ]);
 
             return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
@@ -81,7 +81,7 @@ class GuestCheckout extends Component
         
         }
         else{
-            if($request->account_type==1){
+           
                 $request->validate([
                     'g_email' => 'required|email',
                     'g_first_name' => 'required',
@@ -89,7 +89,10 @@ class GuestCheckout extends Component
                     'g_mobile_number' => 'required',
                 ]);
     
-              
+                $user = User::where('email', $request->g_email)->first();
+                if($user) {
+                    return response()->json(['message' => 'Email already exist!', 'success' => false]);
+                }
         
                 $user = User::create([
                     'first_name' => $request->g_first_name,
@@ -102,7 +105,7 @@ class GuestCheckout extends Component
     
                 return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
     
-            }
+            
         }
        
     }
