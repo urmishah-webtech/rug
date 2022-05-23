@@ -322,12 +322,23 @@ class PaymentController extends Controller
         }   
     }
 
-    public function get_thankyou($userid){
-
-        $ordercheck = Orders::where('user_id',$userid)->count();
-        $user_detail = User::where('id', $userid)->first();
+    public function get_thankyou($userid,$userExists){
+        if($userExists==1)
+        {
+            $ordercheck = Orders::where('user_id',$userid)->count();
+            $user_detail = User::where('id', $userid)->first();
+        }
+        else{
+            $ordercheck = Orders::where('session_id',$userid)->count();
+            $user_detail = User::where('session_id', $userid)->first();
+        }
         if($ordercheck != 0){
-            $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
+            if($userExists==1){
+                $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
+            }
+            else{
+                $order = Orders::where('session_id',$userid)->orderBy('id', 'DESC')->first();
+            }
             
             $order_item = order_item::with('media_product')->with(['variant_product' => function($q) {
                 return $q->with('variantmediafirst');
