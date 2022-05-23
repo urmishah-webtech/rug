@@ -110,3 +110,5 @@ Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterControll
 
 Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
 Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave'); 
+
+Route::post('get-tax-all', 'App\Http\Controllers\Api\CheckoutController@getTax'); 
