@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_recovery_codes',
         'two_factor_secret',
     ];
-    protected $fillable=['first_name','last_name','email','mobile_number','session_id','account_type'];
+    protected $fillable=['first_name','last_name','email','mobile_number','session_id','account_type','password'];
 
     /**
      * The attributes that should be cast to native types.
