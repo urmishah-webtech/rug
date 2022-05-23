@@ -52,6 +52,8 @@ use Illuminate\Support\Facades\Validator; // For Validation
 
 use App\Models\Cart;
 
+
+
 class GuestCheckout extends Component
 {
     public function GuestUserSave(Request $request)
@@ -89,6 +91,7 @@ class GuestCheckout extends Component
         
             $user['token'] = $user->createToken('appToken')->accessToken;
             $payment = Cart::where('session_id', $request->session_id)->update(['user_id' => $user->id,'session_id' => '']);
+            $payment = CustomerAddress::where('session_id', $request->session_id)->update(['user_id' => $user->id,'session_id' => '']);
 
             return response()->json(['message' => 'Record Created!!', 'success' => true, 'user'=>$user ]);
 
