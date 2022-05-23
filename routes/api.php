@@ -87,7 +87,7 @@ Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
 Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
 
 Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
-Route::get('thankyou/{id}', 'App\Http\Controllers\Api\PaymentController@get_thankyou');
+Route::get('thankyou/{id}/{userExists}', 'App\Http\Controllers\Api\PaymentController@get_thankyou');
 
 Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@countryCheck'); 
 
