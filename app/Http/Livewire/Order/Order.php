@@ -63,10 +63,10 @@ class Order extends Component
         }
         $this->selecteorder = [];
         $this->selectall = false;
-    }  
+    }
 
-    public function getOrderpaginateProperty(){ 
-        $orders = Orders::with('user')->when($this->filter_order, function ($query, $filter_order) {
+    public function getOrderpaginateProperty(){
+        $orders = Orders::with('user')->where('transactionid','!=','0' )->when($this->filter_order, function ($query, $filter_order) {
 
             $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
             $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');
