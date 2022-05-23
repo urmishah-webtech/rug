@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Livewire\Component;
+use Livewire\Component; 
 
 use Laravel\Fortify\Fortify;
 
