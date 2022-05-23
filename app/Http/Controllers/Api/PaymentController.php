@@ -368,12 +368,16 @@ class PaymentController extends Controller
 
             //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
             $user['to'] = $order['email'];
-
+            try{
              Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
                     $message->to($user['to']);
                     $message->subject('Rug Order Mail!!!');
                 });
-         
+            }
+            catch(Exception $e)
+            {
+                
+            }
             return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
 
         }else
