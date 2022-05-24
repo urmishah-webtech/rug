@@ -235,7 +235,7 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
                 ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
