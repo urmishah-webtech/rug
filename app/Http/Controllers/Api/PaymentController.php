@@ -92,6 +92,10 @@ class PaymentController extends Controller
             $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
 
         }
+
+        if($Cart->isEmpty()) {
+           return $this->sendJson(['status' => 0, 'message' => 'Cart is Empty!']);
+        }
      
 
 
@@ -107,6 +111,10 @@ class PaymentController extends Controller
                 $totalamout = ($res->price * $res->stock);
                 $netamount += $totalamout;
             }               
+        }
+
+        if($netamount <= 0) {
+            return $this->sendJson(['status' => 0, 'message' => 'Amount is 0']);
         }
 
         $includeshipping = $netamount + $shipping_cost_data['cost'];
@@ -235,7 +243,7 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
                 ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
