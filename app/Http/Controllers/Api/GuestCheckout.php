@@ -58,7 +58,7 @@ class GuestCheckout extends Component
 {
     public function GuestUserSave(Request $request)
     {
-      
+       $error_msgs=array();
         if($request->account_type==1){
            
             $validation = Validator::make($request->all() ,[
@@ -69,8 +69,16 @@ class GuestCheckout extends Component
                 'g_mobile_number' => 'required',
                 'password' =>  ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'],
             ]);
+            
+          
+            foreach($validation->errors()->getMessages() as $err)
+            {
+               
+                array_push($error_msgs,$err);
+            }
+          
             if($validation->fails()) {
-                return response()->json(['message' => $validation->errors(), 'success' => false]);
+                return response()->json(['message' =>$error_msgs, 'success' => false]);
             }
             $user = User::where('email', $request->g_email)->first();
             
@@ -99,13 +107,22 @@ class GuestCheckout extends Component
         }
         else{
            
-                $request->validate([
+                $validation = Validator::make($request->all() ,[
                     'g_email' => 'required|email',
                     'g_first_name' => 'required',
                     'g_last_name' => 'required',
                     'g_mobile_number' => 'required',
                 ]);
-    
+                foreach($validation->errors()->getMessages() as $err)
+                {
+                
+                    array_push($error_msgs,$err);
+                }
+
+                if($validation->fails()) {
+                    return response()->json(['message' =>$error_msgs, 'success' => false]);
+                }
+                
                 $user = User::where('email', $request->g_email)->first();
                 if($user) {
                     return response()->json(['message' => 'Email already exist!', 'success' => false]);
