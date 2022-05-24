@@ -15,52 +15,24 @@ class ProductlistController extends Controller
     {
 
         $symbol = CurrencySymbol();
-        $product = DB::table('product')->get();
-
-        $data = array();
-        $i = 0;
         $image_path =  env('IMAGE_PATH');
 
-        foreach ($product as $val)
-        {
-            $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price','product.price as main_price')
-                ->where('product.id', $val->id)
-                ->whereNotNull('product_variants.price')
-                ->get();
+        $products = Product::with(['productmediafirst:product_id,image', 'variants'])->get(['id', 'title', 'descripation', 'seo_utl as url']);
 
-            $product_image = DB::table('product')->leftJoin('product_media as pm', 'product.id', '=', 'pm.product_id')
-                ->select('product.id as id', 'pm.image as image', 'product.title as title', 'product.descripation as descripation')
-                ->where('product.id', $val->id)
-                ->first();
+        $products->each(function($product, $key) use ($image_path, $symbol) {
+            if(isset($product->productmediafirst->image))
+                $product->image = $image_path . $product->productmediafirst->image;
 
-            $price_array = array();
-            foreach ($price_data as $key => $value)
-            {
-                $price_array[$key] = $value->price;
-            }
+            if(!empty($product->variants))
+                $product->price_range = $symbol['currency'] . $product->variants->min('price') . '-' . $symbol['currency'] . $product->variants->max('price');
+            
+            unset($product->variants);
+            unset($product->productmediafirst);
+        });
 
-            if (!empty($price_array))
-            {
-                $min = min($price_array);
-                $max = max($price_array);
-            }else{
-                $min = '';
-                $max = '';
-            }
-            $data[$i]['id'] = $val->id;
-            $data[$i]['title'] = $val->title;
-            $data[$i]['description'] = $val->descripation;
-            $data[$i]['url'] = $val->seo_utl;
-            $data[$i]['image'] = $image_path . $product_image->image;
-            if (!empty($price_array)){
-            $data[$i]['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
-            }else{
-                 $data[$i]['price_range'] = $symbol['currency'] . $val->price;
-            }
-            $i++;
+                
+        return response(['success' => true, 'products' => $products, 'message' => 'Products List!']);
 
-        }
-        return response($data, 200);
     }
 
     public function getIndividualProduct($slug)
