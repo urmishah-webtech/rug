@@ -45,6 +45,7 @@ Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
 
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
 Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
+Route::post('getCity', 'App\Http\Controllers\Api\CountryController@getCity');
 
 Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
 
