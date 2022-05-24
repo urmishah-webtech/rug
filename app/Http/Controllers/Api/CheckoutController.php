@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerAddress;
+use App\Models\tax;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -84,6 +85,15 @@ class CheckoutController extends Controller
 		    'success' => true, 
 		    'message'=> 'deleted sucessfully.',
 		    'data'    => $deleted,
+            ]);
+    }
+
+    public function getTax(Request $request)
+    {
+       $get_tax = tax::where('country_name',$request->country)->first();
+        return response()->json([
+            'success' => true,
+            'data'    => $get_tax,
             ]);
     }
 }
