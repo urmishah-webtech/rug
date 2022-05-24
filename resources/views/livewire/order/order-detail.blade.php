@@ -23,7 +23,7 @@
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                         </button>
                     </a>
-                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <!-- <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span> -->
+                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>{{$order->paymentstatus}}</span> <!-- <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span> -->
                     <?php $d=strtotime($order->created_at); ?>
                     <p class="header-leble"><?php echo date("d M Y h:i", $d); ?> from Orders</p></h4>
                 </div>

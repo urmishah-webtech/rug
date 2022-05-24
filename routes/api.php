@@ -45,6 +45,7 @@ Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
 
 Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
 Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
+Route::post('getCity', 'App\Http\Controllers\Api\CountryController@getCity');
 
 Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
 
@@ -54,7 +55,6 @@ Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogP
 Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
 Route::get('getmenu', 'App\Http\Controllers\Api\NavigationController@getnavigation');
 Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
-Route::get('sub-menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList_Submenu');
 
 Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 
@@ -80,12 +80,15 @@ Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartPro
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
 Route::any('shipping-cost', 'App\Http\Controllers\Api\CartController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
+Route::post('update-address/{id}', 'App\Http\Controllers\Api\CheckoutController@updateAddress');
+Route::get('delete-address/{id}', 'App\Http\Controllers\Api\CheckoutController@deleteShipping');
+
 
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
 Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
 
 Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
-Route::get('thankyou/{id}', 'App\Http\Controllers\Api\PaymentController@get_thankyou');
+Route::get('thankyou/{id}/{userExists}', 'App\Http\Controllers\Api\PaymentController@get_thankyou');
 
 Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@countryCheck'); 
 
@@ -97,8 +100,16 @@ Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
 Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
 Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit'); 
 Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
+Route::post('password-forgot', 'App\Http\Controllers\Api\UserProfile@sendPasswordResetLink');
+Route::post('reset-password', 'App\Http\Controllers\Api\UserProfile@storeNewPassword');
+Route::get('order-detail/{id}', 'App\Http\Controllers\Api\UserProfile@OrderDetail');
+Route::get('get-order/{id}', 'App\Http\Controllers\Api\PaymentController@get_order');
+
 
 /*FILTER PRODUCT*/
 Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
 
 Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
+Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave'); 
+
+Route::post('get-tax-all', 'App\Http\Controllers\Api\CheckoutController@getTax'); 

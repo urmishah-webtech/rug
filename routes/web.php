@@ -226,6 +226,12 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/order/{id?}', Livewire\Order\OrderDetail::class)->name('order-detail');
 
+            Route::get('/user-invoice/{id?}', Livewire\Order\UserInvoice::class)->name('user-invoice');
+
+            Route::get('/generate-pdf-billing/{id?}', [Livewire\Order\UserInvoice::class, 'generatePDF'])->name('generate-pdf-billing');
+           
+            Route::get('/product-invoice/{id?}', [Livewire\Order\ProductInvoice::class, 'generateProductPDF'])->name('product-invoice');
+
             Route::get('/draft-orders', Livewire\Order\DraftOrder::class)->name('draft-orders');
 
             Route::get('/draft-orders/new', Livewire\Order\DraftOrderCreate::class)->name('draft-orders-create');

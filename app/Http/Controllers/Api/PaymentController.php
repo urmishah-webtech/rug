@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\api;
+namespace app\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,8 +21,6 @@ use App\Models\Country;
 use App\Models\ShippingZone;
 use App\Models\ShippingZoneCountry;
 use Illuminate\Support\Facades\DB;
-
-
 use App\Http\Controllers\Api\CartController;
 
 class PaymentController extends Controller
@@ -77,11 +75,28 @@ class PaymentController extends Controller
 
         $payment_type = $request->payment_type;
         
-        $user_detail = User::where('id', $request['user_id'])->first();
+        if($request->account_type==1){
+            $user_detail = User::where('session_id', $request['user_id'])->first();
 
-        $Cart = Cart::where('user_id',$user_detail['id'])->get();
-  
-        $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+            $Cart = Cart::where('session_id',$user_detail['session_id'])->get();
+      
+            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->first();
+    
+        }
+        else{
+
+            $user_detail = User::where('id', $request['user_id'])->first();
+
+            $Cart = Cart::where('user_id',$user_detail['id'])->get();
+      
+            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+
+        }
+
+        if($Cart->isEmpty()) {
+           return $this->sendJson(['status' => 0, 'message' => 'Cart is Empty!']);
+        }
+     
 
 
         $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
@@ -98,48 +113,97 @@ class PaymentController extends Controller
             }               
         }
 
+        if($netamount <= 0) {
+            return $this->sendJson(['status' => 0, 'message' => 'Amount is 0']);
+        }
 
         $includeshipping = $netamount + $shipping_cost_data['cost'];
 
+        if(!empty($request->account_type) && $request->account_type == '1'){
 
-        $Order_insert = orders::insert($order_arr = [
+            $Order_insert = orders::insert($order_arr = [
 
-            'user_id' => $user_detail['id'],
+                'session_id' => $user_detail['session_id'],
 
-            'transactionid' => '',
+                'transactionid' => '',
 
-            'email' => $user_detail['email'],
+                'email' => $user_detail['email'],
 
-            'netamout' => $netamount,
+                'netamout' => $netamount,
 
-            'shipping_cost' => $shipping_cost_data['cost'],
+                'shipping_cost' => $shipping_cost_data['cost'],
 
-            'paymentstatus' => 'pending',
+                'paymentstatus' => 'pending',
 
-            'first_name' => $shipping['first_name'],
+                'first_name' => $shipping['first_name'],
 
-            'last_name' => $shipping['last_name'],
+                'last_name' => $shipping['last_name'],
 
-            'address' => $shipping['address'],
+                'address' => $shipping['address'],
 
-            'state' => $shipping['state'], 
+                'state' => $shipping['state'], 
 
-            'city' => $shipping['city'], 
+                'city' => $shipping['city'], 
 
-            'country' => $shipping['country'], 
+                'country' => $shipping['country'], 
 
-            'pincode' => $shipping['postal_code'], 
+                'pincode' => $shipping['postal_code'], 
 
-            'mobile' => $shipping['mobile_no'],
-            
-            'payment_type' => $payment_type,
+                'mobile' => $shipping['mobile_no'],
+                
+                'payment_type' => $payment_type,
+               
+                'account_type' => '1',
+            ]);
+        }else{
 
-        ]);
+            $Order_insert = orders::insert($order_arr = [
+
+                'user_id' => $user_detail['id'],
+
+                'transactionid' => '',
+
+                'email' => $user_detail['email'],
+
+                'netamout' => $netamount,
+
+                'shipping_cost' => $shipping_cost_data['cost'],
+
+                'paymentstatus' => 'pending',
+
+                'first_name' => $shipping['first_name'],
+
+                'last_name' => $shipping['last_name'],
+
+                'address' => $shipping['address'],
+
+                'state' => $shipping['state'], 
+
+                'city' => $shipping['city'], 
+
+                'country' => $shipping['country'], 
+
+                'pincode' => $shipping['postal_code'], 
+
+                'mobile' => $shipping['mobile_no'],
+                
+                'payment_type' => $payment_type,
+               
+                'account_type' => '2',
+            ]);
+        }
 
 
         if($Order_insert){
             // Insert Record Order Item
-            $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
+            if($request->account_type==1){
+                $lastorderid = Orders::where('user_id',$user_detail['session_id'])->orderBy('id', 'DESC')->first();
+
+            }
+            else{
+                $lastorderid = Orders::where('user_id',$user_detail['id'])->orderBy('id', 'DESC')->first();
+
+            }
 
             $insert_order_item =[];
             foreach($Cart as $res) {         
@@ -179,7 +243,7 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $request->amount], "method" => "creditcard", "description" => "My first API payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
                 ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
@@ -191,20 +255,36 @@ class PaymentController extends Controller
             $pay->status = $payment->status;
                
             $pay->save();
-
-            Cart::where('user_id',$user_detail['id'])->delete();
+            
+            if($request->account_type == 1)
+            {
+                Cart::where('session_id',$user_detail['session_id'])->delete();
+            }
+            else{
+                Cart::where('user_id',$user_detail['id'])->delete();
+            
+            }
 
 
             return $this->sendJson(['status' => 1, 'message' => $payment]);
         }
 
         if ($payment_type == 0) {
-
+            if($request->account_type == 1)
+            {
+            $Cart = Cart::where('session_id',$request['user_id'])->get();
+            }
+            else{
             $Cart = Cart::where('user_id',$request['user_id'])->get();
-
+            }
             $pay = new Payment();
             $pay->payment_id = 'Cash On Delivery';
-            $pay->user_id = $request['user_id'];
+            if($request->account_type == 1){
+                $pay->session_id = $request['user_id'];
+            }
+            else{
+                $pay->user_id = $request['user_id'];
+            }
             $pay->order_id = $lastorderid['id'];
             $pay->amount = $request->amount;
             $pay->payment_type = $payment_type;
@@ -236,19 +316,37 @@ class PaymentController extends Controller
                 }
             }
 
+            if($request->account_type == 1)
+            {
+                Cart::where('session_id',$user_detail['session_id'])->delete();
+            }
+            else{
                 Cart::where('user_id',$user_detail['id'])->delete();
+            
+            }
             
 
             return $this->sendJson(['status' => 0, 'message' => 'cash on delivery place successed']);
         }   
     }
 
-     public function get_thankyou($userid){
-
-        $ordercheck = Orders::where('user_id',$userid)->count();
-        $user_detail = User::where('id', $userid)->first();
+    public function get_thankyou($userid,$userExists){
+        if($userExists==1)
+        {
+            $ordercheck = Orders::where('user_id',$userid)->count();
+            $user_detail = User::where('id', $userid)->first();
+        }
+        else{
+            $ordercheck = Orders::where('session_id',$userid)->count();
+            $user_detail = User::where('session_id', $userid)->first();
+        }
         if($ordercheck != 0){
-            $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
+            if($userExists==1){
+                $order = Orders::where('user_id',$userid)->orderBy('id', 'DESC')->first();
+            }
+            else{
+                $order = Orders::where('session_id',$userid)->orderBy('id', 'DESC')->first();
+            }
             
             $order_item = order_item::with('media_product')->with(['variant_product' => function($q) {
                 return $q->with('variantmediafirst');
@@ -278,12 +376,16 @@ class PaymentController extends Controller
 
             //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
             $user['to'] = $order['email'];
+            try{
+            //  Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
+            //         $message->to($user['to']);
+            //         $message->subject('Rug Order Mail!!!');
+            //     });
+            }
+            catch(Exception $e)
+            {
 
-             Mail::send('livewire.mail-template.order-place', ['orders' => $order,'order_item' => $order_item,'image' => $order_item], function($message) use($user) {
-                    $message->to($user['to']);
-                    $message->subject('Rug Order Mail!!!');
-                });
-         
+            }
             return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
 
         }else
@@ -420,6 +522,43 @@ class PaymentController extends Controller
         } else {
             return $this->sendJson(['status' => 1, 'data' => $taxes ]);
         }
+    }
+
+    public function get_order($id){
+
+        $order = Orders::find($id);
+        if(empty($order)) {
+            return $this->sendJson(['status' => 0, 'message' => 'Not avalible Order' ]);
+        }
+
+        $order_item = order_item::with('media_product')->with(['variant_product' => function($q) {
+                return $q->with('variantmediafirst');
+            }])->with('order_product')->where('order_id',$id)->orderBy('id', 'DESC')->get();
+
+        $image_path= env('IMAGE_PATH');
+
+        $finalamount = 0;
+        $i=0;
+                
+               
+        foreach ($order_item as $key => $result)
+        {
+            if(!$result->variant_product->isEmpty() && isset($result->variant_product[0]) && !empty($result->variant_product[0]->variantmediafirst) && !empty($result->variant_product[0]->variantmediafirst->image)) {
+                    $order_item[$key]['image'] = $image_path.$result->variant_product[0]->variantmediafirst->image;
+            } else {
+                    $order_item[$key]['image'] = $image_path.$result['media_product'][0]['image'];
+            }
+               
+            $order_item[$key]['title'] = $result['order_product'][0]['title'];
+            $Totalamount = ($result->stock * $result->price);
+            $finalamount += $Totalamount;
+                
+            }
+            
+         
+        return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'product_amount'=>$finalamount]);
+
+        
     }
 }
 

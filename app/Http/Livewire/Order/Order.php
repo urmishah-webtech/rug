@@ -12,6 +12,10 @@ use Livewire\WithPagination;
 
 use App\Models\Payment;
 
+use Artesaos\SEOTools\Facades\SEOTools;
+
+use Artesaos\SEOTools\Facades\SEOMeta;
+
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -31,12 +35,9 @@ class Order extends Component
 
     public $perPage = 10;
   
-  
-
-
     public function mount() {
 
-
+       SEOMeta::setTitle('Order');
        $this->selecteorder = collect();
        $this->OrderItem = order_item::get();
 
@@ -44,11 +45,7 @@ class Order extends Component
 
     public function render()
     {
-    	
         $this->bulkDisabled = count($this->selecteorder) < 1;
-
-		
-        
         return view('livewire.order.order', ['order' => $this->Orderpaginate]);
     }
 
@@ -69,7 +66,7 @@ class Order extends Component
     }
 
     public function getOrderpaginateProperty(){
-        $orders = Orders::with('user')->where('transactionid','!=','0' )->when($this->filter_order, function ($query, $filter_order) {
+        $orders = Orders::with('user')->when($this->filter_order, function ($query, $filter_order) {
 
             $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
             $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');

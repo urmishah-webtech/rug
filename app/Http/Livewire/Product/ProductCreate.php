@@ -120,6 +120,7 @@ class ProductCreate extends Component
             $stock_single_arr = $request['att_stock_qtn'];
 
             $productCollection_arrray = [];
+            $product_new_arrray = '';
        
 
             if(!empty($request['productCollection'])){

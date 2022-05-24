@@ -11,6 +11,13 @@ class order_item extends Model
     use HasFactory;
     protected $guarded =[];
 
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+
+
+
     public function order_product()
     {
         return $this->hasMany(Product::class, 'id', 'product_id');
@@ -25,6 +32,6 @@ class order_item extends Model
     }
     public function order()
     {
-        return $this->hasOne(Orders::class, 'id', 'order_id');
+        return $this->hasMany(Orders::class, 'id', 'order_id');
     }
 }

@@ -10,7 +10,7 @@
 
 
 
-    <title>{{ config('app.name', 'Shoes, Sneaker, Clothes &amp; Clothing') }}</title>
+    {!! SEOMeta::generate() !!}
 
     @livewireStyles
 
