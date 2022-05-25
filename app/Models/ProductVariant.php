@@ -21,6 +21,15 @@ class ProductVariant extends Model
 
     protected $guarded = [];
 
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+
+
+
+
+
     public function variant_stock()
     {
         return $this->hasMany(VariantStock::class, 'variant_main_id', 'id');
@@ -31,7 +40,7 @@ class ProductVariant extends Model
         return $this->hasMany(Product::class, 'id', 'product_id');
     }
 
-    public function detail($value='')
+    public function detail()
     {
         return $this->hasMany(ProductDetail::class, 'variant_id', 'id');
     }

@@ -19,56 +19,59 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(function(){
 	Route::post('shippingInfo', 'App\Http\Controllers\Api\ShippingController@shippingInfo');
 });
+
+/* PRODUCT */
 Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllProducts');
-Route::get('products/{slug}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct');
-Route::get('product-variant/{slug}', 'App\Http\Controllers\Api\ProductlistController@getIndividualProduct_variant');
+Route::get('products/{slug}', 'App\Http\Controllers\Api\ProductlistController@getProductBySlug');
+Route::get('product-variant/{slug}', 'App\Http\Controllers\Api\ProductlistController@getVariantsBySlug');
 Route::get('related-product/{id}', 'App\Http\Controllers\Api\ProductlistController@get_related_Products');
+
 Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetchPrice');
-Route::get('featureproduct', 'App\Http\Controllers\Api\SliderController@FeatureProduct');
+// Route::get('featureproduct', 'App\Http\Controllers\Api\SliderController@FeatureProduct');
 Route::get('custom-products/{id}', 'App\Http\Controllers\Api\ProductlistController@Custome_Modual_InProduct');
 
-Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
-Route::get('homepage', 'App\Http\Controllers\Api\SliderController@getHomepage');
-Route::get('studiopage', 'App\Http\Controllers\Api\SliderController@getStudiopage');
-Route::get('apartmentpage', 'App\Http\Controllers\Api\SliderController@getApartmentpage');
-Route::get('proceesspage', 'App\Http\Controllers\Api\SliderController@getProcesspage');
-Route::get('ourstorypage', 'App\Http\Controllers\Api\SliderController@getStorypage');
-Route::get('swatchespage', 'App\Http\Controllers\Api\SliderController@getSwatchespage');
-Route::get('sizeguidepage', 'App\Http\Controllers\Api\SliderController@getSizeGuidepage');
-Route::get('footerinformation', 'App\Http\Controllers\Api\SliderController@getfooterpage');
-Route::get('footermenu/{id}', 'App\Http\Controllers\Api\SliderController@getFooterNavigationList');
+// Route::get('slider', 'App\Http\Controllers\Api\SliderController@getSlider');
+// Route::get('homepage', 'App\Http\Controllers\Api\SliderController@getHomepage');
+// Route::get('studiopage', 'App\Http\Controllers\Api\SliderController@getStudiopage');
+// Route::get('apartmentpage', 'App\Http\Controllers\Api\SliderController@getApartmentpage');
+// Route::get('proceesspage', 'App\Http\Controllers\Api\SliderController@getProcesspage');
+// Route::get('ourstorypage', 'App\Http\Controllers\Api\SliderController@getStorypage');
+// Route::get('swatchespage', 'App\Http\Controllers\Api\SliderController@getSwatchespage');
+// Route::get('sizeguidepage', 'App\Http\Controllers\Api\SliderController@getSizeGuidepage');
+// Route::get('footerinformation', 'App\Http\Controllers\Api\SliderController@getfooterpage');
+// Route::get('footermenu/{id}', 'App\Http\Controllers\Api\SliderController@getFooterNavigationList');
 
 
-Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
-Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
+// Route::post('contactsave', 'App\Http\Controllers\Api\SliderController@ContactSave');
+// Route::post('tradesave', 'App\Http\Controllers\Api\SliderController@TradeSave');
 
 
-Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
-Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
-Route::post('getCity', 'App\Http\Controllers\Api\CountryController@getCity');
+// Route::get('getCountry', 'App\Http\Controllers\Api\CountryController@getCountry');
+// Route::post('getStates', 'App\Http\Controllers\Api\CountryController@getStates');
+// Route::post('getCity', 'App\Http\Controllers\Api\CountryController@getCity');
 
-Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
+// Route::post('contactInquiry', 'App\Http\Controllers\Api\ContactInquiryController@contactInquiry');
 
-Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
-Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
+// Route::get('blogs', 'App\Http\Controllers\Api\BlogPostController@getAllBlogPost');
+// Route::get('blogs/{slug}', 'App\Http\Controllers\Api\BlogPostController@getBlogPost');
 
-Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
-Route::get('getmenu', 'App\Http\Controllers\Api\NavigationController@getnavigation');
-Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
+// Route::get('menu', 'App\Http\Controllers\Api\NavigationController@getAllNavigation');
+// Route::get('getmenu', 'App\Http\Controllers\Api\NavigationController@getnavigation');
+// Route::get('menu-list/{id}', 'App\Http\Controllers\Api\NavigationController@getNavigationList');
 
-Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
+// Route::get('general-setting', 'App\Http\Controllers\Api\GeneralSettingController@getGeneralSettings');
 
-Route::get('faq-category', 'App\Http\Controllers\Api\FaqlistController@getAllFaqCategory');
-Route::get('faq/{id}', 'App\Http\Controllers\Api\FaqlistController@getFaq_Category_Post');
+// Route::get('faq-category', 'App\Http\Controllers\Api\FaqlistController@getAllFaqCategory');
+// Route::get('faq/{id}', 'App\Http\Controllers\Api\FaqlistController@getFaq_Category_Post');
 
-Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
-Route::post('signup', 'App\Http\Controllers\Api\LoginController@signup');
-Route::post('resetpassword', 'App\Http\Controllers\Api\LoginController@storeNewPassword');
-Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
-Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
+// Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
+// Route::post('signup', 'App\Http\Controllers\Api\LoginController@signup');
+// Route::post('resetpassword', 'App\Http\Controllers\Api\LoginController@storeNewPassword');
+// Route::get('logout', 'App\Http\Controllers\Api\LoginController@logout');
+// Route::get('user', 'App\Http\Controllers\Api\LoginController@user');
 
-Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
-Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
+// Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
+// Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
 
 Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 Route::post('customecart', 'App\Http\Controllers\Api\CartController@CustomeCartSave');
@@ -80,36 +83,36 @@ Route::post('cartupdate', 'App\Http\Controllers\Api\CartController@UpdateCartPro
 Route::get('get-shipping-checkout/{id}', 'App\Http\Controllers\Api\CheckoutController@getshipping');
 Route::any('shipping-cost', 'App\Http\Controllers\Api\CartController@getshipping');
 Route::post('checkout-shipping-save', 'App\Http\Controllers\Api\CheckoutController@SaveShipping');
-Route::post('update-address/{id}', 'App\Http\Controllers\Api\CheckoutController@updateAddress');
-Route::get('delete-address/{id}', 'App\Http\Controllers\Api\CheckoutController@deleteShipping');
+// Route::post('update-address/{id}', 'App\Http\Controllers\Api\CheckoutController@updateAddress');
+// Route::get('delete-address/{id}', 'App\Http\Controllers\Api\CheckoutController@deleteShipping');
 
 
 Route::post('payment', 'App\Http\Controllers\Api\PaymentController@payment');
-Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
+// Route::post('webhook', 'App\Http\Controllers\Api\PaymentController@webhook');  
 
 Route::post('orderplace', 'App\Http\Controllers\Api\PaymentController@orderplace'); 
 Route::get('thankyou/{id}/{userExists}', 'App\Http\Controllers\Api\PaymentController@get_thankyou');
 
-Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@countryCheck'); 
+// Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@countryCheck'); 
 
-/*COLLECTION*/
-Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getCollection'); 
+// /*COLLECTION*/
+// Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getCollection'); 
 
-/*USER DETAIL*/
-Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
-Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
-Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit'); 
-Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
-Route::post('password-forgot', 'App\Http\Controllers\Api\UserProfile@sendPasswordResetLink');
-Route::post('reset-password', 'App\Http\Controllers\Api\UserProfile@storeNewPassword');
-Route::get('order-detail/{id}', 'App\Http\Controllers\Api\UserProfile@OrderDetail');
-Route::get('get-order/{id}', 'App\Http\Controllers\Api\PaymentController@get_order');
+// /*USER DETAIL*/
+// Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');
+// Route::get('profileget/{id}', 'App\Http\Controllers\Api\UserProfile@Profileget');
+// Route::post('userupdate', 'App\Http\Controllers\Api\UserProfile@ProfileEdit'); 
+// Route::post('Passwordupdate', 'App\Http\Controllers\Api\UserProfile@PasswordUpdate');
+// Route::post('password-forgot', 'App\Http\Controllers\Api\UserProfile@sendPasswordResetLink');
+// Route::post('reset-password', 'App\Http\Controllers\Api\UserProfile@storeNewPassword');
+// Route::get('order-detail/{id}', 'App\Http\Controllers\Api\UserProfile@OrderDetail');
+// Route::get('get-order/{id}', 'App\Http\Controllers\Api\PaymentController@get_order');
 
 
-/*FILTER PRODUCT*/
-Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
+// /*FILTER PRODUCT*/
+// Route::get('filterproduct/{id}', 'App\Http\Controllers\Api\ProductFilterController@getFilter');
 
-Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
-Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave'); 
+// Route::post('checkgetproduct', 'App\Http\Controllers\Api\ProductFilterController@getGetFilter');
+ Route::post('guestcheckouted', 'App\Http\Controllers\Api\GuestCheckout@GuestUserSave'); 
 
-Route::post('get-tax-all', 'App\Http\Controllers\Api\CheckoutController@getTax'); 
+// Route::post('get-tax-all', 'App\Http\Controllers\Api\CheckoutController@getTax'); 
