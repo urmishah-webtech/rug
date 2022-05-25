@@ -71,7 +71,7 @@ class Order extends Component
             $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
             $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');
 
-            })->get();
+            })->orderBy('id', 'DESC')->get();
         $items = $orders->forPage($this->page, $this->perPage);
         return new LengthAwarePaginator($items, $orders->count(), $this->perPage, $this->page);
     }
