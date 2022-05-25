@@ -29,9 +29,11 @@ class OrderDetail extends Component
     public function mount($id) {
 
        $this->order = Orders::with('user')->Where('id', $id)->first();
-      
-       $this->allorder = Orders::where('user_id',$this->order['user'][0]['id'])->get();
-
+        if(!empty($this->order['user'][0])){
+        $this->allorder = Orders::where('user_id',$this->order['user'][0]['id'])->get();
+        }else{
+            $this->allorder = Orders::get();
+        }
        $this->commentget = ProductComment::where('order_id',$this->order['id'])->orderBy('id', 'DESC')->get()->groupBy(function($data) {
             return $data->updated_at->format('Y-m-d');
         })->toArray();
