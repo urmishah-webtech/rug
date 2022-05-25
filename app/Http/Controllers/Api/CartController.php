@@ -61,7 +61,8 @@ class CartController extends Controller
             }
             else
             {
-                $product = Product::where('seo_utl', $request->product_id)->first();
+
+                $product = Product::where('id', $request->product_id)->first();
 
                 if(empty($product)) {
                     return response()->json(["message" => "Product not found"], 404);
@@ -125,7 +126,9 @@ class CartController extends Controller
         }
         else
         {
-            $product = Product::with('variants')->where('seo_utl', $request->product_id)->first();
+
+
+            $product = Product::with('variants')->where('id', $request->product_id)->first();
 
             if(empty($product)) {
                 return response()->json(["message" => "Product not found"], 404);
@@ -328,7 +331,7 @@ class CartController extends Controller
 
 
     public function getshipping(Request $request){
-
+       
         $country = Country::where('name',$request->country)->get()->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
@@ -354,7 +357,7 @@ class CartController extends Controller
     }
 
     public function CustomeCartSave(Request $request){
-        $product = Product::where('seo_utl', $request->product_id)->first();
+        $product = Product::where('id', $request->product_id)->first();
         if(empty($product)) {
                 return response()->json(["message" => "Product not found"], 404);
         }

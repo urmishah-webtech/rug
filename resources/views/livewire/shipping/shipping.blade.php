@@ -359,7 +359,7 @@
                                 <label class="pb-1">Select Countries</label>
                                 <select name="countriess" id="countriess" class="form-control js-select2" multiple="multiple">
                                     <?php foreach ($countries_list as $key => $value): ?>
-                                        <option value="{{$value->code}}" data-badge="{{$value->code}}" <?php echo (in_array($value->code,$seleced_countries)) ? 'selected':''; ?>>{{$value->name}}</option>
+                                        <option value="{{$value->phonecode}}" data-badge="{{$value->phonecode}}" <?php echo (in_array($value->phonecode,$seleced_countries)) ? 'selected':''; ?>>{{$value->name}}</option>
                                     <?php endforeach ?>
                                 </select>
                                 <input type="checkbox" id="checkbox1" >Select All

@@ -39,7 +39,6 @@ class PaymentController extends Controller
     }
 
     public function getshipping($amount, $country_name){
-
         $country = Country::where('name',$country_name)->get()->first();
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
