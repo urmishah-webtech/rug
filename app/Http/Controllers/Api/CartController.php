@@ -328,7 +328,7 @@ class CartController extends Controller
 
 
     public function getshipping(Request $request){
-
+       
         $country = Country::where('name',$request->country)->get()->first();
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();

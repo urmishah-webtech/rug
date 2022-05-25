@@ -39,7 +39,6 @@ class PaymentController extends Controller
     }
 
     public function getshipping($amount, $country_name){
-
         $country = Country::where('name',$country_name)->get()->first();
         $taxes = tax::where('country_name',$country_name)->first();
         $code = (!empty($country)) ? $country->code : 'all';
@@ -118,6 +117,7 @@ class PaymentController extends Controller
         }
 
         $includeshipping = $netamount + $shipping_cost_data['cost'];
+        $netamount = number_format($netamount, 2, '.', '' );
 
         if(!empty($request->account_type) && $request->account_type == '1'){
 
