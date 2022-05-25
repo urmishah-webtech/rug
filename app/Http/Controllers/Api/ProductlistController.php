@@ -80,35 +80,18 @@ class ProductlistController extends Controller
 
     public function getVariantsBySlug($slug)
     {
+        $product = Product::with('detail')->where('seo_utl', $slug)->first();
 
-        $symbol = CurrencySymbol();
-        $image_path =  env('IMAGE_PATH');
-        $attribute =  [];
+        if(empty($product)) {
+            return response()->json(['success' => false, "message" => "Product not found"]);
+        }
 
-        $variants = ProductVariant::whereHas('product', function($q) use ($slug) {
-            return $q->where('seo_utl', $slug);
-        })->with(['product'=> function ($q1) {
-            return $q1->select('id')->with('detail');
-        }, 'variantmediafirst:variant_id,image'])->get(['id','product_id', 'price', 'selling_price', 'sku', 'outofstock', 'barcode', 'varient1', 'attribute1', 'varient2', 'attribute2', 'varient3', 'attribute3', 'varient4', 'attribute4']);
+        $variants = ProductVariant::with(['variantmediafirst:variant_id,image'])->where('product_id', $product->id)->get(['id','product_id', 'price', 'selling_price', 'sku', 'outofstock', 'barcode', 'varient1', 'attribute1', 'varient2', 'attribute2', 'varient3', 'attribute3', 'varient4', 'attribute4']);
 
-
-        $variants->each(function($variant, $key) use ($image_path, $symbol, $attribute) {
-
-            $variant->image = url('/') . '/image/defult-image.png';
-            $variant->detail = [];
-            
-            if(isset($variant->variantmediafirst->image))
-                $variant->image = $image_path . $variant->variantmediafirst->image;
-
-            if(!empty($variant->product->detail))
-                $variant->detail = $variant->product->detail;
-            
-            unset($variant->product);
-            unset($variant->variantmediafirst);
-
-        });
 
         $variant_tag = VariantTag::all()->keyBy('id')->toArray();
+
+        $attribute =  [];
 
         $i = 1;
         while($i <= 4 ) {
@@ -122,7 +105,10 @@ class ProductlistController extends Controller
             }
             $i++;
         }
-        return response(['success' => true, 'variants' => $variants, 'attribute' => $attribute, 'message' => 'Variants List!']);
+        $image_path =  env('IMAGE_PATH');
+        $default_img = '/image/defult-image.png';
+
+        return response(['success' => true, 'variants' => $variants, 'detail'=> $product->detail, 'image_path' => $image_path, 'default_img' => $default_img, 'attribute' => $attribute, 'message' => 'Variants List!']);
        
     }
 
@@ -139,7 +125,7 @@ class ProductlistController extends Controller
         $collection = json_decode($get_product->collection);
 
 
-        $products = Product::with('productmediafirst')
+        $products = Product::with('productmediafirst:product_id,image')
                 ->with('variants:product_id,price')
                 ->where('id', '!=',$id)->get(['id','title', 'collection', 'price']);
 
@@ -193,26 +179,21 @@ class ProductlistController extends Controller
     public function fetchPrice(Request $request)
     {
 
-        $product = Product::select('id')->where('seo_utl', $request->product_id)->first();
+        $product = Product::with(['variants' => function($q) {
+            return $q->with('variantmedia');
+        }, 'productmediaget'])->where('seo_utl', $request->slug)->first(['id']);
       
         if(empty($product)) {
-            return response()->json(["message" => "Product not found"], 404);
+            return response()->json(['success' => false, "message" => "Product not found"]);
         }
-
-        $productvariants = ProductVariant::with('variantmedia')->where('product_id', $product->id)
-            ->get();
-      
-        $productimage = ProductMedia::Where('product_id', $product->id)
-            ->get();
+            
         $image_path =  env('IMAGE_PATH');
-        
+        $productvariant = null;
 
-        $price = 0;
-        $Productvariant= null;
-        if (!empty($productvariants) && count($productvariants) > 0)
+        if (!empty($product->variants) && count($product->variants) > 0)
         {
 
-            foreach ($productvariants as $variant)
+            foreach ($product->variants as $variant)
             {
                 $variant->attribute1 = trim($variant->attribute1);
                 $variant->attribute2 = trim($variant->attribute2);
@@ -234,7 +215,7 @@ class ProductlistController extends Controller
             if (empty($productvariant))
             {
 
-                foreach ($productvariants as $variant)
+                foreach ($product->variants as $variant)
                 {
                     $variant->attribute1 = trim($variant->attribute1);
                     $variant->attribute2 = trim($variant->attribute2);
@@ -281,7 +262,7 @@ class ProductlistController extends Controller
             }
             if (empty($productvariant))
             {
-                foreach ($productvariants as $variant)
+                foreach ($product->variants as $variant)
                 {
                     $variant->attribute1 = trim($variant->attribute1);
                     $variant->attribute2 = trim($variant->attribute2);
@@ -304,56 +285,37 @@ class ProductlistController extends Controller
 
             if (empty($productvariant))
             {
-                $productvariant = $productvariants[0];
+                $productvariant = $product->variants->first();
             }
-            $Productvariant = $productvariant->toArray();
+            $productvariant = $productvariant->toArray();
 
-            if (empty($Productvariant['variantmedia']))
-            {
-         
-                if(!empty($productimage)){
-                    $Productvariant['variantmedia'] = $productimage;
-                }
-                else{
+
+            if(empty($productvariant['variantmedia'])) {
+
+                if(empty($product->productmediaget)) {
+
                     $image = 'image/defult-image.png';
-                    $Productvariant['variantmedia'][] = $image;
+                    $productvariant['variantmedia'][] = $image;
+                } else {
+                    $productvariant['variantmedia'] = $product->productmediaget;
                 }
-             
             }
 
-            $price = number_format($Productvariant['price'], 2, '.', ',');
 
         } 
-
-
         
-        return response()
-            ->json(array(
-            'variant' => $Productvariant,
-            'price' => $price,
-            'image_path' => $image_path
-        ));
+       return response(['success' => true, 'variant' => $productvariant, 'image_path' => $image_path, 'message' => 'Variant Fetched!']);
     }
 	
-	public function Custome_Modual_InProduct($id)
+	public function getCustomVariant($id)
     { 
-		if (Product::where('id', $id)->exists())
-        {
-			$product = Product::where('id', $id)->get(); 
-			 $data = array();
-			foreach ($product as $val)
-			{
-				$data['id'] = $val->id;
-				$data['custom_variant'] = $val->custom_variant;
-				$data['cv_option_price'] = json_decode($val->cv_option_price);
-				$data['cv_width_height_price'] = $val->cv_width_height_price;
-			}
-			return response($data, 200);    
-		}
-		else
-        {
-            return response()->json(["message" => "Product not found"], 404);
+        $product = Product::select('id','custom_variant', 'cv_option_price', 'cv_width_height_price')->find($id);
+        if(empty($product)) {
+            return response()->json(['success' => false, "message" => "Product not found"]);
         }
+        $product->cv_option_price = json_decode($product->cv_option_price);
+		return response(['success' => true, 'product' => $product, 'message' => 'Custom Varinat In Product!']);
+	 
 	}
 }
 
