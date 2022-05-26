@@ -61,7 +61,10 @@ class PaymentController extends Controller
 
     public function payment(Request $request)
     {
-      
+        $paymentSettings = DB::table('payment_setting')->first();
+        if(empty($paymentSettings)) {
+            return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
+        }
         $validator = Validator::make($request->all() , ['user_id' => 'required']);
 
         if ($validator->fails())
@@ -162,7 +165,7 @@ class PaymentController extends Controller
 
             $Order_insert = orders::insert($order_arr = [
 
-                'user_id' => $request->user_id,
+                'user_id' =>  $request->user_id,
 
                 'transactionid' => '',
 
