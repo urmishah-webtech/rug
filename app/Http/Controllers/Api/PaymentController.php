@@ -115,7 +115,7 @@ class PaymentController extends Controller
         }
 
         $includeshipping = $netamount + $shipping_cost_data['cost'] + $shipping_cost_data['taxes'];
-        $netamount = number_format($includeshipping, 2, '.', '' );
+        $netamounttotal = number_format($includeshipping, 2, '.', '' );
 
         if($shipping_cost_data['taxes']){
             $tax = $shipping_cost_data['taxes'];
@@ -133,7 +133,7 @@ class PaymentController extends Controller
 
                 'email' => $user_detail['email'],
 
-                'netamout' => $netamount,
+                'netamout' => $netamounttotal,
 
                 'shipping_cost' => $shipping_cost_data['cost'],
                
@@ -171,7 +171,7 @@ class PaymentController extends Controller
 
                 'email' => $user_detail['email'],
 
-                'netamout' => $netamount,
+                'netamout' => $netamounttotal,
 
                 'shipping_cost' => $shipping_cost_data['cost'],
 
@@ -251,13 +251,13 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamounttotal], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
                 ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $netamount;
+            $pay->amount = $netamounttotal;
             $pay->payment_type = $payment_type;
             $pay->payment_link = $payment->_links->checkout->href;
             $pay->status = $payment->status;
@@ -294,7 +294,7 @@ class PaymentController extends Controller
                 $pay->user_id = $request['user_id'];
             }
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $netamount;
+            $pay->amount = $netamounttotal;
             $pay->payment_type = $payment_type;
             $pay->status = 'successed';
             $pay->payment_link = '';
