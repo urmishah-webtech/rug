@@ -78,14 +78,21 @@
                             <td>
                               {{ $row->updated_at->format('d-m-Y h:m:s'); }}
                             </td>
+                            @if(!empty($this->order['user'][0])){
                             <td>
-                               
                                <a class="tc-black fw-6" href="{{ route('customers') }}"> 
                                     <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif 
                                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
                                     </button>
                                 </a>
                             </td>
+                            @else
+                            <td>
+                               <a class="tc-black fw-6" href="{{ route('customers') }}"> 
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
+                                </a>
+                            </td>
+                            @endif
                             <td>
                                 <p>{{$symbol['currency']}}{{$row->netamout}}</p>
                             </td>
@@ -107,7 +114,8 @@
                             <td>
                                 Standard
                             </td> 
-                            <td><a href="{{ route('generate-pdf-billing', $row->id) }}">Billing Print</a>  <a href="{{ route('product-invoice', $row->id) }}">Product Print</a></td>
+                            <td><a target="_blank" href="{{ route('generate-pdf-billing', $row->id) }}">Billing Print</a>  
+                                <a target="_blank" href="{{ route('product-invoice', $row->id) }}">Product Print</a></td>
                         </tr></a>
                         @php $i++; @endphp
                         @endforeach
