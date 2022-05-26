@@ -136,6 +136,8 @@ class PaymentController extends Controller
                 'netamout' => $netamount,
 
                 'shipping_cost' => $shipping_cost_data['cost'],
+               
+                'tax' => $tax,
 
                 'paymentstatus' => 'pending',
 
@@ -173,6 +175,8 @@ class PaymentController extends Controller
 
                 'shipping_cost' => $shipping_cost_data['cost'],
 
+                'tax' => $tax,
+                
                 'paymentstatus' => 'pending',
 
                 'first_name' => $shipping['first_name'],
