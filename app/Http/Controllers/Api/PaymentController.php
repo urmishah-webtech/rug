@@ -61,11 +61,8 @@ class PaymentController extends Controller
 
     public function payment(Request $request)
     {
-        $paymentSettings = DB::table('payment_setting')->first();
-        if(empty($paymentSettings)) {
-            return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
-        }
-        $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
+      
+        $validator = Validator::make($request->all() , ['user_id' => 'required']);
 
         if ($validator->fails())
         {
@@ -115,7 +112,7 @@ class PaymentController extends Controller
         }
 
         $includeshipping = $netamount + $shipping_cost_data['cost'] + $shipping_cost_data['taxes'];
-        $netamount = number_format($netamount, 2, '.', '' );
+        $netamount = number_format($includeshipping, 2, '.', '' );
 
         if($shipping_cost_data['taxes']){
             $tax = $shipping_cost_data['taxes'];
@@ -165,7 +162,7 @@ class PaymentController extends Controller
 
             $Order_insert = orders::insert($order_arr = [
 
-                'user_id' => $user_detail['id'],
+                'user_id' => $request->user_id,
 
                 'transactionid' => '',
 
@@ -257,7 +254,7 @@ class PaymentController extends Controller
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $includeshipping;
+            $pay->amount = $netamount;
             $pay->payment_type = $payment_type;
             $pay->payment_link = $payment->_links->checkout->href;
             $pay->status = $payment->status;
@@ -294,7 +291,7 @@ class PaymentController extends Controller
                 $pay->user_id = $request['user_id'];
             }
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $request->amount;
+            $pay->amount = $netamount;
             $pay->payment_type = $payment_type;
             $pay->status = 'successed';
             $pay->payment_link = '';
