@@ -47,7 +47,7 @@ class CheckoutController extends Controller
     public function SaveShipping(Request $request)
     {
 
-    	$data = [ 
+    	$data = [  
     		'first_name'=> $request->first_name,
 			'last_name' => $request->last_name,
 			'address' => $request->address,
