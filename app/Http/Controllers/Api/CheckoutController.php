@@ -47,13 +47,17 @@ class CheckoutController extends Controller
     public function SaveShipping(Request $request)
     {
 
-    	$data = [  
+        $country = Country::where("id",$request->country)->first();
+        $state = State::where("id",$request->state)->first();
+        $city = City::where("id",$request->city)->first();
+
+    	$data = [
     		'first_name'=> $request->first_name,
 			'last_name' => $request->last_name,
 			'address' => $request->address,
-			'city' => $request->city,
-			'country' => $request->country,
-			'state' => $request->state,
+			'city' => $city->name,
+			'country' => $country->name,
+			'state' => $state->name,
 			'postal_code' => $request->postal_code,
 			'email' => $request->email,
 			'mobile_no' => $request->mobile_no,
