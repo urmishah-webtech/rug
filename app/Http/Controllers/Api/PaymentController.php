@@ -119,6 +119,12 @@ class PaymentController extends Controller
         $includeshipping = $netamount + $shipping_cost_data['cost'];
         $netamount = number_format($netamount, 2, '.', '' );
 
+        if($request->tax){
+            $tax = $request->tax;
+        }else{
+            $tax = 0;
+        }
+
         if(!empty($request->account_type) && $request->account_type == '1'){
 
             $Order_insert = orders::insert($order_arr = [

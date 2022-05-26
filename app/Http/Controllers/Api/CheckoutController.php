@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerAddress;
 use App\Models\tax;
+use App\Models\ShippingZoneCountry;
+use App\Models\ShippingZone;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{Country, State, City};
 
@@ -15,6 +17,7 @@ class CheckoutController extends Controller
     {
     	if(!empty($id)){
     	   $getshipping = CustomerAddress::where('user_id',$id)->first();
+
     	}else
     	{
     		$getshipping = '';
@@ -103,9 +106,33 @@ class CheckoutController extends Controller
             ]);
     }
 
+    public function getshippingCountry(Request $request) 
+    {
+        $country = Country::where('id',$request->country_id)->first(["name", "id"]);
+        $taxes = tax::where('country_name',$country->name)->first();
+        $code = (!empty($country)) ? $country->code : 'all';
+        $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
+        $rate = !empty($taxes) ? $taxes->rate : 0;
+
+        if (empty($get_zone_ids)) {
+            return ['shippingcost' => 0, 'taxes' => $rate, 'success' => true];
+        }
+
+        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$request->amount)->where('end','>=',$request->amount)->orderBy('price', 'DESC')->get()->first();
+
+        if (!empty($get_zone)) {
+            return ['shippingcost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
+        }else{
+            return ['shippingcost' => 0, 'taxes' => $rate, 'success' => true];
+        }
+    }
+
     public function getTax(Request $request)
     {
-       $get_tax = tax::where('country_name',$request->country)->first();
+
+        $country= Country::where("id",$request->country_id)->first(["name", "id"]);
+
+        $get_tax = tax::where('country_name',$country->name)->first();
         return response()->json([
             'success' => true,
             'data'    => $get_tax,
