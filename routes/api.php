@@ -25,7 +25,6 @@ Route::get('products', 'App\Http\Controllers\Api\ProductlistController@getAllPro
 Route::get('products/{slug}', 'App\Http\Controllers\Api\ProductlistController@getProductBySlug');
 Route::get('product-variant/{slug}', 'App\Http\Controllers\Api\ProductlistController@getVariantsBySlug');
 Route::get('related-product/{id}', 'App\Http\Controllers\Api\ProductlistController@get_related_Products');
-
 Route::post('varientData', 'App\Http\Controllers\Api\ProductlistController@fetchPrice');
 // Route::get('featureproduct', 'App\Http\Controllers\Api\SliderController@FeatureProduct');
 Route::get('custom-products/{id}', 'App\Http\Controllers\Api\ProductlistController@getCustomVariant');
@@ -73,6 +72,7 @@ Route::get('custom-products/{id}', 'App\Http\Controllers\Api\ProductlistControll
 // Route::get('pages', 'App\Http\Controllers\Api\PagesController@getAllPages');
 // Route::get('pages/{slug}', 'App\Http\Controllers\Api\PagesController@getPages');
 
+/* CART */
 Route::post('cart', 'App\Http\Controllers\Api\CartController@CartSave');
 Route::post('customecart', 'App\Http\Controllers\Api\CartController@CustomeCartSave');
 Route::get('getcart/{id}', 'App\Http\Controllers\Api\CartController@getCart');

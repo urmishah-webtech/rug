@@ -21,6 +21,16 @@ class Cart extends Model
 
     protected $guarded =[];
 
+    public function variantmediafirst()
+    {
+        return $this->hasOne(VariantMedia::class, 'variant_id', 'varientid');
+    }
+
+    public function productmediafirst()
+    {
+        return $this->hasOne(ProductMedia::class, 'product_id', 'product_id');
+    }
+
     public function product_detail()
     {
         return $this->hasOne(Product::class, 'id', 'product_id');

@@ -237,28 +237,10 @@ class CartController extends Controller
     }
     public function DeleteCartProduct($id)
     {
-        if (!empty($id))
-        {
-            Cart::find($id)->delete();
-            return response()
-                ->json(['message' => 'Deleted Record', 'success' => true, ]);
-        }
-        else
-        {
-            return response()
-                ->json(['message' => 'Not Deleted Record', 'success' => false, ]);
-            /*  $cart = session()->get('cart');
-            if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
-                unset($cart[$variantid]);
-            }
-            if(isset($cart[$id]) && $cart[$id]['type'] == 'product') {
-                unset($cart[$id]);
-            }
-             session()->put('cart', $cart);*/
-        }
-        //$this->getCart();
-        //$this->emit('getCart');
+        Cart::find($id)->delete();
+        return response()->json(['success' => true, 'message' => 'Item removed from Cart']);
     }
+
     public function UpdateCartProduct(Request $request)
     {
         if (!empty($request->cartid))
@@ -273,55 +255,56 @@ class CartController extends Controller
                 ->json(['message' => 'Not Updated Record', 'success' => false, ]);
         }
     }
+
     public function getCart($id)
     {
 
+        $CartItem = Cart::with(['variantmediafirst','productmediafirst','media_product', 'product_detail', 'product_variant']);
+
         if (preg_match("/^\d+$/", $id)) {
-          $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('user_id', $id)->get();
+          $CartItem->where('user_id', $id);
           
         } else {
-           $CartItem = Cart::with(['media_product', 'product_detail', 'product_variant'])->where('session_id', $id)->get();
+           $CartItem->where('session_id', $id);
+        }
+
+        $CartItem = $CartItem->get();
+
+
+        if($CartItem->isEmpty()) {
+            return response()->json(['success' => false, "message" => "Cart Is Empty!"]);
         }
 
         $image_path= env('IMAGE_PATH');
+
         if ($CartItem)
         {
             $finalamount = 0;
-            $i=0;
             foreach ($CartItem as $key => $result)
             { 
 
-                        $productimage = VariantMedia::Where('product_id',$result->product_id)->Where('variant_id',$result->varientid)->first();
-                        
-                        if(empty($productimage)) {
-                            $productimage = ProductMedia::where('product_id', $result->product_id)->first();
-                        }
+                $CartItem[$key]['image'] = $image_path.'/image/defult-image.png';
 
-                        $CartItem[$key]['image']= $image_path.$productimage->image;
-                   
-                    $Totalamount = ($result->stock * $result->price);
-                    $finalamount += $Totalamount;
+                if(!empty($result->variantmediafirst)) {
+
+                    $CartItem[$key]['image'] = $image_path.$result->variantmediafirst->image;
+
+                } else if(!empty($result->productmediafirst)) {
+
+                    $CartItem[$key]['image'] = $image_path.$result->productmediafirst->image;
+                }
+
+                $Totalamount = ($result->stock * $result->price);
+                $finalamount += $Totalamount;
+                unset($CartItem[$key]->productmediafirst);
+                unset($CartItem[$key]->variantmediafirst);
                 
             }
             $cartStock = $CartItem->sum('stock');
-            $cartCount = count($CartItem);
             return response()
-                ->json(['message' => 'success','cartcount' => $cartCount, 'cartitem' => $CartItem, 'Totalstock' => $cartStock, 'Totalamount' => $finalamount, 'success' => true, ]);
+                ->json(['success' => true, 'message' => 'Cart', 'cartcount' => count($CartItem), 'cartitem' => $CartItem, 'Totalstock' => $cartStock, 'Totalamount' => $finalamount ]);
         }
-        /*if (count($CartsessionItem) != 0)
-        {
-            $stock = 0;
-            $finalamount = 0;
-            foreach ($CartsessionItem as $item)
-            {
-                $stock += $item['stock'];
-                $Totalamount = ($result->stock * $result->price);
-                $finalamount += $Totalamount;
-            }
-            $cartCount = $stock;
-            return response()->json(['message' => 'success', 'cartitem' => $CartsessionItem, 'Totalstock' => $cartCount, 'Totalamount' => $finalamount, 'success' => true, ]);
-        }*/
-        // $this->dispatchBrowserEvent('onCartChanged');
+        
     }
 
 
