@@ -95,13 +95,6 @@ class PaymentController extends Controller
         if($Cart->isEmpty()) {
            return $this->sendJson(['status' => 0, 'message' => 'Cart is Empty!']);
         }
-     
-
-
-        $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
-        if(!$shipping_cost_data['success']) {
-            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
-        }
 
 
         $netamount = 0;
@@ -112,15 +105,20 @@ class PaymentController extends Controller
             }               
         }
 
+         $shipping_cost_data = $this->getshipping($netamount, $shipping['country']);
+        if(!$shipping_cost_data['success']) {
+            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
+        }
+
         if($netamount <= 0) {
             return $this->sendJson(['status' => 0, 'message' => 'Amount is 0']);
         }
 
-        $includeshipping = $netamount + $shipping_cost_data['cost'];
+        $includeshipping = $netamount + $shipping_cost_data['cost'] + $shipping_cost_data['taxes'];
         $netamount = number_format($netamount, 2, '.', '' );
 
-        if($request->tax){
-            $tax = $request->tax;
+        if($shipping_cost_data['taxes']){
+            $tax = $shipping_cost_data['taxes'];
         }else{
             $tax = 0;
         }
