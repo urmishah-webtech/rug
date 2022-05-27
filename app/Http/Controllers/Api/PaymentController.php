@@ -79,7 +79,7 @@ class PaymentController extends Controller
 
             $Cart = Cart::where('session_id',$user_detail['session_id'])->get();
       
-            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->first();
+            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->orderBy('id', 'DESC')->first();
     
         }
         else{
@@ -88,7 +88,7 @@ class PaymentController extends Controller
 
             $Cart = Cart::where('user_id',$user_detail['id'])->get();
       
-            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->orderBy('id', 'DESC')->first();
 
         }
 
