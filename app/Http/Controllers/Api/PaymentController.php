@@ -41,7 +41,7 @@ class PaymentController extends Controller
     public function getshipping($amount, $country_name){
         $country = Country::where('name',$country_name)->get()->first();
         $taxes = tax::where('country_name',$country_name)->first();
-        $code = (!empty($country)) ? $country->code : 'all';
+        $code = (!empty($country)) ? $country->phonecode : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
         $rate = !empty($taxes) ? $taxes->rate : 0;
 
@@ -65,7 +65,7 @@ class PaymentController extends Controller
         if(empty($paymentSettings)) {
             return $this->sendJson(['status' => 0, 'message' => 'Please contact site Admin. Payment setting is not filled yet']);
         }
-        $validator = Validator::make($request->all() , ['user_id' => 'required', 'amount' => 'required']);
+        $validator = Validator::make($request->all() , ['user_id' => 'required']);
 
         if ($validator->fails())
         {
@@ -79,7 +79,7 @@ class PaymentController extends Controller
 
             $Cart = Cart::where('session_id',$user_detail['session_id'])->get();
       
-            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->first();
+            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->orderBy('id', 'DESC')->first();
     
         }
         else{
@@ -88,19 +88,12 @@ class PaymentController extends Controller
 
             $Cart = Cart::where('user_id',$user_detail['id'])->get();
       
-            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->orderBy('id', 'DESC')->first();
 
         }
 
         if($Cart->isEmpty()) {
            return $this->sendJson(['status' => 0, 'message' => 'Cart is Empty!']);
-        }
-     
-
-
-        $shipping_cost_data = $this->getshipping($request->amount, $shipping['country']);
-        if(!$shipping_cost_data['success']) {
-            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
         }
 
 
@@ -112,15 +105,20 @@ class PaymentController extends Controller
             }               
         }
 
+         $shipping_cost_data = $this->getshipping($netamount, $shipping['country']);
+        if(!$shipping_cost_data['success']) {
+            return $this->sendJson(['status' => 0, 'message' => $shipping_cost_data['message']]);
+        }
+
         if($netamount <= 0) {
             return $this->sendJson(['status' => 0, 'message' => 'Amount is 0']);
         }
 
-        $includeshipping = $netamount + $shipping_cost_data['cost'];
-        $netamount = number_format($netamount, 2, '.', '' );
+        $includeshipping = $netamount + $shipping_cost_data['cost'] + $shipping_cost_data['taxes'];
+        $netamounttotal = number_format($includeshipping, 2, '.', '' );
 
-        if($request->tax){
-            $tax = $request->tax;
+        if($shipping_cost_data['taxes']){
+            $tax = $shipping_cost_data['taxes'];
         }else{
             $tax = 0;
         }
@@ -135,9 +133,11 @@ class PaymentController extends Controller
 
                 'email' => $user_detail['email'],
 
-                'netamout' => $netamount,
+                'netamout' => $netamounttotal,
 
                 'shipping_cost' => $shipping_cost_data['cost'],
+               
+                'tax' => $tax,
 
                 'paymentstatus' => 'pending',
 
@@ -165,16 +165,18 @@ class PaymentController extends Controller
 
             $Order_insert = orders::insert($order_arr = [
 
-                'user_id' => $user_detail['id'],
+                'user_id' =>  $request->user_id,
 
                 'transactionid' => '',
 
                 'email' => $user_detail['email'],
 
-                'netamout' => $netamount,
+                'netamout' => $netamounttotal,
 
                 'shipping_cost' => $shipping_cost_data['cost'],
 
+                'tax' => $tax,
+                
                 'paymentstatus' => 'pending',
 
                 'first_name' => $shipping['first_name'],
@@ -249,13 +251,13 @@ class PaymentController extends Controller
             $payment = $mollie
                 ->payments
 
-                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamount], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
+                ->create(["amount" => ["currency" => $paymentSettings->currency, "value" => $netamounttotal], "method" => "creditcard", "description" => "payment", "redirectUrl" => $paymentSettings->redirectUrl, "webhookUrl"  => $paymentSettings->webhookUrl,
                 ]);
             $pay = new Payment();
             $pay->payment_id = $payment->id;
             $pay->user_id = $request['user_id'];
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $includeshipping;
+            $pay->amount = $netamounttotal;
             $pay->payment_type = $payment_type;
             $pay->payment_link = $payment->_links->checkout->href;
             $pay->status = $payment->status;
@@ -292,7 +294,7 @@ class PaymentController extends Controller
                 $pay->user_id = $request['user_id'];
             }
             $pay->order_id = $lastorderid['id'];
-            $pay->amount = $request->amount;
+            $pay->amount = $netamounttotal;
             $pay->payment_type = $payment_type;
             $pay->status = 'successed';
             $pay->payment_link = '';
@@ -378,6 +380,7 @@ class PaymentController extends Controller
                 
             }
 
+           //  $netamount = $finalamount + $order['cost'] + $order['taxes'];
 
 
             //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
@@ -392,7 +395,7 @@ class PaymentController extends Controller
             {
 
             }
-            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
+            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=> $finalamount ]);
 
         }else
         {

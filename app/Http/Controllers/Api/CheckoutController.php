@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerAddress;
 use App\Models\tax;
+use App\Models\Cart;
+use App\Models\User;
 use App\Models\ShippingZoneCountry;
 use App\Models\ShippingZone;
 use Illuminate\Support\Facades\Auth;
@@ -45,13 +47,17 @@ class CheckoutController extends Controller
     public function SaveShipping(Request $request)
     {
 
+        $country = Country::where("id",$request->country)->first();
+        $state = State::where("id",$request->state)->first();
+        $city = City::where("id",$request->city)->first();
+
     	$data = [
     		'first_name'=> $request->first_name,
 			'last_name' => $request->last_name,
 			'address' => $request->address,
-			'city' => $request->city,
-			'country' => $request->country,
-			'state' => $request->state,
+			'city' => $city->name,
+			'country' => $country->name,
+			'state' => $state->name,
 			'postal_code' => $request->postal_code,
 			'email' => $request->email,
 			'mobile_no' => $request->mobile_no,
@@ -76,13 +82,18 @@ class CheckoutController extends Controller
     }
     public function updateAddress(Request $request, $id)
     {
+
+        $country = Country::where("id",$request->country)->first();
+        $state = State::where("id",$request->state)->first();
+        $city = City::where("id",$request->city)->first();
+
     	$addshipping = CustomerAddress::where('id',$id)->update([	
 				'first_name'=> $request->first_name,
 				'last_name' => $request->last_name,
 				'address' => $request->address,
-				'city' => $request->city,
-				'country' => $request->country,
-				'state' => $request->state,
+				'city' => $city->name,
+				'country' => $country->name,
+				'state' => $state->name,
 				'postal_code' => $request->postal_code,
 				'email' => $request->email,
 				'mobile_no' => $request->mobile_no,
@@ -108,9 +119,11 @@ class CheckoutController extends Controller
 
     public function getshippingCountry(Request $request) 
     {
-        $country = Country::where('id',$request->country_id)->first(["name", "id"]);
+        $country = Country::where('id',$request->country_id)->first(["name", "id", "phonecode"]);
         $taxes = tax::where('country_name',$country->name)->first();
-        $code = (!empty($country)) ? $country->code : 'all';
+       
+        $code = (!empty($country)) ? $country->phonecode : 'all';
+
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
         $rate = !empty($taxes) ? $taxes->rate : 0;
 
@@ -118,8 +131,37 @@ class CheckoutController extends Controller
             return ['shippingcost' => 0, 'taxes' => $rate, 'success' => true];
         }
 
-        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$request->amount)->where('end','>=',$request->amount)->orderBy('price', 'DESC')->get()->first();
+        if($request->account_type==1){
+            $user_detail = User::where('session_id', $request['session_id'])->first();
 
+            $Cart = Cart::where('session_id',$request['session_id'])->get();
+      
+            $shipping = CustomerAddress::where('session_id', $user_detail['session_id'])->first();
+    
+        }
+        else{
+
+            $user_detail = User::where('id', $request['user_id'])->first();
+
+            $Cart = Cart::where('user_id',$user_detail['id'])->get();
+      
+            $shipping = CustomerAddress::where('user_id', $user_detail['id'])->first();
+
+        }
+
+        if($Cart->isEmpty()) {
+           return $this->sendJson(['status' => 0, 'message' => 'Cart is Empty!']);
+        }
+
+        $netamount = 0;
+        foreach($Cart as $res) {         
+            if($res) {
+                $totalamout = ($res->price * $res->stock);
+                $netamount += $totalamout;
+            }               
+        }
+
+        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$netamount)->where('end','>=',$netamount)->orderBy('price', 'DESC')->get()->first();
         if (!empty($get_zone)) {
             return ['shippingcost' => $get_zone->price, 'taxes' => $rate, 'success' => true];
         }else{
