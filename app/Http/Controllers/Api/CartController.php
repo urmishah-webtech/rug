@@ -13,227 +13,88 @@ use App\Models\ShippingZoneCountry;
 
 class CartController extends Controller
 {
+
     public function CartSave(Request $request)
     {
-        $variantID = $request->variation;
-       
-        $variant = ProductVariant::select(['product_id', 'price'])->find($variantID);
-        if (!empty($variant))
-        {
-            if (isset($variant->selling_price))
-            {
+
+        $cartData = ['stock' => $request->stock];
+        $cartcount = 0;
+        $product = Product::where('seo_utl', $request->product_id)->first(['id','compare_selling_price', 'price']);
+
+        $exist = Cart::where('product_id', $product->id);
+
+        if(isset($request->user_id)) {
+            $cartData['user_id'] = $request->user_id;
+
+            $cartcount = Cart::where('user_id', $request->user_id)->count();
+
+            $exist->where('user_id', $request->user_id);
+
+        } else if(isset($request->session_id)) {
+            $cartData['session_id'] = $request->session_id;
+
+            $cartcount = Cart::where('session_id', $request->session_id)->count();
+
+            $exist->where('session_id', $request->session_id);
+        }
+
+        $product_exist = clone $exist;
+
+        $exist = $exist->where('varientid', $request->variation)->first(['stock', 'id']);
+
+        $variant = ProductVariant::select(['product_id', 'selling_price','price'])->find($request->variation);
+
+        // update quantity if exist already
+
+        if(!empty($exist) && !empty($variant)) {
+            $exist->stock = $request->stock;
+            $exist->save();
+            
+            return response()->json([ 'success' => true, 'message' => 'Record Updated' ]);
+        }
+
+        if(!empty($variant)) {
+            $cartData['varientid'] = $request->variation;
+
+            if (isset($variant->selling_price)) {
                 $price = $variant->selling_price;
-            }
-            else
-            {
+            } else {
                 $price = $variant->price;
             }
-            if (!empty($request->user_id))
-            {
-              
-                $user_id = $request->user_id;
-                $exist = Cart::where('product_id', $variant->product_id)
-                    ->where('varientid', $variantID)->where('user_id', $user_id)->first(['stock', 'id']);
-                if (empty($exist))
-                {
-                    $cart = Cart::create([
-                    'product_id' => $variant->product_id,
-                    'user_id' => $user_id,
-                    'varientid' => $variantID,
-                    'price' => $price,
-                    'stock' => $request->stock,
-                    'locationid' => '1'
-                    ]);
-                    $cartcount = Cart::where('user_id', $user_id)->count();
-                    return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount ,'cart' => $cart,
-                    ]);
-                }
-                else
-                {
-                    $cart = Cart::where('id', $exist->id)
-                        ->update(['stock' => $request->stock]);
-                    return response()
-                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $exist,
-                    ]);
-                    //  $this->emitTo('header','getCart');
-                }
+        } else {
+
+            if(empty($exist)) {
+
+                $product_exist = $product_exist->whereNull('varientid')->first(['stock', 'id']);
             }
-            else
-            {
-                $product = Product::where('seo_utl', $request->product_id)->first();
 
-                if(empty($product)) {
-                    return response()->json(["message" => "Product not found"], 404);
-                }
+            if(isset($product_exist) && !empty($product_exist)) {
+                $product_exist->stock = $request->stock;
+                $product_exist->save();
+                
+                return response()->json([ 'success' => true, 'message' => 'Record Updated' ]);
+            }
 
-                $cart = Cart::where('product_id', $variant->product_id)->where('session_id',$request->session_id)
-                    ->where('varientid', $variantID)->where('session_id', '!=', null)
-                    ->first(['stock', 'id', 'varientid']);
-                $product_detail = $product->toArray();
-                $media_product = ProductMedia::where('product_id', $product->id)
-                    ->get()
-                    ->toArray();
-                // if cart is empty then this the first product
-                if (empty($cart))
-                {
-                    $cart = Cart::create([
-                    // 'type' => 'variant',
-                    'product_id' => $product->id,
-                    'varientid' => $variantID,
-                    'price' => $price,
-                    'stock' => $request->stock,
-                    'session_id' => $request->session_id,
-                    'locationid' => '1',
-                    // 'product_detail' => $product_detail,
-                    //'media_product' => $media_product
-                    ]);
-                    $cartcount = Cart::where('session_id', $request->session_id)->count();
-                    return response()
-                        ->json(['message' => 'Added Record', 'success' => true , 'cartcount' => $cartcount, 'cart' => $cart,
-                    ]);
-                    // session()->put('cart', $cart);
-                }
-                else if (isset($cart['varientid']))
-                {
-                    //  $cart[$variantID] = ['stock']++;
-                    $cart['varientid'] = Cart::where('id', $cart->id)
-                        ->update(['stock' => $request->stock]);
-                    return response()
-                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
-                    ]);
-                    //  session()->put('cart', $cart);
-                }
-                else
-                {
-                    $cart['varientid'] = Cart::create([
-                    'type' => 'variant',
-                    'product_id' => $product->id,
-                    'varientid' => $variantID,
-                    'price' => $price,
-                    'stock' => $request->stock,
-                    'session_id' => $request->session_id,
-                    'product_detail' => $product_detail,
-                    'media_product' => $media_product]);
-                     $cartcount = Cart::where('session_id', $request->session_id)->count();
-                    return response()->json(['message' => 'insert Record','success' => true,'cartcount' => $cartcount, 'cart' => $cart,
-                    ]);
-                    // session()->put('cart', $cart);
-                    //  $this->emitTo('header','getCart');
-                }
+
+
+            if (isset($product->compare_selling_price)) {
+
+                $price = $product->compare_selling_price;
+            } else {
+
+                $price = $product->price;
             }
         }
-        else
-        {
-            $product = Product::with('variants')->where('seo_utl', $request->product_id)->first();
 
-            if(empty($product)) {
-                return response()->json(["message" => "Product not found"], 404);
-            }
+        $cartData['price'] = $price;
+        $cartData['product_id'] = $product->id;
 
-            if ($product->compare_selling_price)
-            {
-                $price = $product['compare_selling_price'];
-            }
-            else
-            {
-                $price = $product['price'];
-            }
 
-            if (!empty($request->user_id))
-            {
-                $exist = Cart::where('product_id', $product->id)
-                    ->where('user_id', $request->user_id)
-                    ->where('varientid', '=', null)
-                    ->first(['id', 'stock']);
-                if (empty($exist))
-                {
-                    $cart = Cart::create([
-                        'product_id' => $product->id,
-                        'user_id' => $request->user_id,
-                        'price' => $price,
-                        'stock' => $request->stock,
-                        'locationid' => '1'
-                    ]);
-                    $cartcount = Cart::where('user_id', $request->user_id)->count();
-                    return response()
-                        ->json(['message' => 'insert Record', 'success' => true, 'cartcount' => $cartcount, 'cart' => $cart,
-                    ]);
-                    // $this->emitTo('header','getCart');
-                }
-                else
-                {
-                    $cart = Cart::where('id', $exist->id)
-                        ->update(['stock' => $request->stock]);
-                    /*$exist->stock++;
-                     $exist->save();*/
-                    return response()
-                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
-                    ]);
-                    //$this->emitTo('header','getCart');
-                }
-            }
-            else
-            {
-                $cart = Cart::where('product_id', $product->id)
-                    ->where('session_id', $request->session_id)
-                    ->where('varientid', '=', null)
-                    ->first(['id', 'stock', 'product_id']);
-                //  $cart = session()->get('cart');
-                $product_detail = Product::find($product->id)
-                    ->toArray();
-                $media_product = ProductMedia::where('product_id', $product->id)
-                    ->get()
-                    ->toArray();
-                if (!$cart)
-                {
-                    $cart = Cart::create([
-                        //   'type' => 'product',
-                        'product_id' => $product->id,
-                        'price' => $price,
-                        'stock' => $request->stock,
-                        'session_id' => $request->session_id,
-                        'locationid' => '1',
-                        //    'product_detail' => $product_detail,
-                        //   'media_product' => $media_product
-                    ]);
-                    $cartcount = Cart::where('session_id', $request->session_id)->count();
-                    return response()
-                        ->json(['message' => 'Added Record', 'success' => true, 'cartcount' => $cartcount,'cart' => $cart,
-                    ]);
-                }
-                else if (isset($cart['product_id']))
-                {
-                    $cart['product_id'] = Cart::where('id', $cart->id)
-                        ->update(['stock' => $request->stock]);
-                    return response()
-                        ->json(['message' => 'Updated Record', 'success' => true, 'cart' => $cart,
-                    ]);
-                    // $cart[$product->id]['stock']++;
-                    //  session()->put('cart', $cart);
-                    //  $this->emitTo('header','getCart');
-                }
-                else
-                {
-                    // if item not exist in cart then add to cart with quantity = 1
-                    $cart['product_id'] = Cart::create([
-                        'type' => 'product',
-                        'product_id' => $product->id,
-                        'price' => $price,
-                        'stock' => $request->stock,
-                        'session_id' => $request->session_id,
-                        'locationid' => '1',
-                        'product_detail' => $product_detail,
-                        'media_product' => $media_product
-                    ]);
-                    $cartcount = Cart::where('session_id', $request->session_id)->count();
-                    return response()->json(['message' => 'Updated Record', 'success' => true,'cartcount' => $cartcount ,'cart' => $cart,
-                    ]);
-                    //  session()->put('cart', $cart);
-                    //    $this->emitTo('header','getCart');
-                }
-            }
-        }
+        $cart = Cart::create($cartData);
+
+        return response()->json(['success' => true, 'message' => 'Item added to Cart!', 'cartcount' => $cartcount ,'cart' => $cart,
+        ]);
+
     }
     public function DeleteCartProduct($id)
     {
