@@ -380,6 +380,7 @@ class PaymentController extends Controller
                 
             }
 
+             $netamount = $finalamount + $order['cost'] + $order['taxes'];
 
 
             //$data = ['name'=>'vishal', 'data'=>'hello vishal'];
@@ -394,7 +395,7 @@ class PaymentController extends Controller
             {
 
             }
-            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$finalamount]);
+            return $this->sendJson(['status' => 0, 'orders' => $order,'order_item' => $order_item,'image' => $order_item,'product_amount'=>$netamount,'shipping' => $order->cost, 'taxes' => $order->taxes ]);
 
         }else
         {
