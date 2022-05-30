@@ -35,9 +35,11 @@ class ProductInvoice extends Component
 
         $OrderItem = order_item::with('order_product')->with('media_product')->where('order_id',$id)->get();
 
-	    $pdf = PDF::loadView('livewire.order.product-invoice', compact('order','companydetail','Taxes','OrderItem'));
+        return view('livewire.order.product-invoice', compact('order','companydetail','Taxes','OrderItem'));
 
-	     return $pdf->stream('invoice.pdf');
+	    //$pdf = PDF::loadView('livewire.order.product-invoice', compact('order','companydetail','Taxes','OrderItem'));
+
+	    // return $pdf->stream('invoice.pdf');
     }
 
     public function render()
