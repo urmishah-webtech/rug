@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Setting;
 
-use App\Models\Country;
+use App\Models\{Country, State, City};
 use App\Models\CustomerAddress;
 use App\Models\CustomerDetail;
 use App\Models\Tag;
@@ -20,7 +20,7 @@ class GeneralSetting extends Component
     use WithFileUploads;
     public $General, $store_name, $phonenumber, $sender_email, $admin_logo, $admin_favicon;
 
-    public $getgeneral;
+    public $getgeneral,$country,$state,$cities;
 
     protected $rules = [
 
@@ -33,6 +33,7 @@ class GeneralSetting extends Component
         'getgeneral.apartment' => [],
         'getgeneral.mobile_number' => [],
         'getgeneral.city' => [],
+        'getgeneral.state' => [],
         'getgeneral.country' => [],
         'getgeneral.pincode' => [],
 
@@ -41,6 +42,8 @@ class GeneralSetting extends Component
     public function mount()
     {
         $this->getgeneral = General::where('id',1)->first();
+        $this->country = Country::get();  
+        $this->state = State::get();  
     }
 
     public function render()
@@ -48,6 +51,15 @@ class GeneralSetting extends Component
         $this->General = General::where('id','1')->first();
 
         return view('livewire.setting.general-setting');
+    }
+
+     public function getStates()
+    {
+        $this->state = State::where("country_id",$this->getgeneral['country'])->get(["name", "id"]);
+    }
+    public function getCity()
+    {
+        $this->cities = City::where("state_id",$this->getgeneral['state_id'])->get(["name", "id"]);
     }
 
     public function updatestore()

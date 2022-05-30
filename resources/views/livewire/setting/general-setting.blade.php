@@ -142,20 +142,40 @@
                                 <label>Apartment, suite, etc.</label>
                                 <input type="text" wire:model="getgeneral.apartment">
                             </div>
-                            <div class="row">
+       <!--                      <div class="row">
                                 <label>City</label>
                                 <input type="text" wire:model="getgeneral.city">
-                            </div>
+                            </div> -->
                             <article class="full-width three-col-row">
-                                <div class="columns six row field_style1 mb-2">
+                                <div class="columns three row field_style1 mb-2">
                                     <label>Country/region</label>
-                                    <select wire:model="getgeneral.country">
-                                        <option>india</option>
-                                        <option>usa</option>
-                                        <option>aus</option>
+                                    <select wire:model="getgeneral.country" wire:change="getStates()">
+                                        @foreach($country as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="columns six row field_style1 mb-2">
+                                 <div class="columns three row field_style1 mb-2">
+                                    <label>State</label>
+                                    <select wire:model="getgeneral.state" wire:change="getCity()">
+                                        @if($this->state)
+                                        @foreach($this->state as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="columns three row field_style1 mb-2">
+                                    <label>cities</label>
+                                    <select wire:model="getgeneral.city">
+                                        @if($this->cities)
+                                        @foreach($this->cities as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="columns three row field_style1 mb-2">
                                     <label>PIN code</label>
                                     <input type="text" wire:model="getgeneral.pincode">
                                 </div>
