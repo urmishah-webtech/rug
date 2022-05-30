@@ -17,17 +17,13 @@ class CheckoutController extends Controller
 {
     public function getshipping($id) 
     {
-    	if(!empty($id)){
-    	   $getshipping = CustomerAddress::where('user_id',$id)->first();
-
-    	}else
-    	{
-    		$getshipping = '';
+        $shipping = CustomerAddress::where('user_id',$id)->first();
+    	if(empty($shipping)){
+            return response()->json(["success"=> false, "message" => "Address not found"]);
     	}
-
     	return response()->json([
 		    'success' => true, 
-		    'data' => $getshipping,
+		    'data' => $shipping,
             ]);
     }
      public function getCountry(){

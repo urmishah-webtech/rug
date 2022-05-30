@@ -188,11 +188,9 @@ class CartController extends Controller
     }
 
 
+    public function getshipping(Request $request) {
 
-
-    public function getshipping(Request $request){
-       
-        $country = Country::where('name',$request->country)->get()->first();
+        $country = Country::where('name',$request->country)->first(['code']);
         $code = (!empty($country)) ? $country->code : 'all';
         $get_zone_ids = ShippingZoneCountry::select('zone')->where('country_code', $code)->get();
 
@@ -202,7 +200,7 @@ class CartController extends Controller
             ]);
         }
 
-        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$request->amount)->where('end','>=',$request->amount)->orderBy('price', 'DESC')->get()->first();
+        $get_zone = ShippingZone::whereIn('id', $get_zone_ids)->where('start','<=',$request->amount)->where('end','>=',$request->amount)->orderBy('price', 'DESC')->first();
 
         if (!empty($get_zone)) {
             return response()->json([

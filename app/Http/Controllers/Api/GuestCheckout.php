@@ -93,7 +93,6 @@ class GuestCheckout extends Component
                 'mobile_number' => $request->g_mobile_number,
                 'password' => Hash::make($request->password),
                 'account_type' => '2',
-                // 'session_id' =>
                 
             ]);
         
