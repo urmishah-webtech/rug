@@ -29,7 +29,7 @@
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap admin-body-width setting-general-sec" wire:ignore>
+    <section class="full-width flex-wrap admin-body-width setting-general-sec">
         <article class="full-width">
             <div class="columns ten">
                 <article class="full-width add-customer-part bd_none">
@@ -158,6 +158,7 @@
                                  <div class="columns three row field_style1 mb-2">
                                     <label>State</label>
                                     <select wire:model="getgeneral.state" wire:change="getCity()">
+                                        <option value="">Select State</option>
                                         @if($this->state)
                                         @foreach($this->state as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>
@@ -168,6 +169,7 @@
                                 <div class="columns three row field_style1 mb-2">
                                     <label>cities</label>
                                     <select wire:model="getgeneral.city">
+                                        <option value="">Select City</option>
                                         @if($this->cities)
                                         @foreach($this->cities as $row)
                                         <option value="{{$row->id}}">{{$row->name}}</option>

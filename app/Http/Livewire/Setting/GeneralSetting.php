@@ -42,8 +42,9 @@ class GeneralSetting extends Component
     public function mount()
     {
         $this->getgeneral = General::where('id',1)->first();
-        $this->country = Country::get();  
-        $this->state = State::get();  
+        $this->country = Country::get(); 
+      //  $this->state = State::get();  
+        //$this->cities = City::get();
     }
 
     public function render()
@@ -59,7 +60,7 @@ class GeneralSetting extends Component
     }
     public function getCity()
     {
-        $this->cities = City::where("state_id",$this->getgeneral['state_id'])->get(["name", "id"]);
+        $this->cities = City::where("state_id",$this->getgeneral['state'])->get(["name", "id"]);
     }
 
     public function updatestore()
