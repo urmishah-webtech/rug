@@ -6222,8 +6222,11 @@ label {
      height: 20px;
 }
  .order-listing td a {
-     color: #202223 !important;
+     color: #202223;
 }
+.print-btn {margin: 0 5px !important;padding: 5px 10px !important;border: 1px solid #006e52 !important;
+    color: #006e52 !important;}
+.print-btn:hover {background: #006e52 !important;color: #fff !important;}
 /*Add note modal css*/
  #add-note-modal .modal-footer-link p {
      margin: 16px 0;

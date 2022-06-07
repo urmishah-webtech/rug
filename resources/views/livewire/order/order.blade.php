@@ -114,8 +114,8 @@
                             <td>
                                 Standard
                             </td> 
-                            <td><a target="_blank" href="{{ route('generate-pdf-billing', $row->id) }}">Billing Print</a>  
-                                <a target="_blank" href="{{ route('product-invoice', $row->id) }}">Product Print</a></td>
+                            <td><a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('generate-pdf-billing', $row->id) }}"><i class="fas fa-print"></i> Billing Print</a>  
+                                <a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('product-invoice', $row->id) }}"><i class="fas fa-print"></i> Product Print</a></td>
                         </tr></a>
                         @php $i++; @endphp
                         @endforeach
