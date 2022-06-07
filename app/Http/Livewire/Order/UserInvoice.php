@@ -35,11 +35,11 @@ class UserInvoice extends Component
 
         $OrderItem = order_item::with('order_product')->with('media_product')->where('order_id',$id)->get();
 
-         return view('livewire.order.user-invoice',compact('order','companydetail','Taxes','OrderItem'));
+        //return view('livewire.order.user-invoice',compact('order','companydetail','Taxes','OrderItem'));
 
-	   // $pdf = PDF::loadView('livewire.order.user-invoice', compact('order','companydetail','Taxes','OrderItem'));
+	    $pdf = PDF::loadView('livewire.order.user-invoice', compact('order','companydetail','Taxes','OrderItem'));
 
-	    //return $pdf->stream('invoice.pdf');
+	    return $pdf->stream('invoice.pdf');
     }
 
     public function render()
