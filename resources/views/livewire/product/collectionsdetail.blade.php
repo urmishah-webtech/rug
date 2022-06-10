@@ -106,8 +106,10 @@
                         <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing">
                             <tbody>
                                 @php $i = 1; @endphp
-                                    @if(!empty($selected_product) && $selected_product->count())
-                                    @foreach($selected_product as $row)
+
+                                @if(!empty($selected_product) && $selected_product->count())
+                                @foreach($selected_product as $row)
+                                @if(!empty($row['collection_product']))
                                 <tr>
                                     <td>
                                        {{$i}}.
@@ -123,6 +125,7 @@
                                     </td>
                                     <td><button wire:click="destroy({{$row->id}})" class="btn link cd-pd-delete-btn btn-xs btn-danger"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path></svg></button></td>
                                 </tr>
+                                @endif
                                 @php $i++; @endphp
                                 @endforeach
                                 @else
