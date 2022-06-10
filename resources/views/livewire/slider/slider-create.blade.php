@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="columns one-third right-details">  
+            <div class="columns one-third right-details" wire:ignore>  
                 <div class="card pd-20 tag-card card-grey-bg collection-upload-image">
                     <div class="header-title">
                         <h3 class="fs-16  fw-6 mb-0">Slider image</h3>
@@ -64,6 +64,11 @@
                         </label>
                         <input type="file" wire:model.debounce.lazy="image" id="et_pb_contact_brand_file_request_0" class="file-upload">
                          @error('image') <span class="error">{{ $message }}</span> @enderror
+
+                         <div class="avatar-preview">
+                            <div id="logoPreview" style="background-image: url(); display: block;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
