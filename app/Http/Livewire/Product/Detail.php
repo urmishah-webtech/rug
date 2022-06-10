@@ -586,7 +586,7 @@ class Detail extends Component
 
     public function updateDetail()
     {  
-        $this->validate($this->rules);
+      //  $this->validate($this->rules);
     	date_default_timezone_set('Asia/Kolkata');
 
        if ($this->product['custom_variant'] == 1) {
@@ -739,6 +739,8 @@ class Detail extends Component
             
            
         } 
+
+
 
         if ($this->image) {
             foreach ($this->image as $photo) {
