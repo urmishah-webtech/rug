@@ -770,6 +770,37 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div id="variants-edit-selling-prices-moda" class="customer-modal-main variants-edit-option-modal">
+                                                    <div class="customer-modal-inner">
+                                                        <div class="customer-modal">
+                                                            <div class="modal-header">
+                                                                <h2>Edit Seling Price</h2>
+                                                                <span onclick="document.getElementById('variants-edit-selling-prices-moda').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row side-elements align-item-bt">
+                                                                    <div class="form-field-list">
+                                                                        <label>Apply a Selling Price to all variants</label>
+                                                                        <span class="dollar-input">
+                                                                            <input type="text" id="selling-price" class="selling-price" value="" placeholder="0,00">
+                                                                        </span>
+                                                                    </div>
+                                                                    <a class="button fw-6" id="apply-price-submit" class="apply-price-submit">Apply to all</a>
+                                                                </div>
+                                                                
+                                                                <div class="attribute-prices">
+                                                                    
+                                                                </div>
+                                                     
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a onclick="document.getElementById('variants-edit-selling-prices-moda').style.display='none'" class="button secondary">Cancel</a>
+                                                                <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-selling-prices-moda').style.display='none'"  data-recordid="">Done</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!--Edit SKUs modal-->
                                                 <div id="variants-edit-skus-modal" class="customer-modal-main skus-barcodes-modal">
                                                     <div class="customer-modal-inner">

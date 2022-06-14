@@ -445,7 +445,9 @@ class ProductCreate extends Component
 
             $this->product = Product::orderBy('id', 'DESC')->first();
             if($varition_arrray_crunch){
+
              foreach ($varition_arrray_crunch as  $key => $value) {
+
                 $explode_array = explode("/",$value);
                 $variations = [];
                 $variations['product_id'] = $this->product['id'];

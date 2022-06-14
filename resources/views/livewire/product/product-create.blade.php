@@ -147,7 +147,7 @@
                         <label><input type="checkbox" name="option2a" class="edit-website-Attribute">This product has multiple options, like different sizes or colors</label>
                     </div>
 
-                    <div class="card-middle-arrtibute" style="display: none;" wire:ignore.self>
+                    <div class="card-middle-arrtibute" style="display: none;">
                         <!-- <div class="card-middle pd-add-attri-card"> 
                             <div class="add-attri-list">
                                 <div class="row side-elements mb-0">
@@ -926,7 +926,7 @@
                         </div>
                         <a class="button fw-6" id="apply-price-submit" class="apply-price-submit">Apply to all</a>
                     </div>
-                    <div class="attribute-prices">
+                    <div class="attribute-prices" wire:ignore>
                         
                     </div>
                 </div>
@@ -955,7 +955,7 @@
                         </div>
                         <a class="button fw-6" id="apply-price-selling-submit" class="apply-price-selling-submit">Apply to all</a>
                     </div>
-                    <div class="attribute-selling-prices">
+                    <div class="attribute-selling-prices" wire:ignore>
                         
                     </div>
                 </div>
@@ -985,7 +985,7 @@
                         </div>
                         <a class="button fw-6" id="apply-stock-submit" class="apply-stock-submit">Apply to all</a>
                     </div>
-                    <div class="attribute-selling-prices">
+                    <div class="attribute-selling-prices" wire:ignore>
                         
                     </div>
                 </div>
@@ -1024,7 +1024,7 @@
                     <h2>Edit Stock</h2>
                     <span onclick="document.getElementById('variants-edit-stock-qtn-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
                 </div>
-                <div class="modal-body attribute-stock-qtn-value">
+                <div class="modal-body attribute-stock-qtn-value" wire:ignore>
                     
                 </div>
                 <div class="modal-footer">
