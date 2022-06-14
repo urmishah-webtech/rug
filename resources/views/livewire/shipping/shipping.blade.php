@@ -257,7 +257,7 @@
                             <div class="row">
                                 <div class="column four">
                                     <div class="form-group mb-2">
-                                       <label >Start</label>
+                                       <label >Price Range</label>
                                        <div class="col-md-9">
                                             <input type="number" min="0" wire:model="zone.start" wire:ignore>
                                        </div>
@@ -265,7 +265,7 @@
                                 </div>
                                 <div class="column four">
                                     <div class="form-group mb-2">
-                                       <label >End</label>
+                                       <label style="height: 20px;"></label>
                                        <div class="col-md-9">
                                             <input type="number" min="0" wire:model="zone.end" wire:ignore>
                                        </div>
@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="column four">
                                     <div class="form-group mb-2">
-                                        <label>Price</label>
+                                        <label>Shipping Price</label>
                                         <input type="number" min="0" wire:model="zone.price" wire:ignore>
                                      </div>
                                 </div>
@@ -331,29 +331,31 @@
                                </div>
                             </div>
 
-                            <div class="d-flex">
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="column four">
                                     <div class="form-group mb-2">
-                                       <label >Start</label>
+                                       <label >Price Range</label>
                                        <div class="col-md-9">
                                             <input type="number" min="0" wire:model="update_zone_data.start" wire:ignore>
                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="column four">
                                     <div class="form-group mb-2">
-                                       <label >End</label>
+                                       <label style="height:20px;"></label>
                                        <div class="col-md-9">
                                             <input type="number" min="0" wire:model="update_zone_data.end" wire:ignore>
                                        </div>
                                     </div>
                                 </div>
+                                <div class="column four">
+                                    <div class="form-group mb-2">
+                                       <label>Shipping Price</label>
+                                       <input type="number" min="0" wire:model="update_zone_data.price" wire:ignore>
+                                    </div>
+                                    </div>
                             </div>
-
-                            <div class="form-group mb-2">
-                               <label>Price</label>
-                               <input type="number" min="0" wire:model="update_zone_data.price" wire:ignore>
-                            </div>
+                           
 
                             <div class="form-group mb-2">
                                 <label class="pb-1">Select Countries</label>
