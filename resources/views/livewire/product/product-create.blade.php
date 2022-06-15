@@ -649,12 +649,12 @@
                            
                         <div class="row">
                             <label>Title</label>
-                            <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]" wire:model="product_array.{{$key}}.question">
+                            <input type="text" value="{{$product_array[$key]['question']}}" name="product_array[{{$key}}][question]" wire:model.defer="product_array.{{$key}}.question">
                         </div>
                         <div class="form-group row">
                             <label>Description</label>
                             <div class="col-md-9">
-                                <textarea value="{{$product_array[$key]['answer']}}" name="product_array[{{$key}}][answer]" wire:model="product_array.{{$key}}.answer" class="form-control">{{$product_array[$key]['answer']}}</textarea>
+                                <textarea value="{{$product_array[$key]['answer']}}" name="product_array[{{$key}}][answer]" wire:model.defer="product_array.{{$key}}.answer" class="form-control">{{$product_array[$key]['answer']}}</textarea>
                               
                             </div>
                         </div>

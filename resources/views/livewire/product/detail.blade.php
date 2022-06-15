@@ -139,12 +139,12 @@
                     <div class="card">
                         <div class="row">
                             <label>Title</label>
-                            <input type="text" name="title" wire:model="product.title" wire:ignore>
+                            <input type="text" name="title" wire:model.defer="product.title" wire:ignore>
                         </div>
                         <div wire:ignore class="form-group row">
                             <label>Description</label>
                             <div class="col-md-9">
-                                <textarea wire:model="product.descripation" class="form-control required" name="descripation" id="descripation"></textarea>
+                                <textarea wire:model.defer="product.descripation" class="form-control required" name="descripation" id="descripation"></textarea>
                               
                             </div>
                         </div>
