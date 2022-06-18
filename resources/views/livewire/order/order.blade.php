@@ -65,42 +65,36 @@
                         @php $i=1001; @endphp
                         @foreach($order as $row)
                       
-                        <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">
                             <tr>
                             <td class="sticky-col">
                                 <div class="row"><label><input type="checkbox" wire:model="selecteorder" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
                             @if(user_permission('orderlist','update'))
-                            <td class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$row->id}}</a></td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;" class="fw-6 sticky-col"><a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}">#{{$row->id}}</a></td>
                             @else
-                            <td class="fw-6 sticky-col">#{{$row->id}}</td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;"  class="fw-6 sticky-col">#{{$row->id}}</td>
                             @endif                       
-                            <td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;">
                               {{ $row->updated_at->format('d-m-Y h:m:s'); }}
                             </td>
-                            @if(!empty($this->order['user'][0])){
                             <td>
-                               <a class="tc-black fw-6" href="{{ route('customers') }}"> 
-                                    <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif 
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                    </button>
+                               <a class="fw-6" href="{{ route('customers') }}" style="color:#007ace;"> 
+                                @if(!empty($row->user_data)) 
+                                    {{$row->user_data->first_name}}  {{$row->user_data->last_name}}
+                                @elseif(!empty($row->session_user))
+                                     {{$row->session_user->first_name}}  {{$row->session_user->last_name}}
+                                @endif
                                 </a>
                             </td>
-                            @else
-                            <td>
-                               <a class="tc-black fw-6" href="{{ route('customers') }}"> 
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                </a>
-                            </td>
-                            @endif
-                            <td>
+                          
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;">
                                 <p>{{$symbol['currency']}}{{$row->netamout}}</p>
                             </td>
-                            <td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;">
                                 <span class="tag grey"><span class="grey-circle"></span>{{$row->paymentstatus}}</span>
                             </td>
                            
-                            <td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;">
 
                                 <?php $itemcount = 0; $i = 1; ?>
                                
@@ -111,12 +105,16 @@
                                 @endforeach
                                 <button class="link">{{$itemcount}} item<svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
                             </td>
-                            <td>
+                            <td onclick="window.location='{{ route('order-detail', ['id' => $row->id]) }}'" style="cursor: pointer;" >
                                 Standard
                             </td> 
-                            <td><a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('generate-pdf-billing', $row->id) }}"><i class="fas fa-print"></i> Billing Print</a>  
-                                <a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('product-invoice', $row->id) }}"><i class="fas fa-print"></i> Product Print</a></td>
-                        </tr></a>
+                            <td>
+                                <a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('order-detail', $row->id) }}"><i class="fas fa-edit"></i> </a>
+                                <a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('generate-pdf-billing', $row->id) }}"><i class="fas fa-print"></i> Billing Print</a>  
+                                <a class="print-btn btn btn-success custom-addmorebtn" target="_blank" href="{{ route('product-invoice', $row->id) }}"><i class="fas fa-print"></i> Product Print</a>
+
+                            </td>
+                        </tr>
                         @php $i++; @endphp
                         @endforeach
                         @endif

@@ -279,7 +279,7 @@
                         </div> -->
                         
                         @if(!empty($order['user'][0]))
-                        <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">@if($order['user']){{$order['user'][0]['email']}}@endif</a> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">@if($order['user']){{$order['user'][0]['email']}}@endif</a> </p>
                         @if($order['user'][0]['mobile_number'])
                         <p class="text-grey">{{$order['user'][0]['mobile_number']}}</p>
                         @else
@@ -298,7 +298,7 @@
                         </div> -->
                         @if(!empty($order))
 
-                        <p><span>{{$order->first_name}} <br>{{$order->email}} <br> {{$order->company}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        <p><span>{{$order->first_name}} <br>{{$order->email}} <br> {{$order->company}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> </p>
                         @endif
                     </div>
                     

@@ -99,6 +99,7 @@
                             <th>Date</th>
                             <th>Total Variants</th>
                             <th>Price</th>
+                            <th></th>
                         </tr>
 
                         <span>@foreach($product as $row)
@@ -106,14 +107,15 @@
                             <td class="sticky-col">
                                 <div class="row"><label><input type="checkbox" wire:model="selectedproducts" value="{{$row->id}}" name="option6a"></label></div>
                             </td>
-                            <td class="product-img">
+                            <td class="product-img" onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 
 
                                 
                                 <div class="pd-blank-img">
                                     @if(!empty($row->productmediafirst) && !empty($row->productmediafirst->image))
                                     <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">
-                                    <img src="{{ asset('storage/'.$row->productmediafirst->image) }}" />
+                                    
+                                        <img src="{{ asset('storage/'.$row->productmediafirst->image) }}" />
 
                                     </a>
                                      @endif
@@ -121,14 +123,14 @@
                                 
                                 
                             </td>
-                            <td class="product-table-item">
+                            <td class="product-table-item" onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 @if(user_permission('allproduct','update'))
-                                <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">{{$row->title}}</a>
+                                <a class="tc-black fw-6">{{$row->title}}</a>
                                 @else
                                 <p>{{$row->title}}</p>
                                 @endif
                             </td>
-                            <td class="subscribed-label status-table-item">
+                            <td class="subscribed-label status-table-item" onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 @if($row->status == 'active')
                                 <p class="tag green order-filed Activeclass">Active</p>
                                 @endif
@@ -136,11 +138,11 @@
                                 <p class="tag red order-filed invitedclass">Draft</p>
                                 @endif
                             </td>
-                            <td>
+                            <td onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 {{ $row->updated_at->format('d-m-Y'); }}
                                
                             </td>
-                            <td class="inventory-table-item">
+                            <td class="inventory-table-item" onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 <?php $sum = 0; ?>
                                 @foreach($VariantStock as $row_stock)
                                 @if($row_stock->product_id == $row->id)
@@ -156,7 +158,7 @@
                                 @endforeach
                                 <p><?php echo $number; ?> variants</p>
                             </td>
-                            <td class="type-table-item">
+                            <td class="type-table-item" onclick="window.location='{{ route('product-detail', $row->uuid) }}'" style="cursor: pointer;">
                                 <?php
                                     $price_data=DB::table('product')->join('product_variants','product_variants.product_id', '=', 'product.id')->select('product_variants.*')->
                                     where('product.id',$row->id)->whereNotNull('product_variants.price')->get();
@@ -186,6 +188,9 @@
                                 @else
                                 <span>{{$symbol['currency']}}</span><span><?php echo $row->price; ?></span>
                                 @endif
+                            </td>
+                            <td>
+                                <a class="btn btn-success" href="{{ route('product-detail', $row->uuid) }}" style="float:right;"><i class="fas fa-edit" style="font-size: x-large;"></i> </a>
                             </td>
                             
                         </tr>

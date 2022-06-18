@@ -842,7 +842,7 @@
 
 
 
-                     @if($customerData['detail']['agreed_to_receive_marketing_mails'] == 'no')
+                     @if(!empty($customerData['detail']) && $customerData['detail']['agreed_to_receive_marketing_mails'] == 'no')
 
 
 
@@ -921,7 +921,7 @@
 
 
                      <button class="button green-btn" id="tag-creation-btn" data-dismiss="modal" value="" style="display:none;" wire:click.prevent="update('tag-change', $event.target.value)">Save</button><br><br>
-                     @if(!empty($customerData['detail']['tags']))
+                     @if(!empty($customerData['detail']) && !empty($customerData['detail']['tags']))
                      <?php $customerTags = explode(',', $customerData['detail']['tags']); ?>
                         <div class="customer-detail-select-tags">
                         @foreach($customerTags as $detail_tag)

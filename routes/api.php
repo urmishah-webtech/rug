@@ -94,6 +94,8 @@ Route::post('country-check', 'App\Http\Controllers\Api\PaymentController@country
 
 /*COLLECTION*/
 Route::get('collection', 'App\Http\Controllers\Api\CollectionController@getCollection'); 
+Route::get('get-collection-products/{id}', 'App\Http\Controllers\Api\CollectionController@getProducts'); 
+
 
 /*USER DETAIL*/
 Route::get('orderget/{id}', 'App\Http\Controllers\Api\UserProfile@getOrder');

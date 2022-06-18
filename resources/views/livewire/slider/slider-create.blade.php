@@ -55,21 +55,19 @@
                     <div class="header-title">
                         <h3 class="fs-16  fw-6 mb-0">Slider image</h3>
                     </div>
-                    <div class="import-file" onclick="document.getElementById('update-variant-image-modal').style.display='block'" wire:ignore>
-                            <!--<input type="file" name="file" class="form-control" id="import_customers" onchange="importCustomers()">-->
+
+                    <div class="single-upload-img" wire:ignore>
+                        <input type='file' id="readUrl" wire:model.defer="image" accept=".png, .jpg, .jpeg">
                         <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0zm1 8.414l1.293 1.293a1 1 0 101.414-1.414l-3-3a.998.998 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 8.414V14a1 1 0 102 0V8.414z" fill="#5C5F62"></path></svg>
-                            <p class="secondary">Add images</p>
-                            <span class="fs-12">or drop images to upload</span>
+                            <p class="secondary">Add image</p>
+                            <span class="fs-12">or drop an image to upload</span>
                         </label>
-                        <input type="file" wire:model.debounce.lazy="image" id="et_pb_contact_brand_file_request_0" class="file-upload">
-                         @error('image') <span class="error">{{ $message }}</span> @enderror
 
-                         <div class="avatar-preview">
-                            <div id="logoPreview" style="background-image: url(); display: block;">
-                            </div>
-                        </div>
+                        <img id="uploadedImage" src="" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;">
+                        
                     </div>
+                    
                 </div>
             </div>
         </article>
@@ -113,6 +111,17 @@
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
+        });
+
+        document.getElementById('readUrl').addEventListener('change', function(){
+          if (this.files[0] ) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function(event) {
+              document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+              document.getElementById('uploadedImage').style.display = 'block';
+            });
+          }
         });
     </script>
     <script>

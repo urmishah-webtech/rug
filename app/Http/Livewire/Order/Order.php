@@ -66,7 +66,7 @@ class Order extends Component
     }
 
     public function getOrderpaginateProperty(){
-        $orders = Orders::with('user')->when($this->filter_order, function ($query, $filter_order) {
+        $orders = Orders::with('user_data', 'session_user')->when($this->filter_order, function ($query, $filter_order) {
 
             $query->Where('first_name', 'LIKE', '%' . $filter_order . '%');
             $query->orWhere('id', 'LIKE', '%' . $filter_order . '%');

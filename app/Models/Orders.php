@@ -24,6 +24,15 @@ class Orders extends Model
     {
         return $this->hasMany(order_item::class, 'user_id', 'user_id');
     }
+     public function user_data()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function session_user()
+    {
+        return $this->hasOne(User::class, 'session_id', 'session_id');
+    }
 
 
 

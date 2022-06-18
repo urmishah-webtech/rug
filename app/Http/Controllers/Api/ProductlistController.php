@@ -357,13 +357,13 @@ class ProductlistController extends Controller
         }
     }
 
-    public function get_related_Products($id)
+    public function get_related_Products($slug)
     {
 
         $symbol = CurrencySymbol();
-        if (Product::where('id', $id)->exists())
+        if (Product::where('seo_utl', $slug)->exists())
         {
-            $productget = Product::where('id', $id)->first();
+            $productget = Product::where('seo_utl', $slug)->first();
             $product = Product::with('productmediaget')->with('variants')
                 ->get()
                 ->toArray();
@@ -406,7 +406,7 @@ class ProductlistController extends Controller
                                 }
                                 else
                                 {
-                                    $price_array[$key] = $value->price;
+                                    $price_array[$key] = $value['price'];
 
                                     if (!empty($price_array))
                                     {

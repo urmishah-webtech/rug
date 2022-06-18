@@ -27,5 +27,21 @@ class CollectionController extends Controller
 
         return response()->json(['message' => 'success', 'collectionitem' => $data, 'success' => true, ]);
     }
+
+    public function getProducts($collection_id)
+    {
+        $products = Product::all();
+        $collection_products = [];
+
+        if(!empty($products)) {
+            foreach ($products as $product) {
+                if(!empty($product->collection) && in_array($collection_id, json_decode($product->collection)))
+                    $collection_products[] = $product;
+            }    
+        }
+
+        return response()->json(['message' => 'success', 'products' => $collection_products, 'success' => true ]);
+       
+    }
         
 }
