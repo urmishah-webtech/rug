@@ -46,6 +46,7 @@ class ProductlistController extends Controller
                 ->with('variants:product_id,price')->with('detail:id,product_id,title,description')
                 ->where('seo_utl', $slug)->first(['id','title', 'descripation', 'collection', 'faq', 'price']);
 
+        $product->faq = json_decode($product->faq);
         if(empty($product)) {
             return response()->json(['success' => false, "message" => "Product not found"]);
         }
@@ -80,7 +81,7 @@ class ProductlistController extends Controller
 
     public function getVariantsBySlug($slug)
     {
-        $product = Product::with('detail')->where('seo_utl', $slug)->first();
+        $product = Product::with('detail', 'productmediafirst')->where('seo_utl', $slug)->first();
 
         if(empty($product)) {
             return response()->json(['success' => false, "message" => "Product not found"]);
@@ -107,8 +108,9 @@ class ProductlistController extends Controller
         }
         $image_path =  env('IMAGE_PATH');
         $default_img = '/image/defult-image.png';
+        $product_img = isset($product->productmediafirst->image) ? $product->productmediafirst->image : '';
 
-        return response(['success' => true, 'variants' => $variants, 'detail'=> $product->detail, 'image_path' => $image_path, 'default_img' => $default_img, 'attribute' => $attribute, 'message' => 'Variants List!']);
+        return response(['success' => true, 'variants' => $variants, 'detail'=> $product->detail, 'image_path' => $image_path, 'product_img'=> $product_img, 'default_img' => $default_img, 'attribute' => $attribute, 'message' => 'Variants List!']);
        
     }
 
