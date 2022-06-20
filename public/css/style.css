@@ -1328,7 +1328,7 @@ code {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    float: right;
+    float: left;
     outline: none !important;
     box-shadow: none !important;
 }
