@@ -154,7 +154,7 @@
                                     </div>
                                 </th>
                                 <th>Title</th>
-                                <th>Product conditions</th>
+                                <th>Action</th>
                             </tr>
                             @if($collection)
                             @foreach($collection as $row)
@@ -162,7 +162,7 @@
                                 <td>
                                     <div class="row"><label><input type="checkbox" wire:model="selectecollection" value="{{$row->id}}" name="option6a"></label></div>
                                 </td>
-                               <a class="tc-black fw-6" href="{{ route('collections-detail', $row->seo_url) }}"> <td class="product-img">
+                                <a class="tc-black fw-6" href="{{ route('collections-detail', $row->seo_url) }}"><td class="product-img">
                                     @if($row->image != "")
                                     <img src="{{ asset('storage/'.$row->image) }}">
                                     @else
@@ -176,7 +176,7 @@
                                         <p>{{$row->title}}</p>
                                     @endif
                                 </td>
-                                <td class="type-table-item"></td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('collections-detail', $row->uuid) }}"><i class="fas fa-edit"></i> </a></td>
                             </tr>
                             @endforeach
                             @endif

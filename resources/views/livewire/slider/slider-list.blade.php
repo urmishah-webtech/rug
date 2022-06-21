@@ -54,6 +54,7 @@
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Page Name</th>
+                                <th class="fw-6">Action</th>
                                 <th class="ta-right">
                                 	Created Date
                                 </th>
@@ -78,6 +79,7 @@
                                 <td>
                                     <p>{{$result->buttne_text}}</p>
                                 </td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('slider-detail', $result->id) }}"><i class="fas fa-edit"></i> </a></td>
                                 <td class="ta-right">
                                 	<p>{{ $result->created_at->format('d-m-Y'); }}</p>
                                 </td>
