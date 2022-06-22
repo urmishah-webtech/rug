@@ -110,6 +110,8 @@ class ProductlistController extends Controller
     {
 
         $symbol = CurrencySymbol();
+        $variant1 = $variant2 = $variant3 = $variant4 = false;
+
         if (Product::where('seo_utl', $slug)->exists())
         {
             // $varianttag = VariantTag::all()->groupBy('id')->toArray();
@@ -121,11 +123,27 @@ class ProductlistController extends Controller
             ])
                 ->where('seo_utl', $slug)->get();
 
+
             $product_arra = array();
             $image_path =  env('IMAGE_PATH');
 
+
+
             foreach ($product as $key => $val)
             {
+                $firstVariant = $val->variants->first();
+                if(!empty($firstVariant->varient1)) {
+                    $variant1 = true;
+                }
+                if(!empty($firstVariant->varient2)) {
+                    $variant2 = true;
+                }
+                if(!empty($firstVariant->varient3)) {
+                    $variant3 = true;
+                }
+                if(!empty($firstVariant->varient4)) {
+                    $variant4 = true;
+                }
 
                 $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
                     ->where('product.id', $val->id)
@@ -348,7 +366,7 @@ class ProductlistController extends Controller
                 
                 
                
-                 return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4], 200);
+                 return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4, 'variant1' => $variant1, 'variant2' => $variant2, 'variant3' => $variant3, 'variant4' => $variant4], 200);
             }
         }
         else

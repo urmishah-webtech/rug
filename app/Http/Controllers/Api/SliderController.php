@@ -405,7 +405,7 @@ class SliderController extends Controller
         $sliders =  Slider::where('page_id',14)->get();
         $data1=array();
         $i=0; 
-        $image_path= url('/storage/'); 
+        $image_path= env('IMAGE_PATH'); 
          
         foreach($sliders as $value)
         {
@@ -420,7 +420,6 @@ class SliderController extends Controller
 
 
         $data=array();
-        $image_path=  env('IMAGE_PATH');
          
             $data['storymaintitle'] = $storyget->title;
            
