@@ -64,6 +64,7 @@
                                     <a href="{{ route('FaqCategory_Detail', @$val->id) }}" data-id="{{ @$val->id }}" class="fs-14 fw-6 mb-0 black-color">{{@$val->category}}</a>
                                     <p class="mb-0 text-grey">Last edited: {{date('d M Y H:i:s', strtotime(@$val->updated_at))}}</p>
                                 </td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('FaqCategory_Detail', @$val->id) }}"><i class="fas fa-edit"></i> </a></td>
                             </tr>
                             @endforeach
                             @endisset

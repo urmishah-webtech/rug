@@ -160,6 +160,7 @@
                                     @endif
                                    
                                 </td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('pages-detail', $result->uuid) }}"><i class="fas fa-edit"></i> </a></td>
                                 <td class="ta-right">
                                     <span class="text-grey pr-3">{{ $result->created_at->format('d-m-Y'); }}</span>
                                 </td>

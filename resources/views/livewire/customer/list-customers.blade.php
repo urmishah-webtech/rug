@@ -371,6 +371,7 @@
                     <th class="fw-6">Date</th>
                     <th class="fw-6">Order</th>
                     <th class="fw-6 pr-3 ta-right">Amount</th>
+                    <th class="fw-6">Action</th>
                 </tr>
                 <span>@foreach($users as $customer)
 
@@ -439,6 +440,8 @@
                                 @endif
                             @endforeach
                             <td><p class="spent-filed">{{$symbol['currency']}}{{number_format($amount_spent,2,'.',',')}} spent</p></td>
+
+                            <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{route('customer.details', $customer->uuid)}}"><i class="fas fa-edit"></i> </a></td>
 
                         </tr>
                     @endif

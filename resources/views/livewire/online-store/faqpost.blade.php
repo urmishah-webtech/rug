@@ -56,6 +56,7 @@
                             <th></th>
                             <th>Title</th>
                             <th>Category</th>
+                            <th>Action</th>
                              
                             </tr>
                             @isset($faq)
@@ -72,6 +73,7 @@
                                     {{@$val->faqcategory->category}} 
                                     
                                 </td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('Faq_Detail', @$val->id) }}"><i class="fas fa-edit"></i> </a></td>
                             </tr>
                             @endforeach
                             @endisset

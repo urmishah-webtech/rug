@@ -137,9 +137,9 @@
                                 <button class="secondary">Add Image</button>
                                 <label for="logoUpload">or drop files to upload</label>
                             </div>
-                            @if(!empty($page->image3))
+                            @if(!empty($page->image))
                             <div class="avatar-preview">  
-                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image3) }}); display: block;">
+                                <div id="logoPreview" style="background-image: url({{ asset('storage/'.$page->image) }}); display: block;">
                                 </div>
                             </div>
                             @else

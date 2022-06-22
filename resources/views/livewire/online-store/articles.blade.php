@@ -113,7 +113,7 @@
                                     <p class="mb-0 text-grey">Last edited: {{date('d M Y H:i:s', strtotime(@$val->updated_at))}}</p>
                                 </td>
                                 <td><p class="mb-0 text-grey">{!! \Illuminate\Support\Str::limit($val->description, 100) !!}</p></td>
-                                <td class="subscribed-label status-table-item">
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('blog-detail', @$val->slug) }}"><i class="fas fa-edit"></i> </a></td>
                             </tr>
                             @endforeach
                             @endisset
