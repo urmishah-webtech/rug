@@ -99,7 +99,7 @@
                             <th>Date</th>
                             <th>Total Variants</th>
                             <th>Price</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
 
                         <span>@foreach($product as $row)
