@@ -214,7 +214,7 @@ class UserProfile extends Component
 
         //Generate, the password reset link. The token generated is embedded in the link
 
-        $link = env('BASE_PATH') . '/password/reset/' . $token . '?email=' . urlencode($user->email);
+        // $link = env('BASE_PATH') . '/reset-password/' . $token . '?email=' . urlencode($user->email);
 
 
 
@@ -222,7 +222,7 @@ class UserProfile extends Component
 
 
 
-            $user->notify(new ResetPassword($token));
+            $user->notify(new ResetPassword($token,  true));
 
             // $Comment_arr = [
 
