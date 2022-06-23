@@ -79,10 +79,12 @@
                             @endisset
                         </tbody>
                     </table>
+                    <div class="pd-pagination-sec">
                     <div class="pagination">
 
                      {!! $faq->links() !!}
                    
+                    </div>
                     </div>
                 </div>
             </div>

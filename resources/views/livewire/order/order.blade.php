@@ -59,7 +59,7 @@
                             <th>Payment</th>
                             <th>Items</th>
                             <th>Delivery method</th>
-                            <th>Print</th>
+                            <th>Action</th>
                         </tr>
                         @if($order)
                         @php $i=1001; @endphp

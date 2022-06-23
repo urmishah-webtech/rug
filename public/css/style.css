@@ -2966,7 +2966,7 @@ label {
      width: 60px;
 }
  .pdpage-checkbox table#myTable.product-listing td.product-img {
-    width: 210px;
+    width: 125px;
 }
 /* Product pag table css */
  .pdpage-checkbox .one-bg.border-every-row td.product-table-item {
@@ -2986,8 +2986,8 @@ label {
      width: 235px;
 }
  .pdpage-checkbox .type-table-item {
-     width: 80px;
-     min-width: 80px;
+     width: 100px;
+     min-width: 100px;
 }
  .pdpage-checkbox .vendor-table-item {
      width: 170px;

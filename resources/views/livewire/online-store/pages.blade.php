@@ -160,20 +160,23 @@
                                     @endif
                                    
                                 </td>
-                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('pages-detail', $result->uuid) }}"><i class="fas fa-edit"></i> </a></td>
                                 <td class="ta-right">
                                     <span class="text-grey pr-3">{{ $result->created_at->format('d-m-Y'); }}</span>
                                 </td>
+                                <td class="type-table-item"><a class="print-btn btn btn-success custom-addmorebtn" href="{{ route('pages-detail', $result->uuid) }}"><i class="fas fa-edit"></i> </a></td>
+                                
                             </tr>
                             @php $i++; @endphp
                             @endforeach
                             @endif
                         </tbody>
                     </table>
+                    <div class="pd-pagination-sec">
                     <div class="pagination">
 
                      {!! $pages->links() !!}
                    
+                    </div>
                     </div>
                 </div>
             </div>
