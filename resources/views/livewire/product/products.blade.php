@@ -99,7 +99,7 @@
                             <th>Date</th>
                             <th>Total Variants</th>
                             <th>Price</th>
-                            <th>Action</th>
+                            <th style="text-align: right;">Action</th>
                         </tr>
 
                         <span>@foreach($product as $row)
@@ -190,7 +190,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-success" href="{{ route('product-detail', $row->uuid) }}" style="float:right;"><i class="fas fa-edit" style="font-size: x-large;"></i> </a>
+                                <a class="btn btn-success print-btn custom-addmorebtn" href="{{ route('product-detail', $row->uuid) }}" style="float:right;margin: 0 20px !important;"><i class="fas fa-edit"></i> </a>
                             </td>
                             
                         </tr>
