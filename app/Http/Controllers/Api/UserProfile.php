@@ -123,7 +123,7 @@ class UserProfile extends Component
 
         date_default_timezone_set("Europe/Amsterdam");
 
-        session()->flash('screen', 'forgot-password');
+        // session()->flash('screen', 'forgot-password');
 
 
 
@@ -139,7 +139,7 @@ class UserProfile extends Component
 
 
 
-       session()->forget('screen');
+       // session()->forget('screen');
 
 
 
@@ -169,29 +169,29 @@ class UserProfile extends Component
 
         if ($this->sendResetEmail($request->email, $token)) {
 
-            $Comment_arr = [
+            // $Comment_arr = [
 
-                    'user_id' => $user->id,
+            //         'user_id' => $user->id,
                     
-                    'message' => 'User Requested Password reset',
-                ];
+            //         'message' => 'User Requested Password reset',
+            //     ];
 
 
-            CustomerComment::create($Comment_arr);
+            // CustomerComment::create($Comment_arr);
 
             return response()->json(['message' => 'A Reset link has been sent to your Email address.', 'success' => true]);
 
         } else {
 
-            $Comment_arr = [
+            // $Comment_arr = [
 
-                    'user_id' => $user->id,
+            //         'user_id' => $user->id,
                     
-                    'message' => 'A Network Error occurred. Please try again',
-                ];
+            //         'message' => 'A Network Error occurred. Please try again',
+            //     ];
 
 
-            CustomerComment::create($Comment_arr);
+            // CustomerComment::create($Comment_arr);
 
 
             return response()->json(['message' => 'A Network Error occurred. Please try again.', 'success' => false]);
@@ -214,7 +214,7 @@ class UserProfile extends Component
 
         //Generate, the password reset link. The token generated is embedded in the link
 
-        $link = config('base_url') . 'password/reset/' . $token . '?email=' . urlencode($user->email);
+        $link = env('BASE_PATH') . '/password/reset/' . $token . '?email=' . urlencode($user->email);
 
 
 
@@ -224,15 +224,15 @@ class UserProfile extends Component
 
             $user->notify(new ResetPassword($token));
 
-            $Comment_arr = [
+            // $Comment_arr = [
 
-                    'user_id' => $user->id,
+            //         'user_id' => $user->id,
                     
-                    'message' => 'Send Reset Email Link',
-                ];
+            //         'message' => 'Send Reset Email Link',
+            //     ];
 
 
-                CustomerComment::create($Comment_arr);
+            //     CustomerComment::create($Comment_arr);
 
              return response()->json(['message' => 'success', 'success' => true]);
 
@@ -296,15 +296,15 @@ class UserProfile extends Component
 
         event(new PasswordReset($user));
 
-        $Comment_arr = [
+        // $Comment_arr = [
 
-                    'user_id' => $user->id,
+        //             'user_id' => $user->id,
                     
-                    'message' => 'Your password has been reset',
-                ];
+        //             'message' => 'Your password has been reset',
+        //         ];
 
 
-        CustomerComment::create($Comment_arr);
+        // CustomerComment::create($Comment_arr);
 
         return response()->json(['message' => 'Your password has been reset!', 'success' => true]);
     }
