@@ -17,17 +17,17 @@ class ResetPassword extends Notification implements ShouldQueue
 
      use Queueable;
 
-     public $token, $frontend;
+     public $token, $link;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token, $frontend = false)
+    public function __construct($token, $link = '')
     {
         $this->token = $token;
-        $this->frontend = $frontend;
+        $this->link = $link;
     }
 
     /**
@@ -54,7 +54,7 @@ class ResetPassword extends Notification implements ShouldQueue
         $userdata = User::where('email', $notifiable->getEmailForPasswordReset())->first();
         $MailMessage->discripation = str_replace('{name}', $userdata->first_name .' '. $userdata->last_name, $MailMessage->discripation);
         
-        if(!$frontend) {
+        if(empty($this->link)) {
 
             $url = url(route('password.reset.front', [
                     'token' => $this->token,
@@ -62,12 +62,11 @@ class ResetPassword extends Notification implements ShouldQueue
                 ], false));
         } else {
 
-            $path =  env('BASE_PATH') . '/reset-password';
+            
+            $url = $this->link;
 
-            $url = url($path, [
-                    'token' => $this->token,
-                    'email' => $notifiable->getEmailForPasswordReset(),
-                ], false));
+
+            
         }
         
 
