@@ -355,7 +355,7 @@ class ProductlistController extends Controller
 
                 $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
                 $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
-                $result_attr3 = $result_attributes[38];
+                $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
                 $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
                 // $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
                 // $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
