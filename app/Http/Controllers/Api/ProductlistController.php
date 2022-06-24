@@ -131,19 +131,7 @@ class ProductlistController extends Controller
 
             foreach ($product as $key => $val)
             {
-                $firstVariant = $val->variants->first();
-                if(!empty($firstVariant->varient1)) {
-                    $variant1 = true;
-                }
-                if(!empty($firstVariant->varient2)) {
-                    $variant2 = true;
-                }
-                if(!empty($firstVariant->varient3)) {
-                    $variant3 = true;
-                }
-                if(!empty($firstVariant->varient4)) {
-                    $variant4 = true;
-                }
+                
 
                 $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
                     ->where('product.id', $val->id)
@@ -352,11 +340,12 @@ class ProductlistController extends Controller
                 $tassels_arry[] = $tassels;
                 $tassels_arry[] = $tasselsverient;
                 $result_attributes[$val->variants[0]['varient4']] = $tassels_arry;
+                
 
-                $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
-                $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
-                $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
-                $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
+                // $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
+                // $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
+                // $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
+                // $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
                 // $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
                 // $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
                 // $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
@@ -364,10 +353,36 @@ class ProductlistController extends Controller
 
                 $data_result['variantmedia'] = $val['variantmedia'];
                 
+                $result_attr1 = $result_attr2 = $result_attr3 = $result_attr4 = null;
+                $variant1 = $variant2 = $variant3 = $variant4 = false;
+                
+                foreach($result_attributes as $key=>$item) {
+                    switch($key) {
+                        case(36): 
+                            $result_attr1 = isset($result_attributes[36]) ? $result_attributes[36] : null;
+                            $variant1 = true;
+                            break;
+                        case(37): 
+                            $result_attr2 = isset($result_attributes[37]) ? $result_attributes[37] : null;
+                            $variant2 = true;
+                            break;
+                        case(38): 
+                            $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
+                            $variant3 = true;
+                            break;
+                        case(41): 
+                            $result_attr4 = isset($result_attributes[41]) ? $result_attributes[41] : null;
+                            $variant4 = true;
+                            break;
+                    }
+                }
+                
                 
                
-                 return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4, 'variant1' => $variant1, 'variant2' => $variant2, 'variant3' => $variant3, 'variant4' => $variant4], 200);
+                return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4, 'variant1' => $variant1, 'variant2' => $variant2, 'variant3' => $variant3, 'variant4' => $variant4], 200);
             }
+                            
+
         }
         else
         {
@@ -634,26 +649,26 @@ class ProductlistController extends Controller
             'image_path' => $image_path
         ));
     }
-	
-	public function Custome_Modual_InProduct($id)
+    
+    public function Custome_Modual_InProduct($id)
     { 
-		if (Product::where('id', $id)->exists())
+        if (Product::where('id', $id)->exists())
         {
-			$product = Product::where('id', $id)->get(); 
-			 $data = array();
-			foreach ($product as $val)
-			{
-				$data['id'] = $val->id;
-				$data['custom_variant'] = $val->custom_variant;
-				$data['cv_option_price'] = json_decode($val->cv_option_price);
-				$data['cv_width_height_price'] = $val->cv_width_height_price;
-			}
-			return response($data, 200);    
-		}
-		else
+            $product = Product::where('id', $id)->get(); 
+             $data = array();
+            foreach ($product as $val)
+            {
+                $data['id'] = $val->id;
+                $data['custom_variant'] = $val->custom_variant;
+                $data['cv_option_price'] = json_decode($val->cv_option_price);
+                $data['cv_width_height_price'] = $val->cv_width_height_price;
+            }
+            return response($data, 200);    
+        }
+        else
         {
             return response()->json(["message" => "Product not found"], 404);
         }
-	}
+    }
 }
 
