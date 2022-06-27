@@ -109,32 +109,29 @@ class ProductlistController extends Controller
     public function getIndividualProduct_variant($slug)
     {
 
-        $symbol = CurrencySymbol();
-        $variant1 = $variant2 = $variant3 = $variant4 = false;
-
-        if (Product::where('seo_utl', $slug)->exists())
-        {
-            // $varianttag = VariantTag::all()->groupBy('id')->toArray();
-            $product = Product::with('productmediaget')->with('variantmedia')->with('favoriteget')
+       
+        $product = Product::with('productmediaget')->with('variantmedia')->with('favoriteget')
                 ->with('productDetail')->with(['variants' => function ($q)
             {
                 return $q->with('detail');
             }
             ])
-                ->where('seo_utl', $slug)->get();
+                ->where('seo_utl', $slug)->first();
+                
+        if(empty($product)) {
+            return response()->json(["message" => "Product not found"], 404);
+        }
+        
 
-
+        $result_attr1 = $result_attr2 = $result_attr3 = $result_attr4 = null;
+                $variant1 = $variant2 = $variant3 = $variant4 = false;
+            $symbol = CurrencySymbol();
             $product_arra = array();
             $image_path =  env('IMAGE_PATH');
 
 
-
-            foreach ($product as $key => $val)
-            {
-                
-
                 $price_data = Product::join('product_variants', 'product_variants.product_id', '=', 'product.id')->select('product_variants.price as price')
-                    ->where('product.id', $val->id)
+                    ->where('product.id', $product->id)
                     ->whereNotNull('product_variants.price')
                     ->get();
 
@@ -156,9 +153,9 @@ class ProductlistController extends Controller
                     $max = '';
                 }
 
-                $product_arra['id'] = $val['id'];
-                $product_arra['title'] = $val['title'];
-                $product_arra['description'] = $val['descripation'];
+                $product_arra['id'] = $product->id;
+                $product_arra['title'] = $product->title;
+                $product_arra['description'] = $product->descripation;
                 // $product_arra['image'] = $image_path . $val['productmediaget'][$key]['image'];
                 // dd($val['variants']);
                 $product_arra['price_range'] = $symbol['currency'] . $min . '-' . $symbol['currency'] . $max;
@@ -168,8 +165,11 @@ class ProductlistController extends Controller
                 $insert_stock = [];
                 $arrayvarit = [];
                 $data_result = [];
+                
 
-                foreach ($val['variants'] as $key => $result)
+                if(!$product->variants->isEmpty()) {
+
+                foreach ($product->variants as $key => $result)
                 {
 
                     $insert_stock['variant_id'] = $result['id'];
@@ -193,7 +193,7 @@ class ProductlistController extends Controller
 
                     if ($result['detail']->isEmpty())
                     {
-                        $data_result[$key]['detail'] = $val['productDetail'];
+                        $data_result[$key]['detail'] = $product->productDetail;
                     }
                     else
                     {
@@ -207,10 +207,11 @@ class ProductlistController extends Controller
 
                 $color = [];
                 $colorvarient = [];
+                $first_variant = $product->variants->first();
 
-                foreach ($val->variants->unique('attribute1') as $sizekey1 => $row1)
+                foreach ($product->variants->unique('attribute1') as $sizekey1 => $row1)
                 {
-                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient1'])
+                    $variant_tag = VariantTag::where('id', $first_variant->varient1)
                         ->first();
                     if ($variant_tag)
                     {
@@ -222,7 +223,7 @@ class ProductlistController extends Controller
                     }
                     if ($row1->attribute1 != "")
                     {
-                        $colorvarient['variantnumber'] = $val->variants[0]['varient1'];
+                        $colorvarient['variantnumber'] = $first_variant->varient1;
                         $colorvarient['variant_tag'] = $tag_name;
                         $color[] = $row1->attribute1;
 
@@ -242,15 +243,15 @@ class ProductlistController extends Controller
                     $color_arry[] = '';
                     $color_arry[] = '';
                 }
-                $result_attributes[$val->variants[0]['varient1']] = $color_arry;
+                $result_attributes[$first_variant->varient1] = $color_arry;
 
 
                 $othercolor = [];
                 $othercolorvarient = [];
 
-                foreach ($val->variants->unique('attribute2') as $sizekey2 => $row2)
+                foreach ($product->variants->unique('attribute2') as $sizekey2 => $row2)
                 {
-                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient2'])
+                    $variant_tag = VariantTag::where('id', $first_variant->varient2)
                         ->first();
                     if ($variant_tag)
                     {
@@ -262,7 +263,7 @@ class ProductlistController extends Controller
                     }
                     if ($row2->attribute2 != "")
                     {
-                        $othercolorvarient['variantnumber'] = $val->variants[0]['varient2'];
+                        $othercolorvarient['variantnumber'] = $first_variant->varient2;
                         $othercolorvarient['variant_tag'] = $tag_name;
                         $othercolor[] = $row2->attribute2;
                     }
@@ -275,15 +276,13 @@ class ProductlistController extends Controller
 
                 $other_color_arry[] = $othercolor;
                 $other_color_arry[] = $othercolorvarient;
-                $result_attributes[$val->variants[0]['varient2']] = $other_color_arry;
+                $result_attributes[$first_variant->varient2] = $other_color_arry;
 
                 $size = [];
                 $sizevarient = [];
-                foreach ($val
-                    ->variants
-                    ->unique('attribute3') as $sizekey => $row3)
+                foreach ($product->variants->unique('attribute3') as $sizekey => $row3)
                 {
-                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient3'])
+                    $variant_tag = VariantTag::where('id', $first_variant->varient3)
                         ->first();
                     if ($variant_tag)
                     {
@@ -295,7 +294,7 @@ class ProductlistController extends Controller
                     }
                     if ($row3->attribute3 != "")
                     {
-                        $sizevarient['variantnumber'] = $val->variants[0]['varient3'];
+                        $sizevarient['variantnumber'] = $first_variant->varient3;
                         $sizevarient['variant_tag'] = $tag_name;
                         $size[] = $row3->attribute3;
                     }
@@ -308,14 +307,14 @@ class ProductlistController extends Controller
 
                 $size_arry[] = $size;
                 $size_arry[] = $sizevarient;
-                $result_attributes[$val->variants[0]['varient3']] = $size_arry;
+                $result_attributes[$first_variant->varient3] = $size_arry;
 
 
                 $tassels = [];
                 $tasselsverient = [];
-                foreach ($val->variants->unique('attribute4') as $sizekey4 => $row4)
+                foreach ($product->variants->unique('attribute4') as $sizekey4 => $row4)
                 {
-                    $variant_tag = VariantTag::where('id', $val->variants[0]['varient4'])
+                    $variant_tag = VariantTag::where('id', $first_variant->varient4)
                         ->first();
                     if ($variant_tag)
                     {
@@ -327,7 +326,7 @@ class ProductlistController extends Controller
                     }
                     if ($row4->attribute4 != "")
                     {
-                        $tasselsverient['variantnumber'] = $val->variants[0]['varient4'];
+                        $tasselsverient['variantnumber'] = $first_variant->varient4;
                         $tasselsverient['variant_tag'] = $tag_name;
                         $tassels[] = $row4->attribute4;
                     }
@@ -337,24 +336,10 @@ class ProductlistController extends Controller
                         $tasselsverient[] = '';
                     }
                 }
+                
                 $tassels_arry[] = $tassels;
                 $tassels_arry[] = $tasselsverient;
-                $result_attributes[$val->variants[0]['varient4']] = $tassels_arry;
-                
-
-                // $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
-                // $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
-                // $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
-                // $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
-                // $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
-                // $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
-                // $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
-                // $result_attr4 = !empty($result_attributes[41])? $result_attributes[41] : null;
-
-                $data_result['variantmedia'] = $val['variantmedia'];
-                
-                $result_attr1 = $result_attr2 = $result_attr3 = $result_attr4 = null;
-                $variant1 = $variant2 = $variant3 = $variant4 = false;
+                $result_attributes[$first_variant->varient4] = $tassels_arry;
                 
                 foreach($result_attributes as $key=>$item) {
                     switch($key) {
@@ -376,18 +361,31 @@ class ProductlistController extends Controller
                             break;
                     }
                 }
+                }
+
+                // $result_attr1 = $result_attributes[$val->variants[0]['varient1']];
+                // $result_attr2 = $result_attributes[$val->variants[0]['varient2']];
+                // $result_attr3 = isset($result_attributes[38]) ? $result_attributes[38] : null;
+                // $result_attr4 = $result_attributes[$val->variants[0]['varient4']];
+                // $result_attr1 = !empty($result_attributes[36])? $result_attributes[36] : null;
+                // $result_attr2 = !empty($result_attributes[37])? $result_attributes[37] : null;
+                // $result_attr3 = !empty($result_attributes[38])? $result_attributes[38] : null;
+                // $result_attr4 = !empty($result_attributes[41])? $result_attributes[41] : null;
+
+                $data_result['variantmedia'] = $product->variantmedia;
+                
+                
+
+                
                 
                 
                
                 return response(['data' => $data_result, 'attribute1' => $result_attr1, 'attribute2' => $result_attr2, 'attribute3' => $result_attr3, 'attribute4' => $result_attr4, 'variant1' => $variant1, 'variant2' => $variant2, 'variant3' => $variant3, 'variant4' => $variant4], 200);
-            }
+            
                             
 
-        }
-        else
-        {
-            return response()->json(["message" => "Product not found"], 404);
-        }
+        
+        
     }
 
     public function get_related_Products($slug)
