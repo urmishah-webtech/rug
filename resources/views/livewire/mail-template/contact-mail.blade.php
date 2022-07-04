@@ -10,6 +10,7 @@
 			@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 		</style>
 	</style>
+	<?php $admin_logo = asset("storage/mailimg/adminlogo.png"); ?>
 
 	<?php $MailMessage = App\Models\mail_notification::where('id', 2)->first(); ?>
 	<body style="margin: 0; padding: 0 1em; max-width: 36.8em; width: 100%; margin: 0 auto;font-family: 'Open Sans', sans-serif; font-size: 1.1em; color: #202223; line-height: 1.6em; font-weight: 400;text-align: center;">
@@ -18,7 +19,7 @@
 			<tbody>
 				<tr>
 					<td>
-						<img src="{{ URL::asset('/assets/logo-blue-small._CB485919770_.svg')}}" style="width: 7em; height: 7em; ">
+						<img src="{{ $admin_logo }}" style="width: 7em; height: 7em; ">
 					</td>
 				</tr>
 				<tr>

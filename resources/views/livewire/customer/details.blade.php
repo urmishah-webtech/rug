@@ -235,9 +235,6 @@
 
 
                               <?php
-
-
-
                                  function date_duration($date){
 
                                      $date1 = new DateTime($date);
