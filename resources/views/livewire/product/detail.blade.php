@@ -76,6 +76,18 @@
          background-size: 14px 14px;
          top: 6px;
     }
+
+    .card-middle{
+        border-top: inherit;
+        border-bottom: inherit;
+        padding-top: inherit;
+        padding-bottom: 30px !important;
+    }
+
+    .pd-customise-card-btn{
+        border-top:inherit !important;
+        padding-top: 10px !important;
+    }
         </style>
     
         @php $symbol = CurrencySymbol(); @endphp
@@ -989,28 +1001,67 @@
                                 <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
                             </div>
                             <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="{{$product['custom_variant']}}" class="edit-update-Attribute custom_variant_checked" wire:model.lazy="product.custom_variant" @if($product['custom_variant']) checked="checked" @endif>Custome Price</label>
-
-                            <div class="card-cutome-arrtibute one-half-row-card" @if($product['custom_variant']) style="display: none;" @endif wire:ignore>
+                            @if($product['custom_variant'])
+                            <div class="card-cutome-arrtibute one-half-row-card"   wire:ignore:self>
                              
-                                @foreach($variantag as $key2 => $row)
-                                   @if($this->varientsarray)
-                                        @foreach ($this->varientsarray as $key => $value) 
-                                            @if(!empty($value->lable) && $value->lable == $row->id) 
+                                @foreach($variantag as $row)
+                                    @if($row->id == 36 || $row->id == 37)
+
+                                    <div class="card-middle">
+                                        <div class="row pd-customise-card-btn">
+                                            <a class="fw-6 button secondary" wire:click="addCustomiseOption({{$row->id}})">{{$row->name}}</a>
+
+                                        </div>
+                                        <br>
+                                       
+                                        <div class="option-append-{{$row->id}}">
+                                            @foreach($varientsarray[$row->id] as $key => $item)
+                                            <div class="row">
+                                                <select wire:model.defer="varientsarray.{{$row->id}}.{{$key}}.name" class="varition-type-value-{{$row->id}}-{{$key}}" multiple="multiple">
+
+                                                    <option value="select_all"  onclick="selectAll({{$row->id}}, {{$key}})" id="select_all_{{$row->id}}_{{$key}}">-- Select All --</option>
+
+                                                    <option value="clear_all" onclick="deselectAll({{$row->id}}, {{$key}})" id="deselect_all_{{$row->id}}_{{$key}}" style="display: none;">-- Clear All --</option>
+
+                                                    <option value="natural wool">natural wool</option>
+                                                    <option value="azure blue" >azure blue</option>
+                                                    <option value="saffron yellow">saffron yellow</option>
+                                                    <option value="emerald green">emerald green</option>
+                                                    <option value="navy blue">navy blue</option>
+                                                    <option value="tangerine orange">tangerine orange</option>
+                                                    <option value="scarlet red">scarlet red</option>
+                                                    <option value="sahara brown" >sahara brown</option>
+                                                    <option value="midnight black">midnight black</option>
+                                                    <option value="light gray" >light gray</option>
+                                                </select>
+                                                
+
+                                                <div class="form-field-list">
+                                                    <input class="price-change-input" type="text" value="{{$varientsarray[$row->id][$key]['price']}}"  placeholder="Price" wire:model.defer="varientsarray.{{$row->id}}.{{$key}}.price">
+                                                </div>
+                                                <input type="hidden" id="option_key_{{$row->id}}" value="0">
+
+                                            </div>
+                                            @endforeach
+
+                                        </div>
+
+                                        
+                                    </div>
+                                    @else
+                                   
                                     <div class="row showvarient">        
                                         <div class="form-field-list">
-                                             <input class="price-change-input" type="text" value="{{ $row->name }}"  name="variantname"   readonly>
-                                             <input class="price-change-input" type="hidden" wire:model="varientsarray.{{ $key }}.lable"   readonly>
+                                             <input class="price-change-input" type="text" value="{{ $row->name }}"   readonly>
                                            
                                         </div>
                                         <div class="form-field-list">
 
-                                            <input class="price-change-input" placeholder="Price" type="number"  wire:model="varientsarray.{{ $key }}.price">
+                                            <input class="price-change-input" placeholder="Price" type="number"  wire:model.defer="varientsarray.{{ $row->id }}.price">
                                                
                                         </div>
-                                   </div>
-                                   <br>
-                                        @endif
-                                      @endforeach      
+                                    </div>
+                                    <br>
                                     @endif
                                 @endforeach
                                 
@@ -1019,6 +1070,7 @@
                                     <input type="number" wire:model="product.cv_width_height_price" name="heightwidthprice" class="variant-tags-error">    
                                 </div> -->
                             </div>
+                            @endif
                         </div>
                     </div>
                     
@@ -2824,16 +2876,16 @@
              });
          });
 
-        $(document).ready(function(){
-              //  var answer = $('#showvarient');
-              console.log($('.custom_variant_checked').is(':checked'));
-                if($('.custom_variant_checked').is(':checked')){
-                    $('.card-cutome-arrtibute').slideToggle(500);
-                } else  {
-                    $('.card-cutome-arrtibute').slideUp(500);
-                }
+        // $(document).ready(function(){
+        //       //  var answer = $('#showvarient');
+        //       console.log($('.custom_variant_checked').is(':checked'));
+        //         if($('.custom_variant_checked').is(':checked')){
+        //             $('.card-cutome-arrtibute').slideToggle(500);
+        //         } else  {
+        //             $('.card-cutome-arrtibute').slideUp(500);
+        //         }
 
-            });
+        //     });
 
     
         $(document).ready(function(){
@@ -4305,6 +4357,20 @@ $(".dropdowncustomhide").click(function(e){
 $(document).click(function(){
     $(".dropdowncustomhide").hide();
 });
+
+
+function selectAll(row_id, sub_row_id) {
+
+    $('.varition-type-value-'+row_id+'-'+sub_row_id+' option').prop('selected', true);
+    $("#select_all_"+row_id+"_"+sub_row_id).hide();
+    $("#deselect_all_"+row_id+"_"+sub_row_id).show();
+}
+function deselectAll(row_id, sub_row_id) {
+
+    $('.varition-type-value-'+row_id+'-'+sub_row_id+' option').prop('selected', false);
+    $("#select_all_"+row_id+"_"+sub_row_id).show();
+    $("#deselect_all_"+row_id+"_"+sub_row_id).hide();
+}
 
     </script>
     </x-admin-layout>

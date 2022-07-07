@@ -55,6 +55,7 @@ class Detail extends Component
     public $variantname = [];
   
     public $variantid = [];
+
    
 
     
@@ -73,7 +74,6 @@ class Detail extends Component
 
     public function render()
     {
-
         if($this->filesvariant)
         {
             foreach ($this->filesvariant as $photo) {
@@ -99,11 +99,17 @@ class Detail extends Component
            $this->product['product_new'] =  json_decode($this->product['product_new']);
         }  
         return view('livewire.product.detail');
+
+    }
+
+    public function addCustomiseOption($row_id)
+    {
+        $elem = ['name' => [], 'price' => null];
+        array_push($this->varientsarray[$row_id], $elem);
     }
  
      public function mount($id) {
 
-    
 
         $this->uuid = $id;
         $this->editQuantitiesDetailsModal = false;
@@ -133,9 +139,11 @@ class Detail extends Component
         $this->fullStock = VariantStock::All();
         $this->variantStock = VariantStock::with('product_variant')->where('product_id',$this->product['id'])->get(); 
         $this->locationarray = (array) json_decode($this->product['location']);
-        $this->varientsarray = (array) json_decode($this->product['cv_option_price']);
+        $this->varientsarray = (array) json_decode($this->product['cv_option_price'],true);
         $this->collectionarray = (array) json_decode($this->product['collection']); 
         
+
+        // dd($this->varientsarray);
         if($this->product['custom_variant'] == 1) {
 
             $this->product['custom_variant'] = true;
@@ -145,6 +153,7 @@ class Detail extends Component
             $this->product['custom_variant'] = false;
 
         }
+
 
         if($this->product['featured'] == 1) {
 
@@ -237,8 +246,6 @@ class Detail extends Component
         'Productvariant.*.photo' => [],
         'product_array.*.question' => '',
         'product_array.*.answer' => '',
-        'varientsarray.*.price' => '',
-        'varientsarray.*.lable' => '',
         'att_price' => [],
 
     ];
@@ -628,6 +635,28 @@ class Detail extends Component
 
          array_pop($this->product_array);
 
+
+         foreach ($this->varientsarray as $key => $row) {
+           if($key == 36 || $key == 37){
+            foreach ($row as $key2 => $item) {
+                if(empty($item['price']) && $key2 > 0) {
+                    unset($this->varientsarray[$key][$key2]);
+                } else if(isset($item['name'])) {
+                    if(in_array("select_all", $item['name'])) {
+                        $values = ['natural wool', 'azure blue', 'saffron yellow', 'emerald green', 'navy blue', 'tangerine orange', 'scarlet red', 'sahara brown', 'midnight black', 'light gray'];
+                        $this->varientsarray[$key][$key2]['name'] = $values;
+                    }
+                    if(in_array("clear_all", $item['name'])) {
+                        $this->varientsarray[$key][$key2]['name'] = [];
+                    }
+                }
+            }
+             
+           }
+         }
+
+         // dd($this->varientsarray);
+
         Product::where('id', $this->product['id'])->update(
 
                 [
@@ -702,29 +731,32 @@ class Detail extends Component
 
                     'featured'              => $featuredvalue,
 
+                    'cv_option_price'       => json_encode($this->varientsarray)
+
                 ]
 
             );
 
 
-        $i=0;
-        foreach ($this->varientsarray as $key => $value) {
-          if($this->varientsarray[$key] != ""){
-            $price = $this->varientsarray[$i]['price'];
-            $varientcheckid = $this->varientsarray[$i]['lable'];
-            $custom_variant_Save_arry[] =  array(
-                'price' => $price,
-                'lable' => $varientcheckid,
-            );
+        // $i=0;
 
-            $i++;
-          }
-        }
+        // foreach ($this->varientsarray as $key => $value) {
+        //   if($this->varientsarray[$key] != ""){
+        //     $price = $this->varientsarray[$i]['price'];
+        //     $varientcheckid = $this->varientsarray[$i]['lable'];
+        //     $custom_variant_Save_arry[] =  array(
+        //         'price' => $price,
+        //         'lable' => $varientcheckid,
+        //     );
+
+        //     $i++;
+        //   }
+        // }
 
 
-        if(!empty($custom_variant_Save_arry)){
-        Product::where('id', $this->product['id'])->update( ['cv_option_price' => json_encode($custom_variant_Save_arry) ]);
-        }
+        // if(!empty($custom_variant_Save_arry)){
+        // Product::where('id', $this->product['id'])->update( ['cv_option_price' => json_encode($custom_variant_Save_arry) ]);
+        // }
 
         if($this->productCollection){
         Product::where('id', $this->product['id'])->update( ['collection' => json_encode($this->productCollection) ]);

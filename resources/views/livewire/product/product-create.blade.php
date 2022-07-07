@@ -36,6 +36,18 @@
 
     .show {display: block;}
     .text-danger{color: red;}
+
+    .card-middle{
+        border-top: inherit;
+        border-bottom: inherit;
+        padding-top: inherit;
+        padding-bottom: 30px !important;
+    }
+
+    .pd-customise-card-btn{
+        border-top:inherit !important;
+        padding-top: 10px !important;
+    }
     </style>
     <div wire:key="main">
     <section class="full-width flex-wrap admin-body-width add-customer-head-sec product-details-header">
@@ -247,7 +259,90 @@
                     </div>
                 </div>
 
+
+
+
+
                 <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible" wire:ignore> 
+                    <div class="row-items">
+
+                        <div class="header-title">
+                            <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
+                        </div>
+                        <label><input type="checkbox" name="custom_variant_check" id="custom_variant" value="" class="edit-update-Attribute">Custome Price</label>
+
+                        <div class="card-cutome-arrtibute one-half-row-card" style="display: none;" wire:ignore.self>
+
+                            @foreach($variantag as $row)
+                            @if($row->id == 37 || $row->id == 36)
+
+                            <div class="card-middle">
+                                <div class="row pd-customise-card-btn">
+                                    <a class="fw-6 button secondary" onclick="addCustomiseOption({{$row->id}})">{{$row->name}}</a>
+
+                                </div>
+                                <br>
+                               
+                                <div class="option-append-{{$row->id}}">
+                                    <div class="row">
+                                        <select name="variant[{{$row->id}}][0][name][]" class="varition-type-value-{{$row->id}}" multiple="multiple">
+                                            <option value="" onclick="selectAll({{$row->id}})" id="select_all_{{$row->id}}">-- Select All --</option>
+                                            <option value="" onclick="deselectAll({{$row->id}})" id="deselect_all_{{$row->id}}" style="display: none;">-- Clear All --</option>
+                                            <option value="natural wool">natural wool</option>
+                                            <option value="azure blue">azure blue</option>
+                                            <option value="saffron yellow">saffron yellow</option>
+                                            <option value="emerald green">emerald green</option>
+                                            <option value="navy blue">navy blue</option>
+                                            <option value="tangerine orange">tangerine orange</option>
+                                            <option value="scarlet red">scarlet red</option>
+                                            <option value="sahara brown">sahara brown</option>
+                                            <option value="midnight black">midnight black</option>
+                                            <option value="light gray">light gray</option>
+                                        </select>
+                                        
+
+                                        <div class="form-field-list">
+                                            <input class="price-change-input" type="text" value=""  placeholder="Price" name="variant[{{$row->id}}][0][price]">
+                                        </div>
+                                        <input type="hidden" id="option_key_{{$row->id}}" value="0">
+
+                                    </div>
+
+                                </div>
+
+                                
+                            </div>
+                            
+                            @else
+                            <div class="row">
+                            <div class="form-field-list">
+                                 <input class="price-change-input" type="text" value="{{ $row->name }}" readonly>
+                               
+                            </div>
+                            <div class="form-field-list">
+                                <input class="price-change-input" type="text" value=""  placeholder="Price" name="variant[{{$row->id}}][price]">
+                            </div>
+                            </div>
+                            <br>
+                            @endif
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div> 
+
+
+
+
+
+
+                
+
+
+
+
+
+               <!--  <div class="card card-pd-0 pd-variants-card main-variant-attribute overflow-visible" wire:ignore> 
                     <div class="row-items">
                         <div class="header-title">
                             <h4 class="fs-16 mb-0 fw-6">Customise Product Price</h4>
@@ -274,15 +369,15 @@
                             @endforeach
                             
                             
-                            <!-- <div class="custom_variant_hw mt-3 mb-3">
+                             <div class="custom_variant_hw mt-3 mb-3">
                                 <div class="div">
                                     <label class="mb-0 pb-0" style="padding:0 !important">Height & Width Price (Per Unit)</label>
                                     <input type="number" value="" name="heightwidthprice" class="variant-tags-error" id="custom_price_tags_1" placeholder="Price">    
                                 </div>
                             </div> -->
-                        </div>
+                      <!--   </div>
                     </div>
-                </div> 
+                </div>  - -->
 
                 <div class="card variant-pricing-card" wire:ignore>
 
@@ -899,7 +994,7 @@
 
         <div class="page-bottom-btn">
 
-            <input type="submit" class="button" id="master-save" value="save" disabled="disabled" wire:ignore.self>
+            <input type="submit" class="button" id="master-save" value="save"  wire:ignore.self>
             <div class="loading-overlay" wire:loading.flex wire:target="remove">
                     <div class="page-loading"></div>
                 </div>
@@ -2625,6 +2720,47 @@ $(".dropdowncustomhide").click(function(e){
 $(document).click(function(){
     $(".dropdowncustomhide").hide();
 });
+
+
+function addCustomiseOption(row_id) {
+
+    var key = $('#option_key_'+row_id).val();
+    key = Number(key)+1;
+
+    var opt_append ='<div class="row">'+
+                        '<select name="variant['+row_id+']['+key+'][name][]" class="varition-type-value"  multiple="multiple">'+
+                            '<option value="">-- Select Option --</option>'+
+                            '<option value="natural wool">natural wool</option>'+
+                            '<option value="azure blue">azure blue</option>'+
+                            '<option value="saffron yellow">saffron yellow</option>'+
+                            '<option value="emerald green">emerald green</option>'+
+                            '<option value="navy blue">navy blue</option>'+
+                            '<option value="tangerine orange">tangerine orange</option>'+
+                            '<option value="scarlet red">scarlet red</option>'+
+                            '<option value="sahara brown">sahara brown</option>'+
+                            '<option value="midnight black">midnight black</option>'+
+                            '<option value="light gray">light gray</option>'+
+                        '</select>'+
+                        '<div class="form-field-list">'+
+                            '<input class="price-change-input" type="text" value=""  placeholder="Price" name="variant['+row_id+']['+key+'][price]">'+
+                        '</div>'+
+                    '</div>';
+    $(".option-append-"+ row_id).append(opt_append);
+    $('#option_key_'+row_id).val(key);
+}
+
+function selectAll(row_id) {
+
+    $('.varition-type-value-'+row_id+' option').prop('selected', true);
+    $("#select_all_"+row_id).hide();
+    $("#deselect_all_"+row_id).show();
+}
+function deselectAll(row_id) {
+
+    $('.varition-type-value-'+row_id+' option').prop('selected', false);
+    $("#select_all_"+row_id).show();
+    $("#deselect_all_"+row_id).hide();
+}
 
 
 </script>

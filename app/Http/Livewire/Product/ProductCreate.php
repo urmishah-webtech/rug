@@ -76,6 +76,7 @@ class ProductCreate extends Component
         'product_array.*.question' => '',
 
         'product_array.*.answer' => '',
+
     ];
 
 
@@ -120,6 +121,7 @@ class ProductCreate extends Component
 
     public function StoreVarient($flag)
     {
+
 
 
         if($flag == 'add-varient-type')
@@ -168,65 +170,95 @@ class ProductCreate extends Component
     }
 
     public function storeProduct(Request $request)
-    {    
+    {   
 
         
-        if(!empty($request['varition_arrray'])){
+        // if(!empty($request['varition_arrray'])){
 
-               $validator = Validator::make($request->all(),[
-                    'title'     =>  'required',
-                    'att_price.*'     =>  'required',
-                    'seo_url' => 'unique:product,seo_utl'
-                ],
-                [
-                    "title.required"          =>  "Enter your Title!",
-                    "att_price.*.required"      =>  "Enter your Variant Price!",
-                    "seo_url.unique" => "This value has already been taken. Put different."
-                ]);
+        //        $validator = Validator::make($request->all(),[
+        //             'title'     =>  'required',
+        //             'att_price.*'     =>  'required',
+        //             'seo_url' => 'unique:product,seo_utl'
+        //         ],
+        //         [
+        //             "title.required"          =>  "Enter your Title!",
+        //             "att_price.*.required"      =>  "Enter your Variant Price!",
+        //             "seo_url.unique" => "This value has already been taken. Put different."
+        //         ]);
             
 
-            session()->flash('messagevarient', 'Enter your Variant Price!');
-        }else{
-            $validator = Validator::make($request->all(),[
-                'title'     =>  'required',
-                'price_main'     =>  'required',
-                'seo_url' => 'unique:product,seo_utl'
-            ],
-            [
-                "title.required"          =>  "Enter your Title!",
-                "price_main.required"     =>  "Enter your Price!",
-                "seo_url.unique" => "This value has already been taken. Put different."
-            ]);
-        }
+        //     session()->flash('messagevarient', 'Enter your Variant Price!');
+        // }else{
+        //     $validator = Validator::make($request->all(),[
+        //         'title'     =>  'required',
+        //         'price_main'     =>  'required',
+        //         'seo_url' => 'unique:product,seo_utl'
+        //     ],
+        //     [
+        //         "title.required"          =>  "Enter your Title!",
+        //         "price_main.required"     =>  "Enter your Price!",
+        //         "seo_url.unique" => "This value has already been taken. Put different."
+        //     ]);
+        // }
 
-        if ($validator->fails()) {
+        // if ($validator->fails()) {
 
-            return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
+        //     return redirect()->back()
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
 
-        $variantprice = $request->variantprice;
-        $variantid = $request->variantid;
-        $i=0;
-        foreach ($variantprice as $key => $value) {
-          if($variantprice[$i] != ""){
-            $price = $variantprice[$i];
-            $varientcheckid = $variantid[$i];
-            $custom_variant_Save_arry[] =  array(
-                'price' => $price,
-                'lable' => $varientcheckid,
-            );
-          }else{
-            $price = '';
-            $varientcheckid = $variantid[$i];
-            $custom_variant_Save_arry[] =  array(
-                'price' => $price,
-                'lable' => $varientcheckid,
-                );
+
+        $custom_variant_Save_arry = [];
+        // dd($request->variant);
+
+        foreach ($request->variant as $key => $row) {
+
+           if($key == 36 || $key == 37){
+            foreach ($row as $key2 => $item) {
+
+
+                if(!empty($item['price']) || $key2 == 0) {
+                  $custom_variant_Save_arry[$key][$key2]['price'] = $item['price'];
+                    
+                  if(isset($item['name'])) {
+                      foreach ($item['name'] as $key3 => $value) {
+                        if(!empty($value)) {
+                          $custom_variant_Save_arry[$key][$key2]['name'][] = $value;
+                        }
+                      }
+                    }
+                  }
+                  
+                }
+
+            } else{
+              $custom_variant_Save_arry[$key] = $row;
+             
+            }
           }
-          $i++;
-        }      
+         
+
+        // foreach ($variants as $key => $variant) {
+        //   if($variantprice[$i] != ""){
+        //     $price = $variantprice[$i];
+        //     $varientcheckid = $variantid[$i];
+        //     $custom_variant_Save_arry[] =  array(
+        //         'price' => $price,
+        //         'lable' => $varientcheckid,
+        //     );
+        //   }else{
+        //     $price = '';
+        //     $varientcheckid = $variantid[$i];
+        //     $custom_variant_Save_arry[] =  array(
+        //         'price' => $price,
+        //         'lable' => $varientcheckid,
+        //         );
+        //   }
+        //   $i++;
+        // }      
+
+        // dd($custom_variant_Save_arry);
 
           
 
